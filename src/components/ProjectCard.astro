@@ -1,0 +1,97 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  /** The lead project gets a wider card and shows its highlights. */
+  featuredLayout?: boolean;
+}
+
+const { project, featuredLayout = false } = Astro.props;
+const { data } = project;
+const href = `/work/${project.id}/`;
+
+const categoryLabels: Record<string, string> = {
+  web: 'Web & Backend',
+  game: 'Games',
+  threed: '3D & Technical Art',
+  hardware: 'Robotics',
+};
+---
+
+<article
+  class:list={[
+    'reveal group relative flex flex-col rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-6 transition-colors hover:border-[var(--border-strong)] sm:p-8',
+    featuredLayout && 'lg:col-span-2',
+  ]}
+>
+  <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+    <span class="eyebrow">{categoryLabels[data.category] ?? data.category}</span>
+    <span class="text-[var(--border-strong)]" aria-hidden="true">/</span>
+    <span class="font-mono text-xs text-[var(--text-muted)]">{data.period}</span>
+    {
+      data.confidential && (
+        <span class="rounded-full border border-[var(--border-subtle)] px-2 py-0.5 font-mono text-[0.65rem] tracking-wide text-[var(--text-muted)]">
+          CLIENT WORK
+        </span>
+      )
+    }
+  </div>
+
+  <h3 class="mt-4 text-xl font-semibold tracking-tight sm:text-2xl">
+    <a href={href} class="transition-colors group-hover:text-[var(--accent)]">
+      <!-- Stretched link makes the whole card clickable without nesting interactive elements. -->
+      <span class="absolute inset-0" aria-hidden="true"></span>
+      {data.title}
+    </a>
+  </h3>
+
+  <p class="mt-2 text-[var(--text-secondary)]">{data.tagline}</p>
+
+  {
+    data.cover && (
+      <Image
+        src={data.cover}
+        alt={data.coverAlt ?? `${data.title} screenshot`}
+        widths={[480, 800, 1200]}
+        sizes="(min-width: 1024px) 42rem, 100vw"
+        class="mt-6 w-full rounded-lg border border-[var(--border-subtle)]"
+        loading="lazy"
+      />
+    )
+  }
+
+  {
+    featuredLayout && data.highlights.length > 0 && (
+      <ul class="mt-6 space-y-2">
+        {data.highlights.map((highlight) => (
+          <li class="flex gap-3 text-sm text-[var(--text-secondary)]">
+            <span class="mt-2 size-1.5 shrink-0 rounded-full bg-[var(--accent)]" aria-hidden="true" />
+            {highlight}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+
+  <ul class="mt-6 flex flex-wrap gap-1.5 pt-2" aria-label="Technologies used">
+    {
+      data.stack.slice(0, featuredLayout ? 8 : 5).map((tech) => (
+        <li class="rounded-md bg-[var(--surface-sunken)] px-2 py-1 font-mono text-[0.7rem] text-[var(--text-muted)]">
+          {tech}
+        </li>
+      ))
+    }
+  </ul>
+
+  <p
+    class="mt-6 flex items-center gap-1.5 font-mono text-xs text-[var(--text-muted)] transition-colors group-hover:text-[var(--accent)]"
+  >
+    Read the case study
+    <span
+      class="inline-block transition-transform group-hover:translate-x-0.5"
+      aria-hidden="true">&#8594;</span
+    >
+  </p>
+</article>

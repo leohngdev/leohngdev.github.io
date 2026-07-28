@@ -1,0 +1,24 @@
+---
+import Section from './Section.astro';
+import ProjectCard from './ProjectCard.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+}
+
+const { projects } = Astro.props;
+const [lead, ...rest] = projects;
+---
+
+<Section
+  id="work"
+  eyebrow="Selected work"
+  title="Five things worth reading about"
+  lede="Ordered by what I think tells you the most, not by recency. Each one is a short case study rather than a screenshot gallery."
+>
+  <div class="grid gap-6 lg:grid-cols-2">
+    {lead && <ProjectCard project={lead} featuredLayout />}
+    {rest.map((project) => <ProjectCard project={project} />)}
+  </div>
+</Section>

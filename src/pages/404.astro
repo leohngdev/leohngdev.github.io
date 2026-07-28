@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { profile } from '../data/profile';
+---
+
+<Layout title={`Not found — ${profile.displayName}`} description="That page does not exist." subpage>
+  <section class="py-28 sm:py-36">
+    <div class="container-page max-w-xl">
+      <p class="eyebrow">Error 404</p>
+      <h1 class="mt-4 font-mono text-3xl font-semibold tracking-tight sm:text-4xl">
+        command not found
+      </h1>
+      <p class="mt-5 text-lg text-[var(--text-secondary)]">
+        That page does not exist. The terminal on the home page has better error messages than this.
+      </p>
+      <a
+        href="/"
+        class="mt-9 inline-block rounded-lg bg-[var(--text-primary)] px-5 py-2.5 text-sm font-medium text-[var(--surface)] transition-opacity hover:opacity-88"
+      >
+        Back to the start
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -1,0 +1,54 @@
+---
+import { profile } from '../data/profile';
+
+const channels = [
+  { label: 'Email', value: profile.email, href: `mailto:${profile.email}`, external: false },
+  { label: 'LinkedIn', value: 'leo-hnguyen', href: profile.linkedin, external: true },
+  { label: 'GitHub', value: profile.githubHandle, href: profile.github, external: true },
+];
+---
+
+<section id="contact" class="border-t border-[var(--border-subtle)] py-20 sm:py-28">
+  <div class="container-page">
+    <div class="reveal max-w-2xl">
+      <p class="eyebrow">Contact</p>
+      <h2 class="mt-3 text-[length:var(--text-section)] font-semibold tracking-tight">
+        {profile.available}.
+      </h2>
+      <p class="mt-4 text-lg text-[var(--text-secondary)]">
+        If you are hiring, or you just want to talk about scoring engines, engine performance or
+        rigging, I would like to hear from you. I reply to everything.
+      </p>
+    </div>
+
+    <div class="reveal mt-12 grid gap-px overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--border-subtle)] sm:grid-cols-3">
+      {
+        channels.map((channel) => (
+          <a
+            href={channel.href}
+            class="group flex flex-col gap-2 bg-[var(--surface-raised)] p-6 transition-colors hover:bg-[var(--surface-sunken)]"
+            {...(channel.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+          >
+            <span class="eyebrow">{channel.label}</span>
+            <span class="flex items-center gap-2 font-mono text-sm break-all transition-colors group-hover:text-[var(--accent)]">
+              {channel.value}
+              <span
+                class="inline-block shrink-0 transition-transform group-hover:translate-x-0.5"
+                aria-hidden="true"
+              >
+                &#8594;
+              </span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+
+    <p class="reveal mt-8 text-sm text-[var(--text-muted)]">
+      Prefer the paper version?
+      <a href={profile.resume} download class="link-underline text-[var(--text-secondary)]">
+        Download my CV as a PDF
+      </a>.
+    </p>
+  </div>
+</section>

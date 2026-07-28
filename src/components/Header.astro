@@ -1,0 +1,61 @@
+---
+import { profile } from '../data/profile';
+import ThemeToggle from './ThemeToggle.astro';
+
+interface Props {
+  subpage?: boolean;
+}
+
+const { subpage = false } = Astro.props;
+const prefix = subpage ? '/' : '';
+
+const links = [
+  { label: 'Work', href: `${prefix}#work` },
+  { label: 'About', href: `${prefix}#about` },
+  { label: 'Skills', href: `${prefix}#skills` },
+  { label: 'Contact', href: `${prefix}#contact` },
+];
+---
+
+<header
+  class="sticky top-0 z-40 border-b border-[var(--border-subtle)] bg-[color-mix(in_srgb,var(--surface)_88%,transparent)] backdrop-blur-md"
+>
+  <div class="container-page flex h-16 items-center justify-between gap-4">
+    <a
+      href="/"
+      class="font-mono text-sm font-medium tracking-tight transition-colors hover:text-[var(--accent)]"
+      aria-label={`${profile.displayName}, home`}
+    >
+      <span class="text-[var(--accent)]">~/</span>{profile.displayName.toLowerCase().replace(' ', '-')}
+    </a>
+
+    <div class="flex items-center gap-1 sm:gap-2">
+      <nav aria-label="Sections" class="hidden sm:block">
+        <ul class="flex items-center gap-1">
+          {
+            links.map((link) => (
+              <li>
+                <a
+                  href={link.href}
+                  class="rounded-md px-3 py-2 text-sm text-[var(--text-secondary)] transition-colors hover:bg-[var(--surface-sunken)] hover:text-[var(--text-primary)]"
+                >
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+
+      <a
+        href={profile.resume}
+        class="rounded-md border border-[var(--border-strong)] px-3 py-1.5 font-mono text-xs tracking-wide transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+        download
+      >
+        CV
+      </a>
+
+      <ThemeToggle />
+    </div>
+  </div>
+</header>

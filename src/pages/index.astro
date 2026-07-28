@@ -1,0 +1,61 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Work from '../components/Work.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Experience from '../components/Experience.astro';
+import Contact from '../components/Contact.astro';
+import { profile } from '../data/profile';
+import type { TerminalData } from '../lib/terminal-data';
+
+const projects = (await getCollection('projects'))
+  .filter((project) => project.data.featured)
+  .sort((a, b) => a.data.order - b.data.order);
+
+const roles = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+
+/**
+ * The terminal's data is derived here, at build time, from the same collections
+ * that render the visual sections. Astro serialises it into the island's props,
+ * so there is no extra request and no second copy of the content to maintain.
+ */
+const terminalData: TerminalData = {
+  name: profile.displayName,
+  role: profile.role,
+  location: profile.location,
+  available: profile.available,
+  headline: profile.headline,
+  about: profile.about,
+  skills: profile.skills.map((group) => ({ label: group.label, items: group.items })),
+  projects: projects.map((project) => ({
+    slug: project.id,
+    title: project.data.title,
+    tagline: project.data.tagline,
+    period: project.data.period,
+    category: project.data.category,
+    stack: [...project.data.stack],
+    href: `/work/${project.id}/`,
+  })),
+  experience: roles.map((entry) => ({
+    role: entry.data.role,
+    org: entry.data.org,
+    period: entry.data.period,
+  })),
+  education: `${profile.education.degree}, ${profile.education.institution} (${profile.education.period}). Major in ${profile.education.major}, minor in ${profile.education.minor}.`,
+  email: profile.email,
+  linkedin: profile.linkedin,
+  github: profile.github,
+  resume: profile.resume,
+};
+---
+
+<Layout>
+  <Hero terminalData={terminalData} />
+  <Work projects={projects} />
+  <About />
+  <Skills />
+  <Experience roles={roles} />
+  <Contact />
+</Layout>

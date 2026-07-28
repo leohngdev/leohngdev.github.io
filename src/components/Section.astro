@@ -1,0 +1,27 @@
+---
+interface Props {
+  id: string;
+  eyebrow: string;
+  title: string;
+  lede?: string;
+  class?: string;
+}
+
+const { id, eyebrow, title, lede, class: className = '' } = Astro.props;
+---
+
+<section id={id} class={`border-t border-[var(--border-subtle)] py-20 sm:py-28 ${className}`}>
+  <div class="container-page">
+    <div class="reveal max-w-2xl">
+      <p class="eyebrow">{eyebrow}</p>
+      <h2 class="mt-3 text-[length:var(--text-section)] font-semibold tracking-tight">
+        {title}
+      </h2>
+      {lede && <p class="mt-4 text-lg text-[var(--text-secondary)]">{lede}</p>}
+    </div>
+
+    <div class="mt-12 sm:mt-16">
+      <slot />
+    </div>
+  </div>
+</section>

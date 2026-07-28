@@ -1,0 +1,223 @@
+@import 'tailwindcss';
+
+/* Weight-axis only: skips the optical-size and italic variants we never use,
+   which halves the number of font files the build has to emit. */
+@import '@fontsource-variable/inter/wght.css';
+@import '@fontsource-variable/jetbrains-mono/wght.css';
+
+@plugin "@tailwindcss/typography";
+
+/* Manual theme toggle rather than prefers-color-scheme alone, so the choice can be persisted. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+
+  /* Warm neutrals rather than pure grey, so the page reads less clinical. */
+  --color-ink-50: #f8f7f5;
+  --color-ink-100: #eeecE8;
+  --color-ink-200: #ddd9d2;
+  --color-ink-300: #b9b3a9;
+  --color-ink-400: #8a847a;
+  --color-ink-500: #6b6559;
+  --color-ink-600: #4c4740;
+  --color-ink-700: #332f2a;
+  --color-ink-800: #1f1c19;
+  --color-ink-900: #141210;
+  --color-ink-950: #0c0b0a;
+
+  /* Single accent, borrowed from amber phosphor CRT terminals. */
+  --color-accent-400: #f5a524;
+  --color-accent-500: #e08c10;
+  --color-accent-600: #b56d09;
+  --color-accent-700: #8a5307;
+
+  --text-hero: clamp(2.5rem, 7vw, 5.25rem);
+  --text-section: clamp(1.75rem, 3.5vw, 2.5rem);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Semantic tokens, flipped once for dark mode instead of scattering dark: everywhere. */
+@layer base {
+  :root {
+    --surface: var(--color-ink-50);
+    --surface-raised: #ffffff;
+    --surface-sunken: var(--color-ink-100);
+    --border-subtle: var(--color-ink-200);
+    --border-strong: var(--color-ink-300);
+    --text-primary: var(--color-ink-900);
+    --text-secondary: var(--color-ink-600);
+    --text-muted: var(--color-ink-500);
+    --accent: var(--color-accent-700);
+    --accent-bright: var(--color-accent-600);
+  }
+
+  .dark {
+    --surface: var(--color-ink-950);
+    --surface-raised: var(--color-ink-900);
+    --surface-sunken: #080807;
+    --border-subtle: #26221e;
+    --border-strong: #3a352f;
+    --text-primary: var(--color-ink-50);
+    --text-secondary: var(--color-ink-300);
+    --text-muted: var(--color-ink-400);
+    --accent: var(--color-accent-400);
+    --accent-bright: var(--color-accent-400);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    /* Keeps anchored sections clear of the sticky header. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--surface);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-feature-settings: 'cv11', 'ss01';
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background-color: var(--color-accent-400);
+    color: var(--color-ink-950);
+  }
+
+  /* Visible, consistent keyboard focus everywhere. */
+  :focus-visible {
+    outline: 2px solid var(--accent-bright);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 72rem;
+  padding-inline: 1.5rem;
+
+  @media (width >= 48rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Small uppercase mono label used to head every section. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+@utility link-underline {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--border-strong);
+  transition: text-decoration-color 150ms var(--ease-out-soft), color 150ms var(--ease-out-soft);
+
+  &:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+}
+
+/* Entrance animation. Only applied once the element scrolls into view. */
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 600ms var(--ease-out-soft),
+      transform 600ms var(--ease-out-soft);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* No JS, or motion turned down: never leave content hidden. */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
+
+html:not(.js) .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+/* Maps the typography plugin onto the same semantic tokens as the rest of the site,
+   so case study prose flips with the theme without a second dark: variant set. */
+@layer components {
+  .prose-case {
+    --tw-prose-body: var(--text-secondary);
+    --tw-prose-headings: var(--text-primary);
+    --tw-prose-lead: var(--text-secondary);
+    --tw-prose-links: var(--accent);
+    --tw-prose-bold: var(--text-primary);
+    --tw-prose-counters: var(--text-muted);
+    --tw-prose-bullets: var(--border-strong);
+    --tw-prose-hr: var(--border-subtle);
+    --tw-prose-quotes: var(--text-primary);
+    --tw-prose-quote-borders: var(--accent);
+    --tw-prose-captions: var(--text-muted);
+    --tw-prose-code: var(--text-primary);
+    --tw-prose-pre-code: var(--color-ink-100);
+    --tw-prose-pre-bg: var(--color-ink-900);
+    --tw-prose-th-borders: var(--border-strong);
+    --tw-prose-td-borders: var(--border-subtle);
+  }
+
+  .prose-case :where(h2) {
+    font-size: 1.375rem;
+    letter-spacing: -0.01em;
+    margin-top: 2.5em;
+  }
+
+  .prose-case :where(a) {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  .prose-case :where(strong) {
+    font-weight: 600;
+  }
+}

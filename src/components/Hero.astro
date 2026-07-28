@@ -1,0 +1,79 @@
+---
+import { profile } from '../data/profile';
+import Terminal from './Terminal.tsx';
+import type { TerminalData } from '../lib/terminal-data';
+
+interface Props {
+  terminalData: TerminalData;
+}
+
+const { terminalData } = Astro.props;
+---
+
+<section class="pt-16 pb-20 sm:pt-24 sm:pb-28">
+  <div class="container-page">
+    <div class="grid items-center gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+      <div>
+        <p class="eyebrow reveal">
+          <span class="text-[var(--accent)]">&#9679;</span>
+          {profile.available}
+        </p>
+
+        <h1
+          class="reveal mt-5 text-[length:var(--text-hero)] leading-[0.95] font-semibold tracking-tight"
+          style="transition-delay: 60ms"
+        >
+          {profile.displayName}
+        </h1>
+
+        <p
+          class="reveal mt-6 max-w-xl text-xl leading-snug text-[var(--text-primary)] sm:text-2xl"
+          style="transition-delay: 120ms"
+        >
+          {profile.headline}
+        </p>
+
+        <p
+          class="reveal mt-5 max-w-xl text-base text-[var(--text-secondary)]"
+          style="transition-delay: 180ms"
+        >
+          {profile.subheadline}
+        </p>
+
+        <div class="reveal mt-9 flex flex-wrap items-center gap-3" style="transition-delay: 240ms">
+          <a
+            href="#work"
+            class="rounded-lg bg-[var(--text-primary)] px-5 py-2.5 text-sm font-medium text-[var(--surface)] transition-opacity hover:opacity-88"
+          >
+            View selected work
+          </a>
+          <a
+            href={profile.resume}
+            download
+            class="rounded-lg border border-[var(--border-strong)] px-5 py-2.5 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            Download CV
+          </a>
+          <a
+            href={`mailto:${profile.email}`}
+            class="px-1 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
+          >
+            Get in touch
+          </a>
+        </div>
+      </div>
+
+      <div class="reveal lg:pl-4" style="transition-delay: 300ms">
+        <p class="eyebrow mb-3 flex items-center gap-2">
+          <span aria-hidden="true">&#8595;</span>
+          {profile.terminalHint}
+        </p>
+        <!--
+          client:visible keeps the island off the critical path: the hero paints
+          as static HTML and React only hydrates once the terminal is on screen.
+        -->
+        <Terminal data={terminalData} client:visible />
+      </div>
+    </div>
+  </div>
+</section>

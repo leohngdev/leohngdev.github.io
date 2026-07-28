@@ -1,0 +1,55 @@
+[
+  {
+    "id": "antsa",
+    "role": "Software Developer",
+    "org": "ANTSA (Industry Experience Project)",
+    "location": "Monash University · Melbourne, Australia",
+    "period": "Jul – Nov 2025",
+    "order": 1,
+    "points": [
+      "Worked in an agile team of five to overhaul the questionnaire engine of a live Australian digital mental health platform (Nest.js / PostgreSQL / React Native).",
+      "Rebuilt scoring from hardcoded to fully dynamic: custom categories, severity thresholds, configurable weighting with auto-redistribution, and reverse scoring.",
+      "Extended the new scoring logic into the clinician dashboard and PDF export report.",
+      "Rebuilt a broken multiservice dev environment from scratch and resolved a silent bug causing incorrect answer options across the mobile app.",
+      "Delivered a 100% UAT pass rate across two client signed iterations."
+    ]
+  },
+  {
+    "id": "monash",
+    "role": "Bachelor of Information Technology",
+    "org": "Monash University",
+    "location": "Melbourne, Australia",
+    "period": "Feb 2023 – Dec 2025",
+    "order": 2,
+    "points": [
+      "Major in Software Development, minor in Games Development.",
+      "Built game prototypes in Unreal Engine and Unity (C++, C#) covering gameplay mechanics, AI systems and AR/VR experiences.",
+      "Created and textured 3D character models in Maya and Substance Painter with topology optimised for realtime rendering.",
+      "Built full stack web applications using HTML, CSS, JavaScript, Node.js and PHP (CakePHP), and designed and tuned PostgreSQL databases."
+    ]
+  },
+  {
+    "id": "hackathon",
+    "role": "Hackathon Participant",
+    "org": "Monash University",
+    "location": "Melbourne, Australia",
+    "period": "Feb – Mar 2023",
+    "order": 3,
+    "points": [
+      "Prototyped software and game concepts under 24–48 hour constraints using Agile.",
+      "Delivered functional demonstrations under tight deadlines."
+    ]
+  },
+  {
+    "id": "frc",
+    "role": "Robotics Team Member",
+    "org": "FRC Team",
+    "location": "Ho Chi Minh City, Vietnam",
+    "period": "Aug 2020 – Mar 2022",
+    "order": 4,
+    "points": [
+      "Programmed robot navigation and sensor systems in Python and C++.",
+      "Collaborated on autonomous component design and presented technical updates to mentors."
+    ]
+  }
+]

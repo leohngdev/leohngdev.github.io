@@ -1,0 +1,132 @@
+---
+import '../styles/global.css';
+import { profile } from '../data/profile';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Set on case study pages so the nav links back to the home page sections. */
+  subpage?: boolean;
+}
+
+const {
+  title = `${profile.displayName} — ${profile.role}`,
+  description = profile.subheadline,
+  subpage = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.fullDisplayName,
+  alternateName: profile.displayName,
+  jobTitle: profile.role,
+  email: `mailto:${profile.email}`,
+  url: Astro.site?.toString(),
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Melbourne',
+    addressRegion: 'VIC',
+    addressCountry: 'AU',
+  },
+  alumniOf: {
+    '@type': 'CollegeOrUniversity',
+    name: profile.education.institution,
+  },
+  knowsAbout: profile.skills.flatMap((group) => group.items),
+  sameAs: [profile.linkedin, profile.github],
+};
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta name="author" content={profile.fullDisplayName} />
+    <meta name="theme-color" content="#0c0b0a" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#f8f7f5" media="(prefers-color-scheme: light)" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content={profile.displayName} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script is:inline>
+      // Runs before paint so the correct theme is applied without a flash.
+      (function () {
+        const root = document.documentElement;
+        root.classList.add('js');
+        try {
+          const stored = localStorage.getItem('theme');
+          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          if (stored === 'dark' || (!stored && prefersDark)) root.classList.add('dark');
+        } catch {
+          /* localStorage can throw in private modes; system preference is a fine fallback. */
+        }
+      })();
+    </script>
+
+    <set:html
+      value={`<script type="application/ld+json">${JSON.stringify(personSchema)}</script>`}
+    />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:rounded-md focus:bg-[var(--surface-raised)] focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:shadow-lg"
+    >
+      Skip to content
+    </a>
+
+    <Header subpage={subpage} />
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <script>
+      // Reveal-on-scroll. Progressive enhancement only: without JS the CSS
+      // fallback in global.css leaves everything visible.
+      const items = document.querySelectorAll<HTMLElement>('.reveal');
+      if (items.length) {
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (reduce) {
+          items.forEach((el) => el.classList.add('is-visible'));
+        } else {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-visible');
+                observer.unobserve(entry.target);
+              });
+            },
+            { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+          );
+          items.forEach((el) => observer.observe(el));
+        }
+      }
+    </script>
+  </body>
+</html>

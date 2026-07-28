@@ -1,0 +1,48 @@
+---
+import Section from './Section.astro';
+import { profile } from '../data/profile';
+---
+
+<Section
+  id="about"
+  eyebrow="About"
+  title="Full stack by major, games by minor, debugger by instinct."
+>
+  <div class="grid gap-12 lg:grid-cols-[1.6fr_1fr] lg:gap-16">
+    <div class="reveal space-y-5 text-lg leading-relaxed text-[var(--text-secondary)]">
+      {profile.about.map((paragraph) => <p>{paragraph}</p>)}
+    </div>
+
+    <aside class="reveal space-y-8" style="transition-delay: 120ms">
+      <div>
+        <p class="eyebrow">Education</p>
+        <p class="mt-3 font-medium">{profile.education.degree}</p>
+        <p class="text-[var(--text-secondary)]">{profile.education.institution}</p>
+        <p class="mt-1 font-mono text-xs text-[var(--text-muted)]">{profile.education.period}</p>
+
+        <dl class="mt-5 space-y-2 text-sm">
+          <div class="flex gap-2">
+            <dt class="text-[var(--text-muted)]">Major</dt>
+            <dd>{profile.education.major}</dd>
+          </div>
+          <div class="flex gap-2">
+            <dt class="text-[var(--text-muted)]">Minor</dt>
+            <dd>{profile.education.minor}</dd>
+          </div>
+        </dl>
+      </div>
+
+      <div>
+        <p class="eyebrow">Coursework</p>
+        <ul class="mt-3 space-y-1.5 text-sm text-[var(--text-secondary)]">
+          {profile.education.coursework.map((unit) => <li>{unit}</li>)}
+        </ul>
+      </div>
+
+      <div>
+        <p class="eyebrow">Based in</p>
+        <p class="mt-3 text-[var(--text-secondary)]">{profile.locationDetail}</p>
+      </div>
+    </aside>
+  </div>
+</Section>
