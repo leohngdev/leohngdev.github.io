@@ -139,9 +139,10 @@ const thesisLines = ['Games taught me', 'what software costs.'];
 </style>
 
 <script>
-  const hero = document.querySelector<HTMLElement>('[data-hero]');
+  function initHero() {
+    const hero = document.querySelector<HTMLElement>('[data-hero]');
+    if (!hero || hero.classList.contains('hero-play')) return;
 
-  if (hero) {
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Words carry the stagger; the supporting items follow behind the last word so
@@ -169,4 +170,6 @@ const thesisLines = ['Games taught me', 'what software costs.'];
       setTimeout(() => hero.classList.add('hero-play'), 900);
     }
   }
+
+  document.addEventListener('astro:page-load', initHero);
 </script>

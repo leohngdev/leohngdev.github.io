@@ -1,0 +1,274 @@
+---
+import Section from './Section.astro';
+import type { CollectionEntry } from 'astro:content';
+import { worldFor, worldLabel } from '../lib/categories';
+import { boundsOf, parsePeriod, placement, type TimelineEntry } from '../lib/timeline';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+  roles: CollectionEntry<'experience'>[];
+}
+
+const { projects, roles } = Astro.props;
+
+/**
+ * Projects and roles on one axis. Separately they are two lists a reader has to
+ * hold in their head and reconcile; together they are a single picture that answers
+ * what, when, and in which world — which is the closest this site gets to showing
+ * the work without having any images of it.
+ */
+const projectEntries: TimelineEntry[] = projects.flatMap((project) => {
+  const range = parsePeriod(project.data.period);
+  if (!range) return [];
+  return [
+    {
+      id: project.id,
+      label: project.data.title,
+      detail: project.data.tagline,
+      period: project.data.period,
+      world: worldFor(project.data.category),
+      href: `/work/${project.id}/`,
+      ...range,
+    },
+  ];
+});
+
+const roleEntries: TimelineEntry[] = roles.flatMap((role) => {
+  const range = parsePeriod(role.data.period);
+  if (!range) return [];
+  const isStudy = /university|monash/i.test(role.data.org);
+  return [
+    {
+      id: role.data.id,
+      label: role.data.role,
+      detail: role.data.org,
+      period: role.data.period,
+      world: isStudy ? 'study' : 'software',
+      ...range,
+    },
+  ];
+});
+
+/**
+ * Two tracks, not one merged list.
+ *
+ * Flattened together, the FRC role and the FRC project sit on the same span saying
+ * almost the same thing, and so do the ANTSA role and the ANTSA case study — which
+ * reads as duplication rather than as a role containing the work done inside it.
+ * Separating them makes the relationship legible: where I was, and what I built
+ * while I was there.
+ */
+const bounds = boundsOf([...roleEntries, ...projectEntries]);
+
+const tracks = [
+  { id: 'roles', label: 'Where I was', entries: roleEntries.sort((a, b) => a.start - b.start) },
+  { id: 'projects', label: 'What I built', entries: projectEntries.sort((a, b) => a.start - b.start) },
+];
+
+const WORLD_STYLE: Record<string, string> = {
+  software: 'bg-[var(--border-strong)]',
+  engines: 'bg-[var(--accent)]',
+  study: 'bg-[var(--text-muted)]',
+};
+---
+
+<Section
+  id="timeline"
+  eyebrow="Trajectory"
+  title="Five years, two worlds, one line"
+  lede="Robotics in Ho Chi Minh City, then Monash, then a live health platform. Bars are coloured by which world the work belonged to."
+>
+  <div class="timeline" data-timeline>
+    <!-- Legend first: a reader should know what the colours mean before they parse the bars. -->
+    <p class="datum mb-6 flex flex-wrap items-center gap-x-5 gap-y-2">
+      {
+        (['software', 'engines', 'study'] as const).map((world) => (
+          <span class="flex items-center gap-2">
+            <span class:list={['size-1.5 rounded-full', WORLD_STYLE[world]]} aria-hidden="true" />
+            {world === 'study' ? 'Study' : worldLabel[world]}
+          </span>
+        ))
+      }
+    </p>
+
+    <div class="relative">
+      <!-- Year rules, drawn behind the bars so they read as an axis, not as content. -->
+      <div class="pointer-events-none absolute inset-0 flex" aria-hidden="true">
+        {
+          bounds.ticks.slice(0, -1).map(() => (
+            <div class="flex-1 border-l border-[var(--border-subtle)]" />
+          ))
+        }
+        <div class="border-l border-[var(--border-subtle)]" />
+      </div>
+
+      {
+        tracks.map((track, trackIndex) => (
+          <section class="relative pt-7 first:pt-0">
+            <p class="eyebrow absolute top-0 left-0">{track.label}</p>
+
+            <ol class="space-y-1.5">
+              {track.entries.map((entry, index) => {
+                const { left, width } = placement(entry, bounds);
+                const Tag = entry.href ? 'a' : 'div';
+                const delay = (trackIndex * 4 + index) * 60;
+                return (
+                  <li class="timeline-row" style={`--row-delay: ${delay}ms`}>
+                    <Tag
+                      {...(entry.href ? { href: entry.href } : {})}
+                      class="group block rounded-md py-2 transition-colors hover:bg-[var(--surface-sunken)]"
+                    >
+                      <div class="timeline-track relative h-6">
+                        <div
+                          class="timeline-bar absolute top-1/2 flex h-1.5 -translate-y-1/2 items-center rounded-full"
+                          style={`left: ${left}%; width: ${width}%`}
+                        >
+                          <span
+                            class:list={['h-1.5 w-full rounded-full', WORLD_STYLE[entry.world]]}
+                            aria-hidden="true"
+                          />
+                        </div>
+
+                        {/* Label sits after the bar, or before it when the bar runs to
+                            the right edge, so it never falls off the axis. */}
+                        <span
+                          class:list={[
+                            'timeline-label datum absolute top-1/2 -translate-y-1/2 whitespace-nowrap text-[var(--text-primary)] transition-colors',
+                            entry.href && 'group-hover:text-[var(--accent)]',
+                          ]}
+                          style={
+                            left + width > 68
+                              ? `right: ${100 - left}%; padding-right: 0.75rem`
+                              : `left: ${left + width}%; padding-left: 0.75rem`
+                          }
+                        >
+                          {entry.label}
+                        </span>
+                      </div>
+                    </Tag>
+                  </li>
+                );
+              })}
+            </ol>
+          </section>
+        ))
+      }
+    </div>
+
+    <!-- Axis labels last in the DOM so the bars are read first. -->
+    <div class="mt-3 flex" aria-hidden="true">
+      {
+        bounds.ticks.slice(0, -1).map((year) => (
+          <span class="datum flex-1 border-l border-[var(--border-subtle)] pl-2">{year}</span>
+        ))
+      }
+    </div>
+
+    <p class="sr-only">
+      Timeline of roles and projects from {bounds.ticks[0]} to {bounds.ticks[bounds.ticks.length - 1]}.
+      The same information is listed in the work and experience sections, in full.
+    </p>
+  </div>
+</Section>
+
+<style>
+  /* Bars grow from their start date rather than fading in: the gesture matches what
+     the bar means, which is a span of time beginning somewhere and running on. */
+  .timeline-row .timeline-bar {
+    transform-origin: left center;
+    transform: translateY(-50%) scaleX(0);
+  }
+  .timeline-row .timeline-label {
+    opacity: 0;
+  }
+
+  .timeline.is-visible .timeline-row .timeline-bar {
+    transform: translateY(-50%) scaleX(1);
+    transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--row-delay);
+  }
+  .timeline.is-visible .timeline-row .timeline-label {
+    opacity: 1;
+    transition: opacity 320ms ease-out calc(var(--row-delay) + 200ms);
+  }
+
+  html:not(.js) .timeline .timeline-bar {
+    transform: translateY(-50%) scaleX(1);
+  }
+  html:not(.js) .timeline .timeline-label {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .timeline .timeline-bar {
+      transform: translateY(-50%) scaleX(1) !important;
+      transition: none !important;
+    }
+    .timeline .timeline-label {
+      opacity: 1 !important;
+      transition: none !important;
+    }
+  }
+
+  /* Below the label-beside-bar breakpoint the axis is too narrow for text next to a
+     bar, so the label moves above its bar and the row grows to fit.
+
+     The bar switches to relative rather than absolute positioning, which preserves
+     its inline left and width percentages — an earlier version forced every bar to
+     full width here, which made every row look identical and threw away the duration
+     the chart exists to show. */
+  @media (width < 48rem) {
+    /* column-reverse rather than static flow: the label is last in the DOM (so the
+       bar is read first by assistive tech and by the desktop layout) but needs to
+       sit above the bar here. Making both flex items guarantees they stack instead
+       of overlapping, which relying on normal flow did not. */
+    .timeline-row .timeline-track {
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: stretch;
+      gap: 0.375rem;
+      height: auto !important;
+    }
+    .timeline-row .timeline-label {
+      position: static !important;
+      padding: 0 !important;
+      transform: none !important;
+      white-space: normal;
+    }
+    .timeline-row .timeline-bar {
+      position: relative !important;
+      top: auto !important;
+      transform: scaleX(0);
+    }
+    .timeline.is-visible .timeline-row .timeline-bar {
+      transform: scaleX(1);
+    }
+  }
+</style>
+
+<script>
+  // Plays once, when the chart is actually on screen. A timeline that has already
+  // finished animating before you scroll to it is just a static chart.
+  function initTimeline() {
+    const timeline = document.querySelector<HTMLElement>('[data-timeline]');
+    if (!timeline || timeline.classList.contains('is-visible')) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      timeline.classList.add('is-visible');
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          timeline.classList.add('is-visible');
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.25 },
+    );
+    observer.observe(timeline);
+  }
+
+  document.addEventListener('astro:page-load', initTimeline);
+</script>

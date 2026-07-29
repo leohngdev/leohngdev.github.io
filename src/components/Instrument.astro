@@ -150,5 +150,7 @@ const budgetLabel = (metric: (typeof metrics)[number]) =>
     }
   }
 
-  whenSettled(render);
+  // Re-measures after each view transition, so a case study reports its own weight
+  // rather than the number the home page happened to produce.
+  document.addEventListener('astro:page-load', () => whenSettled(render));
 </script>

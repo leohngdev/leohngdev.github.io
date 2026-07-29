@@ -143,9 +143,10 @@ const rows: Row[] = [
 <script>
   import { isFont, isScript, isStyle, snapshot, sumWhere, whenSettled } from '../lib/page-cost';
 
-  const explorer = document.querySelector<HTMLElement>('[data-explorer]');
+  function initExplorer() {
+    const explorer = document.querySelector<HTMLElement>('[data-explorer]');
+    if (!explorer) return;
 
-  if (explorer) {
     const totalEl = explorer.querySelector<HTMLElement>('[data-explorer-total]')!;
     const rows = Array.from(explorer.querySelectorAll<HTMLButtonElement>('[data-explorer-row]'));
 
@@ -258,10 +259,13 @@ const rows: Row[] = [
 
     whenSettled(() => {
       measure();
-      // A cached repeat visit reports transferSize 0 for everything, which would
-      // render a control full of zeroes. Leave the dashes rather than lie.
+      // Nothing measurable means nothing worth showing. Leave the dashes rather
+      // than render a control full of zeroes.
       if (activeTotal() === 0) return;
       paint();
     });
   }
+
+  // The explorer only exists on the home page, so this is a no-op elsewhere.
+  document.addEventListener('astro:page-load', initExplorer);
 </script>

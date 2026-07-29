@@ -49,7 +49,17 @@ export interface RuntimeBudget {
 const KB = 1024;
 
 export const buildBudget: BuildBudget = {
-  javascript: 10 * KB,
+  /**
+   * Raised from 10 KB to 15 KB when Astro's ClientRouter was added for cross-page
+   * view transitions, which cost about 4.7 KB and pushed the build to 10.9 KB.
+   *
+   * Recording why, because this is the case the gate exists for. It failed, the
+   * spend was looked at, and it was judged worth it: removing the white flash
+   * between the work index and a case study is a real improvement to how the site
+   * feels, and 15 KB is still a quarter of what a single React island cost. The
+   * wrong move would have been raising this without noticing.
+   */
+  javascript: 15 * KB,
   css: 16 * KB,
   html: 16 * KB,
 };
@@ -59,6 +69,6 @@ export const runtimeBudget: RuntimeBudget = {
   // 66, 47 and 40 KB. That is a deliberate trade the cost explorer lets a visitor
   // interrogate for themselves rather than something to hide.
   transferred: 240 * KB,
-  javascript: 12 * KB,
+  javascript: 20 * KB,
   lcp: 1500,
 };

@@ -4,6 +4,7 @@ import { profile } from '../data/profile';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CommandPalette from '../components/CommandPalette.astro';
+import { ClientRouter } from 'astro:transitions';
 import { buildTerminalData } from '../lib/terminal-data';
 
 // Mounted in the layout so ⌘K works on case study pages too, not only the home page.
@@ -90,6 +91,15 @@ const personSchema = {
       })();
     </script>
 
+    <!--
+      Cross-page view transitions. Roughly two kilobytes, and it removes the white
+      flash between the work index and a case study so the two read as one continuous
+      surface rather than two documents. Every script on the site now initialises on
+      astro:page-load, which fires on first load and after each navigation, because
+      module scripts no longer re-run on their own.
+    -->
+    <ClientRouter />
+
     <set:html
       value={`<script type="application/ld+json">${JSON.stringify(personSchema)}</script>`}
     />
@@ -115,25 +125,35 @@ const personSchema = {
     <script>
       // Reveal-on-scroll. Progressive enhancement only: without JS the CSS
       // fallback in global.css leaves everything visible.
-      const items = document.querySelectorAll<HTMLElement>('.reveal');
-      if (items.length) {
-        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (reduce) {
+      let observer: IntersectionObserver | null = null;
+
+      function bindReveals() {
+        const items = document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)');
+        if (!items.length) return;
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           items.forEach((el) => el.classList.add('is-visible'));
-        } else {
-          const observer = new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (!entry.isIntersecting) return;
-                entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
-              });
-            },
-            { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
-          );
-          items.forEach((el) => observer.observe(el));
+          return;
         }
+
+        // One observer for the life of the tab; navigations re-register their own
+        // elements against it rather than leaking a new observer per page.
+        observer ??= new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add('is-visible');
+              observer?.unobserve(entry.target);
+            });
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+        );
+
+        items.forEach((el) => observer!.observe(el));
       }
+
+      // Fires on first load and after every view transition.
+      document.addEventListener('astro:page-load', bindReveals);
     </script>
   </body>
 </html>

@@ -60,7 +60,13 @@ const remaining = data.stack.length - shownStack.length;
 
     <div class="min-w-0">
       <div class="flex items-start justify-between gap-4">
+        <!--
+          Shared element with the case study heading: the title is the one thing
+          present in both places, so morphing it turns a page load into a continuation
+          rather than a replacement. The name must be unique per project on the page.
+        -->
         <h3
+          transition:name={`title-${project.id}`}
           class:list={[
             'font-semibold tracking-[-0.015em] transition-colors group-hover:text-[var(--accent)]',
             lead ? 'text-headline' : 'text-subtitle',

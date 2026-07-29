@@ -47,7 +47,8 @@ const { Content } = await render(project);
           <span class="datum">{data.period}</span>
         </div>
 
-        <h1 class="text-title mt-4 font-semibold tracking-[-0.015em]">
+        <!-- Matches the transition:name on the index row, so the title travels. -->
+        <h1 transition:name={`title-${project.id}`} class="text-title mt-4 font-semibold tracking-[-0.015em]">
           {data.title}
         </h1>
 

@@ -1,32 +1,64 @@
 ---
 import Section from './Section.astro';
 import { profile } from '../data/profile';
+
+/**
+ * Depth, not a chip grid.
+ *
+ * The four equal boxes this replaces gave Unreal Engine, Substance Painter and AR/VR
+ * exactly the same visual weight as Python and React. WORKING-NOTES.md flags those
+ * three as the least-backed claims on the site, so the old layout was quietly
+ * overselling them — and a reader who probed one in an interview would find that out
+ * the hard way.
+ *
+ * Depth is stated in profile.ts rather than inferred here, so the honest ordering
+ * lives with the content it describes and the CV can read the same field later.
+ */
+const DEPTH_LABEL: Record<string, string> = {
+  shipped: 'Shipped production code',
+  built: 'Built real things with',
+  studied: 'Studied and used',
+};
+
+const DEPTH_WIDTH: Record<string, string> = {
+  shipped: 'w-full',
+  built: 'w-2/3',
+  studied: 'w-1/3',
+};
 ---
 
 <Section
   id="skills"
   eyebrow="Skills"
-  title="What I work with"
-  lede="Grouped honestly. The things I have shipped production code in are in the first two groups; the rest is where I am genuinely capable rather than merely familiar."
+  title="What I work with, and how far"
+  lede="Grouped by how far I have actually taken each one, rather than as one flat list where everything looks equal. The bar is the claim; the words underneath are what backs it."
 >
-  <div class="grid gap-x-12 gap-y-10 sm:grid-cols-2">
+  <div class="space-y-10">
     {
       profile.skills.map((group, index) => (
         <div class="reveal" style={`transition-delay: ${index * 70}ms`}>
-          <div class="flex items-baseline gap-3 border-b border-[var(--border-subtle)] pb-3">
-            <h3 class="font-mono text-sm font-medium tracking-tight text-[var(--accent)]">
-              {group.label}
-            </h3>
-            <span class="font-mono text-xs text-[var(--text-muted)]">{group.items.length}</span>
+          <div class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+            <h3 class="text-subtitle font-semibold tracking-[-0.01em]">{group.label}</h3>
+            <p class="datum">{DEPTH_LABEL[group.depth]}</p>
           </div>
 
-          <p class="mt-3 text-sm text-[var(--text-muted)]">{group.note}</p>
+          {/* The bar is the honest part: length encodes depth, so scanning the
+              column tells you where the real experience is without reading. */}
+          <div class="mt-3 h-0.5 w-full bg-[var(--border-subtle)]">
+            <div
+              class:list={[
+                'h-0.5 transition-[width] duration-700 ease-[var(--ease-out-soft)]',
+                DEPTH_WIDTH[group.depth],
+                group.depth === 'shipped' ? 'bg-[var(--accent)]' : 'bg-[var(--border-strong)]',
+              ]}
+            />
+          </div>
 
-          <ul class="mt-4 flex flex-wrap gap-1.5">
+          <p class="mt-3 max-w-2xl text-sm text-[var(--text-secondary)]">{group.note}</p>
+
+          <ul class="mt-4 flex flex-wrap items-center gap-x-3 gap-y-1.5">
             {group.items.map((item) => (
-              <li class="rounded-md border border-[var(--border-subtle)] px-2.5 py-1 font-mono text-xs text-[var(--text-secondary)]">
-                {item}
-              </li>
+              <li class="datum text-[var(--text-secondary)]">{item}</li>
             ))}
           </ul>
         </div>

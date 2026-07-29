@@ -66,38 +66,53 @@ export const profile = {
     ],
   },
 
-  /** Deliberately grouped the same way as the CV so the two read as one story. */
+  /**
+   * Deliberately grouped the same way as the CV so the two read as one story.
+   *
+   * `depth` is what the skills section renders as a bar, and it exists because a flat
+   * chip grid gave Unreal Engine and Substance Painter the same visual weight as
+   * Python. Claiming less where less is true is the whole point: an interviewer who
+   * probes the weakest item should find it already labelled as the weakest item.
+   *
+   *   shipped — production code, against real sign-off
+   *   built   — real things made with it, outside a classroom exercise
+   *   studied — coursework and genuine use, not professional depth
+   */
   skills: [
     {
       id: 'languages',
       label: 'Languages',
+      depth: 'shipped',
       note: 'Comfortable picking up whatever the codebase already uses.',
       items: ['Python', 'Java', 'C++', 'C#', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'PHP', 'SQL'],
     },
     {
       id: 'web',
       label: 'Web & Backend',
-      note: 'Where most of my professional work has happened.',
+      depth: 'shipped',
+      note: 'Where most of my professional work has happened, including the ANTSA scoring engine.',
       items: ['Node.js', 'Nest.js', 'React', 'React Native', 'CakePHP', 'PostgreSQL', 'MySQL', 'REST APIs'],
-    },
-    {
-      id: 'game',
-      label: 'Game & 3D',
-      note: 'The other half of my degree, and the reason I like performance problems.',
-      items: [
-        'Unreal Engine',
-        'Unity',
-        'Maya',
-        'Substance Painter',
-        'AR/VR',
-        'Character Rigging & Animation',
-      ],
     },
     {
       id: 'tools',
       label: 'Ways of Working',
+      depth: 'shipped',
       note: 'Shipped against real client sign-off, not just assignment deadlines.',
       items: ['Git & GitHub', 'Agile / Scrum', 'UAT', 'Code Review', 'CI/CD', 'Debugging legacy systems'],
+    },
+    {
+      id: 'game',
+      label: 'Game & 3D',
+      depth: 'studied',
+      note: 'The other half of my degree, and the reason I care what a frame costs. University work rather than shipped titles.',
+      items: [
+        'Unity',
+        'Maya',
+        'Unreal Engine',
+        'Substance Painter',
+        'AR/VR',
+        'Character Rigging & Animation',
+      ],
     },
   ],
 
