@@ -1,0 +1,346 @@
+---
+import type { TerminalData } from '../lib/terminal-data';
+
+interface Props {
+  data: TerminalData;
+}
+
+const { data } = Astro.props;
+---
+
+{
+  /*
+    The terminal, rewritten without React and moved out of the hero.
+
+    Two reasons, and the second is the real one:
+
+    1. Register. A terminal parked in a hero column is dev-tool cosplay. A palette
+       on ⌘K is a considered product interaction — the same content, read as craft
+       rather than as costume, which matters when half the audience is not a
+       developer.
+    2. Cost. react-dom was ~57 KB gzipped of a ~65 KB JavaScript budget, spent
+       rendering a shell prompt. On a site whose headline is about what software
+       costs, that was the single least defensible number on the page.
+
+    All command behaviour still comes from lib/terminal-commands.ts, which was
+    already pure functions returning Line[] and needed no changes.
+
+    Uses a native dialog element: showModal() gives a focus trap, Escape-to-close,
+    an inert background and ::backdrop with no library and no custom key handling.
+  */
+}
+{/* Data island rather than component props: no framework, no serialisation runtime. */}
+<script is:inline type="application/json" id="palette-data" set:html={JSON.stringify(data)} />
+
+<dialog
+  id="command-palette"
+  class="m-0 max-h-none max-w-none bg-transparent p-0 backdrop:bg-[color-mix(in_srgb,var(--color-ink-950)_55%,transparent)] backdrop:backdrop-blur-sm"
+  aria-label="Command palette"
+>
+  <div class="fixed inset-0 flex items-start justify-center overflow-y-auto p-4 sm:p-6">
+    <div
+      class="palette-panel mt-[8vh] w-full max-w-2xl overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] shadow-2xl"
+    >
+      <div
+        class="flex items-center gap-2 border-b border-[var(--border-subtle)] px-4 py-2.5"
+      >
+        <span class="flex gap-1.5" aria-hidden="true">
+          <span class="size-2.5 rounded-full bg-[var(--border-strong)]"></span>
+          <span class="size-2.5 rounded-full bg-[var(--border-strong)]"></span>
+          <span class="size-2.5 rounded-full bg-[var(--color-accent-400)]"></span>
+        </span>
+        <p class="datum ml-1 flex-1">leo@portfolio — zsh</p>
+        <button
+          type="button"
+          data-palette-close
+          class="datum rounded px-2 py-1 transition-colors hover:text-[var(--accent)]"
+          aria-label="Close command palette"
+        >
+          esc
+        </button>
+      </div>
+
+      <div
+        data-palette-scroll
+        class="h-[min(60vh,26rem)] overflow-y-auto px-4 py-3 font-mono text-[0.8125rem] leading-relaxed"
+      >
+        <div data-palette-log role="log" aria-live="polite" aria-label="Terminal output"></div>
+
+        <form data-palette-form class="mt-1 flex items-baseline gap-2">
+          <label for="palette-input" class="shrink-0 text-[var(--accent)]">
+            leo@portfolio:~$
+          </label>
+          <input
+            id="palette-input"
+            data-palette-input
+            class="min-w-0 flex-1 bg-transparent text-[var(--text-primary)] caret-[var(--accent)] outline-none"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            enterkeyhint="go"
+            aria-describedby="palette-help"
+          />
+        </form>
+
+        <p data-palette-hint class="mt-1 text-[var(--text-muted)]"></p>
+      </div>
+
+      <p id="palette-help" class="sr-only">
+        Optional command palette. Available commands are help, whoami, about, skills, projects,
+        open, go, experience, education, contact, resume, theme and clear. Everything here also
+        appears as ordinary text on the page.
+      </p>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  /* Entrance. Kept short because a palette that makes you wait is a worse palette. */
+  #command-palette[open] .palette-panel {
+    animation: palette-in 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes palette-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.985);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #command-palette[open] .palette-panel {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { complete, runCommand, type Effect, type Line } from '../lib/terminal-commands';
+  import type { TerminalData } from '../lib/terminal-data';
+
+  const dialog = document.getElementById('command-palette') as HTMLDialogElement | null;
+  const dataEl = document.getElementById('palette-data');
+  if (dialog && dataEl?.textContent) {
+    const data = JSON.parse(dataEl.textContent) as TerminalData;
+
+    const log = dialog.querySelector<HTMLElement>('[data-palette-log]')!;
+    const form = dialog.querySelector<HTMLFormElement>('[data-palette-form]')!;
+    const input = dialog.querySelector<HTMLInputElement>('[data-palette-input]')!;
+    const scroller = dialog.querySelector<HTMLElement>('[data-palette-scroll]')!;
+    const hint = dialog.querySelector<HTMLElement>('[data-palette-hint]')!;
+
+    const history: string[] = [];
+    let historyIndex: number | null = null;
+    /** Where focus was before opening, so it can be handed back on close. */
+    let restoreFocusTo: HTMLElement | null = null;
+
+    const TONE: Record<string, string> = {
+      default: 'text-[var(--text-primary)]',
+      muted: 'text-[var(--text-muted)]',
+      accent: 'text-[var(--accent)]',
+      error: 'text-[var(--text-primary)]',
+      success: 'text-[var(--accent)]',
+    };
+
+    function el<K extends keyof HTMLElementTagNameMap>(
+      tag: K,
+      className: string,
+      text?: string,
+    ): HTMLElementTagNameMap[K] {
+      const node = document.createElement(tag);
+      node.className = className;
+      if (text !== undefined) node.textContent = text;
+      return node;
+    }
+
+    /** Renders one Line. Mirrors what the React LineView used to do, without React. */
+    function renderLine(line: Line): HTMLElement {
+      switch (line.type) {
+        case 'blank':
+          return el('div', 'h-3');
+
+        case 'echo': {
+          const row = el('div', 'flex gap-2');
+          row.append(
+            el('span', 'shrink-0 text-[var(--accent)]', 'leo@portfolio:~$'),
+            el('span', 'break-words', line.text),
+          );
+          return row;
+        }
+
+        case 'link': {
+          const row = el('div', 'flex flex-wrap items-baseline gap-2');
+          if (line.note) row.append(el('span', 'text-[var(--text-muted)]', `${line.note}:`));
+          const anchor = document.createElement('a');
+          anchor.href = line.href;
+          anchor.textContent = line.label;
+          anchor.className = 'link-underline text-[var(--accent)] break-all';
+          if (line.external) {
+            anchor.target = '_blank';
+            anchor.rel = 'noopener noreferrer';
+          }
+          // Following a link should not leave a modal open behind the new page.
+          anchor.addEventListener('click', () => close());
+          row.append(anchor);
+          return row;
+        }
+
+        case 'pair': {
+          const row = el('div', 'flex gap-3');
+          row.append(
+            el('span', 'shrink-0 whitespace-pre text-[var(--accent)]', line.key),
+            el('span', 'text-[var(--text-secondary)]', line.value),
+          );
+          return row;
+        }
+
+        case 'tags': {
+          const row = el('div', 'flex flex-wrap items-baseline gap-x-2 gap-y-1');
+          row.append(el('span', 'text-[var(--text-muted)]', `${line.label}:`));
+          for (const item of line.items) {
+            row.append(el('span', 'text-[var(--text-secondary)]', item));
+          }
+          return row;
+        }
+
+        default:
+          return el('div', `break-words ${TONE[line.tone ?? 'default']}`, line.text);
+      }
+    }
+
+    function push(lines: Line[]) {
+      for (const line of lines) log.append(renderLine(line));
+      // Keep the prompt in view as output grows.
+      requestAnimationFrame(() => {
+        scroller.scrollTop = scroller.scrollHeight;
+      });
+    }
+
+    function handleEffect(effect: Effect) {
+      if (effect.kind === 'clear') {
+        log.replaceChildren();
+        return;
+      }
+      if (effect.kind === 'theme') {
+        const isDark = document.documentElement.classList.toggle('dark');
+        try {
+          localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        } catch {
+          /* Not worth failing a command over. */
+        }
+        return;
+      }
+      if (effect.kind === 'scroll') {
+        const target = document.getElementById(effect.target);
+        if (!target) return;
+        close();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+
+    function submit(raw: string) {
+      const value = raw.trim();
+      push([{ type: 'echo', text: value }]);
+      if (value) {
+        history.push(value);
+        push(runCommand(value, { data, effect: handleEffect }));
+      }
+      input.value = '';
+      historyIndex = null;
+      hint.textContent = '';
+    }
+
+    function open() {
+      if (dialog!.open) return;
+      restoreFocusTo = document.activeElement as HTMLElement | null;
+      dialog!.showModal();
+      if (!log.childElementCount) {
+        push([
+          { type: 'text', text: `${data.name} — portfolio`, tone: 'accent' },
+          { type: 'text', text: `${data.role} · ${data.location}` },
+          { type: 'blank' },
+          { type: 'text', text: "Type 'help' for commands, or 'whoami' to start.", tone: 'muted' },
+        ]);
+      }
+      input.focus();
+    }
+
+    function close() {
+      if (!dialog!.open) return;
+      dialog!.close();
+    }
+
+    // Native dialog fires close for Escape too, so focus restore lives here rather
+    // than in every path that can dismiss it.
+    dialog.addEventListener('close', () => restoreFocusTo?.focus());
+
+    // Clicking the backdrop dismisses. The dialog element itself fills the viewport,
+    // so a click landing on it rather than the panel is a click outside the panel.
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) close();
+    });
+
+    dialog.querySelectorAll('[data-palette-close]').forEach((button) => {
+      button.addEventListener('click', () => close());
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      submit(input.value);
+    });
+
+    input.addEventListener('keydown', (event) => {
+      if (event.key === 'Tab') {
+        event.preventDefault();
+        const completed = complete(input.value, data.projects);
+        if (completed) {
+          input.value = completed;
+          hint.textContent = '';
+        } else {
+          hint.textContent = 'No single match.';
+        }
+        return;
+      }
+
+      if (event.key === 'ArrowUp') {
+        if (!history.length) return;
+        event.preventDefault();
+        const next = historyIndex === null ? history.length - 1 : Math.max(historyIndex - 1, 0);
+        historyIndex = next;
+        input.value = history[next];
+        return;
+      }
+
+      if (event.key === 'ArrowDown') {
+        if (historyIndex === null) return;
+        event.preventDefault();
+        const next = historyIndex + 1;
+        if (next >= history.length) {
+          historyIndex = null;
+          input.value = '';
+          return;
+        }
+        historyIndex = next;
+        input.value = history[next];
+      }
+    });
+
+    // Clicking anywhere in the output focuses the prompt, the way a terminal does.
+    scroller.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) return;
+      input.focus();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
+        event.preventDefault();
+        dialog!.open ? close() : open();
+      }
+    });
+
+    document.querySelectorAll('[data-palette-open]').forEach((trigger) => {
+      trigger.addEventListener('click', () => open());
+    });
+  }
+</script>

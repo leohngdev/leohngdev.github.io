@@ -214,6 +214,30 @@ const commands: Command[] = [
     ],
   },
   {
+    /**
+     * The `scroll` effect existed in the type but nothing emitted it. Now that the
+     * terminal is a palette rather than a widget parked in the hero, jumping to a
+     * section is the thing you actually want from it.
+     */
+    name: 'go',
+    summary: 'Jump to a section of the page',
+    usage: 'go <section>',
+    run: (args, { effect }) => {
+      const sections = ['work', 'timeline', 'about', 'skills', 'experience', 'contact'];
+      const target = args[0]?.toLowerCase();
+
+      if (!target || !sections.includes(target)) {
+        return [
+          { type: 'text', text: target ? `No section called "${target}".` : 'Usage: go <section>', tone: 'error' },
+          { type: 'text', text: `Sections: ${sections.join(', ')}`, tone: 'muted' },
+        ];
+      }
+
+      effect({ kind: 'scroll', target });
+      return [{ type: 'text', text: `Jumping to ${target}.`, tone: 'muted' }];
+    },
+  },
+  {
     name: 'theme',
     summary: 'Flip between light and dark',
     run: (_args, { effect }) => {

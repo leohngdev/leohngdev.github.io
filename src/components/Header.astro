@@ -47,10 +47,31 @@ const links = [
         </ul>
       </nav>
 
+      <!--
+        A keyboard shortcut nobody can discover is worth nothing, so the palette
+        gets a visible, clickable affordance that also states its shortcut.
+      -->
+      <button
+        type="button"
+        data-palette-open
+        class="flex items-center gap-2 rounded-md border border-[var(--border-strong)] px-2.5 py-1.5 font-mono text-xs tracking-wide transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+        aria-haspopup="dialog"
+      >
+        <span aria-hidden="true">&#8984;K</span>
+        <span class="sr-only">Open command palette</span>
+      </button>
+
+      <!--
+        prefetchAll treats the CV as an internal link and was fetching the whole PDF
+        on every page load, for every visitor, most of whom never download it. The
+        site publishes its own page weight, so spending bytes on a file nobody asked
+        for is not a thing it can do.
+      -->
       <a
         href={profile.resume}
         class="rounded-md border border-[var(--border-strong)] px-3 py-1.5 font-mono text-xs tracking-wide transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
         download
+        data-astro-prefetch="false"
       >
         CV
       </a>

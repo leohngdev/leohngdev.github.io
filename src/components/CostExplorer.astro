@@ -1,0 +1,267 @@
+---
+/**
+ * The hero's interactive centrepiece, and the site's thesis made playable.
+ *
+ * Every row is a real thing this page loads. Flip one off and three things happen
+ * at once: the total rolls down, the bar retracts, and the page visibly changes
+ * around you — the display face falls back, the palette unmounts, motion stops.
+ *
+ * It argues to both audiences from one control. An engineer reads an honest asset
+ * breakdown. A designer switches Fraunces off, watches the page get worse, and sees
+ * exactly what 67 KB of typeface buys. Same switch, two arguments.
+ *
+ * HONESTY CONSTRAINT: switching a row off cannot un-download those bytes, so this
+ * does not pretend to re-measure. The baseline total is genuinely measured in the
+ * visitor's browser via Resource Timing; the per-row figures are real transferred
+ * sizes of real assets, and the arithmetic is labelled as what the page *would*
+ * weigh. A tool that lied about measurement would undercut the entire point of it.
+ */
+
+interface Row {
+  id: string;
+  label: string;
+  note: string;
+  /** Matched against resource URLs to read this row's real transferred size. */
+  match: string;
+  locked?: boolean;
+}
+
+const rows: Row[] = [
+  { id: 'display', label: 'Fraunces', note: 'display face', match: 'fraunces' },
+  { id: 'body', label: 'Inter', note: 'body text', match: 'inter-' },
+  { id: 'mono', label: 'JetBrains Mono', note: 'data + palette', match: 'jetbrains' },
+  { id: 'script', label: 'JavaScript', note: 'palette, explorer, readout', match: '.js' },
+  { id: 'styles', label: 'Styles', note: 'one stylesheet', match: '.css' },
+  /**
+   * Absorbs the document itself plus anything the rows above did not match — the
+   * favicon, and the per-row rounding. Without this the explorer's rows summed to
+   * six kilobytes less than the footer readout, and two numbers on one page
+   * disagreeing is worse than either number being slightly coarse.
+   */
+  { id: 'document', label: 'HTML', note: 'the page and the rest', match: 'document', locked: true },
+];
+---
+
+<div
+  class="rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-5 sm:p-6"
+  data-explorer
+>
+  <div class="flex items-baseline justify-between gap-4">
+    <p class="eyebrow">What this page costs</p>
+    <p class="datum text-[var(--text-primary)]">
+      <span class="inline-block min-w-[3.5ch] text-right" data-explorer-total>&mdash;</span> KB
+    </p>
+  </div>
+
+  <ul class="mt-5 space-y-1">
+    {
+      rows.map((row) => (
+        <li>
+          <button
+            type="button"
+            class="group grid w-full grid-cols-[1fr_auto] items-center gap-x-3 gap-y-1 rounded-md px-2 py-2 text-left transition-colors hover:bg-[var(--surface-sunken)] disabled:cursor-not-allowed disabled:hover:bg-transparent"
+            data-explorer-row={row.id}
+            data-match={row.match}
+            disabled={row.locked}
+            aria-pressed={row.locked ? undefined : 'true'}
+          >
+            <span class="flex min-w-0 items-baseline gap-2">
+              <span
+                class="size-1.5 shrink-0 rounded-full bg-[var(--accent)] transition-colors"
+                data-explorer-dot
+                aria-hidden="true"
+              />
+              <span class="datum truncate text-[var(--text-primary)]">{row.label}</span>
+              <span class="datum truncate text-[var(--text-muted)]">{row.note}</span>
+            </span>
+
+            <span class="datum shrink-0 text-right text-[var(--text-secondary)]">
+              <span class="inline-block min-w-[2.5ch]" data-explorer-size>&mdash;</span><span
+                data-explorer-unit
+              >
+                KB</span
+              >
+            </span>
+
+            <span class="col-span-2 h-0.5 w-full bg-[var(--border-subtle)]">
+              <span
+                class="block h-0.5 w-0 bg-[var(--accent)] transition-[width,background-color] duration-500 ease-[var(--ease-out-soft)]"
+                data-explorer-bar
+              />
+            </span>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="datum mt-4 leading-relaxed text-[var(--text-muted)]">
+    Measured in your browser, not typed in. Switch a row off to see what this page would weigh
+    without it — the bytes are already here, so that part is arithmetic, not a reload.
+  </p>
+</div>
+
+<style>
+  /* Off state. Applied by the script rather than a CSS-only :checked trick because
+     the same state also drives the arithmetic and the page-wide changes. */
+  [data-explorer-row][aria-pressed='false'] [data-explorer-dot] {
+    background-color: var(--border-strong);
+  }
+  [data-explorer-row][aria-pressed='false'] [data-explorer-bar] {
+    background-color: var(--border-strong);
+  }
+  [data-explorer-row][aria-pressed='false'] .datum {
+    color: var(--text-muted);
+    text-decoration: line-through;
+    text-decoration-color: var(--border-strong);
+  }
+
+  /* What switching each row off actually does to the page. These are real
+     consequences, not simulations of consequences. */
+  :global(html[data-off-display]) {
+    --font-display: ui-serif, Georgia, 'Times New Roman', serif;
+  }
+  :global(html[data-off-body]) {
+    --font-sans: ui-sans-serif, system-ui, sans-serif;
+  }
+  :global(html[data-off-mono]) {
+    --font-mono: ui-monospace, 'Consolas', monospace;
+  }
+  :global(html[data-off-styles]) [data-explorer],
+  :global(html[data-off-styles]) .reveal {
+    /* Deliberately partial: genuinely unloading the stylesheet would take the
+       control itself with it. Dropping the surfaces makes the point honestly. */
+    background-color: transparent;
+    border-color: transparent;
+  }
+  :global(html[data-off-script]) * {
+    animation: none !important;
+    transition: none !important;
+  }
+</style>
+
+<script>
+  import { isFont, isScript, isStyle, snapshot, sumWhere, whenSettled } from '../lib/page-cost';
+
+  const explorer = document.querySelector<HTMLElement>('[data-explorer]');
+
+  if (explorer) {
+    const totalEl = explorer.querySelector<HTMLElement>('[data-explorer-total]')!;
+    const rows = Array.from(explorer.querySelectorAll<HTMLButtonElement>('[data-explorer-row]'));
+
+    /** Real transferred bytes per row, filled in from Resource Timing on load. */
+    const sizes = new Map<string, number>();
+
+    function measure() {
+      const resources = snapshot();
+      let accounted = 0;
+
+      for (const row of rows) {
+        const match = row.dataset.match ?? '';
+        if (match === 'document') continue;
+
+        const bytes = sumWhere(resources, (name) => {
+          // Each predicate must be exclusive, or a font would be counted twice.
+          if (match === '.js') return isScript(name);
+          if (match === '.css') return isStyle(name);
+          return isFont(name) && name.includes(match);
+        });
+
+        sizes.set(row.dataset.explorerRow!, bytes);
+        accounted += bytes;
+      }
+
+      // The locked row takes the document plus whatever nothing else claimed, so the
+      // rows always sum to exactly what the footer readout reports.
+      const documentRow = rows.find((row) => row.dataset.match === 'document');
+      if (documentRow) {
+        sizes.set(documentRow.dataset.explorerRow!, Math.max(resources.total - accounted, 0));
+      }
+    }
+
+    const kb = (bytes: number) => Math.round(bytes / 1024);
+
+    function activeTotal() {
+      let total = 0;
+      for (const row of rows) {
+        if (row.getAttribute('aria-pressed') === 'false') continue;
+        total += sizes.get(row.dataset.explorerRow!) ?? 0;
+      }
+      return total;
+    }
+
+    let displayed = 0;
+
+    /** Rolls the total rather than snapping it: the number is the point. */
+    function rollTo(target: number) {
+      const from = displayed;
+      const start = performance.now();
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduce || from === 0) {
+        displayed = target;
+        totalEl.textContent = String(kb(target));
+        return;
+      }
+      function tick(now: number) {
+        const t = Math.min((now - start) / 420, 1);
+        const eased = 1 - Math.pow(1 - t, 3);
+        displayed = from + (target - from) * eased;
+        totalEl.textContent = String(kb(displayed));
+        if (t < 1) requestAnimationFrame(tick);
+        else displayed = target;
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function paint() {
+      const max = Math.max(...rows.map((r) => sizes.get(r.dataset.explorerRow!) ?? 0), 1);
+      for (const row of rows) {
+        const bytes = sizes.get(row.dataset.explorerRow!) ?? 0;
+        const on = row.getAttribute('aria-pressed') !== 'false';
+        const sizeEl = row.querySelector<HTMLElement>('[data-explorer-size]')!;
+        const bar = row.querySelector<HTMLElement>('[data-explorer-bar]')!;
+
+        /**
+         * A zero-byte row is not a broken reading. Astro's inlineStylesheets: 'auto'
+         * folds a small stylesheet into the document, so there is no separate CSS
+         * request to measure and those bytes are already counted in the HTML row.
+         * Say that, rather than printing a "0 KB" that looks like a bug — and drop
+         * the switch, because there is nothing separate left to subtract.
+         */
+        if (bytes === 0) {
+          sizeEl.textContent = 'inlined';
+          sizeEl.classList.add('text-[var(--text-muted)]');
+          row.querySelector<HTMLElement>('[data-explorer-unit]')?.remove();
+          bar.style.width = '0%';
+          row.disabled = true;
+          row.removeAttribute('aria-pressed');
+          continue;
+        }
+
+        sizeEl.textContent = String(kb(bytes));
+        bar.style.width = on ? `${(bytes / max) * 100}%` : '0%';
+      }
+      rollTo(activeTotal());
+    }
+
+    for (const row of rows) {
+      if (row.disabled) continue;
+      row.addEventListener('click', () => {
+        const on = row.getAttribute('aria-pressed') !== 'false';
+        row.setAttribute('aria-pressed', on ? 'false' : 'true');
+        // The page-wide consequence. Attribute on <html> so the CSS above can reach
+        // anything, including elements outside this component.
+        document.documentElement.toggleAttribute(`data-off-${row.dataset.explorerRow}`, on);
+        paint();
+      });
+    }
+
+    whenSettled(() => {
+      measure();
+      // A cached repeat visit reports transferSize 0 for everything, which would
+      // render a control full of zeroes. Leave the dashes rather than lie.
+      if (activeTotal() === 0) return;
+      paint();
+    });
+  }
+</script>

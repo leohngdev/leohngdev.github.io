@@ -1,17 +1,20 @@
 ---
 import { profile } from '../data/profile';
-import Terminal from './Terminal.tsx';
 import Instrument from './Instrument.astro';
-import type { TerminalData } from '../lib/terminal-data';
+import CostExplorer from './CostExplorer.astro';
 
-interface Props {
-  terminalData: TerminalData;
-}
-
-const { terminalData } = Astro.props;
+/**
+ * The thesis is split into words at build time so each can be revealed
+ * independently. Splitting in the browser would mean shipping a string-manipulation
+ * step just to animate, and would leave the headline momentarily unstyled.
+ *
+ * Line breaks are authored rather than left to the browser: at display size the
+ * break position is a typographic decision, not something to discover at runtime.
+ */
+const thesisLines = ['Games taught me', 'what software costs.'];
 ---
 
-<section class="pt-16 pb-20 sm:pt-24 sm:pb-28">
+<section class="pt-16 pb-20 sm:pt-24 sm:pb-28" data-hero>
   <div class="container-page">
     <!--
       The name is demoted on purpose. Nobody scans a portfolio looking for a name,
@@ -19,41 +22,36 @@ const { terminalData } = Astro.props;
       to the claim, not the label. The name still reads first in the DOM, so screen
       readers and the document outline are unaffected.
     -->
-    <p class="reveal datum flex items-center gap-2 text-[var(--text-secondary)]">
+    <p class="datum flex items-center gap-2 text-[var(--text-secondary)]" data-hero-item="0">
       {profile.displayName}
       <span class="text-[var(--border-strong)]" aria-hidden="true">/</span>
       {profile.role}
     </p>
 
-    <!--
-      The thesis spans the full container rather than sharing a row with the terminal.
-      At display size a half-width column broke it across three ragged lines, which
-      costs exactly the instant legibility the line exists to buy.
-    -->
-    <h1
-      class="reveal text-display mt-4 max-w-[19ch] font-semibold tracking-[-0.02em]"
-      style="transition-delay: 60ms"
-    >
-      {profile.thesis}
+    <h1 class="text-display mt-4 max-w-[19ch] font-semibold tracking-[-0.02em]" data-hero-thesis>
+      {
+        thesisLines.map((line) => (
+          <span class="block">
+            {line.split(' ').map((word) => (
+              <span class="hero-word inline-block">{word}&nbsp;</span>
+            ))}
+          </span>
+        ))
+      }
     </h1>
 
-    <!--
-      min-w-0 on both columns: grid items default to min-width:auto, so the terminal's
-      long unbreakable mono lines were sizing the column to their own max-content and
-      pushing the whole page 6px wider than the viewport on a 375px screen.
-    -->
     <div class="mt-10 grid gap-12 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
       <div class="min-w-0">
-        <p class="reveal text-lede max-w-xl text-[var(--text-secondary)]" style="transition-delay: 120ms">
+        <p class="text-lede max-w-xl text-[var(--text-secondary)]" data-hero-item="1">
           {profile.heroProof}
         </p>
 
-        <p class="reveal eyebrow mt-7 flex items-center gap-2" style="transition-delay: 180ms">
+        <p class="eyebrow mt-7 flex items-center gap-2" data-hero-item="2">
           <span class="text-[var(--accent)]" aria-hidden="true">&#9679;</span>
           {profile.available}
         </p>
 
-        <div class="reveal mt-9 flex flex-wrap items-center gap-3" style="transition-delay: 240ms">
+        <div class="mt-9 flex flex-wrap items-center gap-3" data-hero-item="3">
           <a
             href="#work"
             class="rounded-lg bg-[var(--text-primary)] px-5 py-2.5 text-sm font-medium text-[var(--surface)] transition-opacity hover:opacity-88"
@@ -63,37 +61,112 @@ const { terminalData } = Astro.props;
           <a
             href={profile.resume}
             download
+            data-astro-prefetch="false"
             class="rounded-lg border border-[var(--border-strong)] px-5 py-2.5 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             Download CV
           </a>
-          <a
-            href={`mailto:${profile.email}`}
+          <button
+            type="button"
+            data-palette-open
             class="px-1 py-2.5 text-sm font-medium text-[var(--text-secondary)] transition-colors hover:text-[var(--accent)]"
+            aria-haspopup="dialog"
           >
-            Get in touch
-          </a>
+            Or type a command
+          </button>
         </div>
 
-        <!--
-          Sits under the thesis as its first piece of evidence. The claim is about
-          what software costs; this is what this page cost, read out of the reader's
-          own browser. Full breakdown with budgets is in the footer.
-        -->
-        <Instrument variant="line" class="mt-8 text-[var(--text-muted)]" />
+        <Instrument variant="line" class="mt-8 text-[var(--text-muted)]" data-hero-item="4" />
       </div>
 
-      <div class="reveal min-w-0 lg:pl-4" style="transition-delay: 300ms">
-        <p class="eyebrow mb-3 flex items-center gap-2">
-          <span aria-hidden="true">&#8595;</span>
-          {profile.terminalHint}
-        </p>
-        <!--
-          client:visible keeps the island off the critical path: the hero paints
-          as static HTML and React only hydrates once the terminal is on screen.
-        -->
-        <Terminal data={terminalData} client:visible />
+      <div class="min-w-0" data-hero-item="5">
+        <CostExplorer />
       </div>
     </div>
   </div>
 </section>
+
+<style>
+  /* The hero is the only place on the site that animates without waiting to be
+     scrolled to, because it is already in view. Everything starts hidden and the
+     .hero-play class on the section releases it. */
+  [data-hero] .hero-word,
+  [data-hero] [data-hero-item] {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  [data-hero] .hero-word {
+    filter: blur(6px);
+  }
+
+  [data-hero].hero-play .hero-word {
+    opacity: 1;
+    filter: blur(0);
+    transform: none;
+    transition:
+      opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      filter 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  [data-hero].hero-play [data-hero-item] {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Nothing is hidden without JavaScript, and nothing moves for a reader who has
+     asked for less motion. Both paths land on the finished state immediately. */
+  html:not(.js) [data-hero] .hero-word,
+  html:not(.js) [data-hero] [data-hero-item] {
+    opacity: 1;
+    filter: none;
+    transform: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-hero] .hero-word,
+    [data-hero] [data-hero-item] {
+      opacity: 1 !important;
+      filter: none !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+</style>
+
+<script>
+  const hero = document.querySelector<HTMLElement>('[data-hero]');
+
+  if (hero) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    // Words carry the stagger; the supporting items follow behind the last word so
+    // the headline always finishes first. Set here rather than in CSS because the
+    // word count depends on the copy.
+    const words = hero.querySelectorAll<HTMLElement>('.hero-word');
+    words.forEach((word, index) => {
+      word.style.transitionDelay = `${index * 55}ms`;
+    });
+
+    const headlineDone = words.length * 55 + 220;
+    hero.querySelectorAll<HTMLElement>('[data-hero-item]').forEach((item) => {
+      const order = Number(item.dataset.heroItem ?? '0');
+      item.style.transitionDelay = `${headlineDone + order * 70}ms`;
+    });
+
+    if (reduce) {
+      hero.classList.add('hero-play');
+    } else {
+      // Wait for the display face before revealing: a headline that swaps typeface
+      // mid-animation is worse than one that starts 40ms later.
+      const fonts = document.fonts?.ready ?? Promise.resolve();
+      fonts.then(() => requestAnimationFrame(() => hero.classList.add('hero-play')));
+      // Never let a font that fails to load leave the hero invisible.
+      setTimeout(() => hero.classList.add('hero-play'), 900);
+    }
+  }
+</script>

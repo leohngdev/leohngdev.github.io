@@ -48,7 +48,12 @@ const channels = [
       <!-- Explicit space: Astro trims the whitespace between text and a following
            element, which was rendering this as "version?Download my CV". -->
       Prefer the paper version?{' '}
-      <a href={profile.resume} download class="link-underline text-[var(--text-secondary)]">
+      <a
+        href={profile.resume}
+        download
+        data-astro-prefetch="false"
+        class="link-underline text-[var(--text-secondary)]"
+      >
         Download my CV as a PDF
       </a>.
     </p>

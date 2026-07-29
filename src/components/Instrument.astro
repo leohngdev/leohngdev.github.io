@@ -15,7 +15,7 @@ const { variant = 'full', class: className = '' } = Astro.props;
  * performance from causing the layout shift it is supposed to be arguing against.
  */
 const metrics = [
-  { key: 'transferred', label: 'Transferred', unit: 'KB', budget: runtimeBudget.transferred },
+  { key: 'transferred', label: 'Page weight', unit: 'KB', budget: runtimeBudget.transferred },
   { key: 'javascript', label: 'JavaScript', unit: 'KB', budget: runtimeBudget.javascript },
   { key: 'lcp', label: 'Largest paint', unit: 'ms', budget: runtimeBudget.lcp },
 ] as const;
@@ -94,46 +94,22 @@ const budgetLabel = (metric: (typeof metrics)[number]) =>
 
 <script>
   import { runtimeBudget } from '../data/budget';
+  import { isScript, observeLcp, snapshot, sumWhere, whenSettled } from '../lib/page-cost';
 
   /**
-   * Reads what this page actually cost and writes it into every [data-instrument]
-   * block on the page. Same-origin assets only, so transferSize is populated without
-   * needing Timing-Allow-Origin.
+   * Reads what this page cost and writes it into every [data-instrument] block.
+   * Measurement itself lives in lib/page-cost so the hero cost explorer reads the
+   * exact same snapshot at the exact same moment and the two cannot disagree.
    */
-  let largestPaint = 0;
-
-  if ('PerformanceObserver' in window) {
-    try {
-      // buffered:true picks up the LCP entry that fired before this script ran.
-      new PerformanceObserver((list) => {
-        for (const entry of list.getEntries()) largestPaint = entry.startTime;
-      }).observe({ type: 'largest-contentful-paint', buffered: true });
-    } catch {
-      /* Firefox lacked LCP for a long time. A missing metric is not worth an error. */
-    }
-  }
+  const readLcp = observeLcp();
 
   function measure() {
-    const nav = performance.getEntriesByType('navigation')[0] as
-      | PerformanceNavigationTiming
-      | undefined;
-    const resources = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
-
-    let transferred = nav?.transferSize ?? 0;
-    let javascript = 0;
-
-    for (const resource of resources) {
-      const size = resource.transferSize || 0;
-      transferred += size;
-      if (resource.initiatorType === 'script' || /\.m?js(\?|$)/.test(resource.name)) {
-        javascript += size;
-      }
-    }
-
+    const resources = snapshot();
     return {
-      transferred,
-      javascript,
-      lcp: Math.round(largestPaint),
+      transferred: resources.total,
+      javascript: sumWhere(resources, (name) => isScript(name)),
+      lcp: readLcp(),
+      // No framework runtime left to hydrate, so this reads zero by design.
       islands: document.querySelectorAll('astro-island').length,
     };
   }
@@ -174,12 +150,5 @@ const budgetLabel = (metric: (typeof metrics)[number]) =>
     }
   }
 
-  // LCP is not final until the page settles, so measure once things are quiet
-  // rather than racing it on DOMContentLoaded.
-  function schedule() {
-    requestAnimationFrame(() => setTimeout(render, 400));
-  }
-
-  if (document.readyState === 'complete') schedule();
-  else window.addEventListener('load', schedule, { once: true });
+  whenSettled(render);
 </script>

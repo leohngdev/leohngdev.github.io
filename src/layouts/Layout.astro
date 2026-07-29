@@ -3,6 +3,11 @@ import '../styles/global.css';
 import { profile } from '../data/profile';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import { buildTerminalData } from '../lib/terminal-data';
+
+// Mounted in the layout so ⌘K works on case study pages too, not only the home page.
+const terminalData = await buildTerminalData();
 
 interface Props {
   title?: string;
@@ -104,6 +109,8 @@ const personSchema = {
     </main>
 
     <Footer />
+
+    <CommandPalette data={terminalData} />
 
     <script>
       // Reveal-on-scroll. Progressive enhancement only: without JS the CSS

@@ -36,11 +36,10 @@ export interface RuntimeBudget {
   /**
    * JavaScript bytes over the wire.
    *
-   * Currently dominated by react-dom, which the Terminal island pulls in — roughly
-   * 57 KB of the ~64 KB total to render a shell prompt. That is the honest reading
-   * of this number and the reason the headroom here looks generous. When the
-   * terminal becomes a command palette this should drop by an order of magnitude,
-   * and this budget should drop with it.
+   * Was ~65 KB when a React island rendered the terminal, roughly 57 KB of which was
+   * react-dom. Rewriting that as a vanilla command palette took it to ~5 KB. The
+   * budget was cut to match: leaving the old ceiling in place would have meant a
+   * gate that could never fail, which is the same as no gate.
    */
   javascript: number;
   /** Largest Contentful Paint, milliseconds. */
@@ -50,13 +49,16 @@ export interface RuntimeBudget {
 const KB = 1024;
 
 export const buildBudget: BuildBudget = {
-  javascript: 72 * KB,
+  javascript: 10 * KB,
   css: 16 * KB,
   html: 16 * KB,
 };
 
 export const runtimeBudget: RuntimeBudget = {
-  transferred: 300 * KB,
-  javascript: 80 * KB,
+  // Fonts are now the overwhelming majority of this: three variable faces at roughly
+  // 66, 47 and 40 KB. That is a deliberate trade the cost explorer lets a visitor
+  // interrogate for themselves rather than something to hide.
+  transferred: 240 * KB,
+  javascript: 12 * KB,
   lcp: 1500,
 };
