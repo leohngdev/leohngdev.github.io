@@ -1,6 +1,7 @@
 ---
 import { profile } from '../data/profile';
 import Terminal from './Terminal.tsx';
+import Instrument from './Instrument.astro';
 import type { TerminalData } from '../lib/terminal-data';
 
 interface Props {
@@ -73,6 +74,13 @@ const { terminalData } = Astro.props;
             Get in touch
           </a>
         </div>
+
+        <!--
+          Sits under the thesis as its first piece of evidence. The claim is about
+          what software costs; this is what this page cost, read out of the reader's
+          own browser. Full breakdown with budgets is in the footer.
+        -->
+        <Instrument variant="line" class="mt-8 text-[var(--text-muted)]" />
       </div>
 
       <div class="reveal min-w-0 lg:pl-4" style="transition-delay: 300ms">

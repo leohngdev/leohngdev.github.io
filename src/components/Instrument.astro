@@ -1,0 +1,185 @@
+---
+import { runtimeBudget } from '../data/budget';
+
+interface Props {
+  /** `full` renders labelled meters; `line` renders a single row of figures. */
+  variant?: 'full' | 'line';
+  class?: string;
+}
+
+const { variant = 'full', class: className = '' } = Astro.props;
+
+/**
+ * Every metric is rendered server-side as an em dash in a fixed-width slot, then
+ * filled in by the client script. Reserving the space is what keeps a readout about
+ * performance from causing the layout shift it is supposed to be arguing against.
+ */
+const metrics = [
+  { key: 'transferred', label: 'Transferred', unit: 'KB', budget: runtimeBudget.transferred },
+  { key: 'javascript', label: 'JavaScript', unit: 'KB', budget: runtimeBudget.javascript },
+  { key: 'lcp', label: 'Largest paint', unit: 'ms', budget: runtimeBudget.lcp },
+] as const;
+
+/** A meter with no stated ceiling is just a decorative bar, so print the ceiling. */
+const budgetLabel = (metric: (typeof metrics)[number]) =>
+  metric.unit === 'ms' ? `${metric.budget} ms` : `${Math.round(metric.budget / 1024)} KB`;
+---
+
+{
+  /*
+    The site's claim is that its author thinks about what software costs. Every other
+    portfolio asserts something like that. This one prints the number, measured in the
+    reader's own browser rather than typed into a template — which is the only version
+    of the claim that is worth anything.
+  */
+}
+{
+  variant === 'full' ? (
+    <div class:list={['w-full max-w-md', className]} data-instrument>
+      <p class="eyebrow">This page, measured in your browser</p>
+
+      <dl class="mt-4 space-y-3">
+        {metrics.map((metric) => (
+          <div class="grid grid-cols-[1fr_auto] items-baseline gap-x-4 gap-y-1.5">
+            <dt class="datum text-[var(--text-secondary)]">{metric.label}</dt>
+            <dd class="datum text-right text-[var(--text-primary)]">
+              <span class="inline-block min-w-[3.5ch] text-right" data-metric={metric.key}>
+                &mdash;
+              </span>
+              <span class="text-[var(--text-muted)]"> {metric.unit}</span>
+            </dd>
+
+            <div class="col-span-2 flex items-center gap-3">
+              <div class="h-0.5 flex-1 bg-[var(--border-subtle)]" role="presentation">
+                {/* Fill starts at zero width so it grows into place rather than snapping. */}
+                <div
+                  class="h-0.5 w-0 bg-[var(--accent)] transition-[width] duration-700 ease-[var(--ease-out-soft)]"
+                  data-meter={metric.key}
+                />
+              </div>
+              <span class="datum shrink-0 text-[var(--border-strong)]">
+                {budgetLabel(metric)}
+              </span>
+            </div>
+          </div>
+        ))}
+      </dl>
+
+      <p class="datum mt-4 text-[var(--text-muted)]">
+        <span data-metric="islands">&mdash;</span> hydrated · budgets enforced at build
+      </p>
+    </div>
+  ) : (
+    <p class:list={['datum flex flex-wrap items-center gap-x-3 gap-y-1', className]} data-instrument>
+      {/* Same width reservation as the full variant: a readout that argues about
+          page cost must not shift the layout when its own numbers arrive. */}
+      <span>
+        <span class="inline-block min-w-[3.5ch]" data-metric="transferred">&mdash;</span> KB
+      </span>
+      <span class="text-[var(--border-strong)]" aria-hidden="true">
+        ·
+      </span>
+      <span>
+        <span class="inline-block min-w-[2.5ch]" data-metric="javascript">&mdash;</span> KB JS
+      </span>
+      <span class="text-[var(--border-strong)]" aria-hidden="true">
+        ·
+      </span>
+      <span>
+        <span class="inline-block min-w-[3.5ch]" data-metric="lcp">&mdash;</span> ms to paint
+      </span>
+    </p>
+  )
+}
+
+<script>
+  import { runtimeBudget } from '../data/budget';
+
+  /**
+   * Reads what this page actually cost and writes it into every [data-instrument]
+   * block on the page. Same-origin assets only, so transferSize is populated without
+   * needing Timing-Allow-Origin.
+   */
+  let largestPaint = 0;
+
+  if ('PerformanceObserver' in window) {
+    try {
+      // buffered:true picks up the LCP entry that fired before this script ran.
+      new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) largestPaint = entry.startTime;
+      }).observe({ type: 'largest-contentful-paint', buffered: true });
+    } catch {
+      /* Firefox lacked LCP for a long time. A missing metric is not worth an error. */
+    }
+  }
+
+  function measure() {
+    const nav = performance.getEntriesByType('navigation')[0] as
+      | PerformanceNavigationTiming
+      | undefined;
+    const resources = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
+
+    let transferred = nav?.transferSize ?? 0;
+    let javascript = 0;
+
+    for (const resource of resources) {
+      const size = resource.transferSize || 0;
+      transferred += size;
+      if (resource.initiatorType === 'script' || /\.m?js(\?|$)/.test(resource.name)) {
+        javascript += size;
+      }
+    }
+
+    return {
+      transferred,
+      javascript,
+      lcp: Math.round(largestPaint),
+      islands: document.querySelectorAll('astro-island').length,
+    };
+  }
+
+  function render() {
+    const values = measure();
+
+    // A cached repeat visit reports transferSize 0 for everything. Showing "0 KB"
+    // would be a lie of a different kind, so leave the dash in place instead.
+    if (values.transferred === 0) return;
+
+    const display: Record<string, string> = {
+      transferred: Math.round(values.transferred / 1024).toString(),
+      javascript: Math.round(values.javascript / 1024).toString(),
+      lcp: values.lcp.toString(),
+      islands: `${values.islands} island${values.islands === 1 ? '' : 's'}`,
+    };
+
+    for (const [key, text] of Object.entries(display)) {
+      document.querySelectorAll<HTMLElement>(`[data-metric="${key}"]`).forEach((el) => {
+        el.textContent = text;
+      });
+    }
+
+    const budgets: Record<string, number> = {
+      transferred: runtimeBudget.transferred,
+      javascript: runtimeBudget.javascript,
+      lcp: runtimeBudget.lcp,
+    };
+
+    for (const [key, budget] of Object.entries(budgets)) {
+      const ratio = Math.min(values[key as keyof typeof values] / budget, 1);
+      document.querySelectorAll<HTMLElement>(`[data-meter="${key}"]`).forEach((el) => {
+        el.style.width = `${(ratio * 100).toFixed(1)}%`;
+        // Over 85% of budget is worth seeing before CI catches it on the next build.
+        if (ratio > 0.85) el.style.backgroundColor = 'var(--color-accent-600)';
+      });
+    }
+  }
+
+  // LCP is not final until the page settles, so measure once things are quiet
+  // rather than racing it on DOMContentLoaded.
+  function schedule() {
+    requestAnimationFrame(() => setTimeout(render, 400));
+  }
+
+  if (document.readyState === 'complete') schedule();
+  else window.addEventListener('load', schedule, { once: true });
+</script>
