@@ -27,5 +27,6 @@ Thumbs.db
 !.vscode/extensions.json
 .idea/
 
-# working notes: contains private repo details and personal contact info
+# working notes: contain private repo details, client-sensitive detail and contact info
 PROJECT-INVENTORY.md
+WORKING-NOTES.md

@@ -9,12 +9,21 @@ interface Props {
 
 const { projects } = Astro.props;
 const [lead, ...rest] = projects;
+
+// Derived rather than written out, so publishing or unpublishing a project
+// cannot leave the heading claiming a count the grid does not show.
+const numberWords = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine'];
+const count = numberWords[projects.length] ?? String(projects.length);
+const title =
+  projects.length === 1
+    ? 'One thing worth reading about'
+    : `${count} things worth reading about`;
 ---
 
 <Section
   id="work"
   eyebrow="Selected work"
-  title="Five things worth reading about"
+  title={title}
   lede="Ordered by what I think tells you the most, not by recency. Each one is a short case study rather than a screenshot gallery."
 >
   <div class="grid gap-6 lg:grid-cols-2">

@@ -5,7 +5,10 @@ import Layout from '../../layouts/Layout.astro';
 import { profile } from '../../data/profile';
 
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
+  // `featured` gates the whole site, not just the homepage grid: an unfeatured
+  // entry gets no page at all, so a draft awaiting screenshots cannot be reached
+  // through the next-case-study link either.
+  const projects = (await getCollection('projects')).filter((project) => project.data.featured);
   const ordered = [...projects].sort((a, b) => a.data.order - b.data.order);
 
   return ordered.map((project, index) => ({

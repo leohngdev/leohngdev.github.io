@@ -1,16 +1,29 @@
 [
   {
+    "id": "independent",
+    "role": "Independent Projects",
+    "org": "Self-directed",
+    "location": "Melbourne, Australia",
+    "period": "Apr 2026 – present",
+    "order": 1,
+    "points": [
+      "Building Yard, a privacy-first social app: Next.js and React on the web, an Expo React Native client, and Supabase Postgres with eleven hand-written migrations enforcing access through row level security.",
+      "Implemented embedding-based match signals with pgvector and a deterministic offline fallback, recomputed on scheduled cron jobs.",
+      "Built PostMint, an asynchronous content pipeline turning market data into generated finance videos via a Redis-backed BullMQ queue and programmatic rendering in Remotion."
+    ]
+  },
+  {
     "id": "antsa",
     "role": "Software Developer",
     "org": "ANTSA (Industry Experience Project)",
     "location": "Monash University · Melbourne, Australia",
     "period": "Jul – Nov 2025",
-    "order": 1,
+    "order": 2,
     "points": [
-      "Worked in an agile team of five to overhaul the questionnaire engine of a live Australian digital mental health platform (Nest.js / PostgreSQL / React Native).",
-      "Rebuilt scoring from hardcoded to fully dynamic: custom categories, severity thresholds, configurable weighting with auto-redistribution, and reverse scoring.",
-      "Extended the new scoring logic into the clinician dashboard and PDF export report.",
-      "Rebuilt a broken multiservice dev environment from scratch and resolved a silent bug causing incorrect answer options across the mobile app.",
+      "Worked in an agile team of five on the questionnaire assessment features of a live Australian digital mental health platform (Nest.js / PostgreSQL / React Native).",
+      "Moved assessment configuration out of application code and into data, so clinical instruments can be adjusted without a developer release.",
+      "Extended the new configuration through to the clinician dashboard and the PDF export report.",
+      "Rebuilt the local multiservice development environment so the system ran end to end, and tracked down a defect that produced no error and no log output.",
       "Delivered a 100% UAT pass rate across two client signed iterations."
     ]
   },
@@ -20,12 +33,12 @@
     "org": "Monash University",
     "location": "Melbourne, Australia",
     "period": "Feb 2023 – Dec 2025",
-    "order": 2,
+    "order": 3,
     "points": [
       "Major in Software Development, minor in Games Development.",
-      "Built game prototypes in Unreal Engine and Unity (C++, C#) covering gameplay mechanics, AI systems and AR/VR experiences.",
-      "Created and textured 3D character models in Maya and Substance Painter with topology optimised for realtime rendering.",
-      "Built full stack web applications using HTML, CSS, JavaScript, Node.js and PHP (CakePHP), and designed and tuned PostgreSQL databases."
+      "Games minor coursework in Unity and Unreal Engine, covering gameplay systems, AI behaviour and AR/VR interaction.",
+      "Built a Unity farm environment with Timeline cinematics and a full FMOD soundscape, alongside 3D modelling and animation coursework in Maya.",
+      "Web and database coursework across HTML, CSS, JavaScript, Node.js and PHP, with relational schema design and query tuning in PostgreSQL and MySQL."
     ]
   },
   {
@@ -34,7 +47,7 @@
     "org": "Monash University",
     "location": "Melbourne, Australia",
     "period": "Feb – Mar 2023",
-    "order": 3,
+    "order": 4,
     "points": [
       "Prototyped software and game concepts under 24–48 hour constraints using Agile.",
       "Delivered functional demonstrations under tight deadlines."
@@ -46,7 +59,7 @@
     "org": "FRC Team",
     "location": "Ho Chi Minh City, Vietnam",
     "period": "Aug 2020 – Mar 2022",
-    "order": 4,
+    "order": 5,
     "points": [
       "Programmed robot navigation and sensor systems in Python and C++.",
       "Collaborated on autonomous component design and presented technical updates to mentors."

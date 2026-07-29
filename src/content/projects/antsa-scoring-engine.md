@@ -1,18 +1,18 @@
 ---
-title: ANTSA Questionnaire Scoring Engine
-tagline: Rebuilt the scoring engine behind a live Australian digital mental health platform.
+title: ANTSA Digital Mental Health Platform
+tagline: Five month industry placement building assessment features on a live Australian health platform.
 role: Software Developer
 org: ANTSA — Monash Industry Experience Project
 period: Jul – Nov 2025
-order: 1
+order: 2
 featured: true
 category: web
 summary: >-
   ANTSA is a live digital mental health platform used by clinicians and their clients across
-  Australia. Over a five month industry placement I worked in a team of five to replace its
-  hardcoded questionnaire scoring system with a fully configurable engine, extended the new
-  scoring into the clinician dashboard and PDF reporting, and delivered 100% UAT pass across
-  two client signed iterations.
+  Australia. Over a five month industry placement I worked in a team of five to make the platform's
+  questionnaire assessments configurable rather than code-driven, extended that work into the
+  clinician-facing dashboard and PDF reporting, and delivered 100% UAT pass across two client
+  signed iterations.
 stack:
   - Nest.js
   - Node.js
@@ -23,62 +23,42 @@ stack:
   - Agile / Scrum
 highlights:
   - 100% UAT pass rate across two client signed iterations
-  - Replaced hardcoded scoring with configurable categories, thresholds and weighting
-  - Found and fixed a silent bug serving wrong answer options to clinicians
+  - Moved assessment configuration out of code and into data
+  - Delivered in an agile team of five against real client sign-off
 links: []
 confidential: true
 ---
 
-## The problem
+## The placement
 
-ANTSA's questionnaire scoring was hardcoded. Every scoring rule — which questions belonged to
-which category, what score counted as mild versus severe, how much each question contributed to
-a total — lived in code. Adding a questionnaire, or changing a threshold on an existing one,
-meant a developer writing and deploying a code change.
+ANTSA is a commercial product with real clinicians and real clients depending on it, which made this
+the first time I worked somewhere that a mistake had consequences beyond a grade. Five months, a team
+of five, two iterations, each one demoed to and signed off by the client.
 
-For a platform where clinicians need to configure assessments around their own practice, that is
-the wrong place for the logic to live. The brief was to move all of it into data.
+The brief in general terms: the platform's questionnaire assessments were configured in code, and the
+goal was to move that configuration into data so the people who understand the clinical instruments
+could change them without a developer writing a release. Once the underlying work was in place I
+extended it outward into the surfaces clinicians actually use — the dashboard views that display
+results, and the PDF export they hand to clients.
 
-## What I built
-
-I rebuilt the engine so that every part of scoring is configurable at runtime:
-
-- **Custom categories.** Questions are grouped into named categories defined per questionnaire
-  rather than fixed in code, so a new assessment is a configuration exercise rather than a release.
-- **Severity thresholds.** Score bands are defined per category, which is what lets one
-  questionnaire report "mild / moderate / severe" and another report a different scale entirely.
-- **Configurable weighting with auto-redistribution.** Questions carry weights that must sum to a
-  whole. This was the most interesting constraint: when someone changes one weight, the others have
-  to move to keep the total valid, without silently destroying values the user set deliberately.
-- **Reverse scoring.** Some instruments deliberately invert questions to detect inattentive
-  responses. That inversion is now a per-question flag rather than a special case in the scoring path.
-
-Once the engine was in place I extended it outward into the surfaces clinicians actually use — the
-dashboard views that display scored results, and the PDF export that they hand to clients.
-
-## The part I'm most proud of
+## What I took from it
 
 Two things, and neither was a feature.
 
-The dev environment was broken when I arrived. This is a multiservice system — API, database, mobile
-client — and it did not start. I rebuilt the local environment from scratch, which meant reading
-enough of the system to understand how the services were meant to fit together before I had any
-running code to learn from. That work is invisible in a changelog and it was the thing that made
+The first was rebuilding the local development environment. This is a multiservice system — API,
+database, mobile client — and getting it running end to end on a fresh machine meant reading enough
+of the architecture to understand how the services were meant to fit together before I had anything
+running to learn from. That work never shows up in a changelog, and it was the thing that made
 everything afterwards possible.
 
-The second was a silent bug. The mobile app was serving incorrect answer options for certain
-questions. Nothing errored, nothing logged, and the data looked plausible enough to pass a casual
-glance — which is exactly what makes this class of bug dangerous in a clinical setting. Tracking it
-down meant not trusting the layer that looked correct, and following the actual values rather than
-the code that was supposed to produce them.
+The second was a defect that produced no error and no log entry. Nothing crashed, nothing was
+flagged, and the data looked plausible enough to survive a casual glance — which is exactly what
+makes that class of bug worth taking seriously. Finding it meant not trusting the layer that looked
+correct, and following the actual values through the system rather than reading the code that was
+supposed to produce them. It is the same habit I picked up years earlier debugging robots, where the
+machine does the wrong thing in front of you and no console is available.
 
 ## Outcome
 
-Two iterations, both signed off by the client, both at 100% UAT pass. Scoring configuration moved
+Two iterations, both signed off by the client, both at 100% UAT pass. Assessment configuration moved
 out of the codebase and into the hands of the people who understand the instruments.
-
-<!--
-The specific implementation details above are deliberately kept at a design level: this is
-client work on a live health platform. If ANTSA is happy for more to be shared, screenshots of
-the configuration UI would strengthen this page considerably.
--->
