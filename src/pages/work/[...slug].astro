@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { profile } from '../../data/profile';
+import { labelFor } from '../../lib/categories';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -26,13 +27,6 @@ interface Props {
 const { project, next } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
-
-const categoryLabels: Record<string, string> = {
-  web: 'Web & Backend',
-  game: 'Games',
-  threed: '3D & Technical Art',
-  hardware: 'Robotics',
-};
 ---
 
 <Layout title={`${data.title} — ${profile.displayName}`} description={data.summary} subpage>
@@ -48,9 +42,9 @@ const categoryLabels: Record<string, string> = {
 
       <header class="mt-8 max-w-3xl">
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span class="eyebrow">{categoryLabels[data.category] ?? data.category}</span>
+          <span class="eyebrow">{labelFor(data.category)}</span>
           <span class="text-[var(--border-strong)]" aria-hidden="true">/</span>
-          <span class="font-mono text-xs text-[var(--text-muted)]">{data.period}</span>
+          <span class="datum">{data.period}</span>
         </div>
 
         <h1 class="text-title mt-4 font-semibold tracking-[-0.015em]">

@@ -1,0 +1,127 @@
+---
+import type { CollectionEntry } from 'astro:content';
+// The index shows the world, not the category. World is what scans; the finer
+// category label is detail, and it is on the case study page where detail belongs.
+import { worldFor, worldLabel } from '../lib/categories';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  /** The lead project gets a larger title and keeps its outcomes always visible. */
+  lead?: boolean;
+}
+
+const { project, lead = false } = Astro.props;
+const { data } = project;
+const href = `/work/${project.id}/`;
+
+const world = worldFor(data.category);
+const isEngines = world === 'engines';
+
+// The lead shows its full stack; the rest are trimmed so the column stays scannable.
+const shownStack = lead ? data.stack : data.stack.slice(0, 4);
+const remaining = data.stack.length - shownStack.length;
+---
+
+<!--
+  A row, not a card. Three reasons this is the right shape here:
+
+  1. Five bordered boxes made ANTSA and a 3D character pipeline look like the same
+     kind of object. An index makes the differences structural instead of decorative.
+  2. A card with empty space where an image should be looks unfinished. A row does
+     not promise a picture, so a site with no images reads as deliberate.
+  3. The card grid is the most template-looking pattern there is.
+
+  The whole row is the anchor rather than a stretched-link pseudo-element: there are
+  no nested interactive elements, so wrapping is simpler and gives one clean tab stop
+  per project.
+-->
+<article class="reveal group border-t border-[var(--border-subtle)]">
+  <a
+    href={href}
+    class="grid gap-x-8 gap-y-4 py-8 transition-colors sm:grid-cols-[10rem_1fr] sm:py-10"
+  >
+    <div class="flex items-center gap-3 sm:block">
+      <p class="datum">{data.period}</p>
+      <p class="datum mt-0 flex items-center gap-2 sm:mt-2">
+        <span
+          class:list={[
+            'size-1.5 shrink-0 rounded-full',
+            isEngines ? 'bg-[var(--accent)]' : 'bg-[var(--border-strong)]',
+          ]}
+          aria-hidden="true"></span>
+        {worldLabel[world]}
+      </p>
+      {
+        data.confidential && (
+          <p class="datum mt-0 text-[var(--text-muted)] sm:mt-2">Client work</p>
+        )
+      }
+    </div>
+
+    <div class="min-w-0">
+      <div class="flex items-start justify-between gap-4">
+        <h3
+          class:list={[
+            'font-semibold tracking-[-0.015em] transition-colors group-hover:text-[var(--accent)]',
+            lead ? 'text-headline' : 'text-subtitle',
+          ]}
+        >
+          {data.title}
+        </h3>
+        <span
+          class="mt-1 shrink-0 text-[var(--text-muted)] transition-all group-hover:translate-x-1 group-hover:text-[var(--accent)]"
+          aria-hidden="true">&#8594;</span
+        >
+      </div>
+
+      <p class="mt-2 max-w-2xl text-[var(--text-secondary)]">{data.tagline}</p>
+
+      {
+        /*
+          Outcomes are always visible on the lead. On the rest they open on hover and
+          on keyboard focus. Tailwind's hover variant is already wrapped in
+          @media (hover: hover), so this never sticks open on touch. The grid 0fr→1fr
+          trick animates to the content's real height without hardcoding one, and the
+          reduced-motion block in global.css collapses the transition to nothing.
+        */
+      }
+      {
+        data.highlights.length > 0 &&
+          (lead ? (
+            <ul class="mt-5 space-y-2">
+              {data.highlights.map((highlight) => (
+                <li class="flex gap-3 text-sm text-[var(--text-secondary)]">
+                  <span
+                    class="mt-2 size-1 shrink-0 rounded-full bg-[var(--accent)]"
+                    aria-hidden="true"
+                  />
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div class="grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-[var(--ease-out-soft)] group-focus-within:grid-rows-[1fr] group-hover:grid-rows-[1fr]">
+              <div class="overflow-hidden">
+                <ul class="mt-4 space-y-2">
+                  {data.highlights.map((highlight) => (
+                    <li class="flex gap-3 text-sm text-[var(--text-secondary)]">
+                      <span
+                        class="mt-2 size-1 shrink-0 rounded-full bg-[var(--border-strong)]"
+                        aria-hidden="true"
+                      />
+                      {highlight}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+      }
+
+      <ul class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1.5" aria-label="Technologies used">
+        {shownStack.map((tech) => <li class="datum">{tech}</li>)}
+        {remaining > 0 && <li class="datum text-[var(--border-strong)]">+{remaining}</li>}
+      </ul>
+    </div>
+  </a>
+</article>

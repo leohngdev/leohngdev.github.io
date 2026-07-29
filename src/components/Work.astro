@@ -1,7 +1,8 @@
 ---
 import Section from './Section.astro';
-import ProjectCard from './ProjectCard.astro';
+import ProjectRow from './ProjectRow.astro';
 import type { CollectionEntry } from 'astro:content';
+import { worldFor, worldLabel } from '../lib/categories';
 
 interface Props {
   projects: CollectionEntry<'projects'>[];
@@ -9,16 +10,35 @@ interface Props {
 
 const { projects } = Astro.props;
 const [lead, ...rest] = projects;
+
+// Counted rather than hardcoded so the summary can never disagree with the list.
+const engines = projects.filter((p) => worldFor(p.data.category) === 'engines').length;
+const software = projects.length - engines;
 ---
 
 <Section
   id="work"
   eyebrow="Selected work"
-  title="Five things worth reading about"
+  title={`${projects.length} things worth reading about`}
   lede="Ordered by what I think tells you the most, not by recency. Each one is a short case study rather than a screenshot gallery."
 >
-  <div class="grid gap-6 lg:grid-cols-2">
-    {lead && <ProjectCard project={lead} featuredLayout />}
-    {rest.map((project) => <ProjectCard project={project} />)}
+  <!--
+    The count sits above the index as a one-line summary of the pairing. It is the
+    fastest possible version of the site's argument: you can read it without reading.
+  -->
+  <p class="reveal datum mb-2 flex flex-wrap items-center gap-x-4 gap-y-1">
+    <span class="flex items-center gap-2">
+      <span class="size-1.5 rounded-full bg-[var(--border-strong)]" aria-hidden="true"></span>
+      {`${software} ${worldLabel.software}`}
+    </span>
+    <span class="flex items-center gap-2">
+      <span class="size-1.5 rounded-full bg-[var(--accent)]" aria-hidden="true"></span>
+      {`${engines} ${worldLabel.engines}`}
+    </span>
+  </p>
+
+  <div class="border-b border-[var(--border-subtle)]">
+    {lead && <ProjectRow project={lead} lead />}
+    {rest.map((project) => <ProjectRow project={project} />)}
   </div>
 </Section>

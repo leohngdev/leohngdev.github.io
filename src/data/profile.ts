@@ -31,9 +31,14 @@ export const profile = {
    */
   thesis: 'Games taught me what software costs.',
 
-  /** One line of concrete proof directly beneath the thesis. Both halves, fast. */
+  /**
+   * One line of concrete proof directly beneath the thesis. Both halves, fast.
+   * Deliberately does NOT restate the ANTSA tagline: that sentence already appears
+   * on the lead row of the work index one screen further down, and reading the same
+   * sentence twice in the first two screens makes the page feel thinner than it is.
+   */
   heroProof:
-    'I rebuilt the scoring engine behind a live Australian mental health platform. Before that, two years of engine and 3D work.',
+    'Software Development major, Games Development minor at Monash. Most recently on a live Australian mental health platform.',
 
   headline: 'I build full-stack web apps, and things that run in game engines.',
   /** Meta description and OG copy. Longer than the hero copy on purpose. */
