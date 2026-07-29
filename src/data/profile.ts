@@ -22,7 +22,21 @@ export const profile = {
   locationDetail: 'Melbourne, Australia',
   available: 'Open to graduate and junior software roles in Melbourne',
 
+  /**
+   * The one sentence the site is built around, set at display scale in the hero.
+   * It is a causal claim, not a list: the games half explains why the software half
+   * is good, which is the thing a four-second scan needs to land. Everything else on
+   * the page — including the measured page-weight readout — is evidence for it.
+   * Keep it under about 40 characters or it stops working at display size.
+   */
+  thesis: 'Games taught me what software costs.',
+
+  /** One line of concrete proof directly beneath the thesis. Both halves, fast. */
+  heroProof:
+    'I rebuilt the scoring engine behind a live Australian mental health platform. Before that, two years of engine and 3D work.',
+
   headline: 'I build full-stack web apps, and things that run in game engines.',
+  /** Meta description and OG copy. Longer than the hero copy on purpose. */
   subheadline:
     'Software Development graduate from Monash with a Games Development minor. Most recently I rebuilt the scoring engine behind a live Australian digital mental health platform.',
 
