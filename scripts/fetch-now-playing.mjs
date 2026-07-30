@@ -21,17 +21,59 @@
 import { writeFile, mkdir } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import path from 'node:path';
+import { createInterface } from 'node:readline/promises';
+import { stdin, stdout } from 'node:process';
 import sharp from 'sharp';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const JSON_OUT = path.join(ROOT, 'src', 'data', 'now-playing.json');
 const ART_OUT = path.join(ROOT, 'src', 'assets', 'now-playing.jpg');
 
-const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET, SPOTIFY_REFRESH_TOKEN } = process.env;
+/**
+ * In CI the credentials arrive as environment variables and a missing one is a
+ * deliberate no-op, so a fork or an unconfigured repo never fails a build.
+ *
+ * Run by hand in a terminal, it asks instead. That exists so the whole pipeline can
+ * be proven locally before any of it reaches the default branch, which matters
+ * because a scheduled workflow only ever runs on the default branch and cannot be
+ * tested from a feature branch at all.
+ */
+async function credentials() {
+  const fromEnv = {
+    id: process.env.SPOTIFY_CLIENT_ID?.trim(),
+    secret: process.env.SPOTIFY_CLIENT_SECRET?.trim(),
+    refresh: process.env.SPOTIFY_REFRESH_TOKEN?.trim(),
+  };
+
+  if (fromEnv.id && fromEnv.secret && fromEnv.refresh) return fromEnv;
+
+  if (!stdin.isTTY) {
+    console.log('now-playing: Spotify credentials absent, leaving the existing data alone.');
+    process.exit(0);
+  }
+
+  console.log('\n  Spotify credentials (they are not stored anywhere by this script)\n');
+  const rl = createInterface({ input: stdin, output: stdout });
+  try {
+    return {
+      id: fromEnv.id || (await rl.question('  Client ID:      ')).trim(),
+      secret: fromEnv.secret || (await rl.question('  Client secret:  ')).trim(),
+      refresh: fromEnv.refresh || (await rl.question('  Refresh token:  ')).trim(),
+    };
+  } finally {
+    rl.close();
+  }
+}
+
+const {
+  id: SPOTIFY_CLIENT_ID,
+  secret: SPOTIFY_CLIENT_SECRET,
+  refresh: SPOTIFY_REFRESH_TOKEN,
+} = await credentials();
 
 if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
-  console.log('now-playing: Spotify credentials absent, leaving the existing data alone.');
-  process.exit(0);
+  console.error('\n  All three values are required. Nothing was written.\n');
+  process.exit(1);
 }
 
 /** Exchanges the long-lived refresh token for a short-lived access token. */
