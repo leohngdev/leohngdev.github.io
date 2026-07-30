@@ -27,26 +27,20 @@ highlights:
 links: []
 ---
 
-## Front to back, deliberately
+## Every layer by hand
 
-These projects were where I built every layer myself rather than inheriting one. That matters more
-than it sounds, because it is the difference between using a database and understanding one.
+I built each layer of these myself instead of inheriting one, which is the difference between using a
+database and understanding one.
 
-**The data layer first.** Designing schemas from requirements — working out entities, relationships
-and where normalisation genuinely helps versus where it just adds joins — then tuning the queries
-and indexes that sit on top. Getting this wrong early is the kind of mistake that is expensive to
-undo later, which is a good lesson to learn while the stakes are still coursework.
+**The data layer first.** Designing schemas from requirements: working out entities, relationships,
+and where normalisation earns its keep versus where it only adds joins, then tuning the queries and
+indexes on top. Getting this wrong early costs a fortune to undo, and coursework is a cheap place to
+learn that.
 
-**Server side in more than one ecosystem.** Node.js and CakePHP are not similar, and working in both
-was useful precisely because it separates the ideas that are transferable — routing, middleware,
-ORM patterns, request lifecycle — from the framework-specific syntax around them. When I later
-picked up Nest.js on a live production codebase, it was recognisable rather than new.
+**Server side in two ecosystems.** Node.js and CakePHP are not alike, and working in both separated
+the transferable ideas (routing, middleware, ORM patterns, request lifecycle) from the syntax around
+them. When I picked up Nest.js on a live production codebase later, I recognised the shape of it.
 
-**Plain front end.** HTML, CSS and JavaScript directly, without a framework in between. Semantic
-markup, layout and the actual DOM API. This site is built on that foundation, which is why it ships
-almost no JavaScript.
-
-<!--
-TODO (Leo): pick the single best of these and split it into its own entry with a real name, a repo
-link and a screenshot. One named, linkable project with a live demo outperforms a category summary.
--->
+**Plain front end.** HTML, CSS and JavaScript directly, no framework in between. Semantic markup,
+layout, and the DOM API. This site runs on that foundation, which is why it ships almost no
+JavaScript.

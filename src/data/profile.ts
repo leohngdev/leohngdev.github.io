@@ -90,21 +90,21 @@ export const profile = {
       id: 'web',
       label: 'Web & Backend',
       depth: 'shipped',
-      note: 'Where most of my professional work has happened, including the ANTSA scoring engine.',
+      note: 'Most of my paid work sits here, including the ANTSA scoring engine.',
       items: ['Node.js', 'Nest.js', 'React', 'React Native', 'CakePHP', 'PostgreSQL', 'MySQL', 'REST APIs'],
     },
     {
       id: 'tools',
       label: 'Ways of Working',
       depth: 'shipped',
-      note: 'Shipped against real client sign-off, not just assignment deadlines.',
+      note: 'Shipped against a client who could reject it, rather than a marking rubric.',
       items: ['Git & GitHub', 'Agile / Scrum', 'UAT', 'Code Review', 'CI/CD', 'Debugging legacy systems'],
     },
     {
       id: 'game',
       label: 'Game & 3D',
       depth: 'studied',
-      note: 'The other half of my degree, and the reason I care what a frame costs. University work rather than shipped titles.',
+      note: 'The other half of my degree, and the reason I care what a frame costs. Coursework, no shipped titles.',
       items: [
         'Unity',
         'Maya',
@@ -118,15 +118,18 @@ export const profile = {
 
   /** First person, written to be read out loud. Rendered in the About section. */
   about: [
-    "I'm a software developer in Melbourne. I finished a Bachelor of IT at Monash at the end of 2025, majoring in Software Development with a minor in Games Development, which is a slightly unusual pairing that turned out to be the most useful thing I did.",
-    'Before university I spent two years on an FRC robotics team in Ho Chi Minh City writing navigation and sensor code in Python and C++. That was where I learned that software is mostly about the gap between what you think the system is doing and what it is actually doing.',
-    "My most recent work was on ANTSA, a live Australian digital mental health platform, where I replaced a hardcoded questionnaire scoring system with a fully configurable one. The work I'm proudest of there wasn't a feature. It was rebuilding a broken multiservice dev environment from scratch, and then finding a silent bug that had been feeding clinicians the wrong answer options.",
-    "The engine and 3D side is not a hobby I keep separate. Writing gameplay systems in C# and C++, rigging characters in Maya and optimising topology for realtime rendering taught me to care about frame budgets and memory, and I bring that instinct back to web work.",
+    "I'm a software developer in Melbourne. I finished a Bachelor of IT at Monash at the end of 2025, majoring in Software Development with a minor in Games Development. It is an odd pairing and I would choose it again.",
+    'Before university I spent two years on an FRC robotics team in Ho Chi Minh City, writing navigation and sensor code in Python and C++. Two years of watching a machine do the wrong thing taught me where the work lives: in the gap between what you think a system does and what it does.',
+    "My most recent work was ANTSA, a live Australian digital mental health platform, where I replaced a hardcoded questionnaire scoring system with a configurable one. The two things I am proudest of never shipped as features. I rebuilt a broken multiservice dev environment from scratch, then found a bug that had been feeding clinicians the wrong answer options.",
+    'The engine and 3D half feeds the rest. Writing gameplay systems in C# and C++ and optimising topology for realtime rendering made me count frames and bytes. I still count them when I write a backend.',
   ],
 
-  /** Condensed one-paragraph version used at the top of the CV PDF. */
+  /**
+   * Condensed one-paragraph version used at the top of the CV PDF. Keeps the keyword
+   * density an applicant tracking system scans for, without the filler.
+   */
   cvSummary:
-    'IT graduate (Software Development major, Games Development minor) with hands-on experience in full stack web development, agile delivery with real clients, and game/engine programming. Comfortable across the stack, from debugging legacy backends to shipping production features.',
+    'IT graduate, Software Development major and Games Development minor. I build full stack web applications, deliver against real client sign-off in an agile team, and program game engines in C++ and C#. I debug legacy backends and ship production features.',
 
   /** Shown in the hero as a subtle hint that the terminal is real. */
   terminalHint: 'try: whoami',

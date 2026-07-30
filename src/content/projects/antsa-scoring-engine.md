@@ -10,9 +10,9 @@ category: web
 summary: >-
   ANTSA is a live digital mental health platform used by clinicians and their clients across
   Australia. Over a five month industry placement I worked in a team of five to replace its
-  hardcoded questionnaire scoring system with a fully configurable engine, extended the new
-  scoring into the clinician dashboard and PDF reporting, and delivered 100% UAT pass across
-  two client signed iterations.
+  hardcoded questionnaire scoring with a configurable engine, carried the new scoring into the
+  clinician dashboard and PDF reporting, and passed UAT at 100% across two client signed
+  iterations.
 stack:
   - Nest.js
   - Node.js
@@ -31,54 +31,46 @@ confidential: true
 
 ## The problem
 
-ANTSA's questionnaire scoring was hardcoded. Every scoring rule — which questions belonged to
-which category, what score counted as mild versus severe, how much each question contributed to
-a total — lived in code. Adding a questionnaire, or changing a threshold on an existing one,
-meant a developer writing and deploying a code change.
+ANTSA's questionnaire scoring was hardcoded. Which questions belonged to which category, what score
+counted as mild versus severe, how much each question contributed to a total: all of it lived in
+code. Adding a questionnaire, or changing one threshold on an existing one, meant a developer
+writing and deploying a code change.
 
-For a platform where clinicians need to configure assessments around their own practice, that is
-the wrong place for the logic to live. The brief was to move all of it into data.
+Clinicians configure assessments around their own practice, so that logic belongs in data. Moving
+it there was the brief.
 
 ## What I built
 
-I rebuilt the engine so that every part of scoring is configurable at runtime:
+Every part of scoring is now configurable at runtime.
 
-- **Custom categories.** Questions are grouped into named categories defined per questionnaire
-  rather than fixed in code, so a new assessment is a configuration exercise rather than a release.
-- **Severity thresholds.** Score bands are defined per category, which is what lets one
-  questionnaire report "mild / moderate / severe" and another report a different scale entirely.
-- **Configurable weighting with auto-redistribution.** Questions carry weights that must sum to a
-  whole. This was the most interesting constraint: when someone changes one weight, the others have
-  to move to keep the total valid, without silently destroying values the user set deliberately.
-- **Reverse scoring.** Some instruments deliberately invert questions to detect inattentive
-  responses. That inversion is now a per-question flag rather than a special case in the scoring path.
+- **Custom categories.** Questions group into named categories defined per questionnaire instead of
+  fixed in code, so adding an assessment is configuration rather than a release.
+- **Severity thresholds.** Score bands are set per category, which lets one questionnaire report
+  mild, moderate and severe while another uses a different scale.
+- **Configurable weighting with auto-redistribution.** Weights have to sum to a whole, so changing
+  one forces the others to move. The hard part was keeping the total valid without wiping values
+  someone had set on purpose.
+- **Reverse scoring.** Some instruments invert questions to catch inattentive responses. That
+  inversion is a per-question flag now, rather than a branch inside the scoring path.
 
-Once the engine was in place I extended it outward into the surfaces clinicians actually use — the
-dashboard views that display scored results, and the PDF export that they hand to clients.
+With the engine in place I extended it into the surfaces clinicians use: the dashboard views that
+display scored results, and the PDF export they hand to clients.
 
-## The part I'm most proud of
+## The two things I am proudest of
 
-Two things, and neither was a feature.
+Neither shipped as a feature.
 
-The dev environment was broken when I arrived. This is a multiservice system — API, database, mobile
-client — and it did not start. I rebuilt the local environment from scratch, which meant reading
-enough of the system to understand how the services were meant to fit together before I had any
-running code to learn from. That work is invisible in a changelog and it was the thing that made
-everything afterwards possible.
+The dev environment did not start when I arrived. API, database, mobile client, and nothing came up.
+I rebuilt it from scratch, which meant reading enough of the system to work out how the services
+were meant to fit together before I had anything running to learn from. Nobody reads that work in a
+changelog. Everything after it depended on it.
 
-The second was a silent bug. The mobile app was serving incorrect answer options for certain
-questions. Nothing errored, nothing logged, and the data looked plausible enough to pass a casual
-glance — which is exactly what makes this class of bug dangerous in a clinical setting. Tracking it
-down meant not trusting the layer that looked correct, and following the actual values rather than
-the code that was supposed to produce them.
+Then the silent bug. The mobile app served incorrect answer options for some questions. Nothing
+errored, nothing logged, and the data looked plausible enough to survive a glance, which is what
+makes this class of bug dangerous in a clinical setting. I found it by distrusting the layer that
+looked correct and following the values instead of the code meant to produce them.
 
 ## Outcome
 
-Two iterations, both signed off by the client, both at 100% UAT pass. Scoring configuration moved
-out of the codebase and into the hands of the people who understand the instruments.
-
-<!--
-The specific implementation details above are deliberately kept at a design level: this is
-client work on a live health platform. If ANTSA is happy for more to be shared, screenshots of
-the configuration UI would strengthen this page considerably.
--->
+Two iterations, both signed off by the client, both at 100% UAT pass. Clinicians who understand the
+instruments now configure the scoring themselves.

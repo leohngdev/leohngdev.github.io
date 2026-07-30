@@ -8,7 +8,7 @@
     "order": 1,
     "points": [
       "Worked in an agile team of five to overhaul the questionnaire engine of a live Australian digital mental health platform (Nest.js / PostgreSQL / React Native).",
-      "Rebuilt scoring from hardcoded to fully dynamic: custom categories, severity thresholds, configurable weighting with auto-redistribution, and reverse scoring.",
+      "Rebuilt scoring from hardcoded to configurable: custom categories, severity thresholds, weighting with auto-redistribution, and reverse scoring.",
       "Extended the new scoring logic into the clinician dashboard and PDF export report.",
       "Rebuilt a broken multiservice dev environment from scratch and resolved a silent bug causing incorrect answer options across the mobile app.",
       "Delivered a 100% UAT pass rate across two client signed iterations."
@@ -36,8 +36,8 @@
     "period": "Feb – Mar 2023",
     "order": 3,
     "points": [
-      "Prototyped software and game concepts under 24–48 hour constraints using Agile.",
-      "Delivered functional demonstrations under tight deadlines."
+      "Prototyped software and game concepts in 24 to 48 hour sprints using Agile.",
+      "Shipped a working demo at the end of each one."
     ]
   },
   {
