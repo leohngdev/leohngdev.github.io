@@ -67,6 +67,10 @@ const links = [
       </button>
 
       <!--
+        Opens the CV in a window rather than downloading. Still a real anchor to the
+        PDF, so middle-click, right-click-save and a no-JS visitor all keep working;
+        the script only intercepts the plain click.
+
         prefetchAll treats the CV as an internal link and was fetching the whole PDF
         on every page load, for every visitor, most of whom never download it. The
         site publishes its own page weight, so spending bytes on a file nobody asked
@@ -74,8 +78,9 @@ const links = [
       -->
       <a
         href={profile.resume}
+        data-cv-open
+        aria-haspopup="dialog"
         class="rounded-md border border-[var(--border-strong)] px-3 py-1.5 font-mono text-xs tracking-wide transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-        download
         data-astro-prefetch="false"
       >
         CV

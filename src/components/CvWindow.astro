@@ -1,0 +1,176 @@
+---
+import { profile } from '../data/profile';
+
+/**
+ * The CV as a window rather than a download.
+ *
+ * Borrowed from looc.dev, where the resume opening in a window rather than
+ * downloading is the thing that makes you willing to look at it. A download is a
+ * commitment: it puts a file on someone's machine before they know whether they
+ * want it. A window costs a click and can be dismissed, so more people actually
+ * read the thing, and the download button is still right there for the ones who
+ * want the file.
+ *
+ * Same native dialog approach as the command palette: showModal() supplies the
+ * focus trap, Escape-to-close, an inert background and ::backdrop for free.
+ */
+---
+
+<dialog
+  id="cv-window"
+  class="m-0 max-h-none max-w-none bg-transparent p-0 backdrop:bg-[color-mix(in_srgb,var(--color-ink-950)_60%,transparent)] backdrop:backdrop-blur-sm"
+  aria-label="Curriculum vitae"
+>
+  <div class="fixed inset-0 flex items-center justify-center p-3 sm:p-6">
+    <div
+      class="cv-panel flex h-full max-h-[min(90vh,58rem)] w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] shadow-2xl"
+    >
+      <!-- Title bar, matching the palette's chrome so the two read as the same system. -->
+      <div class="flex items-center gap-2 border-b border-[var(--border-subtle)] px-4 py-2.5">
+        <span class="flex gap-1.5" aria-hidden="true">
+          <span class="size-2.5 rounded-full bg-[var(--border-strong)]"></span>
+          <span class="size-2.5 rounded-full bg-[var(--border-strong)]"></span>
+          <span class="size-2.5 rounded-full bg-[var(--color-accent-400)]"></span>
+        </span>
+        <p class="datum ml-1 flex-1 truncate">leo-nguyen-cv.pdf</p>
+
+        <a
+          href={profile.resume}
+          download
+          data-astro-prefetch="false"
+          class="datum rounded px-2 py-1 text-[var(--accent)] transition-colors hover:underline"
+        >
+          Download
+        </a>
+        <button
+          type="button"
+          data-cv-close
+          class="datum rounded px-2 py-1 transition-colors hover:text-[var(--accent)]"
+          aria-label="Close CV"
+        >
+          esc
+        </button>
+      </div>
+
+      <div class="relative flex-1 bg-[var(--surface-sunken)]">
+        <!--
+          The iframe is created on first open, not on page load. Embedding it in the
+          markup would make every visitor fetch the PDF whether or not they ever ask
+          for it, which is the same mistake prefetchAll was making.
+        -->
+        <div data-cv-mount class="absolute inset-0"></div>
+
+        <p
+          data-cv-fallback
+          class="absolute inset-0 hidden flex-col items-center justify-center gap-4 p-8 text-center"
+        >
+          <span class="text-[var(--text-secondary)]">
+            Your browser will not display a PDF inline.
+          </span>
+          <a
+            href={profile.resume}
+            download
+            data-astro-prefetch="false"
+            class="rounded-lg bg-[var(--text-primary)] px-5 py-2.5 text-sm font-medium text-[var(--surface)]"
+          >
+            Download the PDF instead
+          </a>
+        </p>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<style>
+  #cv-window[open] .cv-panel {
+    animation: cv-in 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes cv-in {
+    from {
+      opacity: 0;
+      transform: translateY(10px) scale(0.99);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #cv-window[open] .cv-panel {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const RESUME = '/leo-nguyen-cv.pdf';
+
+  /** Bound once for the life of the tab; the dialog itself is re-queried per page. */
+  let cvBound = false;
+
+  function initCvWindow() {
+    const dialog = document.getElementById('cv-window') as HTMLDialogElement | null;
+    if (!dialog) return;
+
+    const mount = dialog.querySelector<HTMLElement>('[data-cv-mount]')!;
+    const fallback = dialog.querySelector<HTMLElement>('[data-cv-fallback]')!;
+    let restoreFocusTo: HTMLElement | null = null;
+
+    function open() {
+      if (dialog!.open) return;
+      restoreFocusTo = document.activeElement as HTMLElement | null;
+
+      if (!mount.childElementCount && !fallback.classList.contains('flex')) {
+        /**
+         * navigator.pdfViewerEnabled reports whether the browser will render a PDF
+         * inline or hand it to the download manager. Checking it up front beats
+         * appending an iframe and hoping: a PDF the browser refuses to display fires
+         * no error event, so the earlier error listener would never have run and
+         * mobile Safari would have shown an empty white panel with no way out.
+         *
+         * It also means the PDF is never fetched at all on a browser that cannot
+         * show it, instead of downloading 6 KB to render nothing.
+         */
+        if (navigator.pdfViewerEnabled === false) {
+          fallback.classList.replace('hidden', 'flex');
+        } else {
+          const frame = document.createElement('iframe');
+          frame.src = `${RESUME}#view=FitH`;
+          frame.title = 'Curriculum vitae';
+          frame.className = 'h-full w-full border-0';
+          mount.append(frame);
+        }
+      }
+
+      dialog!.showModal();
+    }
+
+    dialog.addEventListener('close', () => restoreFocusTo?.focus());
+
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+
+    dialog.querySelectorAll('[data-cv-close]').forEach((button) => {
+      button.addEventListener('click', () => dialog.close());
+    });
+
+    // Anything marked as a CV trigger opens the window instead of downloading.
+    document.querySelectorAll<HTMLElement>('[data-cv-open]').forEach((trigger) => {
+      trigger.addEventListener('click', (event) => {
+        event.preventDefault();
+        open();
+      });
+    });
+
+    if (!cvBound) {
+      cvBound = true;
+      document.addEventListener('cv:open', () => {
+        const current = document.getElementById('cv-window') as HTMLDialogElement | null;
+        if (current && !current.open) current.dispatchEvent(new CustomEvent('cv:show'));
+      });
+    }
+
+    dialog.addEventListener('cv:show', () => open());
+  }
+
+  document.addEventListener('astro:page-load', initCvWindow);
+</script>

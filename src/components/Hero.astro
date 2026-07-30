@@ -60,11 +60,12 @@ const thesisLines = ['Games taught me', 'what software costs.'];
           </a>
           <a
             href={profile.resume}
-            download
+            data-cv-open
+            aria-haspopup="dialog"
             data-astro-prefetch="false"
             class="rounded-lg border border-[var(--border-strong)] px-5 py-2.5 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
-            Download CV
+            Read my CV
           </a>
           <button
             type="button"

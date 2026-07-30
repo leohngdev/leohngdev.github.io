@@ -4,6 +4,7 @@ import { profile } from '../data/profile';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CommandPalette from '../components/CommandPalette.astro';
+import CvWindow from '../components/CvWindow.astro';
 import { ClientRouter } from 'astro:transitions';
 import { buildTerminalData } from '../lib/terminal-data';
 
@@ -121,6 +122,7 @@ const personSchema = {
     <Footer />
 
     <CommandPalette data={terminalData} />
+    <CvWindow />
 
     <script>
       // Reveal-on-scroll. Progressive enhancement only: without JS the CSS
