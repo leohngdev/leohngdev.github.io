@@ -1,4 +1,16 @@
 {
-  "track": null,
-  "note": "Written by scripts/fetch-now-playing.mjs via the now-playing GitHub Action. track stays null until SPOTIFY_REFRESH_TOKEN and friends are configured, and the NowPlaying component renders nothing while it is null."
+  "track": {
+    "title": "HANDS UP",
+    "artist": "MEOVV",
+    "album": "HANDS UP",
+    "href": "https://open.spotify.com/track/2nopDUxom21JoMzFXj9wS0",
+    "live": true,
+    "art": "now-playing.jpg",
+    "palette": {
+      "raw": "#080808",
+      "onLight": "#080808",
+      "onDark": "#7a7a7a"
+    },
+    "fetchedAt": "2026-07-30T04:51:23.587Z"
+  }
 }
