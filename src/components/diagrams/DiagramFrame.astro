@@ -1,0 +1,42 @@
+---
+interface Props {
+  /** Read by screen readers in place of the drawing. */
+  title: string;
+  /** Shown under the diagram as a caption. */
+  caption: string;
+  viewBox: string;
+}
+
+const { title, caption, viewBox } = Astro.props;
+---
+
+{
+  /*
+    Diagrams are inline SVG rather than image files on purpose.
+
+    A PNG cannot read a CSS variable, so it would need two exports to survive the
+    theme toggle and would still be raster. Inline SVG themes itself from the same
+    ink and amber tokens as the rest of the page, stays crisp at any size, costs no
+    image bytes and cannot shift the layout while it loads.
+
+    They also solve the problem that made this site image-free in the first place.
+    ANTSA's UI cannot be screenshotted, but the architecture I designed is mine to
+    draw, and to an engineer a data flow is stronger evidence than a screenshot.
+  */
+}
+<figure class="reveal my-10">
+  <div
+    class="overflow-hidden rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-4 sm:p-6"
+  >
+    <svg
+      viewBox={viewBox}
+      role="img"
+      aria-label={title}
+      class="h-auto w-full"
+      style="font-family: var(--font-mono)"
+    >
+      <slot />
+    </svg>
+  </div>
+  <figcaption class="datum mt-3 text-[var(--text-muted)]">{caption}</figcaption>
+</figure>

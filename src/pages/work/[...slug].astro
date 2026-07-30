@@ -4,6 +4,8 @@ import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { profile } from '../../data/profile';
 import { labelFor } from '../../lib/categories';
+import AntsaScoringFlow from '../../components/diagrams/AntsaScoringFlow.astro';
+import FrcSensorLoop from '../../components/diagrams/FrcSensorLoop.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -27,6 +29,18 @@ interface Props {
 const { project, next } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
+
+/**
+ * Diagrams are keyed off the project id rather than a frontmatter field, so adding
+ * one is a code change in one place and a project without a diagram needs no
+ * placeholder. Only the two entries whose work is a system worth drawing have one:
+ * a diagram of something that does not have a shape would be decoration.
+ */
+const diagrams: Record<string, typeof AntsaScoringFlow> = {
+  'antsa-scoring-engine': AntsaScoringFlow,
+  'frc-robotics': FrcSensorLoop,
+};
+const Diagram = diagrams[project.id];
 ---
 
 <Layout title={`${data.title} — ${profile.displayName}`} description={data.summary} subpage>
@@ -73,6 +87,10 @@ const { Content } = await render(project);
           />
         )
       }
+
+      <!-- Sits directly under the header so a reader sees the shape of the system
+           before reading a word of the prose describing it. -->
+      {Diagram && <div class="mt-10 max-w-3xl"><Diagram /></div>}
 
       <div class="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16">
         <div class="prose-case prose max-w-none">

@@ -1,0 +1,98 @@
+---
+import DiagramFrame from './DiagramFrame.astro';
+
+/**
+ * The autonomous control loop from the FRC work, and the reason the case study talks
+ * about debugging: every stage here can be lying to you, and the fault can be
+ * mechanical, electrical or yours.
+ */
+const stages = [
+  { label: 'sensors', x: 24 },
+  { label: 'filter', x: 176 },
+  { label: 'pose', x: 312 },
+  { label: 'path', x: 444 },
+  { label: 'motors', x: 580 },
+];
+---
+
+<DiagramFrame
+  title="A closed control loop: sensors feed a filter, which produces a pose estimate, which drives a path controller, which drives the motors, and the resulting movement feeds back into the sensors."
+  caption="A closed loop, which is why a wrong output never tells you which stage was wrong."
+  viewBox="0 0 700 200"
+>
+  <text x="24" y="30" fill="var(--text-muted)" font-size="11" letter-spacing="1.6">
+    AUTONOMOUS LOOP
+  </text>
+
+  {
+    stages.map((stage, index) => (
+      <>
+        <rect
+          x={stage.x}
+          y="60"
+          width="96"
+          height="44"
+          rx="8"
+          fill="var(--surface-sunken)"
+          stroke={index === 0 || index === stages.length - 1 ? 'var(--accent)' : 'var(--border-strong)'}
+          stroke-width="1.5"
+        />
+        <text
+          x={stage.x + 48}
+          y="87"
+          fill="var(--text-primary)"
+          font-size="13"
+          text-anchor="middle"
+        >
+          {stage.label}
+        </text>
+        {index < stages.length - 1 && (
+          <path
+            d={`M${stage.x + 96} 82 H${stages[index + 1].x - 4}`}
+            stroke="var(--border-strong)"
+            stroke-width="1.5"
+            fill="none"
+            marker-end="url(#arrow-frc)"
+          />
+        )}
+      </>
+    ))
+  }
+
+  <!-- The feedback path. Dashed because it runs through the physical world. -->
+  <path
+    d="M628 104 V152 H72 V104"
+    stroke="var(--accent)"
+    stroke-width="1.5"
+    stroke-dasharray="5 5"
+    fill="none"
+    marker-end="url(#arrow-accent)"></path>
+  <text x="350" y="172" fill="var(--text-secondary)" font-size="13" text-anchor="middle">
+    the robot actually moves
+  </text>
+
+  <defs>
+    <marker
+      id="arrow-frc"
+      viewBox="0 0 8 8"
+      refX="7"
+      refY="4"
+      markerWidth="6"
+      markerHeight="6"
+      orient="auto"
+    >
+      <path d="M0 0 L8 4 L0 8 z" fill="var(--border-strong)"></path>
+    </marker>
+    <marker
+      id="arrow-accent"
+      viewBox="0 0 8 8"
+      refX="7"
+      refY="4"
+      markerWidth="6"
+      markerHeight="6"
+      orient="auto"
+    >
+      <path d="M0 0 L8 4 L0 8 z" fill="var(--accent)"></path>
+    </marker>
+  </defs>
+</DiagramFrame>
