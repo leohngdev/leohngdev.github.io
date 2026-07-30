@@ -5,17 +5,19 @@ import nowPlaying from '../data/now-playing.json';
 /**
  * What Leo is listening to, and the site's only source of colour that is not amber.
  *
- * The interaction is the point: the panel is quiet until you press it, and then the
- * album's palette takes over the accent and warms the surfaces across the whole page.
- * Small thing to click, large thing to happen.
+ * Lives in the header beside the theme toggle rather than in a section down the page.
+ * Buried near the footer it was a few lines of small text that any visitor would
+ * scroll straight past; in the chrome it reads as a control the site intends you to
+ * find, it is present on every page, and it does not compete with the thesis for the
+ * first screen.
  *
- * Everything expensive already happened in the Action. The artwork is local and
- * pre-sized, the palette was extracted with sharp, and both contrast-safe variants
- * were computed against this site's real surfaces. All that ships here is a click
- * handler that writes CSS variables.
+ * Everything expensive already happened in the Action: the artwork is local and
+ * pre-sized, the vivid colour was extracted with sharp, and both contrast-safe
+ * variants were computed against this site's real surfaces. What ships here is a
+ * toggle and a handful of CSS variable writes.
  *
- * Renders nothing at all until the Action has run, so the site is correct before the
- * Spotify credentials exist rather than showing an empty shell.
+ * Renders nothing at all until the Action has run, so the header is correct before
+ * Spotify is connected rather than showing a dead button.
  */
 const track = nowPlaying.track as {
   title: string;
@@ -27,68 +29,231 @@ const track = nowPlaying.track as {
   palette: { raw: string; onLight: string; onDark: string } | null;
 } | null;
 
-// Astro needs a static glob to resolve a runtime filename to an optimised asset.
 const artwork = track?.art
   ? Object.entries(
       import.meta.glob<{ default: ImageMetadata }>('../assets/now-playing.jpg', { eager: true }),
     )[0]?.[1]?.default
   : undefined;
+
+/**
+ * The embed needs the Spotify track id. Newer fetches write it directly; older
+ * JSON only has the share URL, so fall back to parsing it out.
+ */
+const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
 ---
 
 {
+  /*
+    transition:persist keeps this exact DOM subtree alive across view transitions.
+    Without it, ClientRouter would swap the header on every navigation and destroy
+    the Spotify iframe mid-note; with it, the music keeps playing while the rest of
+    the page morphs around it. The script guards against re-binding, because the
+    persisted node keeps its listeners.
+  */
   track && (
     <div
-      class="reveal now-playing"
+      class="np relative"
       data-now-playing
+      transition:persist="now-playing"
+      data-track-id={trackId}
       data-on-light={track.palette?.onLight}
       data-on-dark={track.palette?.onDark}
     >
-      <p class="eyebrow mb-3">{track.live ? 'Listening right now' : 'Last listened to'}</p>
-
-      <div class="flex items-center gap-4">
-        {artwork && (
-          <Image
-            src={artwork}
-            alt={`${track.album} album art`}
-            width={56}
-            height={56}
-            loading="lazy"
-            class="size-14 shrink-0 rounded-md border border-[var(--border-subtle)]"
+      <button
+        type="button"
+        data-np-trigger
+        aria-expanded="false"
+        aria-controls="np-panel"
+        class="relative flex size-9 items-center justify-center rounded-md border border-[var(--border-strong)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+      >
+        {/* Two notes rather than a single one: a lone quaver reads as a generic
+            "audio" glyph, a beamed pair reads as music. */}
+        <svg viewBox="0 0 16 16" class="size-4" fill="currentColor" aria-hidden="true">
+          <path d="M6 12.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm7-1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
+          <path d="M5 12.5V4.9l7-1.4V11h1V2.3L4 4.1v8.4h1Z" />
+        </svg>
+        <span class="sr-only">
+          {track.live ? 'Now playing' : 'Recently played'}: {track.title} by {track.artist}
+        </span>
+        {/* A live track gets a pulse, so the button says "there is something new in
+            here" without needing a label. */}
+        {track.live && (
+          <span
+            class="np-live absolute -top-0.5 -right-0.5 size-2 rounded-full bg-[var(--accent)]"
+            aria-hidden="true"
           />
         )}
+      </button>
 
-        <div class="min-w-0 flex-1">
-          <p class="truncate font-medium">
-            {track.href ? (
-              <a href={track.href} class="link-underline" target="_blank" rel="noopener noreferrer">
-                {track.title}
-              </a>
-            ) : (
-              track.title
-            )}
-          </p>
-          <p class="datum truncate">{track.artist}</p>
+      <div
+        id="np-panel"
+        data-np-panel
+        hidden
+        class="np-panel absolute top-[calc(100%+0.5rem)] right-0 z-50 w-[19rem] rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-4 shadow-2xl"
+      >
+        <p class="eyebrow mb-3">{track.live ? 'Listening right now' : 'Last listened to'}</p>
+
+        <div class="flex items-start gap-3">
+          {artwork && (
+            <Image
+              src={artwork}
+              alt={`${track.album} album art`}
+              width={64}
+              height={64}
+              loading="lazy"
+              class="size-16 shrink-0 rounded-md border border-[var(--border-subtle)]"
+            />
+          )}
+
+          <div class="min-w-0 flex-1">
+            <p class="leading-snug font-medium">
+              {track.href ? (
+                <a href={track.href} class="link-underline" target="_blank" rel="noopener noreferrer">
+                  {track.title}
+                </a>
+              ) : (
+                track.title
+              )}
+            </p>
+            <p class="datum mt-1 truncate">{track.artist}</p>
+          </div>
         </div>
 
-        {track.palette && (
+        {track.palette ? (
           <button
             type="button"
             data-tint-toggle
             aria-pressed="false"
-            class="datum shrink-0 rounded-md border border-[var(--border-strong)] px-3 py-2 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            class="mt-4 flex w-full items-center justify-between gap-3 rounded-lg border border-[var(--border-strong)] px-3 py-2.5 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
             <span data-tint-label>Use this palette</span>
+            <span
+              class="size-4 shrink-0 rounded-full border border-[var(--border-subtle)]"
+              style={`background-color: ${track.palette.raw}`}
+              aria-hidden="true"
+            />
           </button>
+        ) : (
+          /* The extractor found no colour worth borrowing, so say so rather than
+             offering a button that would turn the site grey. */
+          <p class="datum mt-4 leading-relaxed text-[var(--text-muted)]">
+            This cover has no colour worth borrowing, so the site keeps its amber.
+          </p>
+        )}
+
+        {/* Spotify's own player mounts here on request, never on page load. It is
+            the only third-party thing on the site, so it costs nothing until a
+            visitor explicitly asks for the music. */}
+        {trackId && <div data-np-embed-mount hidden class="mt-4"><div data-np-embed /></div>}
+
+        {trackId && (
+          <p class="datum mt-3 leading-relaxed text-[var(--text-muted)]" data-np-note hidden>
+            Spotify's player, loaded because you asked. 30-second preview unless you
+            are signed in to Spotify in this browser.
+          </p>
         )}
       </div>
+
+      {/* First-visit invitation. Deliberately not a gate: the page is fully usable
+          behind it, it arrives after the thesis has landed, and either answer is
+          remembered so it never appears twice. */}
+      {trackId && (
+        <div
+          data-np-prompt
+          hidden
+          role="region"
+          aria-label="Soundtrack offer"
+          class="np-prompt fixed top-20 right-4 z-50 w-80 max-w-[calc(100vw-2rem)] rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-4 shadow-2xl"
+        >
+          <p class="eyebrow">This site has a soundtrack</p>
+          <p class="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
+            {track.title} — {track.artist}. Want it while you read? It brings the
+            album's colours with it.
+          </p>
+          <div class="mt-3 flex items-center gap-2">
+            <button
+              type="button"
+              data-vibes-yes
+              class="rounded-lg bg-[var(--text-primary)] px-4 py-2 text-sm font-medium text-[var(--surface)] transition-opacity hover:opacity-88"
+            >
+              Play the vibes
+            </button>
+            <button
+              type="button"
+              data-vibes-no
+              class="rounded-lg border border-[var(--border-strong)] px-4 py-2 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              Keep it quiet
+            </button>
+          </div>
+          <p class="datum mt-3 text-[var(--text-muted)]">
+            Spotify preview · remembered on this device
+          </p>
+        </div>
+      )}
     </div>
   )
 }
 
 <style>
-  /* The tint is applied by overriding the same semantic tokens the whole site reads,
-     so one attribute on <html> repaints every accent and surface at once without a
-     single component knowing it happened. */
+  .np-panel {
+    transform-origin: top right;
+  }
+
+  .np-panel:not([hidden]) {
+    animation: np-in 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes np-in {
+    from {
+      opacity: 0;
+      transform: translateY(-6px) scale(0.97);
+    }
+  }
+
+  /* Slow enough to read as a heartbeat rather than a notification badge demanding
+     attention. */
+  .np-live {
+    animation: np-pulse 2.4s ease-in-out infinite;
+  }
+
+  @keyframes np-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .np-panel:not([hidden]),
+    .np-live {
+      animation: none;
+    }
+  }
+
+  .np-prompt:not([hidden]) {
+    animation: np-prompt-in 360ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @keyframes np-prompt-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.98);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .np-prompt:not([hidden]) {
+      animation: none;
+    }
+  }
+
+  /* The tint overrides the same semantic tokens the whole site reads, so one
+     attribute on <html> repaints every accent and surface at once and no component
+     needs to know it happened. */
   :global(html[data-tinted]) {
     --accent: var(--tint-accent);
     --accent-bright: var(--tint-accent);
@@ -103,9 +268,9 @@ const artwork = track?.art
     --surface-sunken: color-mix(in srgb, var(--tint-accent) 4%, #080807);
   }
 
-  /* Surfaces cross-fade rather than snapping, which is what makes a small button
-     feel like it did something large. Text colour is left alone so nothing reflows
-     or becomes briefly unreadable mid-transition. */
+  /* Surfaces cross-fade rather than snapping, which is what makes one small button
+     feel like it did something large. Text colour is left alone so nothing becomes
+     briefly unreadable mid-transition. */
   :global(html[data-tint-animate] body),
   :global(html[data-tint-animate] body *) {
     transition:
@@ -124,41 +289,105 @@ const artwork = track?.art
 <script>
   const STORAGE_KEY = 'tint';
 
-  function applyTint(on: boolean, panel: HTMLElement) {
+  function applyTint(on: boolean, root_: HTMLElement) {
     const root = document.documentElement;
-    const dark = root.classList.contains('dark');
-    const accent = dark ? panel.dataset.onDark : panel.dataset.onLight;
+    const accent = root.classList.contains('dark')
+      ? root_.dataset.onDark
+      : root_.dataset.onLight;
     if (!accent) return;
 
     root.style.setProperty('--tint-accent', accent);
     root.toggleAttribute('data-tinted', on);
 
-    const button = panel.querySelector<HTMLButtonElement>('[data-tint-toggle]');
-    const label = panel.querySelector<HTMLElement>('[data-tint-label]');
-    button?.setAttribute('aria-pressed', String(on));
+    root_.querySelector('[data-tint-toggle]')?.setAttribute('aria-pressed', String(on));
+    const label = root_.querySelector<HTMLElement>('[data-tint-label]');
     if (label) label.textContent = on ? 'Back to amber' : 'Use this palette';
   }
 
-  function initNowPlaying() {
-    const panel = document.querySelector<HTMLElement>('[data-now-playing]');
-    if (!panel) return;
+  const VIBES_KEY = 'vibes';
 
+  /** Spotify's embed controller, once created. Survives navigations with the node. */
+  let embedController: { play: () => void } | null = null;
+
+  function loadEmbed(wrap: HTMLElement, autoplay: boolean) {
+    if (embedController) {
+      if (autoplay) embedController.play();
+      return;
+    }
+
+    const mount = wrap.querySelector<HTMLElement>('[data-np-embed-mount]');
+    const target = wrap.querySelector<HTMLElement>('[data-np-embed]');
+    const trackId = wrap.dataset.trackId;
+    if (!mount || !target || !trackId) return;
+
+    mount.hidden = false;
+    wrap.querySelector<HTMLElement>('[data-np-note]')?.removeAttribute('hidden');
+
+    // Spotify's iframe API loader calls this global when ready.
+    (window as any).onSpotifyIframeApiReady = (api: any) => {
+      api.createController(
+        target,
+        { uri: `spotify:track:${trackId}`, width: '100%', height: 80 },
+        (controller: any) => {
+          embedController = controller;
+          if (autoplay) controller.play();
+        },
+      );
+    };
+
+    const loader = document.createElement('script');
+    loader.src = 'https://open.spotify.com/embed/iframe-api/v1';
+    loader.async = true;
+    document.head.append(loader);
+  }
+
+  function initNowPlaying() {
+    const wrap = document.querySelector<HTMLElement>('[data-now-playing]');
+    if (!wrap) return;
+
+    // transition:persist carries this node, listeners included, across
+    // navigations. Binding again would double every handler.
+    if (wrap.dataset.bound) return;
+    wrap.dataset.bound = '1';
+
+    const trigger = wrap.querySelector<HTMLButtonElement>('[data-np-trigger]')!;
+    const panel = wrap.querySelector<HTMLElement>('[data-np-panel]')!;
     const root = document.documentElement;
+
+    function setOpen(open: boolean) {
+      panel.hidden = !open;
+      trigger.setAttribute('aria-expanded', String(open));
+    }
+
+    trigger.addEventListener('click', () => setOpen(panel.hidden));
+
+    // Light dismiss. Hand-rolled rather than using the popover attribute so the
+    // behaviour is identical on every browser that can run the rest of this site.
+    document.addEventListener('click', (event) => {
+      if (!panel.hidden && !wrap.contains(event.target as Node)) setOpen(false);
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && !panel.hidden) {
+        setOpen(false);
+        trigger.focus();
+      }
+    });
+
     let on = false;
     try {
       on = localStorage.getItem(STORAGE_KEY) === '1';
     } catch {
-      /* Private mode can throw. Defaulting to off is the right fallback. */
+      /* Private mode can throw. Off is the right default. */
     }
 
-    // Restore without animating, so a returning visitor does not watch the page
-    // fade into a colour it was always going to be.
-    applyTint(on, panel);
+    // Restore without animating: a returning visitor should not watch the page fade
+    // into a colour it was always going to be.
+    applyTint(on, wrap);
 
-    panel.querySelector<HTMLElement>('[data-tint-toggle]')?.addEventListener('click', () => {
+    wrap.querySelector('[data-tint-toggle]')?.addEventListener('click', () => {
       on = !on;
       root.setAttribute('data-tint-animate', '');
-      applyTint(on, panel);
+      applyTint(on, wrap);
       try {
         localStorage.setItem(STORAGE_KEY, on ? '1' : '0');
       } catch {
@@ -166,11 +395,72 @@ const artwork = track?.art
       }
     });
 
-    // The accent has a separate contrast-safe value per theme, so re-apply whenever
-    // the theme flips or a tinted dark page would use the light-mode colour.
-    document.getElementById('theme-toggle')?.addEventListener('click', () => {
-      requestAnimationFrame(() => applyTint(on, panel));
-    });
+    // The accent has a separate contrast-safe value per theme, so re-apply on flip.
+    document
+      .getElementById('theme-toggle')
+      ?.addEventListener('click', () => requestAnimationFrame(() => applyTint(on, wrap)));
+
+    /* ---- The soundtrack. ---- */
+
+    const prompt = wrap.querySelector<HTMLElement>('[data-np-prompt]');
+    let vibes: string | null = null;
+    try {
+      vibes = localStorage.getItem(VIBES_KEY);
+    } catch {
+      /* Private mode. Treat as answered so the prompt cannot nag. */
+      vibes = '0';
+    }
+
+    const remember = (value: string) => {
+      try {
+        localStorage.setItem(VIBES_KEY, value);
+      } catch {
+        /* Fine: the choice just will not persist. */
+      }
+    };
+
+    if (prompt && vibes === null) {
+      // After the thesis has landed, not against it.
+      setTimeout(() => {
+        prompt.hidden = false;
+      }, 1100);
+
+      prompt.querySelector('[data-vibes-yes]')?.addEventListener('click', () => {
+        prompt.hidden = true;
+        remember('1');
+        // Vibes means both: the music and the album's colours, one choice.
+        if (!on && wrap.dataset.onLight) {
+          on = true;
+          root.setAttribute('data-tint-animate', '');
+          applyTint(true, wrap);
+          try {
+            localStorage.setItem(STORAGE_KEY, '1');
+          } catch {
+            /* Fine. */
+          }
+        }
+        setOpen(true);
+        // The click IS the user gesture autoplay policy requires.
+        loadEmbed(wrap, true);
+      });
+
+      prompt.querySelector('[data-vibes-no]')?.addEventListener('click', () => {
+        prompt.hidden = true;
+        remember('0');
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && prompt && !prompt.hidden) prompt.hidden = true;
+      });
+    } else if (vibes === '1') {
+      /**
+       * A returning vibes-visitor cannot get autoplay: browsers require a user
+       * gesture per page load, full stop. The nearest legal thing is to resume on
+       * their first interaction with the page, which is what they opted into.
+       */
+      const resume = () => loadEmbed(wrap, true);
+      document.addEventListener('pointerdown', resume, { once: true });
+    }
   }
 
   document.addEventListener('astro:page-load', initNowPlaying);

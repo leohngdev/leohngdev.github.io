@@ -2,7 +2,6 @@
 import { profile } from '../data/profile';
 import type { CollectionEntry } from 'astro:content';
 import { worldFor } from '../lib/categories';
-import NowPlaying from './NowPlaying.astro';
 
 interface Props {
   projects: CollectionEntry<'projects'>[];
@@ -102,12 +101,6 @@ const engines = projects.filter((project) => worldFor(project.data.category) ===
           </p>
         </div>
       </a>
-    </div>
-
-    <!-- Sits with the doors rather than in its own section: it is a personal aside,
-         not a third destination, and giving it a heading would oversell it. -->
-    <div class="mt-10 max-w-md">
-      <NowPlaying />
     </div>
 
     <p class="reveal datum mt-6 text-[var(--text-muted)]">

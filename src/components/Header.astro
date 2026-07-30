@@ -1,6 +1,7 @@
 ---
 import { profile } from '../data/profile';
 import ThemeToggle from './ThemeToggle.astro';
+import NowPlaying from './NowPlaying.astro';
 
 interface Props {
   subpage?: boolean;
@@ -85,6 +86,13 @@ const links = [
       >
         CV
       </a>
+
+      <!--
+        In the chrome, not buried down the page: a section near the footer was a few
+        lines of small text any visitor scrolled past. Here it reads as a control the
+        site intends you to find, and it exists on every page.
+      -->
+      <NowPlaying />
 
       <ThemeToggle />
     </div>
