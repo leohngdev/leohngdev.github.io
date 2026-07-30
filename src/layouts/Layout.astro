@@ -78,16 +78,51 @@ const personSchema = {
     <meta name="twitter:image" content={ogImage} />
 
     <script is:inline>
-      // Runs before paint so the correct theme is applied without a flash.
+      /**
+       * Applies theme and tint to <html> before paint, on first load AND after every
+       * view transition.
+       *
+       * ClientRouter replaces the <html> element's attributes with the incoming
+       * document's, which silently wiped three things on every in-site navigation:
+       * the `dark` class (so /about was always light), the `js` class (so
+       * html:not(.js) forced every reveal visible and killed the entrance
+       * animations), and `data-tinted` plus the inline --tint-accent (so the Spotify
+       * palette only survived on the page it was switched on).
+       *
+       * astro:after-swap fires after the new document is in place and before it
+       * paints, which is the only hook that can restore this without a visible flash.
+       * The listener goes on `document`, which survives navigations, and is
+       * registered once because this inline script may itself be re-executed.
+       */
       (function () {
-        const root = document.documentElement;
-        root.classList.add('js');
-        try {
-          const stored = localStorage.getItem('theme');
-          const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-          if (stored === 'dark' || (!stored && prefersDark)) root.classList.add('dark');
-        } catch {
-          /* localStorage can throw in private modes; system preference is a fine fallback. */
+        function applyChrome() {
+          const root = document.documentElement;
+          root.classList.add('js');
+          try {
+            const storedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const dark = storedTheme === 'dark' || (!storedTheme && prefersDark);
+            root.classList.toggle('dark', dark);
+
+            // Accents are written by NowPlaying so this can restore the tint without
+            // waiting for that component's module to load and parse.
+            if (localStorage.getItem('tint') === '1') {
+              const accent = localStorage.getItem(dark ? 'tintDark' : 'tintLight');
+              if (accent) {
+                root.style.setProperty('--tint-accent', accent);
+                root.setAttribute('data-tinted', '');
+              }
+            }
+          } catch {
+            /* localStorage throws in some private modes. System preference is fine. */
+          }
+        }
+
+        applyChrome();
+
+        if (!window.__chromeBound) {
+          window.__chromeBound = true;
+          document.addEventListener('astro:after-swap', applyChrome);
         }
       })();
     </script>

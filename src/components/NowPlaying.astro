@@ -299,6 +299,19 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
     root.style.setProperty('--tint-accent', accent);
     root.toggleAttribute('data-tinted', on);
 
+    /**
+     * Published so the pre-paint script in Layout can restore the tint after a view
+     * transition without waiting for this module. ClientRouter wipes the inline
+     * --tint-accent along with the rest of the <html> attributes, and reading it back
+     * from the DOM would mean a visible flash of amber first.
+     */
+    try {
+      if (root_.dataset.onLight) localStorage.setItem('tintLight', root_.dataset.onLight);
+      if (root_.dataset.onDark) localStorage.setItem('tintDark', root_.dataset.onDark);
+    } catch {
+      /* Private mode. The tint still works for this page view. */
+    }
+
     root_.querySelector('[data-tint-toggle]')?.setAttribute('aria-pressed', String(on));
     const label = root_.querySelector<HTMLElement>('[data-tint-label]');
     if (label) label.textContent = on ? 'Back to amber' : 'Use this palette';
@@ -341,13 +354,23 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
     document.head.append(loader);
   }
 
+  /** Current tint state, kept at module scope so it survives navigations. */
+  let tintOn = false;
+
   function initNowPlaying() {
     const wrap = document.querySelector<HTMLElement>('[data-now-playing]');
     if (!wrap) return;
 
-    // transition:persist carries this node, listeners included, across
-    // navigations. Binding again would double every handler.
-    if (wrap.dataset.bound) return;
+    /**
+     * transition:persist carries this node with its listeners, so binding must happen
+     * once. Re-applying the tint must happen EVERY time though: ClientRouter wipes
+     * data-tinted off <html>, and the old early return meant the palette silently
+     * reverted to amber on the first navigation.
+     */
+    if (wrap.dataset.bound) {
+      applyTint(tintOn, wrap);
+      return;
+    }
     wrap.dataset.bound = '1';
 
     const trigger = wrap.querySelector<HTMLButtonElement>('[data-np-trigger]')!;
@@ -373,32 +396,36 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
       }
     });
 
-    let on = false;
     try {
-      on = localStorage.getItem(STORAGE_KEY) === '1';
+      tintOn = localStorage.getItem(STORAGE_KEY) === '1';
     } catch {
       /* Private mode can throw. Off is the right default. */
     }
 
     // Restore without animating: a returning visitor should not watch the page fade
     // into a colour it was always going to be.
-    applyTint(on, wrap);
+    applyTint(tintOn, wrap);
 
     wrap.querySelector('[data-tint-toggle]')?.addEventListener('click', () => {
-      on = !on;
+      tintOn = !tintOn;
       root.setAttribute('data-tint-animate', '');
-      applyTint(on, wrap);
+      applyTint(tintOn, wrap);
       try {
-        localStorage.setItem(STORAGE_KEY, on ? '1' : '0');
+        localStorage.setItem(STORAGE_KEY, tintOn ? '1' : '0');
       } catch {
         /* Not worth failing the interaction over. */
       }
     });
 
-    // The accent has a separate contrast-safe value per theme, so re-apply on flip.
-    document
-      .getElementById('theme-toggle')
-      ?.addEventListener('click', () => requestAnimationFrame(() => applyTint(on, wrap)));
+    /**
+     * The accent has a separate contrast-safe value per theme, so it has to be
+     * recomputed when the theme flips. Listens for the event ThemeToggle dispatches
+     * rather than binding to #theme-toggle: that button lives in the swapped region
+     * and the old direct binding pointed at a dead element after any navigation.
+     */
+    document.addEventListener('theme:changed', () =>
+      requestAnimationFrame(() => applyTint(tintOn, wrap)),
+    );
 
     /* ---- The soundtrack. ---- */
 
@@ -429,8 +456,8 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
         prompt.hidden = true;
         remember('1');
         // Vibes means both: the music and the album's colours, one choice.
-        if (!on && wrap.dataset.onLight) {
-          on = true;
+        if (!tintOn && wrap.dataset.onLight) {
+          tintOn = true;
           root.setAttribute('data-tint-animate', '');
           applyTint(true, wrap);
           try {

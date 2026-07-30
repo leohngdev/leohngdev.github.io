@@ -31,19 +31,45 @@
 </button>
 
 <script>
-  const button = document.getElementById('theme-toggle');
+  /**
+   * Delegated on `document` rather than bound to the button.
+   *
+   * The header is inside the swapped region, so a listener attached directly to
+   * #theme-toggle pointed at an element that no longer existed after the first view
+   * transition: the toggle silently stopped working on every page you navigated to.
+   * `document` survives navigation, so one delegated listener keeps working.
+   */
   const root = document.documentElement;
 
-  const sync = () => button?.setAttribute('aria-pressed', String(root.classList.contains('dark')));
-  sync();
+  function syncPressed() {
+    document
+      .getElementById('theme-toggle')
+      ?.setAttribute('aria-pressed', String(root.classList.contains('dark')));
+  }
 
-  button?.addEventListener('click', () => {
-    const isDark = root.classList.toggle('dark');
-    try {
-      localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    } catch {
-      /* Persisting the choice is a nicety, not a requirement. */
-    }
-    sync();
-  });
+  // Module scope is not enough: a re-executed module would double-bind.
+  const flag = '__themeToggleBound' as const;
+  const w = window as unknown as Record<string, boolean>;
+
+  if (!w[flag]) {
+    w[flag] = true;
+
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement | null;
+      if (!target?.closest('#theme-toggle')) return;
+
+      const isDark = root.classList.toggle('dark');
+      try {
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      } catch {
+        /* Persisting the choice is a nicety, not a requirement. */
+      }
+      syncPressed();
+      // The tint has a separate contrast-safe colour per theme.
+      document.dispatchEvent(new CustomEvent('theme:changed'));
+    });
+  }
+
+  // The new button arrives with aria-pressed="false" from the server on every swap.
+  document.addEventListener('astro:page-load', syncPressed);
 </script>
