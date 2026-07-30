@@ -124,6 +124,52 @@ function contrast(a, b) {
 const hex = ({ r, g, b }) =>
   `#${[r, g, b].map((v) => Math.round(v).toString(16).padStart(2, '0')).join('')}`;
 
+/** HSL saturation and lightness only; hue is preserved by working in RGB. */
+function satLum({ r, g, b }) {
+  const [max, min] = [Math.max(r, g, b) / 255, Math.min(r, g, b) / 255];
+  const l = (max + min) / 2;
+  const d = max - min;
+  return { s: d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1)), l };
+}
+
+/**
+ * Finds the most vivid colour in the artwork, not the most common one.
+ *
+ * sharp's stats().dominant returns the modal colour, which for most album covers is
+ * the background: a near-black or a near-white. Using it produced a grey tint from a
+ * dark cover, which defeats the point of taking colour from the artwork at all.
+ *
+ * This samples a downscaled copy and scores each pixel by saturation, penalising the
+ * very dark and the very pale so a black background cannot win on a rounding error.
+ * Returns null when the art is genuinely monochrome: a greyscale "accent" reads as
+ * broken rather than designed, and the site should keep its amber in that case.
+ */
+async function vividColour(buffer) {
+  const { data } = await sharp(buffer)
+    .resize(64, 64, { fit: 'cover' })
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  let best = null;
+  let bestScore = 0;
+
+  for (let i = 0; i < data.length; i += 3) {
+    const pixel = { r: data[i], g: data[i + 1], b: data[i + 2] };
+    const { s, l } = satLum(pixel);
+    // Mid lightness is worth most: 0 at pure black or white, 1 at l = 0.5.
+    const usable = 1 - Math.abs(l - 0.5) * 2;
+    const score = s * usable ** 0.5;
+    if (score > bestScore) {
+      bestScore = score;
+      best = pixel;
+    }
+  }
+
+  // Below this the cover has no colour worth borrowing.
+  return bestScore < 0.12 ? null : best;
+}
+
 /**
  * Walks a colour toward the given target until it clears a contrast ratio.
  *
@@ -175,24 +221,28 @@ async function main() {
     // 320px is twice the rendered size, which covers a 2x display and no more.
     await sharp(art).resize(320, 320, { fit: 'cover' }).jpeg({ quality: 78 }).toFile(ART_OUT);
 
-    // The mean colour of the artwork carries its mood without picking up a single
-    // saturated pixel from a logo in the corner.
-    const { dominant } = await sharp(art).stats();
+    const vivid = await vividColour(art);
 
-    // These are the site's own surfaces, from global.css.
-    const lightSurface = { r: 248, g: 247, b: 245 };
-    const darkSurface = { r: 12, g: 11, b: 10 };
+    if (!vivid) {
+      console.log('now-playing: artwork is effectively monochrome, keeping the amber accent.');
+    } else {
+      // These are the site's own surfaces, from global.css.
+      const lightSurface = { r: 248, g: 247, b: 245 };
+      const darkSurface = { r: 12, g: 11, b: 10 };
 
-    palette = {
-      raw: hex(dominant),
-      // Accents sit on text-sized elements, so hold them to AA body contrast.
-      onLight: hex(clampForContrast(dominant, lightSurface, 4.5, { r: 0, g: 0, b: 0 })),
-      onDark: hex(clampForContrast(dominant, darkSurface, 4.5, { r: 255, g: 255, b: 255 })),
-    };
+      palette = {
+        raw: hex(vivid),
+        // Accents sit on text-sized elements, so hold them to AA body contrast.
+        onLight: hex(clampForContrast(vivid, lightSurface, 4.5, { r: 0, g: 0, b: 0 })),
+        onDark: hex(clampForContrast(vivid, darkSurface, 4.5, { r: 255, g: 255, b: 255 })),
+      };
+    }
   }
 
   const payload = {
     track: {
+      /** Used by the embedded player. The component also parses href as a fallback. */
+      id: track.id ?? null,
       title: track.name,
       artist: track.artists?.map((a) => a.name).join(', ') ?? '',
       album: track.album?.name ?? '',

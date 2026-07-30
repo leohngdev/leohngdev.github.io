@@ -1,16 +1,16 @@
 {
   "track": {
-    "title": "WE ON GO",
-    "artist": "BIA",
-    "album": "WE ON GO",
-    "href": "https://open.spotify.com/track/01vCzM84c5JLSkG2iXC9VZ",
+    "title": "HANDS UP",
+    "artist": "MEOVV",
+    "album": "HANDS UP",
+    "href": "https://open.spotify.com/track/2nopDUxom21JoMzFXj9wS0",
     "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c8d8c8",
-      "onLight": "#656d65",
-      "onDark": "#c8d8c8"
+      "raw": "#05435a",
+      "onLight": "#05435a",
+      "onDark": "#5d8594"
     },
-    "fetchedAt": "2026-07-30T05:09:05.104Z"
+    "fetchedAt": "2026-07-30T04:51:23.587Z"
   }
 }
