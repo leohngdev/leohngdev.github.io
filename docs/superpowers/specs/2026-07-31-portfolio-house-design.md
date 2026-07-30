@@ -30,10 +30,17 @@ site itself the strongest project in the portfolio.
 3. **The form: a cutaway house.** One building with the front wall removed, seen side on.
    A child version of Leo runs and climbs between rooms. Click a room, he goes to it,
    leans in, and the camera pushes through the doorway.
-4. **Modelling tool: Blender, not Maya.** Blender's glTF export is the best supported
-   path into three.js. Eevee covers the pre-rendered fallback. Geometry Nodes can scatter
-   room dressing. `profile.ts` lists Maya and needs updating; `npm run cv` regenerates
-   the PDF from it.
+4. **Modelling tool: Blender, moving from Maya.** Blender's glTF export is the best
+   supported path into three.js. Eevee covers the pre-rendered fallback. Geometry Nodes can
+   scatter room dressing.
+
+   The CV claims both tools, not a switch. Knowing Maya and Blender is worth more than
+   knowing either. But the timing matters: `profile.ts` groups skills by depth and Game & 3D
+   currently reads "Coursework, no shipped titles." Adding Blender before anything has been
+   built in it is the inflation that rule exists to prevent. **Add Blender to `profile.ts` in
+   Phase 4, not before**, and re-run `npm run cv`. By then it is not only honest, it is the
+   most-shipped 3D tool on the list, and the depth label for that whole group can move up
+   from "studied". Shipping this project is what makes the claim true.
 
 ## The core idea
 
@@ -115,6 +122,44 @@ the strongest beat of the desktop version on phones. It was deferred because it 
 camera state machine and a minimap that nothing else requires. Reconsider once the build is
 otherwise complete.
 
+## Legibility: making the metaphor land for a stranger
+
+The two reference sites get away with zero explanation because everyone already knows VS
+Code and macOS. Nobody knows Leo's life. A room holding a crate and a whiteboard cannot on
+its own tell a stranger "FRC robotics, Ho Chi Minh City, two years." Explanatory text here
+is load-bearing, not a failure of the metaphor.
+
+Three tiers, each catching a different visitor.
+
+**Tier 1: exterior labels.** Every room is tagged on the outside with year and place,
+readable before a single click. Six labels running from "2013, Ho Chi Minh" to "Now,
+Melbourne" explain the whole conceit in about two seconds with no sentence required. This
+tier does most of the work.
+
+**Tier 2: entry text, 40 words hard cap.** Shows every time a visitor enters a room. It is
+not a hover, not a toggle, and not optional. The visitor it exists for is the one who did
+not understand the room, and that visitor will not go hunting for a button.
+
+The 40-word cap is a requirement, not a guideline. It is what keeps "short and concise" true
+by the time room six gets written.
+
+- **Desktop treatment: the placard.** A small museum placard stands in the room. The house
+  reads as an exhibit of a life, which is a stronger idea than the house alone, and it is
+  the only treatment where the explaining text strengthens the metaphor rather than
+  apologising for it.
+- **Phone treatment: the caption band.** A placard is unreadable in a tower cell at 375 px.
+  On phone the same text sits in a band beneath the room, the way a caption sits under a
+  photograph. One component, two layouts, not two features.
+- Render the placard as a DOM overlay positioned to look diegetic. Never as 3D text: 3D text
+  is unreadable at small sizes and invisible to assistive technology.
+
+**Tier 3: the full case study.** The existing prose, for anyone who wants the detail. Tier 2
+must carry an explicit, visible affordance into Tier 3. A visitor who wants more has to be
+able to see that more exists. Discovery by accident does not count.
+
+Draft copy for all six rooms is written in Phase 2 alongside room dressing, under the 40-word
+cap and the prose rules in `CLAUDE.md`: active voice, no em dashes, no adverb crutches.
+
 ## Fallbacks and accessibility
 
 These are requirements, not enhancements. A recruiter on a locked-down corporate machine is
@@ -137,6 +182,12 @@ context creation failure, not on user-agent sniffing.
 is a presentation of that content, not a replacement for it. This gives screen readers a
 complete document, gives search engines something to index, and makes the no-WebGL path a
 styling problem rather than a rebuild.
+
+The text spine and the legibility ladder above are the same feature. Tier 2 entry text and
+Tier 3 case studies are the spine's content; the placard and the caption band are two of its
+presentations. Build it once and it serves the stranger who did not get the metaphor, the
+screen reader, the blocked-WebGL visitor and the search crawler together. Author it as HTML
+first and layer the 3D presentation over it, never the reverse.
 
 **Keyboard.** Arrow keys move between rooms, Enter enters a room, Escape backs out. Focus
 order follows the text spine. The command palette reaches every room directly.
