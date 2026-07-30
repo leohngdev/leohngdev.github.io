@@ -1,16 +1,17 @@
 {
   "track": {
-    "title": "WE ON GO",
-    "artist": "BIA",
-    "album": "WE ON GO",
-    "href": "https://open.spotify.com/track/01vCzM84c5JLSkG2iXC9VZ",
-    "live": true,
+    "id": "7ks6AZmFcm3Y6PGGxGSmlB",
+    "title": "Where Them Girls At (feat. Nicki Minaj & Flo Rida)",
+    "artist": "David Guetta, Flo Rida, Nicki Minaj",
+    "album": "Nothing but the Beat (Ultimate Edition)",
+    "href": "https://open.spotify.com/track/7ks6AZmFcm3Y6PGGxGSmlB",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#05435a",
-      "onLight": "#05435a",
-      "onDark": "#5d8594"
+      "raw": "#d20021",
+      "onLight": "#d20021",
+      "onDark": "#de445c"
     },
-    "fetchedAt": "2026-07-30T05:09:05.104Z"
+    "fetchedAt": "2026-07-30T08:01:11.692Z"
   }
 }
