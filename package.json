@@ -13,7 +13,9 @@
     "astro": "astro",
     "og": "node scripts/generate-og.mjs",
     "cv": "node scripts/generate-cv.mjs",
-    "assets": "npm run og && npm run cv"
+    "assets": "npm run og && npm run cv",
+    "spotify:auth": "node scripts/spotify-auth.mjs",
+    "spotify": "node scripts/fetch-now-playing.mjs"
   },
   "devDependencies": {
     "pdfkit": "^0.19.1",

@@ -1,0 +1,177 @@
+---
+import { Image } from 'astro:assets';
+import nowPlaying from '../data/now-playing.json';
+
+/**
+ * What Leo is listening to, and the site's only source of colour that is not amber.
+ *
+ * The interaction is the point: the panel is quiet until you press it, and then the
+ * album's palette takes over the accent and warms the surfaces across the whole page.
+ * Small thing to click, large thing to happen.
+ *
+ * Everything expensive already happened in the Action. The artwork is local and
+ * pre-sized, the palette was extracted with sharp, and both contrast-safe variants
+ * were computed against this site's real surfaces. All that ships here is a click
+ * handler that writes CSS variables.
+ *
+ * Renders nothing at all until the Action has run, so the site is correct before the
+ * Spotify credentials exist rather than showing an empty shell.
+ */
+const track = nowPlaying.track as {
+  title: string;
+  artist: string;
+  album: string;
+  href: string | null;
+  live: boolean;
+  art: string | null;
+  palette: { raw: string; onLight: string; onDark: string } | null;
+} | null;
+
+// Astro needs a static glob to resolve a runtime filename to an optimised asset.
+const artwork = track?.art
+  ? Object.entries(
+      import.meta.glob<{ default: ImageMetadata }>('../assets/now-playing.jpg', { eager: true }),
+    )[0]?.[1]?.default
+  : undefined;
+---
+
+{
+  track && (
+    <div
+      class="reveal now-playing"
+      data-now-playing
+      data-on-light={track.palette?.onLight}
+      data-on-dark={track.palette?.onDark}
+    >
+      <p class="eyebrow mb-3">{track.live ? 'Listening right now' : 'Last listened to'}</p>
+
+      <div class="flex items-center gap-4">
+        {artwork && (
+          <Image
+            src={artwork}
+            alt={`${track.album} album art`}
+            width={56}
+            height={56}
+            loading="lazy"
+            class="size-14 shrink-0 rounded-md border border-[var(--border-subtle)]"
+          />
+        )}
+
+        <div class="min-w-0 flex-1">
+          <p class="truncate font-medium">
+            {track.href ? (
+              <a href={track.href} class="link-underline" target="_blank" rel="noopener noreferrer">
+                {track.title}
+              </a>
+            ) : (
+              track.title
+            )}
+          </p>
+          <p class="datum truncate">{track.artist}</p>
+        </div>
+
+        {track.palette && (
+          <button
+            type="button"
+            data-tint-toggle
+            aria-pressed="false"
+            class="datum shrink-0 rounded-md border border-[var(--border-strong)] px-3 py-2 transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+          >
+            <span data-tint-label>Use this palette</span>
+          </button>
+        )}
+      </div>
+    </div>
+  )
+}
+
+<style>
+  /* The tint is applied by overriding the same semantic tokens the whole site reads,
+     so one attribute on <html> repaints every accent and surface at once without a
+     single component knowing it happened. */
+  :global(html[data-tinted]) {
+    --accent: var(--tint-accent);
+    --accent-bright: var(--tint-accent);
+    --surface: color-mix(in srgb, var(--tint-accent) 4%, var(--color-ink-50));
+    --surface-raised: color-mix(in srgb, var(--tint-accent) 2%, #ffffff);
+    --surface-sunken: color-mix(in srgb, var(--tint-accent) 7%, var(--color-ink-100));
+  }
+
+  :global(html.dark[data-tinted]) {
+    --surface: color-mix(in srgb, var(--tint-accent) 6%, var(--color-ink-950));
+    --surface-raised: color-mix(in srgb, var(--tint-accent) 9%, var(--color-ink-900));
+    --surface-sunken: color-mix(in srgb, var(--tint-accent) 4%, #080807);
+  }
+
+  /* Surfaces cross-fade rather than snapping, which is what makes a small button
+     feel like it did something large. Text colour is left alone so nothing reflows
+     or becomes briefly unreadable mid-transition. */
+  :global(html[data-tint-animate] body),
+  :global(html[data-tint-animate] body *) {
+    transition:
+      background-color 420ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(html[data-tint-animate] body),
+    :global(html[data-tint-animate] body *) {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'tint';
+
+  function applyTint(on: boolean, panel: HTMLElement) {
+    const root = document.documentElement;
+    const dark = root.classList.contains('dark');
+    const accent = dark ? panel.dataset.onDark : panel.dataset.onLight;
+    if (!accent) return;
+
+    root.style.setProperty('--tint-accent', accent);
+    root.toggleAttribute('data-tinted', on);
+
+    const button = panel.querySelector<HTMLButtonElement>('[data-tint-toggle]');
+    const label = panel.querySelector<HTMLElement>('[data-tint-label]');
+    button?.setAttribute('aria-pressed', String(on));
+    if (label) label.textContent = on ? 'Back to amber' : 'Use this palette';
+  }
+
+  function initNowPlaying() {
+    const panel = document.querySelector<HTMLElement>('[data-now-playing]');
+    if (!panel) return;
+
+    const root = document.documentElement;
+    let on = false;
+    try {
+      on = localStorage.getItem(STORAGE_KEY) === '1';
+    } catch {
+      /* Private mode can throw. Defaulting to off is the right fallback. */
+    }
+
+    // Restore without animating, so a returning visitor does not watch the page
+    // fade into a colour it was always going to be.
+    applyTint(on, panel);
+
+    panel.querySelector<HTMLElement>('[data-tint-toggle]')?.addEventListener('click', () => {
+      on = !on;
+      root.setAttribute('data-tint-animate', '');
+      applyTint(on, panel);
+      try {
+        localStorage.setItem(STORAGE_KEY, on ? '1' : '0');
+      } catch {
+        /* Not worth failing the interaction over. */
+      }
+    });
+
+    // The accent has a separate contrast-safe value per theme, so re-apply whenever
+    // the theme flips or a tinted dark page would use the light-mode colour.
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      requestAnimationFrame(() => applyTint(on, panel));
+    });
+  }
+
+  document.addEventListener('astro:page-load', initNowPlaying);
+</script>

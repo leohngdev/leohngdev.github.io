@@ -1,0 +1,4 @@
+{
+  "track": null,
+  "note": "Written by scripts/fetch-now-playing.mjs via the now-playing GitHub Action. track stays null until SPOTIFY_REFRESH_TOKEN and friends are configured, and the NowPlaying component renders nothing while it is null."
+}
