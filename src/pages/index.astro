@@ -3,12 +3,15 @@ import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import Work from '../components/Work.astro';
-import About from '../components/About.astro';
-import Skills from '../components/Skills.astro';
-import Experience from '../components/Experience.astro';
-import Contact from '../components/Contact.astro';
 import Timeline from '../components/Timeline.astro';
+import Navigator from '../components/Navigator.astro';
+import Contact from '../components/Contact.astro';
 
+/**
+ * The home page is a poster, not a document: the thesis, the work, the trajectory,
+ * two doors, and a way to get in touch. About, skills and experience live on /about,
+ * because seven sections on one scroll read as clutter however good each one is.
+ */
 const projects = (await getCollection('projects'))
   .filter((project) => project.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
@@ -20,8 +23,6 @@ const roles = (await getCollection('experience')).sort((a, b) => a.data.order - 
   <Hero />
   <Work projects={projects} />
   <Timeline projects={projects} roles={roles} />
-  <About />
-  <Skills />
-  <Experience roles={roles} />
+  <Navigator projects={projects} roles={roles} />
   <Contact />
 </Layout>

@@ -9,10 +9,15 @@ interface Props {
 const { subpage = false } = Astro.props;
 const prefix = subpage ? '/' : '';
 
+/**
+ * Work and Trajectory are anchors on the home page; About is its own route now.
+ * Skills moved to /about, so linking it here would have sent people to a section
+ * that no longer exists on whichever page they were standing on.
+ */
 const links = [
   { label: 'Work', href: `${prefix}#work` },
-  { label: 'About', href: `${prefix}#about` },
-  { label: 'Skills', href: `${prefix}#skills` },
+  { label: 'Trajectory', href: `${prefix}#timeline` },
+  { label: 'About', href: '/about/' },
   { label: 'Contact', href: `${prefix}#contact` },
 ];
 ---

@@ -16,7 +16,11 @@ export interface CommandContext {
   effect: (effect: Effect) => void;
 }
 
-export type Effect = { kind: 'clear' } | { kind: 'theme' } | { kind: 'scroll'; target: string };
+export type Effect =
+  | { kind: 'clear' }
+  | { kind: 'theme' }
+  /** Scrolls to `target` on this page, or navigates to `fallbackHref` if it is absent. */
+  | { kind: 'scroll'; target: string; fallbackHref?: string };
 
 export interface Command {
   name: string;
@@ -220,21 +224,32 @@ const commands: Command[] = [
      * section is the thing you actually want from it.
      */
     name: 'go',
-    summary: 'Jump to a section of the page',
+    summary: 'Jump to a section, or to another page',
     usage: 'go <section>',
     run: (args, { effect }) => {
-      const sections = ['work', 'timeline', 'about', 'skills', 'experience', 'contact'];
+      /**
+       * Some of these are anchors on whichever page you are standing on and some are
+       * routes, because about, skills and experience moved to /about. Scrolling is
+       * tried first and falls through to navigation when the section is not here, so
+       * `go skills` works from the home page as well as from /about.
+       */
+      const routes: Record<string, string> = {
+        about: '/about/',
+        skills: '/about/#skills',
+        experience: '/about/#experience',
+      };
+      const sections = ['work', 'timeline', 'contact', ...Object.keys(routes)];
       const target = args[0]?.toLowerCase();
 
       if (!target || !sections.includes(target)) {
         return [
           { type: 'text', text: target ? `No section called "${target}".` : 'Usage: go <section>', tone: 'error' },
-          { type: 'text', text: `Sections: ${sections.join(', ')}`, tone: 'muted' },
+          { type: 'text', text: `Try: ${sections.join(', ')}`, tone: 'muted' },
         ];
       }
 
-      effect({ kind: 'scroll', target });
-      return [{ type: 'text', text: `Jumping to ${target}.`, tone: 'muted' }];
+      effect({ kind: 'scroll', target, fallbackHref: routes[target] });
+      return [{ type: 'text', text: `Going to ${target}.`, tone: 'muted' }];
     },
   },
   {

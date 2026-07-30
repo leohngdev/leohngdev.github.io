@@ -242,9 +242,13 @@ const { data } = Astro.props;
       }
       if (effect.kind === 'scroll') {
         const target = document.getElementById(effect.target);
-        if (!target) return;
         close();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
+        // The section lives on another page now, so navigate instead of doing nothing.
+        if (effect.fallbackHref) window.location.href = effect.fallbackHref;
       }
     }
 
