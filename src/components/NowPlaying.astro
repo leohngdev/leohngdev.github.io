@@ -141,16 +141,100 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
           </p>
         )}
 
-        {/* Spotify's own player mounts here on request, never on page load. It is
-            the only third-party thing on the site, so it costs nothing until a
-            visitor explicitly asks for the music. */}
-        {trackId && <div data-np-embed-mount hidden class="mt-4"><div data-np-embed /></div>}
+        {/*
+          Our own transport, not Spotify's card.
 
+          Their embed renders its own art, title and artist, so dropping it in here
+          repeated everything above it in a different visual language: green on dark
+          inside a warm ink panel. This is the same controls in our own type and
+          tokens, driven by Spotify's iframe API. The iframe itself still does the
+          audio, off-screen, because that is the only lawful way to play the track.
+        */}
         {trackId && (
-          <p class="datum mt-3 leading-relaxed text-[var(--text-muted)]" data-np-note hidden>
-            Spotify's player, loaded because you asked. 30-second preview unless you
-            are signed in to Spotify in this browser.
-          </p>
+          <div data-np-player hidden class="mt-4 border-t border-[var(--border-subtle)] pt-4">
+            <div class="flex items-center gap-3">
+              <button
+                type="button"
+                data-np-playpause
+                aria-label="Play preview"
+                class="flex size-10 shrink-0 items-center justify-center rounded-full border border-[var(--border-strong)] text-[var(--text-primary)] transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                <svg data-np-icon-play viewBox="0 0 16 16" class="size-4" fill="currentColor" aria-hidden="true">
+                  <path d="M5 3.5v9l7.5-4.5L5 3.5Z" />
+                </svg>
+                <svg
+                  data-np-icon-pause
+                  viewBox="0 0 16 16"
+                  class="hidden size-4"
+                  fill="currentColor"
+                  aria-hidden="true"
+                >
+                  <path d="M5 3.5h2.2v9H5v-9Zm3.8 0H11v9H8.8v-9Z" />
+                </svg>
+              </button>
+
+              <div class="min-w-0 flex-1">
+                {/* Scrubbable: a progress bar you cannot seek with is a decoration. */}
+                <div
+                  data-np-scrub
+                  role="slider"
+                  tabindex="0"
+                  aria-label="Seek within preview"
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                  aria-valuenow="0"
+                  class="np-scrub group/scrub relative flex h-4 w-full cursor-pointer items-center"
+                >
+                  <span class="h-0.5 w-full rounded-full bg-[var(--border-subtle)]">
+                    <span
+                      data-np-progress
+                      class="block h-0.5 w-0 rounded-full bg-[var(--accent)]"
+                    />
+                  </span>
+                  <span
+                    data-np-thumb
+                    class="pointer-events-none absolute size-2.5 -translate-x-1/2 rounded-full bg-[var(--accent)] opacity-0 transition-opacity group-hover/scrub:opacity-100"
+                    style="left: 0%"
+                    aria-hidden="true"
+                  />
+                </div>
+
+                {/* Dashes, not 0:00 / 0:30. The length is whatever Spotify reports
+                    (30s preview, or the full track for a signed-in listener), so
+                    printing a duration before being told one would be a guess. */}
+                <p class="datum mt-1.5 flex items-center justify-between gap-2">
+                  <span data-np-time class="tnum">&ndash;:&ndash;&ndash;</span>
+                  <span data-np-duration class="tnum text-[var(--text-muted)]">&ndash;:&ndash;&ndash;</span>
+                </p>
+              </div>
+            </div>
+
+            {/* Attribution stays visible: the audio is theirs, and their guidelines
+                expect the source named and linkable. */}
+            <p class="datum mt-3 flex flex-wrap items-center gap-x-2 text-[var(--text-muted)]">
+              <span data-np-state>Connecting&hellip;</span>
+              <span class="text-[var(--border-strong)]" aria-hidden="true">·</span>
+              {track.href ? (
+                <a href={track.href} class="link-underline" target="_blank" rel="noopener noreferrer">
+                  via Spotify
+                </a>
+              ) : (
+                <span>via Spotify</span>
+              )}
+            </p>
+          </div>
+        )}
+
+        {/*
+          The audio engine. Positioned off-screen rather than display:none, because a
+          display:none iframe can have its media suspended by the browser. Loaded only
+          when a visitor asks for music, so the one third-party connection on this site
+          costs nothing until consented to.
+        */}
+        {trackId && (
+          <div data-np-embed-mount class="np-engine" aria-hidden="true">
+            <div data-np-embed />
+          </div>
         )}
       </div>
 
@@ -198,6 +282,26 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
 <style>
   .np-panel {
     transform-origin: top right;
+  }
+
+  /* Spotify's iframe, kept for audio only. Off-screen at real size rather than
+     display:none or 1px, both of which let browsers suspend or refuse media
+     playback. Never focusable, never in the tab order. */
+  .np-engine {
+    position: fixed;
+    left: -10000px;
+    top: 0;
+    width: 320px;
+    height: 80px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Widen the hit area without changing the visual weight of the 2px track. */
+  .np-scrub::before {
+    content: '';
+    position: absolute;
+    inset: -6px 0;
   }
 
   .np-panel:not([hidden]) {
@@ -319,8 +423,74 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
 
   const VIBES_KEY = 'vibes';
 
-  /** Spotify's embed controller, once created. Survives navigations with the node. */
-  let embedController: { play: () => void } | null = null;
+  interface SpotifyController {
+    play: () => void;
+    togglePlay: () => void;
+    seek: (seconds: number) => void;
+    addListener: (event: string, cb: (e: { data: PlaybackData }) => void) => void;
+  }
+  interface PlaybackData {
+    isPaused: boolean;
+    isBuffering: boolean;
+    duration: number;
+    position: number;
+  }
+
+  /** Survives navigations along with the transition:persist node. */
+  let embedController: SpotifyController | null = null;
+  /** 0 until Spotify reports a real length, so nothing is invented. */
+  let lastDuration = 0;
+
+  const mmss = (ms: number) => {
+    const total = Math.max(0, Math.round(ms / 1000));
+    return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
+  };
+
+  /** Paints our own transport from Spotify's playback events. */
+  function renderPlayback(wrap: HTMLElement, data: PlaybackData) {
+    if (data.duration) lastDuration = data.duration;
+    const ratio = lastDuration ? Math.min(data.position / lastDuration, 1) : 0;
+
+    const fill = wrap.querySelector<HTMLElement>('[data-np-progress]');
+    const thumb = wrap.querySelector<HTMLElement>('[data-np-thumb]');
+    const scrub = wrap.querySelector<HTMLElement>('[data-np-scrub]');
+    if (fill) fill.style.width = `${(ratio * 100).toFixed(2)}%`;
+    if (thumb) thumb.style.left = `${(ratio * 100).toFixed(2)}%`;
+    scrub?.setAttribute('aria-valuenow', String(Math.round(ratio * 100)));
+
+    const time = wrap.querySelector<HTMLElement>('[data-np-time]');
+    const dur = wrap.querySelector<HTMLElement>('[data-np-duration]');
+    if (time) time.textContent = lastDuration ? mmss(data.position) : '–:––';
+    if (dur) dur.textContent = lastDuration ? mmss(lastDuration) : '–:––';
+
+    /**
+     * Icon shows what the button will DO next, which is the convention.
+     * Toggles the `hidden` class, not the attribute: the markup uses Tailwind's
+     * hidden utility and an attribute would not have overridden that class.
+     */
+    const playIcon = wrap.querySelector<HTMLElement>('[data-np-icon-play]');
+    const pauseIcon = wrap.querySelector<HTMLElement>('[data-np-icon-pause]');
+    const button = wrap.querySelector<HTMLElement>('[data-np-playpause]');
+    playIcon?.classList.toggle('hidden', !data.isPaused);
+    pauseIcon?.classList.toggle('hidden', data.isPaused);
+    button?.setAttribute('aria-label', data.isPaused ? 'Play preview' : 'Pause preview');
+
+    /**
+     * "Preview" vs "Full track" is inferred from the length Spotify hands back: an
+     * anonymous listener gets 30 seconds, a signed-in one gets the whole thing. Only
+     * claimed once a real duration has arrived.
+     */
+    const state = wrap.querySelector<HTMLElement>('[data-np-state]');
+    if (state) {
+      state.textContent = data.isBuffering
+        ? 'Buffering…'
+        : !lastDuration
+          ? 'Connecting…'
+          : lastDuration > 45000
+            ? 'Full track'
+            : 'Preview';
+    }
+  }
 
   function loadEmbed(wrap: HTMLElement, autoplay: boolean) {
     if (embedController) {
@@ -328,21 +498,23 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
       return;
     }
 
-    const mount = wrap.querySelector<HTMLElement>('[data-np-embed-mount]');
     const target = wrap.querySelector<HTMLElement>('[data-np-embed]');
+    const player = wrap.querySelector<HTMLElement>('[data-np-player]');
     const trackId = wrap.dataset.trackId;
-    if (!mount || !target || !trackId) return;
+    if (!target || !trackId) return;
 
-    mount.hidden = false;
-    wrap.querySelector<HTMLElement>('[data-np-note]')?.removeAttribute('hidden');
+    player?.removeAttribute('hidden');
 
-    // Spotify's iframe API loader calls this global when ready.
+    // Spotify's loader calls this global once its API is ready.
     (window as any).onSpotifyIframeApiReady = (api: any) => {
       api.createController(
         target,
-        { uri: `spotify:track:${trackId}`, width: '100%', height: 80 },
-        (controller: any) => {
+        { uri: `spotify:track:${trackId}`, width: 320, height: 80 },
+        (controller: SpotifyController) => {
           embedController = controller;
+          controller.addListener('playback_update', (event) =>
+            renderPlayback(wrap, event.data),
+          );
           if (autoplay) controller.play();
         },
       );
@@ -352,6 +524,48 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
     loader.src = 'https://open.spotify.com/embed/iframe-api/v1';
     loader.async = true;
     document.head.append(loader);
+  }
+
+  /** Wires our transport. Called once; the controller may not exist yet. */
+  function bindTransport(wrap: HTMLElement) {
+    wrap.querySelector('[data-np-playpause]')?.addEventListener('click', () => {
+      // First press doubles as the gesture that loads and starts the engine.
+      if (!embedController) loadEmbed(wrap, true);
+      else embedController.togglePlay();
+    });
+
+    const scrub = wrap.querySelector<HTMLElement>('[data-np-scrub]');
+    if (!scrub) return;
+
+    const seekTo = (clientX: number) => {
+      // Seeking before a duration is known would send seek(NaN).
+      if (!embedController || !lastDuration) return;
+      const rect = scrub.getBoundingClientRect();
+      const ratio = Math.min(Math.max((clientX - rect.left) / rect.width, 0), 1);
+      embedController.seek((ratio * lastDuration) / 1000);
+    };
+
+    scrub.addEventListener('pointerdown', (event) => {
+      seekTo(event.clientX);
+      // Dragging past the bar keeps scrubbing until release.
+      const move = (e: PointerEvent) => seekTo(e.clientX);
+      const up = () => {
+        window.removeEventListener('pointermove', move);
+        window.removeEventListener('pointerup', up);
+      };
+      window.addEventListener('pointermove', move);
+      window.addEventListener('pointerup', up);
+    });
+
+    // Keyboard seeking, because a slider role promises arrow keys work.
+    scrub.addEventListener('keydown', (event) => {
+      if (!embedController || !lastDuration) return;
+      const step = event.key === 'ArrowRight' ? 5 : event.key === 'ArrowLeft' ? -5 : 0;
+      if (!step) return;
+      event.preventDefault();
+      const current = Number(scrub.getAttribute('aria-valuenow') ?? '0') / 100;
+      embedController.seek(Math.max(0, current * (lastDuration / 1000) + step));
+    });
   }
 
   /** Current tint state, kept at module scope so it survives navigations. */
@@ -428,6 +642,8 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
     );
 
     /* ---- The soundtrack. ---- */
+
+    bindTransport(wrap);
 
     const prompt = wrap.querySelector<HTMLElement>('[data-np-prompt]');
     let vibes: string | null = null;
