@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3eOeuofLjOgjOCs7eWuvZ0",
-    "title": "Cool Kids",
-    "artist": "Echosmith",
-    "album": "Talking Dreams",
-    "href": "https://open.spotify.com/track/3eOeuofLjOgjOCs7eWuvZ0",
-    "live": false,
+    "id": "14kYOiFVPb7E7NfFbqhdln",
+    "title": "goodnight n go",
+    "artist": "Ariana Grande",
+    "album": "Sweetener",
+    "href": "https://open.spotify.com/track/14kYOiFVPb7E7NfFbqhdln",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#407b7c",
-      "onLight": "#407b7c",
-      "onDark": "#4b8384"
+      "raw": "#fec1a1",
+      "onLight": "#896857",
+      "onDark": "#fec1a1"
     },
-    "fetchedAt": "2026-07-30T13:19:08.133Z"
+    "fetchedAt": "2026-07-30T13:46:01.091Z"
   }
 }
