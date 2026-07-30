@@ -9,7 +9,13 @@
  *
  * Run it on your own machine, never in CI:
  *
- *   SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/spotify-auth.mjs
+ *   npm run spotify:auth
+ *
+ * It asks for the client id and secret rather than reading them from the command
+ * line. That is not only friendlier: a value typed on a command line ends up in shell
+ * history, and `VAR=x command` is Bash syntax that fails outright in PowerShell.
+ * Reading from a prompt avoids both. Environment variables still win if they are set,
+ * which keeps it usable in a scripted setup.
  *
  * It prints a refresh token. Put that in a GitHub repo secret. Do not paste it into
  * a chat, a commit, or anywhere else: it grants read access to your listening history
@@ -17,21 +23,57 @@
  */
 import { createServer } from 'node:http';
 import { randomBytes } from 'node:crypto';
+import { createInterface } from 'node:readline/promises';
+import { stdin, stdout } from 'node:process';
 
 const PORT = 8888;
 // Spotify stopped accepting "localhost" for loopback redirects; it wants the literal
 // loopback IP. This string has to match the redirect URI in the dashboard exactly.
 const REDIRECT_URI = `http://127.0.0.1:${PORT}/callback`;
 
-const { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } = process.env;
+/**
+ * Asks for anything not already in the environment. Values are trimmed because
+ * copying from the Spotify dashboard tends to pick up a trailing space, and a secret
+ * with whitespace fails the token exchange with an unhelpful 400.
+ */
+async function collectCredentials() {
+  let clientId = process.env.SPOTIFY_CLIENT_ID?.trim();
+  let clientSecret = process.env.SPOTIFY_CLIENT_SECRET?.trim();
 
-if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET) {
-  console.error(
-    'Set SPOTIFY_CLIENT_ID and SPOTIFY_CLIENT_SECRET first.\n\n' +
-      '  SPOTIFY_CLIENT_ID=xxx SPOTIFY_CLIENT_SECRET=yyy node scripts/spotify-auth.mjs\n',
-  );
-  process.exit(1);
+  if (clientId && clientSecret) return { clientId, clientSecret };
+
+  // Without a terminal, readline's question never resolves and the process hangs on
+  // an unsettled await with no explanation. Say what is wrong instead.
+  if (!stdin.isTTY) {
+    console.error(
+      '\n  No interactive terminal, so there is nothing to prompt.\n' +
+        '  Run this directly in a terminal, or set SPOTIFY_CLIENT_ID and\n' +
+        '  SPOTIFY_CLIENT_SECRET in the environment first.\n',
+    );
+    process.exit(1);
+  }
+
+  console.log('\n  Spotify app credentials');
+  console.log('  developer.spotify.com/dashboard -> your app -> Settings\n');
+
+  const rl = createInterface({ input: stdin, output: stdout });
+  try {
+    if (!clientId) clientId = (await rl.question('  Client ID:     ')).trim();
+    if (!clientSecret) clientSecret = (await rl.question('  Client secret: ')).trim();
+  } finally {
+    rl.close();
+  }
+
+  if (!clientId || !clientSecret) {
+    console.error('\n  Both values are required. Nothing was saved; run it again.\n');
+    process.exit(1);
+  }
+
+  return { clientId, clientSecret };
 }
+
+const { clientId: SPOTIFY_CLIENT_ID, clientSecret: SPOTIFY_CLIENT_SECRET } =
+  await collectCredentials();
 
 /** Only what the site reads. No playback control, no playlist or profile access. */
 const SCOPES = ['user-read-currently-playing', 'user-read-recently-played'].join(' ');
