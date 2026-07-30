@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "14kYOiFVPb7E7NfFbqhdln",
-    "title": "goodnight n go",
-    "artist": "Ariana Grande",
-    "album": "Sweetener",
-    "href": "https://open.spotify.com/track/14kYOiFVPb7E7NfFbqhdln",
-    "live": true,
+    "id": "63CSozvYUEudPp12679UVF",
+    "title": "Don't Worry (with Ray Dalton) - Radio Edit",
+    "artist": "Madcon, Ray Dalton",
+    "album": "Don't Worry (feat. Ray Dalton)",
+    "href": "https://open.spotify.com/track/63CSozvYUEudPp12679UVF",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fec1a1",
-      "onLight": "#896857",
-      "onDark": "#fec1a1"
+      "raw": "#790c2f",
+      "onLight": "#790c2f",
+      "onDark": "#ad6b80"
     },
-    "fetchedAt": "2026-07-30T13:46:01.091Z"
+    "fetchedAt": "2026-07-30T19:04:39.510Z"
   }
 }
