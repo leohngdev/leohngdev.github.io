@@ -7,10 +7,10 @@
     "period": "Jul – Nov 2025",
     "order": 1,
     "points": [
-      "Worked in an agile team of five to overhaul the questionnaire engine of a live Australian digital mental health platform (Nest.js / PostgreSQL / React Native).",
-      "Rebuilt scoring from hardcoded to configurable: custom categories, severity thresholds, weighting with auto-redistribution, and reverse scoring.",
+      "Worked in an agile team of five on the questionnaire engine of a live Australian digital mental health platform (Nest.js / PostgreSQL / React Native).",
+      "Made scoring configurable at runtime: custom categories, severity thresholds, weighting with auto-redistribution, and reverse scoring.",
       "Extended the new scoring logic into the clinician dashboard and PDF export report.",
-      "Rebuilt a broken multiservice dev environment from scratch and resolved a silent bug causing incorrect answer options across the mobile app.",
+      "Stood up the full multiservice stack locally, and traced a data mismatch that produced no error and no log entry.",
       "Delivered a 100% UAT pass rate across two client signed iterations."
     ]
   },

@@ -120,7 +120,7 @@ export const profile = {
   about: [
     "I'm a software developer in Melbourne. I finished a Bachelor of IT at Monash at the end of 2025, majoring in Software Development with a minor in Games Development. It is an odd pairing and I would choose it again.",
     'Before university I spent two years on an FRC robotics team in Ho Chi Minh City, writing navigation and sensor code in Python and C++. Two years of watching a machine do the wrong thing taught me where the work lives: in the gap between what you think a system does and what it does.',
-    "My most recent work was ANTSA, a live Australian digital mental health platform, where I replaced a hardcoded questionnaire scoring system with a configurable one. The two things I am proudest of never shipped as features. I rebuilt a broken multiservice dev environment from scratch, then found a bug that had been feeding clinicians the wrong answer options.",
+    'My most recent work was ANTSA, a live Australian digital mental health platform, where I made questionnaire scoring configurable at runtime. The two things I am proudest of never shipped as features. I stood the whole multiservice stack up locally before writing a line, then traced a data mismatch that produced no error and no log entry.',
     'The engine and 3D half feeds the rest. Writing gameplay systems in C# and C++ and optimising topology for realtime rendering made me count frames and bytes. I still count them when I write a backend.',
   ],
 

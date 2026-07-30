@@ -32,8 +32,8 @@ same code behaves differently on carpet than on tile, and a fault can be mechani
 yours. You learn to form one specific hypothesis and test it instead of changing something plausible
 and hoping.
 
-I used that habit years later at ANTSA to find a bug that produced no error and no log entry, only
-wrong data. Same discipline: stop trusting the layer that looks fine, follow the values.
+I used that habit years later at ANTSA to trace a data mismatch that produced no error and no log
+entry. Same discipline: stop trusting the layer that looks fine, follow the values.
 
 ## The other half
 

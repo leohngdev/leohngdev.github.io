@@ -9,10 +9,10 @@ featured: true
 category: web
 summary: >-
   ANTSA is a live digital mental health platform used by clinicians and their clients across
-  Australia. Over a five month industry placement I worked in a team of five to replace its
-  hardcoded questionnaire scoring with a configurable engine, carried the new scoring into the
-  clinician dashboard and PDF reporting, and passed UAT at 100% across two client signed
-  iterations.
+  Australia. Over a five month industry placement I worked in a team of five on its questionnaire
+  scoring engine, making categories, thresholds and weighting configurable at runtime, carried the
+  new scoring into the clinician dashboard and PDF reporting, and passed UAT at 100% across two
+  client signed iterations.
 stack:
   - Nest.js
   - Node.js
@@ -23,21 +23,20 @@ stack:
   - Agile / Scrum
 highlights:
   - 100% UAT pass rate across two client signed iterations
-  - Replaced hardcoded scoring with configurable categories, thresholds and weighting
-  - Found and fixed a silent bug serving wrong answer options to clinicians
+  - Built runtime-configurable categories, severity thresholds and question weighting
+  - Traced and fixed a data mismatch that produced no error and no log entry
 links: []
 confidential: true
 ---
 
-## The problem
+## The brief
 
-ANTSA's questionnaire scoring was hardcoded. Which questions belonged to which category, what score
-counted as mild versus severe, how much each question contributed to a total: all of it lived in
-code. Adding a questionnaire, or changing one threshold on an existing one, meant a developer
-writing and deploying a code change.
+ANTSA is a live digital mental health platform used by clinicians and their clients across
+Australia. I joined a team of five on a five month industry placement, and my brief was the scoring
+engine behind its questionnaires.
 
-Clinicians configure assessments around their own practice, so that logic belongs in data. Moving
-it there was the brief.
+Clinicians shape assessments around their own practice, so the goal was to put scoring rules in
+data where a clinician can reach them, instead of somewhere only a developer can.
 
 ## What I built
 
@@ -60,17 +59,17 @@ display scored results, and the PDF export they hand to clients.
 
 Neither shipped as a feature.
 
-The dev environment did not start when I arrived. API, database, mobile client, and nothing came up.
-I rebuilt it from scratch, which meant reading enough of the system to work out how the services
-were meant to fit together before I had anything running to learn from. Nobody reads that work in a
-changelog. Everything after it depended on it.
+The first was getting the whole stack running on my own machine. API, database and mobile client, and
+I wanted all three up before I wrote a line. Standing that up meant reading the system and working
+out how the services were meant to fit together before I had anything running to learn from. Nobody
+reads that work in a changelog, and everything I did afterwards depended on it.
 
-Then the silent bug. The mobile app served incorrect answer options for some questions. Nothing
-errored, nothing logged, and the data looked plausible enough to survive a glance, which is what
-makes this class of bug dangerous in a clinical setting. I found it by distrusting the layer that
-looked correct and following the values instead of the code meant to produce them.
+The second was diagnostic. I chased a data mismatch that produced no error and no log entry, where
+every layer I checked looked correct on its own. I found it by distrusting the layer that looked
+fine and following the values instead of the code meant to produce them. Working on clinical software
+is a good argument for never taking plausible-looking data at face value.
 
 ## Outcome
 
 Two iterations, both signed off by the client, both at 100% UAT pass. Clinicians who understand the
-instruments now configure the scoring themselves.
+instruments can now configure the scoring themselves.
