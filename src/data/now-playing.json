@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7ks6AZmFcm3Y6PGGxGSmlB",
-    "title": "Where Them Girls At (feat. Nicki Minaj & Flo Rida)",
-    "artist": "David Guetta, Flo Rida, Nicki Minaj",
-    "album": "Nothing but the Beat (Ultimate Edition)",
-    "href": "https://open.spotify.com/track/7ks6AZmFcm3Y6PGGxGSmlB",
+    "id": "3eOeuofLjOgjOCs7eWuvZ0",
+    "title": "Cool Kids",
+    "artist": "Echosmith",
+    "album": "Talking Dreams",
+    "href": "https://open.spotify.com/track/3eOeuofLjOgjOCs7eWuvZ0",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d20021",
-      "onLight": "#d20021",
-      "onDark": "#de445c"
+      "raw": "#407b7c",
+      "onLight": "#407b7c",
+      "onDark": "#4b8384"
     },
-    "fetchedAt": "2026-07-30T08:01:11.692Z"
+    "fetchedAt": "2026-07-30T13:19:08.133Z"
   }
 }
