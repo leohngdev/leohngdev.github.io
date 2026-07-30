@@ -127,6 +127,17 @@ const personSchema = {
       // fallback in global.css leaves everything visible.
       let observer: IntersectionObserver | null = null;
 
+      /**
+       * The observer is the ONLY thing that reveals content, deliberately.
+       *
+       * An earlier version handed `.reveal` to CSS scroll-driven animation and had
+       * this script stand down when CSS.supports said the browser could do it. The
+       * CSS minifier then folded animation-timeline into the animation shorthand,
+       * which the browser rejects outright, so the animation never applied and the
+       * script had already opted out: every revealed element sat at opacity 0
+       * forever. Two mechanisms that can each believe the other is handling it is a
+       * bad shape regardless of the minifier bug, so reveals have one owner now.
+       */
       function bindReveals() {
         const items = document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)');
         if (!items.length) return;

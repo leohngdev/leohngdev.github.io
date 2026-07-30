@@ -30,6 +30,13 @@ const { Content } = await render(project);
 ---
 
 <Layout title={`${data.title} — ${profile.displayName}`} description={data.summary} subpage>
+  <!--
+    Case studies are the only long-scroll pages here, so they get a reading position
+    indicator. Driven entirely by CSS scroll-driven animation, so it costs no
+    JavaScript and hides itself on browsers that cannot drive it honestly.
+  -->
+  <div class="read-progress" role="presentation"></div>
+
   <article class="pt-14 pb-20 sm:pt-20 sm:pb-28">
     <div class="container-page">
       <a

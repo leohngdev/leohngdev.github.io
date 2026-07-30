@@ -230,6 +230,54 @@ html:not(.js) .reveal {
   transform: none;
 }
 
+/* Reading progress for long pages, driven by the document scroll position with no
+   JavaScript at all.
+
+   MINIFIER HAZARD: never write the `animation` shorthand in a rule that also sets
+   animation-timeline. Lightning CSS folds the longhand into the shorthand and emits
+   `animation: linear both name scroll()`, which is invalid because the shorthand
+   resets animation-timeline. The browser then drops the whole declaration. Longhands
+   only here, and animation-duration MUST be auto or a scroll timeline never advances. */
+.read-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  background-color: var(--accent);
+  /* Hidden unless a scroll timeline can actually drive it, rather than sitting at
+     full width pretending to be a progress bar. */
+  display: none;
+}
+
+@supports (animation-timeline: scroll()) {
+  .read-progress {
+    display: block;
+    animation-name: read-progress-grow;
+    animation-duration: auto;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root block);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .read-progress {
+    display: none;
+  }
+}
+
+@keyframes read-progress-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
 /* Maps the typography plugin onto the same semantic tokens as the rest of the site,
    so case study prose flips with the theme without a second dark: variant set. */
 @layer components {

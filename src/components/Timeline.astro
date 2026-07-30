@@ -198,6 +198,53 @@ const WORLD_STYLE: Record<string, string> = {
     opacity: 1;
   }
 
+  /* Scroll-linked rather than triggered, where the browser can do it: each bar draws
+     itself as the chart moves up the viewport, so scrolling controls the animation
+     instead of merely starting it. The .is-visible path above still runs and lands on
+     the same end state, so a browser without scroll timelines loses nothing.
+
+     Longhands only, and animation-duration: auto. See the note in global.css: writing
+     the `animation` shorthand alongside animation-timeline lets the minifier fold them
+     together into a declaration the browser rejects. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .timeline-row .timeline-bar {
+        animation-name: bar-draw;
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 35%;
+      }
+      .timeline-row .timeline-label {
+        animation-name: label-in;
+        animation-duration: auto;
+        animation-timing-function: linear;
+        animation-fill-mode: both;
+        animation-timeline: view();
+        animation-range: entry 25% cover 40%;
+      }
+    }
+  }
+
+  @keyframes bar-draw {
+    from {
+      transform: translateY(-50%) scaleX(0);
+    }
+    to {
+      transform: translateY(-50%) scaleX(1);
+    }
+  }
+
+  @keyframes label-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .timeline .timeline-bar {
       transform: translateY(-50%) scaleX(1) !important;
