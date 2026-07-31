@@ -33,8 +33,12 @@ export function createScene(container: HTMLElement, columns: number): HouseScene
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   container.appendChild(renderer.domElement);
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.6));
-  const key = new THREE.DirectionalLight(0xffffff, 1.1);
+  // Ambient raised from 0.6 to 1.2 so the shell and floor read against the
+  // background instead of blending into it. The four hex colours stay as they are;
+  // the background is unlit, so brightening the geometry is what raises figure-
+  // ground contrast without touching the deliberate palette.
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+  const key = new THREE.DirectionalLight(0xffffff, 1.4);
   key.position.set(4, 8, 10);
   scene.add(key);
 
