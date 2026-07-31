@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "01vCzM84c5JLSkG2iXC9VZ",
-    "title": "WE ON GO",
-    "artist": "BIA",
-    "album": "WE ON GO",
-    "href": "https://open.spotify.com/track/01vCzM84c5JLSkG2iXC9VZ",
+    "id": "0r2pUCPPwdNxhS2myG7aU5",
+    "title": "Say So",
+    "artist": "Terror Jr",
+    "album": "Bop City",
+    "href": "https://open.spotify.com/track/0r2pUCPPwdNxhS2myG7aU5",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#9d6124",
-      "onLight": "#9d6124",
-      "onDark": "#a8733d"
+      "raw": "#cc4874",
+      "onLight": "#c0446d",
+      "onDark": "#cf537c"
     },
-    "fetchedAt": "2026-07-31T13:22:20.627Z"
+    "fetchedAt": "2026-07-31T19:00:57.120Z"
   }
 }
