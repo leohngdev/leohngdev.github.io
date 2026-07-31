@@ -2,10 +2,12 @@
  * The only module src/pages/house.astro imports. Everything three.js hangs off here
  * so the dynamic import boundary stays in one obvious place.
  */
-import { columnsFor } from './grid.ts';
+import { cellFor, columnsFor } from './grid.ts';
 import { createScene, type HouseScene } from './scene.ts';
 import { createCameraRig, type CameraRig } from './camera.ts';
 import { createCharacter, type Character } from './character.ts';
+import { createInput } from './input.ts';
+import { ladderColumnFor, pathBetween } from './path.ts';
 
 let active: HouseScene | null = null;
 let rig: CameraRig | null = null;
@@ -22,6 +24,27 @@ export function mountHouseScene(stage: HTMLElement): void {
 
   kid = createCharacter(active.scene);
   kid.placeAt({ col: 0, row: 0 }, columns);
+
+  // A click during a walk redirects rather than being ignored: follow() cancels
+  // whatever arrival callback was pending and registers this one, so the capsule
+  // turns toward the new room and the camera pushes into wherever it actually
+  // lands.
+  const input = createInput({
+    renderer: active.renderer,
+    camera: active.camera,
+    roomMeshes: active.roomMeshes,
+    onSelect(index) {
+      if (!kid || !rig) return;
+      const destination = cellFor(index, columns);
+      const moves = pathBetween(kid.cell, destination, ladderColumnFor(columns));
+      kid.follow(moves, columns, () => rig?.pushInto(destination, columns));
+      stage.dataset.houseRoom = String(index);
+    },
+    onBack() {
+      rig?.pullOut();
+      delete stage.dataset.houseRoom;
+    },
+  });
 
   let frame = 0;
   let last = performance.now();
@@ -53,6 +76,7 @@ export function mountHouseScene(stage: HTMLElement): void {
   document.addEventListener('astro:before-swap', () => {
     cancelAnimationFrame(frame);
     window.removeEventListener('resize', onResize);
+    input.dispose();
     active?.dispose();
     active = null;
     rig = null;
