@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7xoUc6faLbCqZO6fQEYprd",
-    "title": "One Last Time",
-    "artist": "Ariana Grande",
-    "album": "My Everything (Deluxe)",
-    "href": "https://open.spotify.com/track/7xoUc6faLbCqZO6fQEYprd",
-    "live": true,
+    "id": "01vCzM84c5JLSkG2iXC9VZ",
+    "title": "WE ON GO",
+    "artist": "BIA",
+    "album": "WE ON GO",
+    "href": "https://open.spotify.com/track/01vCzM84c5JLSkG2iXC9VZ",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#03030b",
-      "onLight": "#03030b",
-      "onDark": "#7f7f83"
+      "raw": "#9d6124",
+      "onLight": "#9d6124",
+      "onDark": "#a8733d"
     },
-    "fetchedAt": "2026-07-31T08:25:01.020Z"
+    "fetchedAt": "2026-07-31T13:22:20.627Z"
   }
 }
