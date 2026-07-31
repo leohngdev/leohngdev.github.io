@@ -1,0 +1,40 @@
+---
+import type { Room } from '~/data/house';
+
+interface Props {
+  room: Room;
+}
+
+const { room } = Astro.props;
+---
+
+<!--
+  One room as plain HTML. This is Tier 2 and Tier 3 of the legibility ladder and the
+  accessibility spine in one component. The three.js layer positions a placard over
+  this on desktop and a caption band under it on phone; neither replaces it, and with
+  JavaScript off or WebGL blocked this is the whole experience.
+-->
+<section
+  id={`room-${room.id}`}
+  class="house-room"
+  data-room-index={room.index}
+  aria-labelledby={`room-${room.id}-title`}
+>
+  <p class="house-room__label">
+    <span>{String(room.index + 1).padStart(2, '0')}</span>
+    <span>{room.era}</span>
+    <span>{room.place}</span>
+  </p>
+
+  <h2 id={`room-${room.id}-title`} class="house-room__title">{room.title}</h2>
+
+  <p class="house-room__entry">{room.entry}</p>
+
+  <a class="house-room__more" href={`#room-${room.id}-detail`}>
+    Read the full story
+  </a>
+
+  <div id={`room-${room.id}-detail`} class="house-room__detail">
+    <slot />
+  </div>
+</section>

@@ -1,0 +1,66 @@
+---
+import Layout from '~/layouts/Layout.astro';
+import RoomSpine from '~/components/house/RoomSpine.astro';
+import { rooms } from '~/data/house';
+
+/**
+ * The house, under construction. The live site at / is untouched until Phase 4.
+ *
+ * The markup below is authored first and is the source of truth for content. The
+ * three.js layer in src/lib/house/ is dynamically imported over the top of it, only
+ * when WebGL is available and motion is not reduced.
+ */
+---
+
+<Layout title="The House" description="A portfolio you walk around in. Under construction." subpage>
+  <div id="house-stage" class="house-stage" data-house-state="spine">
+    <div class="house-spine">
+      {rooms.map((room) => <RoomSpine room={room}>
+        <p>Full case study for {room.title} lands in Phase 2.</p>
+      </RoomSpine>)}
+    </div>
+  </div>
+</Layout>
+
+<style>
+  /* Greybox styling only. Phase 1 replaces this wholesale. */
+  .house-stage { position: relative; min-height: 100svh; }
+  .house-spine { max-width: 46rem; margin: 0 auto; padding: 4rem 1.5rem; }
+  .house-room { padding-block: 2.5rem; border-top: 1px solid var(--border, #ccc); }
+  .house-room__label {
+    display: flex; gap: 0.75rem;
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted, #666);
+  }
+  .house-room__title { font-family: var(--font-display); font-size: 2rem; margin-block: 0.5rem; }
+  .house-room__entry { max-width: 34rem; }
+  .house-room__more { display: inline-block; margin-top: 1rem; font-size: 0.875rem; }
+</style>
+
+<script>
+  /**
+   * Loads the 3D layer only when it can actually run, and only on this route.
+   *
+   * Initialises on astro:page-load because ClientRouter is on and module scripts do
+   * not re-run after navigation. The guard keeps a second navigation back to /house
+   * from mounting two scenes.
+   */
+  let mounted = false;
+
+  async function mountHouse() {
+    const stage = document.getElementById('house-stage');
+    if (!stage || mounted) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const probe = document.createElement('canvas');
+    const gl = probe.getContext('webgl2');
+    if (!gl) return;
+
+    mounted = true;
+    const { mountHouseScene } = await import('~/lib/house/index.ts');
+    mountHouseScene(stage);
+  }
+
+  document.addEventListener('astro:page-load', mountHouse);
+</script>
