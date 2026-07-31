@@ -30,13 +30,10 @@ const { room } = Astro.props;
 
   <p class="house-room__entry">{room.entry}</p>
 
-  <a class="house-room__more" href={`#room-${room.id}-detail`}>
-    Read the full story
-  </a>
-
-  <div id={`room-${room.id}-detail`} class="house-room__detail">
+  <details id={`room-${room.id}-detail`} class="house-room__detail">
+    <summary class="house-room__more">Read the full story</summary>
     <slot />
-  </div>
+  </details>
 </section>
 
 <style>

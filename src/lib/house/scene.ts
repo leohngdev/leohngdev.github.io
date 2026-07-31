@@ -48,7 +48,25 @@ export function createScene(container: HTMLElement, columns: number): HouseScene
   const floorMaterial = new THREE.MeshLambertMaterial({ color: 0x1b1828 });
   const propMaterial = new THREE.MeshLambertMaterial({ color: 0x564a75 });
 
+  // The invisible per-room click-target material and every BoxGeometry are created
+  // fresh on each build() call, so clear() must dispose them or they leak GPU memory
+  // on every rebuild. The three shell/floor/prop materials are shared across all six
+  // rooms and reused on every rebuild, so they are excluded here and disposed once,
+  // in dispose(), when the scene is actually going away.
+  function disposeMesh(mesh: THREE.Mesh) {
+    mesh.geometry.dispose();
+    const materials = Array.isArray(mesh.material) ? mesh.material : [mesh.material];
+    for (const material of materials) {
+      if (material !== shellMaterial && material !== floorMaterial && material !== propMaterial) {
+        material.dispose();
+      }
+    }
+  }
+
   function clear() {
+    group.traverse((child) => {
+      if (child instanceof THREE.Mesh) disposeMesh(child);
+    });
     group.clear();
     roomMeshes.clear();
   }
@@ -137,6 +155,9 @@ export function createScene(container: HTMLElement, columns: number): HouseScene
     resize,
     dispose() {
       clear();
+      shellMaterial.dispose();
+      floorMaterial.dispose();
+      propMaterial.dispose();
       renderer.dispose();
       renderer.domElement.remove();
     },

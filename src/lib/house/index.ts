@@ -21,10 +21,15 @@ export function mountHouseScene(stage: HTMLElement): void {
   };
   tick();
 
-  window.addEventListener('resize', () => active?.resize());
+  // Named so the same reference can be removed in teardown. An anonymous listener
+  // here would outlive every scene it was built for, and the camera-rig task is
+  // what will actually exercise a second mount and surface the leak.
+  const onResize = () => active?.resize();
+  window.addEventListener('resize', onResize);
 
   document.addEventListener('astro:before-swap', () => {
     cancelAnimationFrame(frame);
+    window.removeEventListener('resize', onResize);
     active?.dispose();
     active = null;
   }, { once: true });
