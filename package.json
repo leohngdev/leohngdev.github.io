@@ -9,6 +9,7 @@
     "start": "astro dev",
     "build": "astro check && astro build && node scripts/check-budget.mjs",
     "budget": "node scripts/check-budget.mjs",
+    "test": "node --test",
     "preview": "astro preview",
     "astro": "astro",
     "og": "node scripts/generate-og.mjs",
