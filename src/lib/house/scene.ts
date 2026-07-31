@@ -7,7 +7,7 @@
 import * as THREE from 'three';
 
 import { rooms } from '~/data/house';
-import { CELL_HEIGHT, CELL_WIDTH, centeredPositionFor, layout } from './grid.ts';
+import { CELL_HEIGHT, CELL_WIDTH, FRAME_PADDING, centeredPositionFor, layout } from './grid.ts';
 
 export interface HouseScene {
   readonly scene: THREE.Scene;
@@ -94,15 +94,19 @@ export function createScene(container: HTMLElement, columns: number): HouseScene
       group.add(volume);
       roomMeshes.set(room.index, volume);
 
+      // Shrunk by WALL on the X axis, same as the invisible volume above, so the
+      // floor and back wall of one cell do not touch the identically-coloured floor
+      // and back wall of its neighbour. Without this gap adjacent cells shared one
+      // colour at zero distance and six rooms read as one strip.
       const floor = new THREE.Mesh(
-        new THREE.BoxGeometry(CELL_WIDTH, WALL, ROOM_DEPTH),
+        new THREE.BoxGeometry(CELL_WIDTH - WALL, WALL, ROOM_DEPTH),
         floorMaterial,
       );
       floor.position.set(x, y - CELL_HEIGHT / 2, 0);
       group.add(floor);
 
       const back = new THREE.Mesh(
-        new THREE.BoxGeometry(CELL_WIDTH, CELL_HEIGHT, WALL),
+        new THREE.BoxGeometry(CELL_WIDTH - WALL, CELL_HEIGHT, WALL),
         shellMaterial,
       );
       back.position.set(x, y, -ROOM_DEPTH / 2);
@@ -138,7 +142,7 @@ export function createScene(container: HTMLElement, columns: number): HouseScene
     // keeps this module independently viewable rather than rendering an empty
     // canvas until the rig lands.
     const rowCount = Math.ceil(rooms.length / columnsNow);
-    const halfHeight = (rowCount * CELL_HEIGHT * 1.15) / 2;
+    const halfHeight = (rowCount * CELL_HEIGHT * FRAME_PADDING) / 2;
     const halfWidth = halfHeight * (w / h);
     camera.left = -halfWidth;
     camera.right = halfWidth;

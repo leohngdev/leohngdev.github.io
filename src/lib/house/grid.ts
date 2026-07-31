@@ -21,6 +21,14 @@ export const CELL_WIDTH = 10;
 export const CELL_HEIGHT = 7;
 
 /**
+ * Multiplier applied to a framed extent (a room or the whole house) so the camera
+ * leaves a margin rather than cropping tight to the edge. One home for this number:
+ * scene.ts's fallback frustum and camera.ts's rig both import it, so the two can
+ * never drift apart the way a bare 1.15 literal in each file once could.
+ */
+export const FRAME_PADDING = 1.15;
+
+/**
  * Below this width the house re-flows from 3x2 into a 1x6 tower. 768 counts as
  * desktop: at 768 a three-wide house still gives each room 256 CSS pixels, which
  * reads, and tablets in landscape should get the full composition.
