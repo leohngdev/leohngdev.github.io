@@ -46,16 +46,26 @@ document is stale until someone updates it.
 
 Do this once, save it as your startup file, and never repeat it per asset.
 
-**Unit system and scale.** Open the **Scene Properties** tab (the icon is a small printer/cone
-cluster, near the bottom of the Properties editor's vertical tab strip) and find the **Units**
-panel. Set:
+**Maya-to-Blender trap #1: viewport navigation.** This is the first thing you'll hit, before
+you've modelled anything. Blender's default navigation is nothing like Maya's Alt-plus-mouse
+scheme: orbit is the middle mouse button dragged, pan is Shift plus middle mouse button dragged,
+and zoom is the scroll wheel (or Ctrl plus middle mouse button dragged). If that fights your
+muscle memory enough to slow you down, Blender gives you two ways out rather than one: Edit →
+Preferences → Input has an Emulate 3 Button Mouse checkbox for a mouse or trackpad without a
+proper middle button, and the Keymap preset dropdown at the top of that same Preferences tab
+includes a Maya preset that remaps navigation and several tool shortcuts to match Maya's scheme
+directly. Pick whichever gets you moving fastest rather than fighting the default.
+
+**Unit system and scale.** Open the **Scene Properties** tab (icon is a cone-and-sphere
+cluster; it sits well above the middle of the Properties editor's vertical tab strip, after the
+Tool, Render, Output and View Layer tabs) and find the **Units** panel. Set:
 
 - **Unit System:** Metric
 - **Unit Scale:** `1.0` (the default; leave it alone)
 - **Length:** Meters (this is a label only and does not rescale anything as long as Unit Scale
   stays at 1.0)
 
-**Maya-to-Blender trap #1.** Maya's default scene unit is centimetres. Blender's metric default
+**Maya-to-Blender trap #2: unit scale.** Maya's default scene unit is centimetres. Blender's metric default
 is metres, and this project treats 1 Blender unit as 1 world unit, matching `CELL_WIDTH` and
 `CELL_HEIGHT` directly with no conversion factor anywhere in the three.js code. If you carry
 over a "think in centimetres" habit and start scaling props down by 100 out of instinct, every
@@ -94,7 +104,7 @@ starts from this configuration. I'm confident this is the current menu path in 4
 Blender versions also bound a keyboard shortcut for it, Ctrl+U, but I'm not certain that
 binding still exists in 4.2 by default, so use the menu rather than relying on the hotkey.
 
-**Maya-to-Blender trap #2: Z-up vs Y-up, and what it means for export.** Blender's world is
+**Maya-to-Blender trap #3: Z-up vs Y-up, and what it means for export.** Blender's world is
 Z-up (Z is vertical). glTF, and by extension three.js, is Y-up (Y is vertical). Do not manually
 rotate your models to Y-up inside Blender to pre-correct for this. Blender's own tools (walk
 navigation, gizmos, the floor grid, physics if you ever use it) all assume Z-up, so a model
@@ -102,6 +112,16 @@ built rotated to Y-up fights every one of them and looks wrong in your own viewp
 naturally in Blender's Z-up orientation. The glTF exporter has a dedicated **+Y Up** checkbox
 (covered in Section 7) that performs the axis conversion at export time, so the `.glb` file that
 reaches three.js is correctly Y-up without you ever having built the source file that way.
+
+**Maya-to-Blender trap #4: Tab toggles Object and Edit mode.** Used throughout this document
+without comment so far, but worth calling out the way the unit-scale and Z-up traps above are.
+Pressing **Tab** with an object selected in the 3D viewport switches between **Object Mode**
+(selecting, moving and scaling whole objects, roughly Maya's object-level manipulation) and
+**Edit Mode** (working on the object's vertices, edges and faces, roughly Maya's component
+mode). It toggles between exactly those two states for the active object; it is not a menu. The
+current mode is always visible in the dropdown at the top-left of the 3D viewport, worth
+checking any time a tool behaves unexpectedly, since a large share of "this isn't doing what I
+expect" confusion in Blender traces back to being in the wrong one of these two modes.
 
 ---
 
@@ -151,7 +171,28 @@ crisp 8x8 pixel blocks this way requires zooming the image editor in enough that
 fighting brush softness. The external-editor route avoids this entirely and is what I'd
 recommend unless you specifically want to stay inside Blender.
 
-### Step 2: Set interpolation to Closest
+### Step 2: Create the material and wire in the palette image
+
+Switch to the **Shading** workspace (top of the Blender window) with a prop selected. In the
+Properties editor, open the **Material Properties** tab (checkered sphere icon) and click
+**New** to create a material. Name it something shared across the whole kit, for example
+`kit_palette_material`, since every prop in the kit is going to reuse this exact material rather
+than each getting its own copy.
+
+The new material starts with a **Principled BSDF** node feeding a **Material Output** node in
+the Shader Editor at the bottom of the Shading workspace. Add an **Image Texture** node
+(**Add → Texture → Image Texture**, or **Shift+A** in the Shader Editor and the same path),
+click its **Open** folder icon, and load the `kit_palette` image from Step 1. Drag a connection
+from the Image Texture node's **Color** output socket to the Principled BSDF's **Base Color**
+input socket.
+
+Assign this same material to every other prop by selecting the prop, opening its Material
+Properties tab, and picking `kit_palette_material` from the material browse dropdown at the top
+of the panel rather than clicking New again. Every prop must reference the same material
+data-block, not a duplicate, or the palette atlas stops doing its job of collapsing the whole
+kit onto one material and one draw call.
+
+### Step 3: Set interpolation to Closest
 
 This is the step that is easy to skip and breaks everything subtly if you do. In the **Shading**
 workspace, select a material that uses the palette image and find its **Image Texture** node in
@@ -161,12 +202,12 @@ it to **Closest**.
 Linear interpolation blends between neighbouring texture pixels, which means any UV coordinate
 sitting near a swatch boundary samples a blend of two swatch colours instead of one flat colour,
 a soft, blurred seam exactly where you don't want one, since your UV islands are collapsed to
-tiny points near swatch centres (Step 3) but floating point and mip-mapping can still land a
+tiny points near swatch centres (Step 4) but floating point and mip-mapping can still land a
 sample near an edge. Closest picks the nearest texel with no blending, so every sample inside a
 swatch returns that swatch's exact colour regardless of where inside it the UV coordinate lands.
 Do this once on the master material; every prop that shares the material inherits it.
 
-### Step 3: Assign faces to a swatch
+### Step 4: Assign faces to a swatch
 
 Per prop, per face group that should be one colour:
 
@@ -186,8 +227,16 @@ Per prop, per face group that should be one colour:
 5. Move that collapsed point onto the target swatch with **G** (grab). For precision, press **N**
    in the UV Editor to open its side panel, **Item** tab, and type exact **Vertex X / Y**
    coordinates: each 8x8 swatch occupies 1/8 (0.125) of UV space per axis, so swatch column `c`,
-   row `r` (both 0 to 7) has its centre at `((c + 0.5) / 8, (r + 0.5) / 8)`. Typing the number is
-   more reliable than eyeballing it against the viewport grid.
+   row `r` has its centre at `((c + 0.5) / 8, (r + 0.5) / 8)`. This formula counts row `r` from
+   the bottom of the image, because Blender's UV V axis has 0 at the bottom edge and increases
+   upward. Most external 2D image editors, including the one recommended in Step 1 for painting
+   the swatches, number pixel rows the opposite way, with row 0 at the top. If you built the
+   palette externally and are thinking of a swatch by its row counted from the top of the image,
+   convert before typing the coordinate: `r = 7 - (row counted from the top)`. Getting this
+   backward silently selects the swatch mirrored across the image's vertical centre, for example
+   the bottom-left swatch instead of the top-left one, and nothing in Blender flags the mistake;
+   it only shows up later when a prop turns out the wrong colour. Typing the number is still more
+   reliable than eyeballing it against the viewport grid, once the row is converted correctly.
 6. Repeat per face group, per prop.
 
 ### Why this yields one material and very few draw calls
@@ -319,9 +368,9 @@ shin_L, shin_R
 foot_L, foot_R
 ```
 
-That's 17 bones counting both sides of the six paired bones (shoulder, arm, forearm, thigh,
-shin, foot: 12 bones) plus root, hips, spine, chest, neck, head (6 unpaired bones). Read
-"roughly fifteen" as the spec's ballpark, not a hard count to hit exactly.
+That's 18 bones: 6 unpaired (root, hips, spine, chest, neck, head) plus 6 paired (shoulder, arm,
+forearm, thigh, shin, foot), 12 bones across both sides. Read "roughly fifteen" as the spec's
+ballpark, not a hard count to hit exactly.
 
 **Naming for symmetry.** Blender's X-axis mirror editing and the Symmetrize operator recognise a
 set of left/right suffix conventions, and `_L` / `_R` (underscore, capital letter) is one of the
@@ -373,10 +422,13 @@ as verified constants the way the grid dimensions are.
   matches frame 1. Standard run-cycle structure applies from your Maya experience: contact,
   down, passing, up, then repeat on the opposite leg at the halfway point (frame 13).
 - **Climb:** frames 1 to 32. Pace this to one climb cycle per ladder rung rather than to a fixed
-  loop time, since the character's traversal speed on the ladder (`CLIMB_SPEED` in
-  `src/lib/house/character.ts`, currently 5 world units per second, slower than the walk speed
-  of 9 on purpose, "it should read as effort") drives how many cycles play per floor climbed.
-  Loop point: frame 32 matches frame 1.
+  loop time, since the character's traversal speed on the ladder drives how many cycles play per
+  floor climbed. That speed is not yet in the codebase: `src/lib/house/character.ts` does not
+  exist yet. The implementation plan
+  (`docs/superpowers/plans/2026-07-31-house-phase-0-greybox.md`, Task 7) specifies a planned
+  `CLIMB_SPEED` of 5 world units per second, slower than a planned walk speed of 9, "it should
+  read as effort". Treat those two numbers as a planned target, not a verified constant, until
+  that file lands and you can check them directly. Loop point: frame 32 matches frame 1.
 - **Lean:** frames 1 to 16, a short one-shot rather than a loop, holding the final pose (the
   character leaning into a doorway as the camera pushes in). Do not loop this one; it plays once
   per room entry and holds.
@@ -407,7 +459,12 @@ Three separate files, three slightly different settings:
 | Character `.glb` | The rig, the skinned mesh, all four clips | Yes |
 | House shell `.glb` | The room structure only (floors, back walls) | No |
 
-**Checkboxes that matter, across all three files except where noted:**
+**Checkboxes that matter, across all three files except where noted.** Blender's glTF exporter
+(`io_scene_gltf2`) groups these into panels down the right side of the export file browser, and
+that grouping has moved between major versions, including within the 4.x series. Rather than
+assert a single fixed layout I'm not fully certain of for whatever exact 4.2 point release you
+have, here are the option names to look for and my best understanding of where they sit in 4.2.
+Treat the names as the reliable part and confirm the exact grouping on your own screen.
 
 - **Include** panel:
   - **Selected Objects:** off, unless you deliberately want to export a subset. Leaving it off
@@ -418,32 +475,33 @@ Three separate files, three slightly different settings:
   - **+Y Up:** on, always. This is the checkbox that performs the Z-up (Blender) to Y-up
     (glTF/three.js) conversion described in Section 1. Do not also manually rotate your source
     geometry to compensate; that double-corrects and exports it upside down or sideways.
-- **Geometry** panel:
-  - **Apply Modifiers:** on. Bakes any modifier stack (bevels, mirrors, subdivision) into the
-    exported mesh, which is what you want since the destination has no modifier stack to
+- **Data** panel, with **Mesh**, **Material** and **Animation** sub-sections. In Blender 4.2 the
+  geometry, material and animation export options live grouped here rather than as separate
+  top-level panels the way older Blender versions laid them out. Look for these names inside
+  whichever of the three sub-sections holds them:
+  - **Apply Modifiers** (Mesh): on. Bakes any modifier stack (bevels, mirrors, subdivision) into
+    the exported mesh, which is what you want since the destination has no modifier stack to
     evaluate at runtime.
-  - **UVs:** on.
-  - **Normals:** on.
-  - **Tangents:** off. Nothing in this kit needs normal mapping, which is the only thing
+  - **UVs** (Mesh): on.
+  - **Normals** (Mesh): on.
+  - **Tangents** (Mesh): off. Nothing in this kit needs normal mapping, which is the only thing
     tangents are for, so exporting them adds size for no benefit.
-  - **Materials:** set to export materials normally, not "No export" or placeholder-only. The
-    exact label for this dropdown may read "Export" or similar depending on version; the intent
-    is that materials go out with the mesh, which for this kit means the single shared palette
-    material and its image.
-- **Compression** panel: enable it, algorithm **Draco**, compression level **6** (the slider's
-  range runs roughly 0 to 10; 6 is a solid middle ground between file size and encode/decode
-  cost for a kit this small. Geometry this simple won't show visible Draco compression
-  artefacting even at more aggressive settings, but 6 is a safe default rather than something to
-  chase further without a reason).
-- **Animation** panel: **Export Animations** on for the character file only. Leave it off for
-  the prop kit and the house shell, since neither has anything to animate, and an empty
-  animation track is wasted bytes against the 2.5 MB budget.
+  - **Materials** (Material): set to export materials normally, not "No export" or
+    placeholder-only. The exact label for this dropdown may read "Export" or similar depending
+    on version; the intent is that materials go out with the mesh, which for this kit means the
+    single shared palette material and its image from Section 2.
+  - **Export Animations** (Animation): on for the character file only. Leave it off for the prop
+    kit and the house shell, since neither has anything to animate, and an empty animation track
+    is wasted bytes against the 2.5 MB budget.
+- **Compression** panel, separate from Data: enable it, algorithm **Draco**, compression level
+  **6** (the slider's range runs roughly 0 to 10; 6 is a solid middle ground between file size
+  and encode/decode cost for a kit this small. Geometry this simple won't show visible Draco
+  compression artefacting even at more aggressive settings, but 6 is a safe default rather than
+  something to chase further without a reason).
 
-The exact panel names and grouping (Include, Transform, Geometry, Compression, Animation)
-reflect Blender 4.2's glTF exporter layout. This exporter (`io_scene_gltf2`) has had its options
-reorganised across major versions before. If a checkbox isn't where described, F3, then the
-checkbox's name (for example "Apply Modifiers"), will jump you to it regardless of which panel
-it's currently grouped under.
+If a checkbox isn't where described above, F3, then the checkbox's name (for example "Apply
+Modifiers" or "Export Animations"), will jump you to it regardless of which panel or sub-section
+currently holds it. That search is the reliable fallback for this whole section.
 
 ---
 
