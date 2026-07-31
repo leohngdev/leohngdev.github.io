@@ -61,13 +61,18 @@ async function main() {
   }
 
   const files = await walk(DIST);
-  const js = files.filter((f) => f.endsWith('.js'));
+  const allJs = files.filter((f) => f.endsWith('.js'));
+  // Chunk naming is pinned in astro.config.mjs so this match is a contract, not a
+  // heuristic about how Rollup happens to name things today.
+  const houseJs = allJs.filter((f) => path.basename(f).startsWith('house'));
+  const js = allJs.filter((f) => !houseJs.includes(f));
   const css = files.filter((f) => f.endsWith('.css'));
   const html = files.filter((f) => f.endsWith('.html'));
 
   const sum = async (list) => (await Promise.all(list.map(gzipSize))).reduce((a, b) => a + b, 0);
 
   const jsTotal = await sum(js);
+  const houseTotal = await sum(houseJs);
   const cssTotal = await sum(css);
 
   // HTML is measured per page, not summed: adding more pages should not fail a
@@ -79,6 +84,12 @@ async function main() {
 
   const checks = [
     { name: 'JavaScript', detail: `${js.length} files`, actual: jsTotal, limit: buildBudget.javascript },
+    {
+      name: 'JS (house)',
+      detail: `${houseJs.length} files`,
+      actual: houseTotal,
+      limit: buildBudget.houseJavascript,
+    },
     { name: 'CSS', detail: `${css.length} files`, actual: cssTotal, limit: buildBudget.css },
     {
       name: 'HTML (largest)',

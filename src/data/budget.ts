@@ -28,6 +28,16 @@ export interface BuildBudget {
   css: number;
   /** Gzipped size of the single largest HTML page. */
   html: number;
+  /**
+   * Combined gzipped size of every .js chunk belonging to the house route.
+   *
+   * Budgeted separately from `javascript` on purpose. The site retired its
+   * page-weight thesis, but the argument that the rest of the site should stay
+   * near zero still holds: only the route that needs a 3D scene should pay for
+   * one. A single global figure would have let three.js hide the cost of
+   * everything else.
+   */
+  houseJavascript: number;
 }
 
 export interface RuntimeBudget {
@@ -62,6 +72,10 @@ export const buildBudget: BuildBudget = {
   javascript: 15 * KB,
   css: 16 * KB,
   html: 16 * KB,
+  // three.js core plus the house modules. Set with headroom over the greybox
+  // build so Phase 1 art loading does not trip it, and low enough that pulling in
+  // a second large dependency does.
+  houseJavascript: 220 * KB,
 };
 
 export const runtimeBudget: RuntimeBudget = {

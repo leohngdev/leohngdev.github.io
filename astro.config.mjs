@@ -13,6 +13,21 @@ export default defineConfig({
   integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        output: {
+          // The budget gate accounts for the house separately from the rest of the
+          // site, and it identifies the house by chunk name. Pinning three.js and
+          // everything under src/lib/house into one predictably named chunk is what
+          // makes that accounting deterministic instead of a guess about hashes.
+          manualChunks(id) {
+            if (id.includes('node_modules/three')) return 'house';
+            if (id.includes('src/lib/house')) return 'house';
+            return undefined;
+          },
+        },
+      },
+    },
   },
   build: {
     inlineStylesheets: 'auto',
