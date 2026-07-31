@@ -26,7 +26,11 @@ Copied from `docs/superpowers/specs/2026-07-31-portfolio-house-design.md` and `C
 
 ## Grid convention, resolved
 
-The approved spec says rooms read "bottom left to top right", and the phone tower has the kid climbing upward through time. The floor plan mockup drew room 01 top-left, which contradicts both. **This plan uses the spec prose: row 0 is the bottom row and holds the earliest rooms.** Desktop bottom row is rooms 01 to 03, top row is 04 to 06. Climbing always moves forward in time, on both desktop and phone.
+**Row 0 is the TOP row and holds the earliest rooms. Time runs downward.** Desktop top floor is rooms 01 to 03, the floor below is 04 to 06. Phone stacks room 01 at the top through room 06 at the bottom. Descending always moves forward in time, on both layouts.
+
+Two reasons, and the second is the load-bearing one. Descending reads as peeling back a surface and going deeper into the craft, which is the same idea as the peek behind a door applied to the whole building. And a visitor's first instinct on a phone is to move down: a journey that runs downward has the metaphor and the reflex pointing the same way.
+
+In code this means the row index increases as you go down, and `worldPositionFor` maps it to a negative Y. Every module derives its Y from that one function rather than doing its own arithmetic, so the direction is defined in exactly one place.
 
 ## File Structure
 
@@ -197,7 +201,8 @@ git commit -m "build: budget the house route separately from the site"
   - `type Cell = { col: number; row: number }`
   - `columnsFor(viewportWidth: number): number`
   - `cellFor(index: number, columns: number): Cell`
-  - `worldPositionFor(cell: Cell): { x: number; y: number }`
+  - `worldPositionFor(cell: Cell): { x: number; y: number }` (row 0 is the top; Y goes negative as row increases)
+  - `centeredPositionFor(cell: Cell, columns: number, roomCount: number): { x: number; y: number }`
   - `CELL_WIDTH: number`, `CELL_HEIGHT: number`, `PHONE_BREAKPOINT: number`
 
 - [ ] **Step 1: Add the test script**
@@ -216,8 +221,8 @@ Create `src/data/house.ts`:
 
 ```ts
 /**
- * The six rooms, in chronological order. Index 0 is the earliest and sits on the
- * bottom-left of the house; index 5 is the present and sits top-right. Climbing
+ * The six rooms, in chronological order. Index 0 is the earliest and sits at the
+ * top-left of the house; index 5 is the present and sits bottom-right. Descending
  * always moves forward in time.
  *
  * `entry` is Tier 2 of the legibility ladder and is capped at 40 words. The cap is
@@ -313,6 +318,7 @@ import {
   CELL_HEIGHT,
   CELL_WIDTH,
   cellFor,
+  centeredPositionFor,
   columnsFor,
   worldPositionFor,
 } from './grid.ts';
@@ -331,31 +337,55 @@ test('the breakpoint itself is a desktop layout', () => {
   assert.equal(columnsFor(768), 3);
 });
 
-test('room 0 sits bottom-left on desktop', () => {
+test('room 0 sits top-left on desktop', () => {
   assert.deepEqual(cellFor(0, 3), { col: 0, row: 0 });
 });
 
-test('the first three rooms fill the bottom row on desktop', () => {
+test('the first three rooms fill the top floor on desktop', () => {
   assert.deepEqual(cellFor(1, 3), { col: 1, row: 0 });
   assert.deepEqual(cellFor(2, 3), { col: 2, row: 0 });
 });
 
-test('the last three rooms fill the top row on desktop', () => {
+test('the last three rooms fill the floor below on desktop', () => {
   assert.deepEqual(cellFor(3, 3), { col: 0, row: 1 });
   assert.deepEqual(cellFor(5, 3), { col: 2, row: 1 });
 });
 
-test('phone stacks every room in one column, earliest at the bottom', () => {
+test('phone stacks every room in one column, earliest at the top', () => {
   assert.deepEqual(cellFor(0, 1), { col: 0, row: 0 });
   assert.deepEqual(cellFor(5, 1), { col: 0, row: 5 });
 });
 
-test('world position grows right with column and up with row', () => {
+test('world position grows right with column and DOWN with row', () => {
   assert.deepEqual(worldPositionFor({ col: 0, row: 0 }), { x: 0, y: 0 });
   assert.deepEqual(worldPositionFor({ col: 2, row: 1 }), {
     x: 2 * CELL_WIDTH,
-    y: CELL_HEIGHT,
+    y: -CELL_HEIGHT,
   });
+});
+
+test('later rooms are always lower than earlier ones', () => {
+  const first = worldPositionFor(cellFor(0, 1)).y;
+  const last = worldPositionFor(cellFor(5, 1)).y;
+  assert.ok(last < first, 'room 06 must sit below room 01');
+});
+
+test('centring puts the middle of the desktop house on the origin', () => {
+  // 3x2: columns span 0..2, rows span 0..-1. Centre is (1 * CELL_WIDTH, -CELL_HEIGHT/2).
+  assert.deepEqual(centeredPositionFor({ col: 1, row: 0 }, 3, 6), {
+    x: 0,
+    y: CELL_HEIGHT / 2,
+  });
+  assert.deepEqual(centeredPositionFor({ col: 1, row: 1 }, 3, 6), {
+    x: 0,
+    y: -CELL_HEIGHT / 2,
+  });
+});
+
+test('centring keeps later rooms below earlier ones on phone', () => {
+  const first = centeredPositionFor(cellFor(0, 1), 1, 6).y;
+  const last = centeredPositionFor(cellFor(5, 1), 1, 6).y;
+  assert.ok(last < first, 'room 06 must stay below room 01 after centring');
 });
 ```
 
@@ -374,8 +404,12 @@ Create `src/lib/house/grid.ts`:
  * Cell layout for the house. Deliberately free of any three.js import so the
  * layout rules can be unit tested in Node without a browser or a GL context.
  *
- * Row 0 is the BOTTOM row and holds the earliest rooms. Climbing moves forward in
- * time on both layouts, which is the whole point of the phone tower.
+ * Row 0 is the TOP row and holds the earliest rooms, so time runs downward and the
+ * row index increases as you descend. Going down is peeling back a surface, and on a
+ * phone it also matches the reflex to move down rather than up.
+ *
+ * worldPositionFor is the ONLY place that decides which way is later. Every other
+ * module derives its Y from it rather than multiplying row by height itself.
  */
 import type { Room } from '~/data/house';
 
@@ -404,7 +438,31 @@ export function cellFor(index: number, columns: number): Cell {
 }
 
 export function worldPositionFor(cell: Cell): { x: number; y: number } {
-  return { x: cell.col * CELL_WIDTH, y: cell.row * CELL_HEIGHT };
+  // Negative Y: row 0 is the top floor and later rooms sit below it.
+  return { x: cell.col * CELL_WIDTH, y: -cell.row * CELL_HEIGHT };
+}
+
+/**
+ * Cell position with the whole house centred on the origin.
+ *
+ * The scene, the camera rig and the character all need this same shift, and each
+ * doing its own version is how a sign error becomes three sign errors. One function,
+ * one direction, no arithmetic anywhere else.
+ *
+ * roomCount is passed in rather than imported so this module stays free of runtime
+ * imports and its tests need no path alias resolution.
+ */
+export function centeredPositionFor(
+  cell: Cell,
+  columns: number,
+  roomCount: number,
+): { x: number; y: number } {
+  const world = worldPositionFor(cell);
+  const rowCount = Math.ceil(roomCount / columns);
+  return {
+    x: world.x - ((columns - 1) * CELL_WIDTH) / 2,
+    y: world.y + ((rowCount - 1) * CELL_HEIGHT) / 2,
+  };
 }
 
 /** Every room paired with the cell it occupies at the given column count. */
@@ -787,7 +845,7 @@ git commit -m "feat(house): the text spine at /house, authored before the 3D"
 - Create: `src/lib/house/index.ts` (replacing the Task 4 stub if it was created)
 
 **Interfaces:**
-- Consumes: `layout`, `worldPositionFor`, `CELL_WIDTH`, `CELL_HEIGHT` from `./grid.ts`; `rooms` from `~/data/house`.
+- Consumes: `layout`, `centeredPositionFor`, `CELL_WIDTH`, `CELL_HEIGHT` from `./grid.ts`; `rooms` from `~/data/house`.
 - Produces:
   - `createScene(container: HTMLElement, columns: number): HouseScene`
   - `interface HouseScene { scene: THREE.Scene; renderer: THREE.WebGLRenderer; roomMeshes: Map<number, THREE.Mesh>; rebuild(columns: number): void; resize(): void; dispose(): void }`
@@ -814,7 +872,7 @@ Create `src/lib/house/scene.ts`:
 import * as THREE from 'three';
 
 import { rooms } from '~/data/house';
-import { CELL_HEIGHT, CELL_WIDTH, layout } from './grid.ts';
+import { CELL_HEIGHT, CELL_WIDTH, centeredPositionFor, layout } from './grid.ts';
 
 export interface HouseScene {
   readonly scene: THREE.Scene;
@@ -865,8 +923,8 @@ export function createScene(container: HTMLElement, columns: number): HouseScene
     columnsNow = cols;
 
     for (const { room, cell } of layout(rooms, cols)) {
-      const x = cell.col * CELL_WIDTH;
-      const y = cell.row * CELL_HEIGHT;
+      // Centred here, so nothing downstream re-derives which way is "later".
+      const { x, y } = centeredPositionFor(cell, cols, rooms.length);
 
       // The room volume. Invisible, and used only as the click target and the
       // anchor the camera pushes toward.
@@ -908,10 +966,9 @@ export function createScene(container: HTMLElement, columns: number): HouseScene
       }
     }
 
-    // Centre the house on the origin so the camera framing maths stays simple.
-    const width = (cols - 1) * CELL_WIDTH;
-    const height = (Math.ceil(rooms.length / cols) - 1) * CELL_HEIGHT;
-    group.position.set(-width / 2, -height / 2, 0);
+    // centeredPositionFor already places every cell relative to the origin, so the
+    // group itself stays at the origin.
+    group.position.set(0, 0, 0);
   }
 
   function resize() {
@@ -1018,7 +1075,7 @@ git commit -m "feat(house): greybox scene with six room cells"
 - Modify: `src/lib/house/index.ts`
 
 **Interfaces:**
-- Consumes: `Cell` and `worldPositionFor` from `./grid.ts`.
+- Consumes: `Cell`, `CELL_HEIGHT` and `centeredPositionFor` from `./grid.ts`; `rooms` from `~/data/house`.
 - Produces:
   - `createCameraRig(camera: THREE.OrthographicCamera, container: HTMLElement): CameraRig`
   - `interface CameraRig { frameHouse(columns: number): void; pushInto(cell: Cell, columns: number): void; pullOut(): void; update(dt: number): void; get state(): 'overview' | 'room' }`
@@ -1036,7 +1093,7 @@ Create `src/lib/house/camera.ts`:
  */
 import * as THREE from 'three';
 
-import { CELL_HEIGHT, CELL_WIDTH, type Cell, worldPositionFor } from './grid.ts';
+import { CELL_HEIGHT, type Cell, centeredPositionFor } from './grid.ts';
 import { rooms } from '~/data/house';
 
 export type CameraState = 'overview' | 'room';
@@ -1093,14 +1150,9 @@ export function createCameraRig(
   }
 
   function offsetFor(cell: Cell, columns: number) {
-    // The group is centred on the origin in scene.ts, so a cell's world position has
-    // to be shifted by the same amount to line the camera up with it.
-    const world = worldPositionFor(cell);
-    const rowCount = Math.ceil(rooms.length / columns);
-    return {
-      x: world.x - ((columns - 1) * CELL_WIDTH) / 2,
-      y: world.y - ((rowCount - 1) * CELL_HEIGHT) / 2,
-    };
+    // Same centring the scene uses, from the same function, so the camera can never
+    // disagree with the geometry about where a room is.
+    return centeredPositionFor(cell, columns, rooms.length);
   }
 
   return {
@@ -1193,7 +1245,7 @@ export function mountHouseScene(stage: HTMLElement): void {
 
 Run `npm run dev` and open `/house`. In the console, temporarily call the rig by exposing it: add `(window as any).__rig = rig;` after `rig.frameHouse(columns)`, then run `__rig.pushInto({col:0,row:0}, 3)` via `$B js`.
 
-Expected: the camera eases into the bottom-left room over roughly 0.65 seconds and that room fills the frame. `__rig.pullOut()` returns to the whole house. Screenshot both states.
+Expected: the camera eases into the top-left room, which is room 01, over roughly 0.65 seconds and that room fills the frame. `__rig.pullOut()` returns to the whole house. Screenshot both states.
 
 Remove the `window.__rig` line before committing.
 
@@ -1213,7 +1265,7 @@ git commit -m "feat(house): camera rig with overview and push-in states"
 - Modify: `src/lib/house/index.ts`
 
 **Interfaces:**
-- Consumes: `Move` from `./path.ts`; `Cell`, `CELL_WIDTH`, `CELL_HEIGHT`, `worldPositionFor` from `./grid.ts`.
+- Consumes: `Move` from `./path.ts`; `Cell`, `CELL_HEIGHT`, `centeredPositionFor` from `./grid.ts`; `rooms` from `~/data/house`.
 - Produces:
   - `createCharacter(parent: THREE.Object3D): Character`
   - `interface Character { mesh: THREE.Mesh; cell: Cell; placeAt(cell: Cell, columns: number): void; follow(moves: readonly Move[], columns: number, onArrive: () => void): void; update(dt: number): void; get moving(): boolean }`
@@ -1232,7 +1284,7 @@ Create `src/lib/house/character.ts`:
  */
 import * as THREE from 'three';
 
-import { CELL_HEIGHT, CELL_WIDTH, type Cell, worldPositionFor } from './grid.ts';
+import { CELL_HEIGHT, type Cell, centeredPositionFor } from './grid.ts';
 import type { Move } from './path.ts';
 import { rooms } from '~/data/house';
 
@@ -1252,13 +1304,8 @@ export interface Character {
 const FLOOR_OFFSET = -CELL_HEIGHT / 2 + 1.1;
 
 function positionFor(cell: Cell, columns: number): THREE.Vector3 {
-  const world = worldPositionFor(cell);
-  const rowCount = Math.ceil(rooms.length / columns);
-  return new THREE.Vector3(
-    world.x - ((columns - 1) * CELL_WIDTH) / 2,
-    world.y - ((rowCount - 1) * CELL_HEIGHT) / 2 + FLOOR_OFFSET,
-    1.6,
-  );
+  const { x, y } = centeredPositionFor(cell, columns, rooms.length);
+  return new THREE.Vector3(x, y + FLOOR_OFFSET, 1.6);
 }
 
 export function createCharacter(parent: THREE.Object3D): Character {
@@ -1380,7 +1427,7 @@ __house.kid.follow(
 );
 ```
 
-Expected: the capsule slides right along the bottom floor, rises to the top floor at a visibly slower speed, then slides left, and logs `arrived`. Screenshot mid-climb.
+Expected: the capsule slides right along the top floor, descends to the floor below at a visibly slower speed, then slides left, and logs `arrived`. Screenshot mid-descent. If it moves upward, `worldPositionFor` has lost its negative sign.
 
 Remove the `window.__house` line before committing.
 
@@ -1578,7 +1625,7 @@ The resize handler currently resets the character to room 0 on every re-flow, wh
 
 Run `npm run dev`. With `/browse`, resize to 375x812 and open `/house`. Screenshot.
 
-Expected: six rooms stacked in a single column, room 01 at the bottom and room 06 at the top, the whole tower framed. Tapping a room above sends the capsule climbing upward.
+Expected: six rooms stacked in a single column, room 01 at the top and room 06 at the bottom, the whole shaft framed. Tapping a room below sends the capsule descending. Confirm the direction of travel matches the reflex to move down: the journey through time must run downward, not up.
 
 - [ ] **Step 3: Verify the breakpoint crossing**
 

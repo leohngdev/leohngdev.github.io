@@ -48,13 +48,24 @@ A visitor lands on a lit house at night with one room glowing and a kid standing
 Nothing explains itself. Clicking a room sends the kid there and pushes the camera inside,
 where that chapter's content lives.
 
-The house is chronological. Bottom left is Ho Chi Minh City at twelve; top right is
-Melbourne now. The kid grows a little taller each floor. That delivers the whole career
-arc without a word of copy, and it replaces the current Timeline component outright.
+The house is chronological and it runs downward. Top left is Ho Chi Minh City at twelve;
+bottom right is Melbourne now. The kid grows a little taller each floor down. That delivers
+the whole career arc without a word of copy, and it replaces the current Timeline component
+outright.
+
+**Descending is the metaphor.** Moving down through the house is peeling back a surface to
+find what is under it, and going deeper into the craft. It is the same idea as the peek
+behind a door, applied to the shape of the whole building. Height was the wrong axis: this
+is about depth, not growth.
+
+The phone reinforces the choice for a plainer reason. A visitor's first instinct on a phone
+is to move down, not up. A layout that asks them to climb against that instinct spends more
+than the metaphor returns.
 
 ## Site map
 
-Six rooms, read bottom left to top right, which is also 2013 to now.
+Six rooms, read top left to bottom right, which is also 2013 to now. Rooms 01 to 03 fill the
+top floor; rooms 04 to 06 fill the floor below it.
 
 | # | Room | Era | Absorbs |
 |---|------|-----|---------|
@@ -107,13 +118,16 @@ than explore, and it doubles as part of the keyboard route.
 A six-cell cutaway at 375 px gives each room roughly 110 px of width, which is unreadable.
 The house re-composes instead of shrinking.
 
-**Chosen: the house stands up.** The 3x2 grid re-flows to 1x6 and becomes a tower the kid
-climbs. One room fills the screen width. Tapping a room above or below sends him up or down
-the ladder. Because rooms are cells with a layout, this is a layout change and needs no new
-art. Vertical reads as climbing and climbing reads as growing up, so the phone version
-arguably tells the story better than the desktop one.
+**Chosen: the house stands up.** The 3x2 grid re-flows to 1x6 and becomes a shaft the kid
+descends. Room 01 sits at the top and room 06 at the bottom. One room fills the screen width.
+Tapping a room above or below sends him up or down the ladder. Because rooms are cells with a
+layout, this is a layout change and needs no new art.
 
-Movement must be tap-to-climb, not swipe-to-scroll. A tall thing you scroll through is the
+Descending matters here for a usability reason as much as a thematic one. A visitor's first
+instinct on a phone is to move down. Building the journey in that direction means the
+metaphor and the reflex point the same way instead of fighting.
+
+Movement must be tap-to-descend, not swipe-to-scroll. A tall thing you scroll through is the
 scroll wearing a costume.
 
 **Deferred, revisit after Phase 4:** an establishing shot of the whole house that holds for
