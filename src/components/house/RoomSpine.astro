@@ -38,3 +38,19 @@ const { room } = Astro.props;
     <slot />
   </div>
 </section>
+
+<style>
+  /* Greybox styling only. Phase 1 replaces this wholesale. Scoped here because
+     these classes belong to this component's own markup; house.astro renders
+     RoomSpine as a child and never receives this scope attribute, so rules for
+     these classes written in house.astro's <style> block would match nothing. */
+  .house-room { padding-block: 2.5rem; border-top: 1px solid var(--border-subtle); }
+  .house-room__label {
+    display: flex; gap: 0.75rem;
+    font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--text-muted);
+  }
+  .house-room__title { font-family: var(--font-display); font-size: 2rem; margin-block: 0.5rem; }
+  .house-room__entry { max-width: 34rem; }
+  .house-room__more { display: inline-block; margin-top: 1rem; font-size: 0.875rem; }
+</style>
