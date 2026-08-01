@@ -37,15 +37,17 @@ export function mountHouseScene(stage: HTMLElement): void {
   kid = createCharacter(active.scene);
   kid.placeAt({ col: 0, row: 0 }, columns);
 
-  // The one control a phone visitor has for leaving a room. Cover-fit fills the
-  // canvas edge to edge once the camera is pushed in, so there is no empty canvas
-  // area left to tap and no Escape key to press. house.astro renders this button
-  // as static markup, so it lives in the accessibility tree and the tab order
-  // from the very first paint. Visibility follows the camera state below.
+  // Desktop's only control for leaving a room without the keyboard: Escape and
+  // this button both end at goToOverview. house.astro renders it as static
+  // markup, so it lives in the accessibility tree and the tab order from the
+  // very first paint. A phone visitor gets no back button at all: Fix 3 gives
+  // that layout scroll and swipe navigation between rooms instead, so there is
+  // never a reason to return to an overview a phone never shows in the first
+  // place.
   const backButton = stage.querySelector<HTMLButtonElement>('[data-house-back]');
 
   function syncBackButton() {
-    if (backButton) backButton.hidden = rig?.state !== 'room';
+    if (backButton) backButton.hidden = columns === 1 || rig?.state !== 'room';
   }
 
   // Escape and the back button both end at this one function. One place decides
@@ -58,8 +60,8 @@ export function mountHouseScene(stage: HTMLElement): void {
   // The phone shaft opens pushed into room 01. A contain fit on a 1x6 tower would
   // shrink every room to a thin band, which the phone spec rejects outright, so the
   // landing view has to already be inside a room. Desktop keeps opening framed on
-  // the whole house. Overview stays reachable from the phone through the back
-  // button or Escape.
+  // the whole house. A phone visitor has no path back to that overview: Fix 3
+  // gives that layout scroll and swipe between rooms in its place.
   if (columns === 1) {
     stage.dataset.houseRoom = '0';
     rig.pushInto({ col: 0, row: 0 }, columns);
@@ -88,6 +90,7 @@ export function mountHouseScene(stage: HTMLElement): void {
       stage.dataset.houseRoom = String(index);
     },
     onBack: goToOverview,
+    isPhone: () => columns === 1,
   });
 
   let frame = 0;
@@ -143,6 +146,7 @@ export function mountHouseScene(stage: HTMLElement): void {
       kid?.placeAt(cell, columns);
       if (rig?.state === 'room') rig.pushInto(cell, columns);
       else rig?.frameHouse(columns);
+      input.setFocused(currentRoom);
       syncBackButton();
     }
     active?.resize();

@@ -26,11 +26,12 @@ import { rooms } from '~/data/house';
     </div>
     <!--
       index.ts finds this by its data attribute and toggles `hidden` as the camera
-      state changes. This is static markup, not a runtime-created element, so it
-      sits in the accessibility tree and the tab order from the first paint, well
-      before the scene finishes mounting. A phone visitor pushed into a room has
-      no Escape key and no empty canvas area left to tap once cover-fit fills the
-      frame, so this button is the only discoverable way out.
+      state and the phone/desktop layout change. This is static markup, not a
+      runtime-created element, so it sits in the accessibility tree and the tab
+      order from the first paint, well before the scene finishes mounting. Desktop
+      shows it once a room is open, standing in for a mouse user's missing Escape
+      key. A phone visitor never sees it: that layout moves between rooms by
+      scroll and swipe instead.
     -->
     <button type="button" class="house-back" data-house-back hidden>
       Back to overview
@@ -82,14 +83,35 @@ import { rooms } from '~/data/house';
    * these) the JS would pick the phone layout while a max-width query here
    * declined to pin the stage, reopening the clipped-room bug. Anyone moving
    * PHONE_BREAKPOINT should move this boundary too.
+   *
+   * `top: 0` alone stacked the stage under the header rather than below it: the
+   * header stays visually on top (its z-index wins), but pixels 0 to 4rem of the
+   * room sat behind it, cut from view exactly the way the report described. The
+   * fix is to give the stage the header's own height back: pin it to start where
+   * the header ends and shrink it by that same amount, so the whole room fits the
+   * space the header actually leaves. 4rem matches Header.astro's `h-16`; the two
+   * would need to move together.
+   *
+   * `min-height: 100svh` above (the greybox rule with no state qualifier) still
+   * applies here too, and a smaller `height` never wins against a larger
+   * `min-height`: the box would have been clamped straight back to the full
+   * 100svh this rule is trying to shrink, silently reopening the header overlap.
+   * min-height is repeated here at the higher specificity this rule already has
+   * from `[data-house-state='scene']`, so it actually takes effect on phone.
+   *
+   * The offset is `4rem` (Header.astro's `h-16`) plus the header's own 1px
+   * `border-b`: measuring the two boxes directly showed the stage starting
+   * exactly 1px above the header's true bottom edge without it.
    */
   @media (width < 768px) {
     .house-stage[data-house-state='scene'] {
       position: fixed;
-      top: 0;
+      top: calc(4rem + 1px);
       left: 0;
       z-index: 0;
       width: 100%;
+      height: calc(100svh - 4rem - 1px);
+      min-height: calc(100svh - 4rem - 1px);
     }
   }
 
@@ -152,14 +174,15 @@ import { rooms } from '~/data/house';
   }
 
   /*
-   * The only discoverable way a phone visitor leaves a pushed-in room: no
-   * Escape key exists on a phone, and cover-fit leaves no empty canvas area to
-   * tap once the camera is in a room. Sitting at the bottom keeps it clear of
-   * the sticky header and of the NowPlaying soundtrack card, both of which
-   * occupy the top of the viewport. index.ts toggles the `hidden` attribute as
-   * the camera state changes; the [hidden] rule below beats the bare class on
-   * specificity, so the layout rules here never win and the toggle actually
-   * hides the button.
+   * Desktop's way to leave a pushed-in room without the keyboard: a mouse or
+   * trackpad user gets no Escape key press for free the way a keyboard user
+   * does. A phone visitor never sees this button at all; index.ts keeps it
+   * hidden on that layout and gives it scroll and swipe between rooms instead.
+   * Sitting at the bottom keeps it clear of the sticky header and of the
+   * NowPlaying soundtrack card, both of which occupy the top of the viewport.
+   * index.ts toggles the `hidden` attribute as the camera state and the layout
+   * change; the [hidden] rule below beats the bare class on specificity, so the
+   * layout rules here never win and the toggle actually hides the button.
    */
   .house-back {
     position: absolute;

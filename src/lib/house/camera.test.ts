@@ -102,3 +102,87 @@ test('phone tower overview at aspect 0.46 fits by the raw halfH, not by width', 
   assert.equal(halfHeight, halfH, 'the tall tower is height-constrained: raw halfH must win, not halfW / aspect');
   assert.ok(halfHeight * aspect >= halfW, 'the resulting width must still cover the tower, never crop it');
 });
+
+/**
+ * pushInto's own extents, reproduced from the same constants camera.ts builds
+ * roomHalfExtents from. roomHalfExtents itself is not exported, matching the
+ * houseHalfExtents pattern above.
+ */
+function roomHalfExtents() {
+  return {
+    halfW: (CELL_WIDTH * FRAME_PADDING) / 2,
+    halfH: (CELL_HEIGHT * FRAME_PADDING) / 2,
+  };
+}
+
+/**
+ * The three aspects a real visitor hit this bug at: a laptop reported 75 percent
+ * of room height visible at 1.91, 79 percent at 1.80, and a phone reported 36
+ * percent of room width visible at 0.51. Each assertion checks the specific
+ * numbers pushInto now produces, not just a >= bound, so a min/max swap back to
+ * cover fails the exact equality rather than slipping past a loose check.
+ */
+test('room push-in at the reported laptop aspect 1.91 keeps the full room height and width', () => {
+  // 1.91 is wider than the room's own aspect (halfW / halfH, 5.75 / 4.025 ≈
+  // 1.4286), so height is the binding constraint: contain must hold the raw
+  // halfH and let width grow past halfW, showing a slice of the rooms to
+  // either side rather than cropping the room's own bottom edge the way cover
+  // did (min would have picked halfW / aspect ≈ 3.01, only 75 percent of halfH).
+  const { halfW, halfH } = roomHalfExtents();
+  const aspect = 1.91;
+  const halfHeight = fitHalfHeight('contain', halfW, halfH, aspect);
+  assert.equal(halfHeight, halfH, 'height is the binding constraint at this aspect');
+  assert.ok(halfHeight >= halfH, 'full room height must be visible');
+  assert.ok(halfHeight * aspect >= halfW, 'full room width must be visible');
+});
+
+test('room push-in at the reported laptop aspect 1.80 keeps the full room height and width', () => {
+  // Same shape as 1.91: still wider than the room's own aspect, so height
+  // still binds and cover would still have cropped it (to 79 percent of halfH
+  // per the report).
+  const { halfW, halfH } = roomHalfExtents();
+  const aspect = 1.8;
+  const halfHeight = fitHalfHeight('contain', halfW, halfH, aspect);
+  assert.equal(halfHeight, halfH, 'height is the binding constraint at this aspect');
+  assert.ok(halfHeight >= halfH, 'full room height must be visible');
+  assert.ok(halfHeight * aspect >= halfW, 'full room width must be visible');
+});
+
+test('room push-in at the reported phone aspect 0.51 keeps the full room height and width', () => {
+  // 0.51 is narrower than the room's own aspect, so width is the binding
+  // constraint here: contain holds the exact halfW and lets height grow past
+  // halfH, revealing the rooms above and below rather than cropping the
+  // room's own sides the way cover did (min would have picked the raw halfH,
+  // only 36 percent of the width the report measured).
+  const { halfW, halfH } = roomHalfExtents();
+  const aspect = 0.51;
+  const halfHeight = fitHalfHeight('contain', halfW, halfH, aspect);
+  const halfWidth = halfHeight * aspect;
+  assert.equal(halfWidth, halfW, 'width is the binding constraint at this aspect');
+  assert.ok(halfHeight >= halfH, 'full room height must be visible');
+  assert.ok(halfWidth >= halfW, 'full room width must be visible');
+});
+
+/**
+ * The general claim Fix 1 makes: at any aspect ratio, contain never crops a room
+ * on either axis. Swept rather than sampled once, so a regression narrower than
+ * the three reported aspects above still trips this. Temporarily changing the
+ * 'contain' argument below to 'cover' and rerunning confirmed every assertion in
+ * this test fails, which is what makes it a test of the fix rather than one that
+ * would also pass against the old cover behaviour.
+ */
+test('room push-in with contain never crops the room at any aspect ratio', () => {
+  const { halfW, halfH } = roomHalfExtents();
+  for (let aspect = 0.2; aspect <= 5; aspect += 0.1) {
+    const halfHeight = fitHalfHeight('contain', halfW, halfH, aspect);
+    const halfWidth = halfHeight * aspect;
+    assert.ok(
+      halfHeight >= halfH - 1e-9,
+      `aspect ${aspect}: halfHeight ${halfHeight} must cover room halfH ${halfH}`,
+    );
+    assert.ok(
+      halfWidth >= halfW - 1e-9,
+      `aspect ${aspect}: halfWidth ${halfWidth} must cover room halfW ${halfW}`,
+    );
+  }
+});

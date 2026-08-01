@@ -27,12 +27,16 @@ export interface CameraRig {
 const TRANSITION = 0.65;
 
 /**
- * Overview states must CONTAIN their rectangle: the whole house has to stay fully
- * visible on any aspect ratio, letterboxing whichever axis has room to spare. Room
- * states must COVER their rectangle: a neighbouring room must never be visible, so
- * the frame crops to the room instead of letterboxing around it. The two states
- * need opposite formulas, so the fit mode travels with the target rather than
- * being inferred from the extents alone.
+ * Both overview and room states CONTAIN their rectangle: the target stays fully
+ * visible on any aspect ratio, letterboxing whichever axis has room to spare. A
+ * room push-in used to COVER its rectangle so a neighbouring room could never
+ * appear at the frame edge, but that cropped whichever axis the aspect ratio did
+ * not match: a real visitor lost the bottom of the room on a laptop and the sides
+ * of the room on a phone. Seeing the whole room matters more than a clean edge, so
+ * pushInto below asks for contain like frameHouse does, and the letterboxed slice
+ * of the neighbouring room this reveals is what lets a click reach it directly.
+ * Cover stays defined and tested here: nothing in this module calls it now, but a
+ * future frame that genuinely wants cropping keeps the formula available.
  */
 export type FitMode = 'contain' | 'cover';
 
@@ -168,9 +172,13 @@ export function createCameraRig(
         // mount never eases out from the placeholder halfW/halfH of 1 no matter
         // which of the two entry paths ran.
         framed = true;
-        snapTo('cover', o.x, o.y, halfW, halfH);
+        snapTo('contain', o.x, o.y, halfW, halfH);
       } else {
-        moveTo('cover', o.x, o.y, halfW, halfH);
+        // Contain keeps every edge of the room in frame at any aspect ratio, at
+        // the cost of a letterboxed sliver of whatever sits beyond it. That
+        // sliver is what makes a neighbouring room clickable without a detour
+        // through the overview; see input.ts.
+        moveTo('contain', o.x, o.y, halfW, halfH);
       }
     },
     pullOut() {
