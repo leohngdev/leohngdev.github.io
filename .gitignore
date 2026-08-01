@@ -32,3 +32,6 @@ PROJECT-INVENTORY.md
 .gstack/
 WORKING-NOTES.md
 .superpowers/
+
+# Local AI agent guidance. Contains client content rules that must not be published.
+CLAUDE.md
