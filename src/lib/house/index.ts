@@ -19,11 +19,21 @@ export function mountHouseScene(stage: HTMLElement): void {
   let columns = columnsFor(window.innerWidth);
   active = createScene(stage, columns);
   rig = createCameraRig(active.camera, stage);
-  rig.frameHouse(columns);
   stage.dataset.houseState = 'scene';
 
   kid = createCharacter(active.scene);
   kid.placeAt({ col: 0, row: 0 }, columns);
+
+  // The phone shaft opens pushed into room 01. A contain fit on a 1x6 tower would
+  // shrink every room to a thin band, which the phone spec rejects outright, so the
+  // landing view has to already be inside a room. Desktop keeps opening framed on
+  // the whole house. Overview stays reachable from the phone by pulling out.
+  if (columns === 1) {
+    stage.dataset.houseRoom = '0';
+    rig.pushInto({ col: 0, row: 0 }, columns);
+  } else {
+    rig.frameHouse(columns);
+  }
 
   // A click during a walk redirects rather than being ignored: follow() cancels
   // whatever arrival callback was pending and registers this one, so the capsule
@@ -64,10 +74,17 @@ export function mountHouseScene(stage: HTMLElement): void {
   const onResize = () => {
     const next = columnsFor(window.innerWidth);
     if (next !== columns) {
+      // The room index is layout-independent; only the cell it maps to changes
+      // when the house re-flows. Reading it back from the stage keeps the visitor
+      // in the room they were in, and restores whichever camera state they had,
+      // across the breakpoint instead of resetting to room 01 in overview.
+      const currentRoom = Number(stage.dataset.houseRoom ?? 0);
       columns = next;
       active?.rebuild(columns);
-      rig?.frameHouse(columns);
-      kid?.placeAt({ col: 0, row: 0 }, columns);
+      const cell = cellFor(currentRoom, columns);
+      kid?.placeAt(cell, columns);
+      if (rig?.state === 'room') rig.pushInto(cell, columns);
+      else rig?.frameHouse(columns);
     }
     active?.resize();
   };
