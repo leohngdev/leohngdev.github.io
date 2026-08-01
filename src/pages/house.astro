@@ -74,8 +74,16 @@ import { rooms } from '~/data/house';
    * flow at every width collapses #main to zero height and buries the Footer
    * under the canvas with no scroll left to reach it. The header's higher z-index
    * keeps it stacked above the canvas even while the stage is fixed.
+   *
+   * The `width < 768px` range mirrors PHONE_BREAKPOINT in src/lib/house/grid.ts,
+   * which columnsFor() tests as `viewportWidth < PHONE_BREAKPOINT`. A max-width
+   * query only matches integer pixels at or below its value, so at a fractional
+   * width like 767.4 (browser zoom and devicePixelRatio scaling both produce
+   * these) the JS would pick the phone layout while a max-width query here
+   * declined to pin the stage, reopening the clipped-room bug. Anyone moving
+   * PHONE_BREAKPOINT should move this boundary too.
    */
-  @media (max-width: 767px) {
+  @media (width < 768px) {
     .house-stage[data-house-state='scene'] {
       position: fixed;
       top: 0;
