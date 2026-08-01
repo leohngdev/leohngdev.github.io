@@ -24,6 +24,17 @@ import { rooms } from '~/data/house';
         <p>Full case study for {room.title} lands in Phase 2.</p>
       </RoomSpine>)}
     </div>
+    <!--
+      index.ts finds this by its data attribute and toggles `hidden` as the camera
+      state changes. This is static markup, not a runtime-created element, so it
+      sits in the accessibility tree and the tab order from the first paint, well
+      before the scene finishes mounting. A phone visitor pushed into a room has
+      no Escape key and no empty canvas area left to tap once cover-fit fills the
+      frame, so this button is the only discoverable way out.
+    -->
+    <button type="button" class="house-back" data-house-back hidden>
+      Back to overview
+    </button>
   </div>
 </Layout>
 
@@ -35,13 +46,24 @@ import { rooms } from '~/data/house';
   .house-spine__intro { max-width: 34rem; margin-top: 0.75rem; color: var(--text-muted); }
 
   /*
-   * Once index.ts mounts the scene it flips data-house-state to "scene". Pin the
-   * stage to one viewport-height box and hide its own overflow so the canvas has a
-   * real, stable box to size itself against instead of the document's full scroll
-   * height (which is what produced a canvas taller than it was wide). svh, not vh,
-   * matches the rest of the repo and behaves correctly under mobile browser chrome.
+   * Once index.ts mounts the scene it flips data-house-state to "scene". The
+   * header above this in the document is sticky and takes real space in normal
+   * flow, so a stage that stayed in flow here would add its own full viewport
+   * height on top of the header's, pushing the document taller than the
+   * viewport and clipping the bottom room of the phone tower until a visitor
+   * scrolled. Fixed positioning pins the stage to the true viewport instead, so
+   * its one-viewport-height box is the whole visible area regardless of what
+   * sits above it in the document. The header's higher z-index keeps it stacked
+   * above the canvas, so the header stays visible and the canvas never covers
+   * it. svh, not vh, matches the rest of the repo and behaves correctly under
+   * mobile browser chrome.
    */
   .house-stage[data-house-state='scene'] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
     height: 100svh;
     overflow: hidden;
   }
@@ -80,6 +102,41 @@ import { rooms } from '~/data/house';
     clip-path: inset(50%);
     white-space: nowrap;
     border: 0;
+  }
+
+  /*
+   * The only discoverable way a phone visitor leaves a pushed-in room: no
+   * Escape key exists on a phone, and cover-fit leaves no empty canvas area to
+   * tap once the camera is in a room. Sitting at the bottom keeps it clear of
+   * the sticky header and of the NowPlaying soundtrack card, both of which
+   * occupy the top of the viewport. index.ts toggles the `hidden` attribute as
+   * the camera state changes; the [hidden] rule below beats the bare class on
+   * specificity, so the layout rules here never win and the toggle actually
+   * hides the button.
+   */
+  .house-back {
+    position: absolute;
+    left: 50%;
+    bottom: 1.5rem;
+    z-index: 5;
+    transform: translateX(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.75rem 1.25rem;
+    border: 1px solid var(--border-subtle);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--surface) 88%, transparent);
+    backdrop-filter: blur(8px);
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+
+  .house-back[hidden] {
+    display: none;
   }
 </style>
 
