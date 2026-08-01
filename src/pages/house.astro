@@ -53,28 +53,47 @@ import { rooms } from '~/data/house';
    * height (which is what produced a canvas taller than it was wide). svh, not vh,
    * matches the rest of the repo and behaves correctly under mobile browser chrome.
    *
+   * The header above sits sticky at every width, at 4rem plus its own 1px
+   * `border-b`. A plain 100svh here ignored that and left the stage 65px taller
+   * than the space actually below the header, so the stage's own bottom 65px
+   * fell past the fold on an ordinary desktop viewport: the room read as intact
+   * at a glance, but its lowest slice was never on screen at all, not merely
+   * scrolled to. Shrinking the stage by the header's height keeps the whole
+   * canvas on screen at every width; the phone rule below only needs to change
+   * how the stage is positioned, not this size.
+   *
+   * `min-height: 100svh` from the bare `.house-stage` rule above still applies
+   * here too, and a smaller `height` never wins against a larger `min-height`,
+   * so min-height is repeated here at this rule's higher specificity to actually
+   * take effect.
+   *
    * Staying in normal document flow here matters: the Footer after this stage in
    * the markup needs #main to keep real height so it stays reachable by scrolling.
    * Below, the phone breakpoint overrides this to fixed positioning for a reason
    * the general case does not share; see that rule for why.
    */
   .house-stage[data-house-state='scene'] {
-    height: 100svh;
+    height: calc(100svh - 4rem - 1px);
+    min-height: calc(100svh - 4rem - 1px);
     overflow: hidden;
   }
 
   /*
    * The header above this stage is sticky and takes real space in normal flow.
-   * On the phone tower, the header's own height plus the stage's full 100svh push
-   * the document taller than the viewport, so the last room in the overview sat
-   * past the fold until a visitor scrolled to it. Fixed positioning here pins the
-   * stage to the true viewport so its one-viewport-height box is the whole visible
-   * area no matter what sits above it in the document, which is what actually
-   * fixes the clipped room. It only runs below the phone breakpoint: at desktop
-   * widths the stage stays in flow (the rule above), because taking it out of
-   * flow at every width collapses #main to zero height and buries the Footer
-   * under the canvas with no scroll left to reach it. The header's higher z-index
-   * keeps it stacked above the canvas even while the stage is fixed.
+   * On the phone tower, the header's own height plus the stage's height still
+   * pushed the document taller than the viewport before the rule above shrank
+   * the stage, so the last room in the overview sat past the fold until a
+   * visitor scrolled to it. Fixed positioning here pins the stage to the true
+   * viewport so its box is the whole visible area no matter what sits above it
+   * in the document, which is what actually fixes the clipped room; the height
+   * shrink alone would only have shortened the document, leaving fixed
+   * positioning as the piece that moves the phone tower's overview into view
+   * without a scroll. This only runs below the phone breakpoint: at desktop
+   * widths the stage stays in flow (the rule above already sized it correctly),
+   * because taking it out of flow at every width collapses #main to zero height
+   * and buries the Footer under the canvas with no scroll left to reach it. The
+   * header's higher z-index keeps it stacked above the canvas even while the
+   * stage is fixed.
    *
    * The `width < 768px` range mirrors PHONE_BREAKPOINT in src/lib/house/grid.ts,
    * which columnsFor() tests as `viewportWidth < PHONE_BREAKPOINT`. A max-width
@@ -84,24 +103,10 @@ import { rooms } from '~/data/house';
    * declined to pin the stage, reopening the clipped-room bug. Anyone moving
    * PHONE_BREAKPOINT should move this boundary too.
    *
-   * `top: 0` alone stacked the stage under the header rather than below it: the
-   * header stays visually on top (its z-index wins), but pixels 0 to 4rem of the
-   * room sat behind it, cut from view exactly the way the report described. The
-   * fix is to give the stage the header's own height back: pin it to start where
-   * the header ends and shrink it by that same amount, so the whole room fits the
-   * space the header actually leaves. 4rem matches Header.astro's `h-16`; the two
-   * would need to move together.
-   *
-   * `min-height: 100svh` above (the greybox rule with no state qualifier) still
-   * applies here too, and a smaller `height` never wins against a larger
-   * `min-height`: the box would have been clamped straight back to the full
-   * 100svh this rule is trying to shrink, silently reopening the header overlap.
-   * min-height is repeated here at the higher specificity this rule already has
-   * from `[data-house-state='scene']`, so it actually takes effect on phone.
-   *
-   * The offset is `4rem` (Header.astro's `h-16`) plus the header's own 1px
-   * `border-b`: measuring the two boxes directly showed the stage starting
-   * exactly 1px above the header's true bottom edge without it.
+   * Height and min-height are not repeated here: the rule above already sets
+   * both, at the same selector and therefore the same specificity, so this
+   * block only needs to change what actually differs on phone: how the stage
+   * is positioned.
    */
   @media (width < 768px) {
     .house-stage[data-house-state='scene'] {
@@ -110,8 +115,6 @@ import { rooms } from '~/data/house';
       left: 0;
       z-index: 0;
       width: 100%;
-      height: calc(100svh - 4rem - 1px);
-      min-height: calc(100svh - 4rem - 1px);
     }
   }
 

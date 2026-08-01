@@ -16,7 +16,11 @@
  */
 import * as THREE from 'three';
 
-import { rooms } from '~/data/house';
+// Uses a relative path, not the '~' alias: node --test resolves modules with
+// plain Node ESM and has no knowledge of the tsconfig path alias Astro/Vite
+// honour, and input.test.ts (a value import away from this file) needs a path
+// Node can follow on its own, matching the fix already applied in camera.ts.
+import { rooms } from '../../data/house.ts';
 
 export interface InputOptions {
   renderer: THREE.WebGLRenderer;
@@ -29,26 +33,66 @@ export interface InputOptions {
    * navigation are the phone substitute for the back button (there is no Escape
    * key and no back button on that layout), so they stay off at desktop widths:
    * a wheel or touch gesture over the canvas there is left to do its ordinary
-   * job, including scrolling the page down to the Footer. Read live rather than
-   * captured once, since a resize can flip this after createInput has already
-   * run.
+   * job, including scrolling the page down to the Footer. This is read live on
+   * every event, not captured once, since a resize can flip it after
+   * createInput has already run.
    */
   isPhone(): boolean;
 }
 
 /** Vertical travel, in CSS pixels for a touch swipe or deltaY for a wheel tick,
- * below which a gesture reads as incidental rather than a deliberate scroll. */
+ * below which a gesture reads as incidental noise, not a deliberate scroll. */
 const SCROLL_THRESHOLD = 32;
 
 /**
- * Milliseconds a scroll or swipe gesture is ignored right after one has just
- * moved a room. TRANSITION in camera.ts eases a push over 0.65s; this sits a
- * little above that so the lockout always outlasts the camera arriving. That is
- * what keeps one flick worth exactly one room: a real touch swipe reports as one
- * pointerup and a real wheel flick reports as a burst of many small deltaY
- * events, and the lockout swallows every event in that burst after the first.
+ * Milliseconds a touch swipe is ignored right after one has just moved a room.
+ * TRANSITION in camera.ts eases a push over 0.65s; this sits a little above
+ * that so the lockout always outlasts the camera arriving. A touch swipe is a
+ * single pointerup, so a flat lockout after it fires is enough; the wheel path
+ * below needs a different mechanism, see WHEEL_GESTURE_QUIET_MS.
  */
-const SCROLL_COOLDOWN_MS = 700;
+const SWIPE_COOLDOWN_MS = 700;
+
+/**
+ * Milliseconds of silence after the last wheel event before a run of them
+ * counts as over. A trackpad flick does not report as one event: it reports as
+ * a burst whose deltaY decays for well over a second, arriving faster than
+ * this file first assumed. A flat cooldown timed from the first qualifying
+ * event expires mid-burst, so a later event in the same physical flick (still
+ * above SCROLL_THRESHOLD) reads as a second gesture and skips an extra room.
+ * Tracking silence instead of elapsed time closes that gap: createWheelGesture
+ * below only allows a new step once the gap between two events exceeds this
+ * value, so a gesture stays "in progress", however long its tail runs, for as
+ * long as the browser keeps delivering events for it.
+ */
+const WHEEL_GESTURE_QUIET_MS = 300;
+
+/**
+ * Turns a stream of wheel events into at most one room-step per physical
+ * gesture. Pulled out as a pure function with no DOM or THREE dependency, so a
+ * decaying tail of events can be fed to it with hand-picked timestamps and
+ * checked with no real browser and no real setTimeout delay; input.test.ts
+ * exercises it directly, including a tail that runs past WHEEL_GESTURE_QUIET_MS.
+ */
+export function createWheelGesture(thresholdPx: number, quietMs: number) {
+  let lastEventAt = -Infinity;
+  let stepped = false;
+  return {
+    /**
+     * Feed one wheel event's deltaY and timestamp (`performance.now()` in the
+     * browser). Returns the room step to take (1 or -1), or null if this event
+     * should not move a room: too small to read as deliberate, or arriving
+     * inside a gesture that already stepped.
+     */
+    onEvent(deltaY: number, now: number): 1 | -1 | null {
+      if (now - lastEventAt > quietMs) stepped = false;
+      lastEventAt = now;
+      if (stepped || Math.abs(deltaY) < thresholdPx) return null;
+      stepped = true;
+      return deltaY > 0 ? 1 : -1;
+    },
+  };
+}
 
 export function createInput(options: InputOptions): { dispose(): void; setFocused(index: number): void } {
   const { renderer, camera, roomMeshes, onSelect, onBack, isPhone } = options;
@@ -56,9 +100,10 @@ export function createInput(options: InputOptions): { dispose(): void; setFocuse
   const raycaster = new THREE.Raycaster();
   const pointer = new THREE.Vector2();
   let focused = 0;
-  let scrollLocked = false;
+  let swipeLocked = false;
   let touchStartY = 0;
   let trackingTouch = false;
+  const wheelGesture = createWheelGesture(SCROLL_THRESHOLD, WHEEL_GESTURE_QUIET_MS);
 
   function pick(event: { clientX: number; clientY: number }) {
     const rect = canvas.getBoundingClientRect();
@@ -77,8 +122,8 @@ export function createInput(options: InputOptions): { dispose(): void; setFocuse
 
   // Shared by wheel and touch: the one path either gesture drives, so a swipe
   // and a tap can never produce two different ideas of what "select a room"
-  // does. Clamped rather than wrapped, matching the arrow keys below: running
-  // past room 06 or room 01 does nothing rather than cycling.
+  // does. Clamped, matching the arrow keys below: running past room 06 or
+  // room 01 does nothing, it does not wrap or cycle back around.
   function stepRoom(direction: 1 | -1) {
     const next = focused + direction;
     if (next < 0 || next > rooms.length - 1) return;
@@ -86,18 +131,19 @@ export function createInput(options: InputOptions): { dispose(): void; setFocuse
     onSelect(focused);
   }
 
-  function lockScroll() {
-    scrollLocked = true;
+  function lockSwipe() {
+    swipeLocked = true;
     window.setTimeout(() => {
-      scrollLocked = false;
-    }, SCROLL_COOLDOWN_MS);
+      swipeLocked = false;
+    }, SWIPE_COOLDOWN_MS);
   }
 
   function onPointerDown(event: PointerEvent) {
     // A swipe and a tap both begin as a pointerdown; only the travel between
     // down and up tells them apart, so a touch pointer on the phone layout is
-    // tracked rather than picked immediately. Every other pointer (mouse, pen,
-    // or touch at desktop widths) keeps the original immediate-tap behaviour.
+    // tracked here and only picked on release. Every other pointer (mouse,
+    // pen, or touch at desktop widths) keeps the original immediate-tap
+    // behaviour below.
     if (event.pointerType === 'touch' && isPhone()) {
       touchStartY = event.clientY;
       trackingTouch = true;
@@ -118,9 +164,9 @@ export function createInput(options: InputOptions): { dispose(): void; setFocuse
       pick(event);
       return;
     }
-    if (scrollLocked) return;
+    if (swipeLocked) return;
     stepRoom(travel > 0 ? 1 : -1);
-    lockScroll();
+    lockSwipe();
   }
 
   function onWheel(event: WheelEvent) {
@@ -130,9 +176,8 @@ export function createInput(options: InputOptions): { dispose(): void; setFocuse
     // the browser's own scroll attempt costs nothing and stops it fighting
     // the room-to-room step below.
     event.preventDefault();
-    if (scrollLocked || Math.abs(event.deltaY) < SCROLL_THRESHOLD) return;
-    stepRoom(event.deltaY > 0 ? 1 : -1);
-    lockScroll();
+    const step = wheelGesture.onEvent(event.deltaY, performance.now());
+    if (step !== null) stepRoom(step);
   }
 
   function onKey(event: KeyboardEvent) {
@@ -194,8 +239,8 @@ export function createInput(options: InputOptions): { dispose(): void; setFocuse
     },
     // index.ts calls this after a resize carries a visitor across the phone
     // breakpoint while a room is open, so scroll and arrow-key stepping both
-    // resume from the room they are actually looking at rather than whatever
-    // room a tap or a previous step last set focused to.
+    // resume from the room they are actually looking at, not whatever room a
+    // tap or a previous step last set focused to.
     setFocused(index) {
       focused = index;
     },

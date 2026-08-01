@@ -1,11 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
+import * as THREE from 'three';
 
-import { fitHalfHeight } from './camera.ts';
+import { fitHalfHeight, createCameraRig } from './camera.ts';
 // Relative rather than the '~' alias: node --test resolves modules with plain
 // Node ESM and has no knowledge of the tsconfig path alias Astro/Vite honour,
 // matching the pattern character.test.ts and rooms.test.ts already use.
-import { CELL_WIDTH, CELL_HEIGHT, FRAME_PADDING } from './grid.ts';
+import { CELL_WIDTH, CELL_HEIGHT, FRAME_PADDING, centeredPositionFor, type Cell } from './grid.ts';
 import { rooms } from '../../data/house.ts';
 
 /**
@@ -119,15 +120,15 @@ function roomHalfExtents() {
  * The three aspects a real visitor hit this bug at: a laptop reported 75 percent
  * of room height visible at 1.91, 79 percent at 1.80, and a phone reported 36
  * percent of room width visible at 0.51. Each assertion checks the specific
- * numbers pushInto now produces, not just a >= bound, so a min/max swap back to
- * cover fails the exact equality rather than slipping past a loose check.
+ * numbers pushInto now produces, not just a >= bound: a min/max swap back to
+ * cover fails the exact equality here, where a loose bound could still slip past it.
  */
 test('room push-in at the reported laptop aspect 1.91 keeps the full room height and width', () => {
   // 1.91 is wider than the room's own aspect (halfW / halfH, 5.75 / 4.025 ≈
   // 1.4286), so height is the binding constraint: contain must hold the raw
   // halfH and let width grow past halfW, showing a slice of the rooms to
-  // either side rather than cropping the room's own bottom edge the way cover
-  // did (min would have picked halfW / aspect ≈ 3.01, only 75 percent of halfH).
+  // either side. Cover cropped the room's own bottom edge here instead
+  // (min would have picked halfW / aspect ≈ 3.01, only 75 percent of halfH).
   const { halfW, halfH } = roomHalfExtents();
   const aspect = 1.91;
   const halfHeight = fitHalfHeight('contain', halfW, halfH, aspect);
@@ -151,9 +152,9 @@ test('room push-in at the reported laptop aspect 1.80 keeps the full room height
 test('room push-in at the reported phone aspect 0.51 keeps the full room height and width', () => {
   // 0.51 is narrower than the room's own aspect, so width is the binding
   // constraint here: contain holds the exact halfW and lets height grow past
-  // halfH, revealing the rooms above and below rather than cropping the
-  // room's own sides the way cover did (min would have picked the raw halfH,
-  // only 36 percent of the width the report measured).
+  // halfH, revealing the rooms above and below. Cover cropped the room's own
+  // sides here instead (min would have picked the raw halfH, only 36 percent
+  // of the width the report measured).
   const { halfW, halfH } = roomHalfExtents();
   const aspect = 0.51;
   const halfHeight = fitHalfHeight('contain', halfW, halfH, aspect);
@@ -165,11 +166,12 @@ test('room push-in at the reported phone aspect 0.51 keeps the full room height 
 
 /**
  * The general claim Fix 1 makes: at any aspect ratio, contain never crops a room
- * on either axis. Swept rather than sampled once, so a regression narrower than
- * the three reported aspects above still trips this. Temporarily changing the
- * 'contain' argument below to 'cover' and rerunning confirmed every assertion in
- * this test fails, which is what makes it a test of the fix rather than one that
- * would also pass against the old cover behaviour.
+ * on either axis. Swept across a range here, not just sampled once, so a
+ * regression narrower than the three reported aspects above still trips this.
+ * Temporarily changing the 'contain' argument below to 'cover' and rerunning
+ * confirmed every assertion in this test fails: that failure is what makes this
+ * a test of the fix, since the old cover behaviour would still pass a looser
+ * version of the same check.
  */
 test('room push-in with contain never crops the room at any aspect ratio', () => {
   const { halfW, halfH } = roomHalfExtents();
@@ -185,4 +187,86 @@ test('room push-in with contain never crops the room at any aspect ratio', () =>
       `aspect ${aspect}: halfWidth ${halfWidth} must cover room halfW ${halfW}`,
     );
   }
+});
+
+/**
+ * Every test above calls fitHalfHeight directly with 'contain' written as a
+ * literal in the test itself, so none of them can fail if pushInto stopped
+ * passing 'contain' through to fitHalfHeight: they exercise the formula, not
+ * the wiring. The two tests below close that gap by building a real
+ * CameraRig with createCameraRig and calling pushInto on it, the exact path
+ * index.ts drives, then reading the mode pushInto actually chose back off
+ * the live THREE.OrthographicCamera it produced.
+ *
+ * A plain object with clientWidth/clientHeight stands in for the container
+ * element: apply() inside camera.ts only ever reads those two properties off
+ * it, and OrthographicCamera's own maths needs no renderer or WebGL context,
+ * so this still runs under plain Node.
+ */
+function fakeContainer(width: number, height: number): HTMLElement {
+  return { clientWidth: width, clientHeight: height } as unknown as HTMLElement;
+}
+
+/**
+ * The room's real geometry, independent of FRAME_PADDING: the raw cell size,
+ * with no wall gap subtracted. scene.ts's actual room mesh is smaller still
+ * (CELL_WIDTH/CELL_HEIGHT each shrunk by a wall gap), so a frustum that
+ * contains this slightly larger rectangle contains the true mesh too, and
+ * this test needs nothing from scene.ts to say so.
+ */
+function realRoomExtent(cell: Cell, columns: number) {
+  const { x, y } = centeredPositionFor(cell, columns, rooms.length);
+  return {
+    left: x - CELL_WIDTH / 2,
+    right: x + CELL_WIDTH / 2,
+    bottom: y - CELL_HEIGHT / 2,
+    top: y + CELL_HEIGHT / 2,
+  };
+}
+
+function assertRoomInsideFrustum(camera: THREE.OrthographicCamera, room: ReturnType<typeof realRoomExtent>) {
+  const xMin = camera.position.x + camera.left;
+  const xMax = camera.position.x + camera.right;
+  const yMin = camera.position.y + camera.bottom;
+  const yMax = camera.position.y + camera.top;
+  assert.ok(xMin <= room.left, `frustum left ${xMin} must reach the room's left edge ${room.left}`);
+  assert.ok(xMax >= room.right, `frustum right ${xMax} must reach the room's right edge ${room.right}`);
+  assert.ok(yMin <= room.bottom, `frustum bottom ${yMin} must reach the room's bottom edge ${room.bottom}`);
+  assert.ok(yMax >= room.top, `frustum top ${yMax} must reach the room's top edge ${room.top}`);
+}
+
+test('createCameraRig.pushInto keeps a real room fully inside the camera frustum at a wide desktop aspect', () => {
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 400);
+  // 1280x670: aspect ≈ 1.9104, matching the 1.91 laptop aspect the bug report
+  // measured. Picked deliberately over a rounder aspect like 1.6: FRAME_PADDING
+  // leaves enough slack that cover's crop at 1.6 still (barely) covers the raw,
+  // unpadded room, so a test at 1.6 would not actually catch a cover regression.
+  // 1.91 is where the report measured cover cropping the room to 75 percent of
+  // its height, which is the aspect this test needs to fail loudly at.
+  const container = fakeContainer(1280, 670);
+  const rig = createCameraRig(camera, container);
+
+  const columns = 3;
+  const cell: Cell = { col: 1, row: 1 }; // room 4, with a neighbour on every side
+  rig.pushInto(cell, columns);
+  // The very first pushInto call on a fresh rig snaps to place instead of
+  // easing (camera.ts's `framed` guard), so update(0) only needs to flush
+  // apply() once; there is no transition to fast-forward through.
+  rig.update(0);
+
+  assertRoomInsideFrustum(camera, realRoomExtent(cell, columns));
+});
+
+test('createCameraRig.pushInto keeps a real room fully inside the camera frustum at a tall phone aspect', () => {
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 400);
+  // 375x812: aspect ≈ 0.4618, the phone viewport the bug report measured.
+  const container = fakeContainer(375, 812);
+  const rig = createCameraRig(camera, container);
+
+  const columns = 1;
+  const cell: Cell = { col: 0, row: 3 }; // an interior room on the phone tower, not the first or last
+  rig.pushInto(cell, columns);
+  rig.update(0);
+
+  assertRoomInsideFrustum(camera, realRoomExtent(cell, columns));
 });
