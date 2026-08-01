@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0r2pUCPPwdNxhS2myG7aU5",
-    "title": "Say So",
-    "artist": "Terror Jr",
-    "album": "Bop City",
-    "href": "https://open.spotify.com/track/0r2pUCPPwdNxhS2myG7aU5",
+    "id": "4E63weMCaNZuGPEFMnuEi8",
+    "title": "exes",
+    "artist": "Tate McRae",
+    "album": "THINK LATER",
+    "href": "https://open.spotify.com/track/4E63weMCaNZuGPEFMnuEi8",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#cc4874",
-      "onLight": "#c0446d",
-      "onDark": "#cf537c"
+      "raw": "#dd967a",
+      "onLight": "#8f614f",
+      "onDark": "#dd967a"
     },
-    "fetchedAt": "2026-08-01T01:21:58.657Z"
+    "fetchedAt": "2026-08-01T07:55:06.455Z"
   }
 }
