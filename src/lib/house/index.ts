@@ -13,6 +13,7 @@ import { rooms } from '~/data/house';
 let active: HouseScene | null = null;
 let rig: CameraRig | null = null;
 let kid: Character | null = null;
+let fpsCount: (() => void) | null = null;
 
 /**
  * stage.dataset.houseRoom is written as a plain string and only this module
@@ -98,8 +99,30 @@ export function mountHouseScene(stage: HTMLElement): void {
     rig?.update(dt);
     kid?.update(dt);
     if (active) active.renderer.render(active.scene, active.camera);
+    fpsCount?.();
   };
   frame = requestAnimationFrame(tick);
+
+  // ?fps exposes a frame counter for the Phase 0 go/no-go measurement. Deliberately
+  // opt-in so it never ships as visible chrome.
+  let fpsInterval = 0;
+  if (new URLSearchParams(location.search).has('fps')) {
+    const readout = document.createElement('p');
+    readout.style.cssText =
+      'position:fixed;top:8px;left:8px;z-index:99;font:12px ui-monospace,monospace;color:#4ade80';
+    document.body.appendChild(readout);
+    let frames = 0;
+    let since = performance.now();
+    fpsInterval = window.setInterval(() => {
+      const now = performance.now();
+      readout.textContent = `${Math.round((frames * 1000) / (now - since))} fps`;
+      frames = 0;
+      since = now;
+    }, 500);
+    fpsCount = () => {
+      frames += 1;
+    };
+  }
 
   // Named so the same reference can be removed in teardown. An anonymous listener
   // here would outlive every scene it was built for, and the camera-rig task is
@@ -132,8 +155,10 @@ export function mountHouseScene(stage: HTMLElement): void {
     backButton?.removeEventListener('click', goToOverview);
     input.dispose();
     active?.dispose();
+    clearInterval(fpsInterval);
     active = null;
     rig = null;
     kid = null;
+    fpsCount = null;
   }, { once: true });
 }
