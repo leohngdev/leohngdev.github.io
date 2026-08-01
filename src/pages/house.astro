@@ -46,26 +46,43 @@ import { rooms } from '~/data/house';
   .house-spine__intro { max-width: 34rem; margin-top: 0.75rem; color: var(--text-muted); }
 
   /*
-   * Once index.ts mounts the scene it flips data-house-state to "scene". The
-   * header above this in the document is sticky and takes real space in normal
-   * flow, so a stage that stayed in flow here would add its own full viewport
-   * height on top of the header's, pushing the document taller than the
-   * viewport and clipping the bottom room of the phone tower until a visitor
-   * scrolled. Fixed positioning pins the stage to the true viewport instead, so
-   * its one-viewport-height box is the whole visible area regardless of what
-   * sits above it in the document. The header's higher z-index keeps it stacked
-   * above the canvas, so the header stays visible and the canvas never covers
-   * it. svh, not vh, matches the rest of the repo and behaves correctly under
-   * mobile browser chrome.
+   * Once index.ts mounts the scene it flips data-house-state to "scene". Pin the
+   * stage to one viewport-height box and hide its own overflow so the canvas has a
+   * real, stable box to size itself against instead of the document's full scroll
+   * height (which is what produced a canvas taller than it was wide). svh, not vh,
+   * matches the rest of the repo and behaves correctly under mobile browser chrome.
+   *
+   * Staying in normal document flow here matters: the Footer after this stage in
+   * the markup needs #main to keep real height so it stays reachable by scrolling.
+   * Below, the phone breakpoint overrides this to fixed positioning for a reason
+   * the general case does not share; see that rule for why.
    */
   .house-stage[data-house-state='scene'] {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    width: 100%;
     height: 100svh;
     overflow: hidden;
+  }
+
+  /*
+   * The header above this stage is sticky and takes real space in normal flow.
+   * On the phone tower, the header's own height plus the stage's full 100svh push
+   * the document taller than the viewport, so the last room in the overview sat
+   * past the fold until a visitor scrolled to it. Fixed positioning here pins the
+   * stage to the true viewport so its one-viewport-height box is the whole visible
+   * area no matter what sits above it in the document, which is what actually
+   * fixes the clipped room. It only runs below the phone breakpoint: at desktop
+   * widths the stage stays in flow (the rule above), because taking it out of
+   * flow at every width collapses #main to zero height and buries the Footer
+   * under the canvas with no scroll left to reach it. The header's higher z-index
+   * keeps it stacked above the canvas even while the stage is fixed.
+   */
+  @media (max-width: 767px) {
+    .house-stage[data-house-state='scene'] {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+      width: 100%;
+    }
   }
 
   /*
