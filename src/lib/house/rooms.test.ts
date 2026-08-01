@@ -24,8 +24,11 @@ test('every entry text stays inside the 40 word cap', () => {
   }
 });
 
-test('entry text uses no em dashes', () => {
+test('entry, title, era and place use no em dashes', () => {
   for (const room of rooms) {
     assert.ok(!room.entry.includes('—'), `${room.id} entry contains an em dash`);
+    assert.ok(!room.title.includes('—'), `${room.id} title contains an em dash`);
+    assert.ok(!room.era.includes('—'), `${room.id} era contains an em dash`);
+    assert.ok(!room.place.includes('—'), `${room.id} place contains an em dash`);
   }
 });

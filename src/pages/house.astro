@@ -130,6 +130,28 @@ import { rooms } from '~/data/house';
   }
 
   /*
+   * A sighted keyboard user tabbing through the scene would otherwise land on six
+   * invisible <summary> stops with no focus indicator, because the rule above
+   * still leaves the spine in the tab order (correctly: it is the accessibility
+   * tree route). Reveal it the moment focus lands anywhere inside, the same
+   * focus:not-sr-only shape src/layouts/Layout.astro uses for its skip link. It
+   * hides again the instant focus moves on, since :focus-within stops matching.
+   */
+  .house-stage[data-house-state='scene'] .house-spine:focus-within {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+    width: auto;
+    height: auto;
+    padding: 4rem 1.5rem;
+    margin: 0;
+    overflow-y: auto;
+    clip-path: none;
+    white-space: normal;
+    background: var(--surface);
+  }
+
+  /*
    * The only discoverable way a phone visitor leaves a pushed-in room: no
    * Escape key exists on a phone, and cover-fit leaves no empty canvas area to
    * tap once the camera is in a room. Sitting at the bottom keeps it clear of
@@ -170,14 +192,16 @@ import { rooms } from '~/data/house';
    * Loads the 3D layer only when it can actually run, and only on this route.
    *
    * Initialises on astro:page-load because ClientRouter is on and module scripts do
-   * not re-run after navigation. The guard keeps a second navigation back to /house
-   * from mounting two scenes.
+   * not re-run after navigation. A module-scoped `mounted` flag here would break
+   * permanently after the first mount: the module never re-executes on later
+   * navigations, so the flag would stay true forever and every future visit to
+   * /house would return early with no scene. index.ts already owns the remount
+   * guard (`if (active) return`, cleared on teardown), so this function has no
+   * guard of its own beyond the stage element existing.
    */
-  let mounted = false;
-
   async function mountHouse() {
     const stage = document.getElementById('house-stage');
-    if (!stage || mounted) return;
+    if (!stage) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
@@ -185,7 +209,6 @@ import { rooms } from '~/data/house';
     const gl = probe.getContext('webgl2');
     if (!gl) return;
 
-    mounted = true;
     const { mountHouseScene } = await import('~/lib/house/index.ts');
     mountHouseScene(stage);
   }

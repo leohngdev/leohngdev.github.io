@@ -36,16 +36,31 @@ test('placeAt mid-route cancels the outstanding callback rather than leaving it 
   const character = createCharacter(new THREE.Object3D());
   character.placeAt({ col: 0, row: 0 }, 3);
 
-  let fired = false;
+  // Asserting only that this callback stays false is not enough to catch a
+  // regression here: placeAt clears the queue and zeroes legDuration either
+  // way, so the callback below is unreachable through update() regardless of
+  // whether placeAt actually cancels it. Starting a fresh route afterwards and
+  // checking that ONLY its own callback ever fires is what actually exercises
+  // the interruption rather than a state update() was never going to reach.
+  let oldFired = false;
   character.follow([{ kind: 'walk', to: { col: 2, row: 0 } }], 3, () => {
-    fired = true;
+    oldFired = true;
   });
   // A breakpoint resize snaps the character home mid-route; index.ts calls
   // placeAt for exactly this.
   character.placeAt({ col: 0, row: 0 }, 1);
 
+  // A room click right after the resize starts a new route, the way a visitor
+  // picking a room during the same tick the layout changed would.
+  let newFired = false;
+  character.follow([{ kind: 'walk', to: { col: 0, row: 1 } }], 1, () => {
+    newFired = true;
+  });
+
   character.update(1000);
-  assert.equal(fired, false, 'a route interrupted by placeAt must not report arrival');
+  assert.equal(oldFired, false, 'the callback from the route placeAt interrupted must never fire');
+  assert.equal(newFired, true, 'the callback from the route started after placeAt must fire');
+  assert.deepEqual(character.cell, { col: 0, row: 1 });
   assert.equal(character.moving, false);
 });
 

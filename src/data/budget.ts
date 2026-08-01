@@ -61,7 +61,7 @@ const KB = 1024;
 export const buildBudget: BuildBudget = {
   /**
    * Raised from 10 KB to 15 KB when Astro's ClientRouter was added for cross-page
-   * view transitions, which cost about 4.7 KB and pushed the build to 10.9 KB.
+   * view transitions, which cost about 4.7 KB and pushed the build to 12.6 KB.
    *
    * Recording why, because this is the case the gate exists for. It failed, the
    * spend was looked at, and it was judged worth it: removing the white flash

@@ -7,7 +7,11 @@
 import * as THREE from 'three';
 
 import { CELL_HEIGHT, CELL_WIDTH, FRAME_PADDING, type Cell, centeredPositionFor } from './grid.ts';
-import { rooms } from '~/data/house';
+// Relative rather than the '~' alias: node --test resolves modules with plain
+// Node ESM and has no knowledge of the tsconfig path alias Astro/Vite honour, and
+// camera.test.ts (a value import away from this file) needs a path Node can
+// follow on its own, matching the same fix already applied in character.ts.
+import { rooms } from '../../data/house.ts';
 
 export type CameraState = 'overview' | 'room';
 
@@ -30,7 +34,32 @@ const TRANSITION = 0.65;
  * need opposite formulas, so the fit mode travels with the target rather than
  * being inferred from the extents alone.
  */
-type FitMode = 'contain' | 'cover';
+export type FitMode = 'contain' | 'cover';
+
+/**
+ * The contain/cover split, pulled out as a pure function so it can be unit
+ * tested without a three.js renderer or a WebGL context. This maths shipped
+ * wrong twice on this branch, both times caught by hand arithmetic during
+ * review rather than by a test; camera.test.ts exists so the next mistake here
+ * is caught the same way instead.
+ *
+ * Contain picks the larger of the two candidate half-heights, so the resulting
+ * frustum is never smaller than the target on either axis (nothing outside the
+ * target rectangle is cropped, at the cost of letterboxing). Cover picks the
+ * smaller of the two, so the frustum never exceeds the target on either axis
+ * (nothing inside the target rectangle is left uncovered, at the cost of
+ * cropping the far axis).
+ */
+export function fitHalfHeight(
+  mode: FitMode,
+  targetHalfW: number,
+  targetHalfH: number,
+  aspect: number,
+): number {
+  return mode === 'contain'
+    ? Math.max(targetHalfH, targetHalfW / aspect)
+    : Math.min(targetHalfH, targetHalfW / aspect);
+}
 
 export function createCameraRig(
   camera: THREE.OrthographicCamera,
@@ -58,12 +87,7 @@ export function createCameraRig(
 
   function apply() {
     const aspect = container.clientWidth / Math.max(container.clientHeight, 1);
-    // Contain picks the smaller frustum height so nothing outside the rectangle
-    // shows; cover picks the larger one so nothing inside it is cropped off.
-    const halfHeight =
-      mode === 'contain'
-        ? Math.max(current.halfH, current.halfW / aspect)
-        : Math.min(current.halfH, current.halfW / aspect);
+    const halfHeight = fitHalfHeight(mode, current.halfW, current.halfH, aspect);
     const halfWidth = halfHeight * aspect;
     camera.left = -halfWidth;
     camera.right = halfWidth;
@@ -137,7 +161,17 @@ export function createCameraRig(
       state = 'room';
       const o = offsetFor(cell, columns);
       const { halfW, halfH } = roomHalfExtents();
-      moveTo('cover', o.x, o.y, halfW, halfH);
+      if (!framed) {
+        // The phone layout mounts by pushing straight into room 01 rather than
+        // framing the whole house first, so frameHouse's own snap guard never
+        // runs on that path. Snap here too, so the very first framing after
+        // mount never eases out from the placeholder halfW/halfH of 1 no matter
+        // which of the two entry paths ran.
+        framed = true;
+        snapTo('cover', o.x, o.y, halfW, halfH);
+      } else {
+        moveTo('cover', o.x, o.y, halfW, halfH);
+      }
     },
     pullOut() {
       state = 'overview';

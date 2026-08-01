@@ -58,14 +58,18 @@ export function createInput(options: InputOptions): { dispose(): void } {
     if (document.activeElement !== canvas) return;
 
     switch (event.key) {
+      // Room index rises downward (grid.ts: row 0 is the top floor, later rooms
+      // sit below it), so a higher index reads lower on screen. Up steps toward
+      // room 01 and Down steps toward room 06 to match; Left and Right stay tied
+      // to reading order, where right moves forward the same way Down does.
       case 'ArrowRight':
-      case 'ArrowUp':
+      case 'ArrowDown':
         event.preventDefault();
         focused = Math.min(rooms.length - 1, focused + 1);
         onSelect(focused);
         break;
       case 'ArrowLeft':
-      case 'ArrowDown':
+      case 'ArrowUp':
         event.preventDefault();
         focused = Math.max(0, focused - 1);
         onSelect(focused);
@@ -89,7 +93,7 @@ export function createInput(options: InputOptions): { dispose(): void } {
   canvas.tabIndex = 0;
   canvas.setAttribute(
     'aria-label',
-    'Interactive view of the house. Arrow keys move between rooms and Enter enters the focused one.',
+    'Interactive view of the house where arrow keys and Enter each walk the character into a room and push the camera in.',
   );
 
   return {
