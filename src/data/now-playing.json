@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4E63weMCaNZuGPEFMnuEi8",
-    "title": "exes",
-    "artist": "Tate McRae",
-    "album": "THINK LATER",
-    "href": "https://open.spotify.com/track/4E63weMCaNZuGPEFMnuEi8",
-    "live": false,
+    "id": "3hDFOFjGIFwlSmCO6b39M4",
+    "title": "Perfect Strangers",
+    "artist": "Jonas Blue, JP Cooper",
+    "album": "Perfect Strangers",
+    "href": "https://open.spotify.com/track/3hDFOFjGIFwlSmCO6b39M4",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#dd967a",
-      "onLight": "#8f614f",
-      "onDark": "#dd967a"
+      "raw": "#00a69d",
+      "onLight": "#007a73",
+      "onDark": "#00a69d"
     },
-    "fetchedAt": "2026-08-02T01:19:36.677Z"
+    "fetchedAt": "2026-08-02T07:57:21.941Z"
   }
 }
