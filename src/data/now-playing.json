@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3hDFOFjGIFwlSmCO6b39M4",
-    "title": "Perfect Strangers",
-    "artist": "Jonas Blue, JP Cooper",
-    "album": "Perfect Strangers",
-    "href": "https://open.spotify.com/track/3hDFOFjGIFwlSmCO6b39M4",
-    "live": true,
+    "id": "3AeicLnm55RqcXGBKYQolM",
+    "title": "King",
+    "artist": "Olly Alexander (Years & Years)",
+    "album": "Communion (Deluxe)",
+    "href": "https://open.spotify.com/track/3AeicLnm55RqcXGBKYQolM",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#00a69d",
-      "onLight": "#007a73",
-      "onDark": "#00a69d"
+      "raw": "#18b4fb",
+      "onLight": "#1075a3",
+      "onDark": "#18b4fb"
     },
-    "fetchedAt": "2026-08-02T07:57:21.941Z"
+    "fetchedAt": "2026-08-02T12:47:39.380Z"
   }
 }
