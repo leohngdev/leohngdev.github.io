@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3AeicLnm55RqcXGBKYQolM",
-    "title": "King",
-    "artist": "Olly Alexander (Years & Years)",
-    "album": "Communion (Deluxe)",
-    "href": "https://open.spotify.com/track/3AeicLnm55RqcXGBKYQolM",
+    "id": "1JNsKjaCFgTxjP3EkKfYZo",
+    "title": "LOOP (feat. Lil Cherry)",
+    "artist": "Yves, Lil Cherry",
+    "album": "LOOP",
+    "href": "https://open.spotify.com/track/1JNsKjaCFgTxjP3EkKfYZo",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#18b4fb",
-      "onLight": "#1075a3",
-      "onDark": "#18b4fb"
+      "raw": "#cd956c",
+      "onLight": "#8d674b",
+      "onDark": "#cd956c"
     },
-    "fetchedAt": "2026-08-03T08:53:15.548Z"
+    "fetchedAt": "2026-08-03T14:07:21.580Z"
   }
 }
