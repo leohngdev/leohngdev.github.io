@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1JNsKjaCFgTxjP3EkKfYZo",
-    "title": "LOOP (feat. Lil Cherry)",
-    "artist": "Yves, Lil Cherry",
-    "album": "LOOP",
-    "href": "https://open.spotify.com/track/1JNsKjaCFgTxjP3EkKfYZo",
+    "id": "3T4s8KFP2SGW7hfmbcICsv",
+    "title": "Adios",
+    "artist": "Hoody, GRAY",
+    "album": "Departure",
+    "href": "https://open.spotify.com/track/3T4s8KFP2SGW7hfmbcICsv",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#cd956c",
-      "onLight": "#8d674b",
-      "onDark": "#cd956c"
+      "raw": "#eee61b",
+      "onLight": "#78740e",
+      "onDark": "#eee61b"
     },
-    "fetchedAt": "2026-08-04T01:11:51.597Z"
+    "fetchedAt": "2026-08-04T08:11:57.945Z"
   }
 }
