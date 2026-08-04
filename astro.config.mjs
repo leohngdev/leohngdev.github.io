@@ -1,14 +1,16 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
-import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 
 import { SITE_URL } from './src/data/site.ts';
 
+// No UI framework integration. The only interactive pieces — the command palette,
+// the cost explorer and the instrument readout — are plain TypeScript modules, which
+// is why this site ships single-digit kilobytes of JavaScript instead of react-dom.
 export default defineConfig({
   site: SITE_URL,
-  integrations: [react(), sitemap()],
+  integrations: [sitemap()],
   vite: {
     plugins: [tailwindcss()],
   },

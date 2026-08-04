@@ -3,6 +3,9 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
 import { profile } from '../../data/profile';
+import { labelFor } from '../../lib/categories';
+import AntsaScoringFlow from '../../components/diagrams/AntsaScoringFlow.astro';
+import FrcSensorLoop from '../../components/diagrams/FrcSensorLoop.astro';
 
 export async function getStaticPaths() {
   const projects = await getCollection('projects');
@@ -27,15 +30,27 @@ const { project, next } = Astro.props;
 const { data } = project;
 const { Content } = await render(project);
 
-const categoryLabels: Record<string, string> = {
-  web: 'Web & Backend',
-  game: 'Games',
-  threed: '3D & Technical Art',
-  hardware: 'Robotics',
+/**
+ * Diagrams are keyed off the project id rather than a frontmatter field, so adding
+ * one is a code change in one place and a project without a diagram needs no
+ * placeholder. Only the two entries whose work is a system worth drawing have one:
+ * a diagram of something that does not have a shape would be decoration.
+ */
+const diagrams: Record<string, typeof AntsaScoringFlow> = {
+  'antsa-scoring-engine': AntsaScoringFlow,
+  'frc-robotics': FrcSensorLoop,
 };
+const Diagram = diagrams[project.id];
 ---
 
 <Layout title={`${data.title} — ${profile.displayName}`} description={data.summary} subpage>
+  <!--
+    Case studies are the only long-scroll pages here, so they get a reading position
+    indicator. Driven entirely by CSS scroll-driven animation, so it costs no
+    JavaScript and hides itself on browsers that cannot drive it honestly.
+  -->
+  <div class="read-progress" role="presentation"></div>
+
   <article class="pt-14 pb-20 sm:pt-20 sm:pb-28">
     <div class="container-page">
       <a
@@ -48,16 +63,17 @@ const categoryLabels: Record<string, string> = {
 
       <header class="mt-8 max-w-3xl">
         <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
-          <span class="eyebrow">{categoryLabels[data.category] ?? data.category}</span>
+          <span class="eyebrow">{labelFor(data.category)}</span>
           <span class="text-[var(--border-strong)]" aria-hidden="true">/</span>
-          <span class="font-mono text-xs text-[var(--text-muted)]">{data.period}</span>
+          <span class="datum">{data.period}</span>
         </div>
 
-        <h1 class="mt-4 text-4xl leading-tight font-semibold tracking-tight sm:text-5xl">
+        <!-- Matches the transition:name on the index row, so the title travels. -->
+        <h1 transition:name={`title-${project.id}`} class="text-title mt-4 font-semibold tracking-[-0.015em]">
           {data.title}
         </h1>
 
-        <p class="mt-5 text-xl leading-snug text-[var(--text-secondary)]">{data.tagline}</p>
+        <p class="text-subtitle mt-5 text-[var(--text-secondary)]">{data.tagline}</p>
       </header>
 
       {
@@ -71,6 +87,10 @@ const categoryLabels: Record<string, string> = {
           />
         )
       }
+
+      <!-- Sits directly under the header so a reader sees the shape of the system
+           before reading a word of the prose describing it. -->
+      {Diagram && <div class="mt-10 max-w-3xl"><Diagram /></div>}
 
       <div class="mt-14 grid gap-12 lg:grid-cols-[minmax(0,1fr)_16rem] lg:gap-16">
         <div class="prose-case prose max-w-none">
@@ -141,8 +161,8 @@ const categoryLabels: Record<string, string> = {
           {
             data.confidential && (
               <p class="border-l-2 border-[var(--border-strong)] pl-4 text-xs leading-relaxed text-[var(--text-muted)]">
-                This was commercial work on a live health platform. Implementation is described at a
-                design level only.
+                This was commercial work on a live health platform, so I describe the implementation
+                at a design level only.
               </p>
             )
           }

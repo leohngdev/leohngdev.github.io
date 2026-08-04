@@ -1,0 +1,56 @@
+name: Update now playing
+
+on:
+  schedule:
+    # Every six hours. Deliberately not every few minutes: each update commits and
+    # therefore triggers a deploy, and the panel is "what I have been listening to"
+    # rather than a live ticker. Four deploys a day is quiet; ninety-six is not.
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+# Only what committing a file needs.
+permissions:
+  contents: write
+
+# A queued run should replace an in-flight one rather than stack up behind it.
+concurrency:
+  group: now-playing
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Fetch from Spotify
+        env:
+          SPOTIFY_CLIENT_ID: ${{ secrets.SPOTIFY_CLIENT_ID }}
+          SPOTIFY_CLIENT_SECRET: ${{ secrets.SPOTIFY_CLIENT_SECRET }}
+          SPOTIFY_REFRESH_TOKEN: ${{ secrets.SPOTIFY_REFRESH_TOKEN }}
+        # Exits 0 without writing anything when the secrets are missing, so this
+        # workflow is harmless until Spotify is actually connected.
+        run: node scripts/fetch-now-playing.mjs
+
+      - name: Commit if the track changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/data/now-playing.json src/assets/now-playing.jpg
+          # No change means no commit, so an unchanged track does not trigger a deploy.
+          if git diff --staged --quiet; then
+            echo "Track unchanged, nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: update now playing"
+          git push

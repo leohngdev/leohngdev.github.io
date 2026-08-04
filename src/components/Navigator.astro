@@ -1,0 +1,181 @@
+---
+import { profile } from '../data/profile';
+import type { CollectionEntry } from 'astro:content';
+import { worldFor } from '../lib/categories';
+
+interface Props {
+  projects: CollectionEntry<'projects'>[];
+  roles: CollectionEntry<'experience'>[];
+}
+
+const { projects, roles } = Astro.props;
+
+/**
+ * Doors that show the room.
+ *
+ * A nav bar promises nothing, which is why the portfolios that make you want to
+ * click use an object instead: a filename implies its contents, a screen shows them.
+ * Rather than borrow an IDE or desktop metaphor (crowded, and it reads as tech-y to
+ * half the audience this site is for), each destination here shows a real fragment
+ * of itself, in the real typeface, with a real count underneath.
+ *
+ * Every preview is derived from the same data the destination renders, so a panel
+ * can never advertise something the page does not actually say.
+ */
+const aboutWords = profile.about.join(' ').split(/\s+/).length;
+const readMinutes = Math.max(1, Math.round(aboutWords / 200));
+const skillCount = profile.skills.reduce((total, group) => total + group.items.length, 0);
+const engines = projects.filter((project) => worldFor(project.data.category) === 'engines').length;
+---
+
+<section id="more" class="border-t border-[var(--border-subtle)] py-20 sm:py-28">
+  <div class="container-page">
+    <div class="reveal max-w-2xl">
+      <p class="eyebrow">Elsewhere</p>
+      <h2 class="text-title mt-3 font-semibold tracking-[-0.015em]">The rest of it</h2>
+      <p class="text-lede mt-4 text-[var(--text-secondary)]">
+        Two doors. Each one shows you what is behind it before you commit.
+      </p>
+    </div>
+
+    <div class="mt-12 grid gap-6 sm:mt-16 lg:grid-cols-2">
+      <!--
+        About. The preview is the genuine opening of the page, at reading size,
+        clipped by a mask rather than by truncated text so the cut reads as "there
+        is more" instead of "this was cropped".
+      -->
+      <a href="/about/" class="door group" data-door>
+        <div class="door-frame">
+          <p class="datum mb-3 flex items-center justify-between gap-3">
+            <span class="text-[var(--accent)]">/about</span>
+            <span>{aboutWords} words · {readMinutes} min</span>
+          </p>
+
+          <div class="door-peek">
+            <p class="text-lede text-[var(--text-secondary)]">{profile.about[0]}</p>
+            <p class="text-lede mt-4 text-[var(--text-secondary)]">{profile.about[1]}</p>
+          </div>
+
+          <p class="datum mt-4 flex items-center gap-2 text-[var(--text-primary)]">
+            Read the long version
+            <span
+              class="inline-block transition-transform group-hover:translate-x-1"
+              aria-hidden="true">&#8594;</span
+            >
+          </p>
+        </div>
+      </a>
+
+      <!--
+        Skills and experience. A count of each is a stronger promise than the word
+        "Skills", and the counts come from the data so they cannot go stale.
+      -->
+      <a href="/about/#skills" class="door group" data-door>
+        <div class="door-frame">
+          <p class="datum mb-3 flex items-center justify-between gap-3">
+            <span class="text-[var(--accent)]">/about#skills</span>
+            <span>{skillCount} tools · {roles.length} roles</span>
+          </p>
+
+          <div class="door-peek">
+            <dl class="space-y-3">
+              {
+                profile.skills.map((group) => (
+                  <div class="flex items-baseline justify-between gap-4 border-b border-[var(--border-subtle)] pb-2">
+                    <dt class="text-subtitle font-semibold tracking-[-0.01em]">{group.label}</dt>
+                    <dd class="datum shrink-0">
+                      {group.depth === 'shipped' ? 'shipped' : 'studied'}
+                    </dd>
+                  </div>
+                ))
+              }
+            </dl>
+          </div>
+
+          <p class="datum mt-4 flex items-center gap-2 text-[var(--text-primary)]">
+            {`How far I have taken each one, and where I have been`}
+            <span
+              class="inline-block transition-transform group-hover:translate-x-1"
+              aria-hidden="true">&#8594;</span
+            >
+          </p>
+        </div>
+      </a>
+    </div>
+
+    <p class="reveal datum mt-6 text-[var(--text-muted)]">
+      {`${projects.length} case studies above, ${engines} of them from the engine side. `}
+      <button
+        type="button"
+        data-palette-open
+        class="link-underline text-[var(--accent)]"
+        aria-haspopup="dialog"
+      >
+        Or type a command
+      </button>
+    </p>
+  </div>
+</section>
+
+<style>
+  /* A door is not a card. It has no visible box at rest: the peek content is the
+     surface, and the frame only materialises on approach. That keeps the section
+     from becoming the decorative card grid this whole redesign removed. */
+  .door {
+    display: block;
+    border-radius: 0.75rem;
+    outline-offset: 4px;
+  }
+
+  .door-frame {
+    position: relative;
+    height: 100%;
+    border: 1px solid var(--border-subtle);
+    border-radius: 0.75rem;
+    background-color: var(--surface-raised);
+    padding: 1.25rem;
+    transition:
+      transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 320ms cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (width >= 40rem) {
+    .door-frame {
+      padding: 1.75rem;
+    }
+  }
+
+  /* The lift. Small enough to read as "this is reachable" rather than as a bounce. */
+  .door:hover .door-frame,
+  .door:focus-visible .door-frame {
+    transform: translateY(-4px);
+    border-color: var(--border-strong);
+    box-shadow: 0 18px 40px -24px color-mix(in srgb, var(--color-ink-950) 45%, transparent);
+  }
+
+  /* The peek is masked, not truncated. A fade at the bottom edge says the text
+     continues; an ellipsis would say it was cut off. */
+  .door-peek {
+    max-height: 11rem;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, black 55%, transparent 100%);
+    transition: max-height 320ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .door:hover .door-peek,
+  .door:focus-visible .door-peek {
+    max-height: 13rem;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .door-frame,
+    .door-peek {
+      transition: none;
+    }
+    .door:hover .door-frame,
+    .door:focus-visible .door-frame {
+      transform: none;
+    }
+  }
+</style>

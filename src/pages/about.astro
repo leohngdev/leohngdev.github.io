@@ -1,0 +1,39 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Experience from '../components/Experience.astro';
+import Contact from '../components/Contact.astro';
+import { profile } from '../data/profile';
+
+/**
+ * Split out of the home page so each page has one job. Seven sections on one scroll
+ * read as clutter no matter how good each section is, and the home page is now a
+ * poster: the thesis, the work, the trajectory, and two doors.
+ */
+const roles = (await getCollection('experience')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<Layout
+  title={`About — ${profile.displayName}`}
+  description={profile.subheadline}
+  subpage
+>
+  <article class="pt-14 sm:pt-20">
+    <div class="container-page">
+      <a
+        href="/"
+        class="datum inline-flex items-center gap-2 transition-colors hover:text-[var(--accent)]"
+      >
+        <span aria-hidden="true">&#8592;</span>
+        Home
+      </a>
+    </div>
+  </article>
+
+  <About />
+  <Skills />
+  <Experience roles={roles} />
+  <Contact />
+</Layout>

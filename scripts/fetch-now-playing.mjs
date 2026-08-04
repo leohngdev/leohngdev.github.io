@@ -1,0 +1,261 @@
+/**
+ * Fetches what Leo is listening to and bakes it into the repo.
+ *
+ * Runs in a GitHub Action, not in the browser. Doing the work here rather than at
+ * page load matters for a site that publishes its own weight:
+ *
+ *   - No Spotify request from the visitor, so no third-party connection and no
+ *     credentials that could live in client code.
+ *   - The album art is downloaded, resized and re-encoded here, so it is served
+ *     from our own origin at a size we chose instead of whatever the CDN hands out.
+ *   - The tint colour is extracted here with sharp, so the browser never runs image
+ *     analysis to work out a palette.
+ *
+ * Writes src/data/now-playing.json and src/assets/now-playing.jpg. Both are
+ * committed, so the site reads them at build time and ships zero fetch.
+ *
+ * Requires SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET and SPOTIFY_REFRESH_TOKEN.
+ * Exits 0 without touching anything when they are absent, so a fork or a local run
+ * is a no-op rather than a failure.
+ */
+import { writeFile, mkdir } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
+import path from 'node:path';
+import { createInterface } from 'node:readline/promises';
+import { stdin, stdout } from 'node:process';
+import sharp from 'sharp';
+
+const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
+const JSON_OUT = path.join(ROOT, 'src', 'data', 'now-playing.json');
+const ART_OUT = path.join(ROOT, 'src', 'assets', 'now-playing.jpg');
+
+/**
+ * In CI the credentials arrive as environment variables and a missing one is a
+ * deliberate no-op, so a fork or an unconfigured repo never fails a build.
+ *
+ * Run by hand in a terminal, it asks instead. That exists so the whole pipeline can
+ * be proven locally before any of it reaches the default branch, which matters
+ * because a scheduled workflow only ever runs on the default branch and cannot be
+ * tested from a feature branch at all.
+ */
+async function credentials() {
+  const fromEnv = {
+    id: process.env.SPOTIFY_CLIENT_ID?.trim(),
+    secret: process.env.SPOTIFY_CLIENT_SECRET?.trim(),
+    refresh: process.env.SPOTIFY_REFRESH_TOKEN?.trim(),
+  };
+
+  if (fromEnv.id && fromEnv.secret && fromEnv.refresh) return fromEnv;
+
+  if (!stdin.isTTY) {
+    console.log('now-playing: Spotify credentials absent, leaving the existing data alone.');
+    process.exit(0);
+  }
+
+  console.log('\n  Spotify credentials (they are not stored anywhere by this script)\n');
+  const rl = createInterface({ input: stdin, output: stdout });
+  try {
+    return {
+      id: fromEnv.id || (await rl.question('  Client ID:      ')).trim(),
+      secret: fromEnv.secret || (await rl.question('  Client secret:  ')).trim(),
+      refresh: fromEnv.refresh || (await rl.question('  Refresh token:  ')).trim(),
+    };
+  } finally {
+    rl.close();
+  }
+}
+
+const {
+  id: SPOTIFY_CLIENT_ID,
+  secret: SPOTIFY_CLIENT_SECRET,
+  refresh: SPOTIFY_REFRESH_TOKEN,
+} = await credentials();
+
+if (!SPOTIFY_CLIENT_ID || !SPOTIFY_CLIENT_SECRET || !SPOTIFY_REFRESH_TOKEN) {
+  console.error('\n  All three values are required. Nothing was written.\n');
+  process.exit(1);
+}
+
+/** Exchanges the long-lived refresh token for a short-lived access token. */
+async function getAccessToken() {
+  const basic = Buffer.from(`${SPOTIFY_CLIENT_ID}:${SPOTIFY_CLIENT_SECRET}`).toString('base64');
+  const response = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${basic}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: SPOTIFY_REFRESH_TOKEN,
+    }),
+  });
+
+  if (!response.ok) {
+    throw new Error(`token exchange failed: ${response.status} ${await response.text()}`);
+  }
+  return (await response.json()).access_token;
+}
+
+async function spotify(endpoint, token) {
+  const response = await fetch(`https://api.spotify.com/v1${endpoint}`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  // 204 means nothing is playing, which is not an error.
+  if (response.status === 204) return null;
+  if (!response.ok) throw new Error(`${endpoint} failed: ${response.status}`);
+  return response.json();
+}
+
+/** sRGB relative luminance, per WCAG. */
+function luminance({ r, g, b }) {
+  const channel = (value) => {
+    const v = value / 255;
+    return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * channel(r) + 0.7152 * channel(g) + 0.0722 * channel(b);
+}
+
+function contrast(a, b) {
+  const [light, dark] = [luminance(a), luminance(b)].sort((x, y) => y - x);
+  return (light + 0.05) / (dark + 0.05);
+}
+
+const hex = ({ r, g, b }) =>
+  `#${[r, g, b].map((v) => Math.round(v).toString(16).padStart(2, '0')).join('')}`;
+
+/** HSL saturation and lightness only; hue is preserved by working in RGB. */
+function satLum({ r, g, b }) {
+  const [max, min] = [Math.max(r, g, b) / 255, Math.min(r, g, b) / 255];
+  const l = (max + min) / 2;
+  const d = max - min;
+  return { s: d === 0 ? 0 : d / (1 - Math.abs(2 * l - 1)), l };
+}
+
+/**
+ * Finds the most vivid colour in the artwork, not the most common one.
+ *
+ * sharp's stats().dominant returns the modal colour, which for most album covers is
+ * the background: a near-black or a near-white. Using it produced a grey tint from a
+ * dark cover, which defeats the point of taking colour from the artwork at all.
+ *
+ * This samples a downscaled copy and scores each pixel by saturation, penalising the
+ * very dark and the very pale so a black background cannot win on a rounding error.
+ * Returns null when the art is genuinely monochrome: a greyscale "accent" reads as
+ * broken rather than designed, and the site should keep its amber in that case.
+ */
+async function vividColour(buffer) {
+  const { data } = await sharp(buffer)
+    .resize(64, 64, { fit: 'cover' })
+    .removeAlpha()
+    .raw()
+    .toBuffer({ resolveWithObject: true });
+
+  let best = null;
+  let bestScore = 0;
+
+  for (let i = 0; i < data.length; i += 3) {
+    const pixel = { r: data[i], g: data[i + 1], b: data[i + 2] };
+    const { s, l } = satLum(pixel);
+    // Mid lightness is worth most: 0 at pure black or white, 1 at l = 0.5.
+    const usable = 1 - Math.abs(l - 0.5) * 2;
+    const score = s * usable ** 0.5;
+    if (score > bestScore) {
+      bestScore = score;
+      best = pixel;
+    }
+  }
+
+  // Below this the cover has no colour worth borrowing.
+  return bestScore < 0.12 ? null : best;
+}
+
+/**
+ * Walks a colour toward the given target until it clears a contrast ratio.
+ *
+ * An album cover is chosen by an art director, not by an accessibility auditor: pull
+ * a pale pastel or a near-black straight out of one and body text on top of it stops
+ * being readable. The hue is what carries the personality, so this keeps the hue and
+ * moves only the lightness until the ratio is met.
+ */
+function clampForContrast(colour, against, ratio, toward) {
+  let current = { ...colour };
+  for (let step = 0; step < 40; step += 1) {
+    if (contrast(current, against) >= ratio) break;
+    current = {
+      r: current.r + (toward.r - current.r) * 0.06,
+      g: current.g + (toward.g - current.g) * 0.06,
+      b: current.b + (toward.b - current.b) * 0.06,
+    };
+  }
+  return current;
+}
+
+async function main() {
+  const token = await getAccessToken();
+
+  let track = null;
+  let live = false;
+
+  const playing = await spotify('/me/player/currently-playing', token);
+  if (playing?.item) {
+    track = playing.item;
+    live = true;
+  } else {
+    const recent = await spotify('/me/player/recently-played?limit=1', token);
+    track = recent?.items?.[0]?.track ?? null;
+  }
+
+  if (!track) {
+    console.log('now-playing: nothing playing and no history, leaving data alone.');
+    return;
+  }
+
+  const artUrl = track.album?.images?.[0]?.url;
+  let palette = null;
+
+  if (artUrl) {
+    const art = Buffer.from(await (await fetch(artUrl)).arrayBuffer());
+
+    await mkdir(path.dirname(ART_OUT), { recursive: true });
+    // 320px is twice the rendered size, which covers a 2x display and no more.
+    await sharp(art).resize(320, 320, { fit: 'cover' }).jpeg({ quality: 78 }).toFile(ART_OUT);
+
+    const vivid = await vividColour(art);
+
+    if (!vivid) {
+      console.log('now-playing: artwork is effectively monochrome, keeping the amber accent.');
+    } else {
+      // These are the site's own surfaces, from global.css.
+      const lightSurface = { r: 248, g: 247, b: 245 };
+      const darkSurface = { r: 12, g: 11, b: 10 };
+
+      palette = {
+        raw: hex(vivid),
+        // Accents sit on text-sized elements, so hold them to AA body contrast.
+        onLight: hex(clampForContrast(vivid, lightSurface, 4.5, { r: 0, g: 0, b: 0 })),
+        onDark: hex(clampForContrast(vivid, darkSurface, 4.5, { r: 255, g: 255, b: 255 })),
+      };
+    }
+  }
+
+  const payload = {
+    track: {
+      /** Used by the embedded player. The component also parses href as a fallback. */
+      id: track.id ?? null,
+      title: track.name,
+      artist: track.artists?.map((a) => a.name).join(', ') ?? '',
+      album: track.album?.name ?? '',
+      href: track.external_urls?.spotify ?? null,
+      live,
+      art: artUrl ? 'now-playing.jpg' : null,
+      palette,
+      fetchedAt: new Date().toISOString(),
+    },
+  };
+
+  await writeFile(JSON_OUT, `${JSON.stringify(payload, null, 2)}\n`, 'utf8');
+  console.log(`now-playing: ${payload.track.title} — ${payload.track.artist} (live: ${live})`);
+}
+
+await main();

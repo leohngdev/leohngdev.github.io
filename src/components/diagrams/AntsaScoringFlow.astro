@@ -1,0 +1,136 @@
+---
+import DiagramFrame from './DiagramFrame.astro';
+
+/**
+ * The shape of the change I made at ANTSA: scoring rules moved out of code and into
+ * data, so the engine reads configuration at runtime instead of having the rules
+ * compiled into it.
+ *
+ * Deliberately describes only my own architecture. No client UI, no screens, no
+ * internals beyond what the case study already states in prose.
+ */
+const config = [
+  { label: 'categories', y: 74 },
+  { label: 'thresholds', y: 100 },
+  { label: 'weights  Σ=1', y: 126 },
+  { label: 'reverse flags', y: 152 },
+];
+---
+
+<DiagramFrame
+  title="Questionnaire configuration and clinician responses feed a scoring engine, which produces per-category scores, maps them to severity bands, and outputs to the dashboard and the PDF report."
+  caption="Scoring rules live in configuration, so a new assessment is data rather than a release."
+  viewBox="0 0 706 232"
+>
+  <!-- Column headings -->
+  <g fill="var(--text-muted)" font-size="11" letter-spacing="1.6">
+    <text x="20" y="34">CONFIGURATION</text>
+    <text x="330" y="34">ENGINE</text>
+    <text x="600" y="34">OUTPUT</text>
+  </g>
+
+  <!-- Configuration: authored per questionnaire, read at runtime -->
+  <rect
+    x="20"
+    y="50"
+    width="200"
+    height="120"
+    rx="8"
+    fill="none"
+    stroke="var(--border-strong)"
+    stroke-width="1"></rect>
+  {
+    config.map((row) => (
+      <>
+        <circle cx="40" cy={row.y - 4} r="2.5" fill="var(--accent)" />
+        <text x="52" y={row.y} fill="var(--text-primary)" font-size="13">
+          {row.label}
+        </text>
+      </>
+    ))
+  }
+
+  <!-- Configuration into the engine -->
+  <path
+    d="M220 110 H300"
+    stroke="var(--border-strong)"
+    stroke-width="1.5"
+    fill="none"
+    marker-end="url(#arrow)"></path>
+
+  <!-- Responses arrive separately, from the client app. Dashed because they come
+       over the wire rather than out of configuration, and ends at 136 so the
+       arrowhead lands on the box edge instead of a few pixels short of it. -->
+  <text x="20" y="212" fill="var(--text-secondary)" font-size="13">responses</text>
+  <path
+    d="M108 204 H355 V136"
+    stroke="var(--border-subtle)"
+    stroke-width="1.5"
+    stroke-dasharray="4 4"
+    fill="none"
+    marker-end="url(#arrow-muted)"></path>
+
+  <!-- The engine: score, then band -->
+  <rect
+    x="300"
+    y="86"
+    width="110"
+    height="46"
+    rx="8"
+    fill="var(--surface-sunken)"
+    stroke="var(--accent)"
+    stroke-width="1.5"></rect>
+  <text x="355" y="114" fill="var(--text-primary)" font-size="13" text-anchor="middle">score</text>
+
+  <path
+    d="M410 109 H460"
+    stroke="var(--border-strong)"
+    stroke-width="1.5"
+    fill="none"
+    marker-end="url(#arrow)"></path>
+
+  <rect
+    x="460"
+    y="86"
+    width="100"
+    height="46"
+    rx="8"
+    fill="var(--surface-sunken)"
+    stroke="var(--accent)"
+    stroke-width="1.5"></rect>
+  <text x="510" y="114" fill="var(--text-primary)" font-size="13" text-anchor="middle">band</text>
+
+  <!-- Fan out to the two surfaces clinicians actually use -->
+  <path
+    d="M560 100 H590 V74 H600"
+    stroke="var(--border-strong)"
+    stroke-width="1.5"
+    fill="none"
+    marker-end="url(#arrow)"></path>
+  <path
+    d="M560 118 H590 V146 H600"
+    stroke="var(--border-strong)"
+    stroke-width="1.5"
+    fill="none"
+    marker-end="url(#arrow)"></path>
+
+  <text x="612" y="79" fill="var(--text-primary)" font-size="13">dashboard</text>
+  <text x="612" y="151" fill="var(--text-primary)" font-size="13">PDF report</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0 0 L8 4 L0 8 z" fill="var(--border-strong)"></path>
+    </marker>
+    <marker
+      id="arrow-muted"
+      viewBox="0 0 8 8"
+      refX="7"
+      refY="4"
+      markerWidth="6"
+      markerHeight="6"
+      orient="auto"
+    >
+      <path d="M0 0 L8 4 L0 8 z" fill="var(--border-subtle)"></path>
+    </marker>
+  </defs>
+</DiagramFrame>

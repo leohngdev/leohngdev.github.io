@@ -1,6 +1,7 @@
 ---
 import { profile } from '../data/profile';
 import ThemeToggle from './ThemeToggle.astro';
+import NowPlaying from './NowPlaying.astro';
 
 interface Props {
   subpage?: boolean;
@@ -9,10 +10,15 @@ interface Props {
 const { subpage = false } = Astro.props;
 const prefix = subpage ? '/' : '';
 
+/**
+ * Work and Trajectory are anchors on the home page; About is its own route now.
+ * Skills moved to /about, so linking it here would have sent people to a section
+ * that no longer exists on whichever page they were standing on.
+ */
 const links = [
   { label: 'Work', href: `${prefix}#work` },
-  { label: 'About', href: `${prefix}#about` },
-  { label: 'Skills', href: `${prefix}#skills` },
+  { label: 'Trajectory', href: `${prefix}#timeline` },
+  { label: 'About', href: '/about/' },
   { label: 'Contact', href: `${prefix}#contact` },
 ];
 ---
@@ -47,13 +53,46 @@ const links = [
         </ul>
       </nav>
 
+      <!--
+        A keyboard shortcut nobody can discover is worth nothing, so the palette
+        gets a visible, clickable affordance that also states its shortcut.
+      -->
+      <button
+        type="button"
+        data-palette-open
+        class="flex items-center gap-2 rounded-md border border-[var(--border-strong)] px-2.5 py-1.5 font-mono text-xs tracking-wide transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+        aria-haspopup="dialog"
+      >
+        <span aria-hidden="true">&#8984;K</span>
+        <span class="sr-only">Open command palette</span>
+      </button>
+
+      <!--
+        Opens the CV in a window rather than downloading. Still a real anchor to the
+        PDF, so middle-click, right-click-save and a no-JS visitor all keep working;
+        the script only intercepts the plain click.
+
+        prefetchAll treats the CV as an internal link and was fetching the whole PDF
+        on every page load, for every visitor, most of whom never download it. The
+        site publishes its own page weight, so spending bytes on a file nobody asked
+        for is not a thing it can do.
+      -->
       <a
         href={profile.resume}
+        data-cv-open
+        aria-haspopup="dialog"
         class="rounded-md border border-[var(--border-strong)] px-3 py-1.5 font-mono text-xs tracking-wide transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-        download
+        data-astro-prefetch="false"
       >
         CV
       </a>
+
+      <!--
+        In the chrome, not buried down the page: a section near the footer was a few
+        lines of small text any visitor scrolled past. Here it reads as a control the
+        site intends you to find, and it exists on every page.
+      -->
+      <NowPlaying />
 
       <ThemeToggle />
     </div>

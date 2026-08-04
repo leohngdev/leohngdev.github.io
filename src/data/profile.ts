@@ -22,7 +22,26 @@ export const profile = {
   locationDetail: 'Melbourne, Australia',
   available: 'Open to graduate and junior software roles in Melbourne',
 
+  /**
+   * The one sentence the site is built around, set at display scale in the hero.
+   * It is a causal claim, not a list: the games half explains why the software half
+   * is good, which is the thing a four-second scan needs to land. Everything else on
+   * the page — including the measured page-weight readout — is evidence for it.
+   * Keep it under about 40 characters or it stops working at display size.
+   */
+  thesis: 'Games taught me what software costs.',
+
+  /**
+   * One line of concrete proof directly beneath the thesis. Both halves, fast.
+   * Deliberately does NOT restate the ANTSA tagline: that sentence already appears
+   * on the lead row of the work index one screen further down, and reading the same
+   * sentence twice in the first two screens makes the page feel thinner than it is.
+   */
+  heroProof:
+    'Software Development major, Games Development minor at Monash. Most recently on a live Australian mental health platform.',
+
   headline: 'I build full-stack web apps, and things that run in game engines.',
+  /** Meta description and OG copy. Longer than the hero copy on purpose. */
   subheadline:
     'Software Development graduate from Monash with a Games Development minor. Most recently I rebuilt the scoring engine behind a live Australian digital mental health platform.',
 
@@ -47,52 +66,70 @@ export const profile = {
     ],
   },
 
-  /** Deliberately grouped the same way as the CV so the two read as one story. */
+  /**
+   * Deliberately grouped the same way as the CV so the two read as one story.
+   *
+   * `depth` is what the skills section renders as a bar, and it exists because a flat
+   * chip grid gave Unreal Engine and Substance Painter the same visual weight as
+   * Python. Claiming less where less is true is the whole point: an interviewer who
+   * probes the weakest item should find it already labelled as the weakest item.
+   *
+   *   shipped — production code, against real sign-off
+   *   built   — real things made with it, outside a classroom exercise
+   *   studied — coursework and genuine use, not professional depth
+   */
   skills: [
     {
       id: 'languages',
       label: 'Languages',
+      depth: 'shipped',
       note: 'Comfortable picking up whatever the codebase already uses.',
       items: ['Python', 'Java', 'C++', 'C#', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'PHP', 'SQL'],
     },
     {
       id: 'web',
       label: 'Web & Backend',
-      note: 'Where most of my professional work has happened.',
+      depth: 'shipped',
+      note: 'Most of my paid work sits here, including the ANTSA scoring engine.',
       items: ['Node.js', 'Nest.js', 'React', 'React Native', 'CakePHP', 'PostgreSQL', 'MySQL', 'REST APIs'],
+    },
+    {
+      id: 'tools',
+      label: 'Ways of Working',
+      depth: 'shipped',
+      note: 'Shipped against a client who could reject it, rather than a marking rubric.',
+      items: ['Git & GitHub', 'Agile / Scrum', 'UAT', 'Code Review', 'CI/CD', 'Debugging legacy systems'],
     },
     {
       id: 'game',
       label: 'Game & 3D',
-      note: 'The other half of my degree, and the reason I like performance problems.',
+      depth: 'studied',
+      note: 'The other half of my degree, and the reason I care what a frame costs. Coursework, no shipped titles.',
       items: [
-        'Unreal Engine',
         'Unity',
         'Maya',
+        'Unreal Engine',
         'Substance Painter',
         'AR/VR',
         'Character Rigging & Animation',
       ],
     },
-    {
-      id: 'tools',
-      label: 'Ways of Working',
-      note: 'Shipped against real client sign-off, not just assignment deadlines.',
-      items: ['Git & GitHub', 'Agile / Scrum', 'UAT', 'Code Review', 'CI/CD', 'Debugging legacy systems'],
-    },
   ],
 
   /** First person, written to be read out loud. Rendered in the About section. */
   about: [
-    "I'm a software developer in Melbourne. I finished a Bachelor of IT at Monash at the end of 2025, majoring in Software Development with a minor in Games Development, which is a slightly unusual pairing that turned out to be the most useful thing I did.",
-    'Before university I spent two years on an FRC robotics team in Ho Chi Minh City writing navigation and sensor code in Python and C++. That was where I learned that software is mostly about the gap between what you think the system is doing and what it is actually doing.',
-    "My most recent work was on ANTSA, a live Australian digital mental health platform, where I replaced a hardcoded questionnaire scoring system with a fully configurable one. The work I'm proudest of there wasn't a feature. It was rebuilding a broken multiservice dev environment from scratch, and then finding a silent bug that had been feeding clinicians the wrong answer options.",
-    "The engine and 3D side is not a hobby I keep separate. Writing gameplay systems in C# and C++, rigging characters in Maya and optimising topology for realtime rendering taught me to care about frame budgets and memory, and I bring that instinct back to web work.",
+    "I'm a software developer in Melbourne. I finished a Bachelor of IT at Monash at the end of 2025, majoring in Software Development with a minor in Games Development. It is an odd pairing and I would choose it again.",
+    'Before university I spent two years on an FRC robotics team in Ho Chi Minh City, writing navigation and sensor code in Python and C++. Two years of watching a machine do the wrong thing taught me where the work lives: in the gap between what you think a system does and what it does.',
+    'My most recent work was ANTSA, a live Australian digital mental health platform, where I made questionnaire scoring configurable at runtime. The two things I am proudest of never shipped as features. I stood the whole multiservice stack up locally before writing a line, then traced a data mismatch that produced no error and no log entry.',
+    'The engine and 3D half feeds the rest. Writing gameplay systems in C# and C++ and optimising topology for realtime rendering made me count frames and bytes. I still count them when I write a backend.',
   ],
 
-  /** Condensed one-paragraph version used at the top of the CV PDF. */
+  /**
+   * Condensed one-paragraph version used at the top of the CV PDF. Keeps the keyword
+   * density an applicant tracking system scans for, without the filler.
+   */
   cvSummary:
-    'IT graduate (Software Development major, Games Development minor) with hands-on experience in full stack web development, agile delivery with real clients, and game/engine programming. Comfortable across the stack, from debugging legacy backends to shipping production features.',
+    'IT graduate, Software Development major and Games Development minor. I build full stack web applications, deliver against real client sign-off in an agile team, and program game engines in C++ and C#. I debug legacy backends and ship production features.',
 
   /** Shown in the hero as a subtle hint that the terminal is real. */
   terminalHint: 'try: whoami',
