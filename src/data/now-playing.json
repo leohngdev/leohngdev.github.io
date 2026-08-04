@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3T4s8KFP2SGW7hfmbcICsv",
-    "title": "Adios",
-    "artist": "Hoody, GRAY",
-    "album": "Departure",
-    "href": "https://open.spotify.com/track/3T4s8KFP2SGW7hfmbcICsv",
+    "id": "5GxeSssLNXPoD4uJYxHQBL",
+    "title": "Kiwi",
+    "artist": "Sarina",
+    "album": "Glass Paradise (Deluxe)",
+    "href": "https://open.spotify.com/track/5GxeSssLNXPoD4uJYxHQBL",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#eee61b",
-      "onLight": "#78740e",
-      "onDark": "#eee61b"
+      "raw": "#f07605",
+      "onLight": "#b05704",
+      "onDark": "#f07605"
     },
-    "fetchedAt": "2026-08-04T13:29:23.750Z"
+    "fetchedAt": "2026-08-04T19:14:08.317Z"
   }
 }
