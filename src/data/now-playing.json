@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6Pgkp4qUoTmJIPn7ReaGxL",
-    "title": "Without You (feat. Sandro Cavazza)",
-    "artist": "Avicii, Sandro Cavazza",
-    "album": "AVĪCI (01)",
-    "href": "https://open.spotify.com/track/6Pgkp4qUoTmJIPn7ReaGxL",
-    "live": true,
+    "id": "1aKvZDoLGkNMxoRYgkckZG",
+    "title": "Magnetic",
+    "artist": "ILLIT",
+    "album": "SUPER REAL ME",
+    "href": "https://open.spotify.com/track/1aKvZDoLGkNMxoRYgkckZG",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ddb772",
-      "onLight": "#7f6941",
-      "onDark": "#ddb772"
+      "raw": "#b18047",
+      "onLight": "#8a6437",
+      "onDark": "#b18047"
     },
-    "fetchedAt": "2026-08-05T08:10:22.128Z"
+    "fetchedAt": "2026-08-05T13:27:52.899Z"
   }
 }
