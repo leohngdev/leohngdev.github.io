@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5GxeSssLNXPoD4uJYxHQBL",
-    "title": "Kiwi",
-    "artist": "Sarina",
-    "album": "Glass Paradise (Deluxe)",
-    "href": "https://open.spotify.com/track/5GxeSssLNXPoD4uJYxHQBL",
-    "live": false,
+    "id": "6Pgkp4qUoTmJIPn7ReaGxL",
+    "title": "Without You (feat. Sandro Cavazza)",
+    "artist": "Avicii, Sandro Cavazza",
+    "album": "AVĪCI (01)",
+    "href": "https://open.spotify.com/track/6Pgkp4qUoTmJIPn7ReaGxL",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f07605",
-      "onLight": "#b05704",
-      "onDark": "#f07605"
+      "raw": "#ddb772",
+      "onLight": "#7f6941",
+      "onDark": "#ddb772"
     },
-    "fetchedAt": "2026-08-05T01:12:57.675Z"
+    "fetchedAt": "2026-08-05T08:10:22.128Z"
   }
 }
