@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1aKvZDoLGkNMxoRYgkckZG",
-    "title": "Magnetic",
-    "artist": "ILLIT",
-    "album": "SUPER REAL ME",
-    "href": "https://open.spotify.com/track/1aKvZDoLGkNMxoRYgkckZG",
-    "live": false,
+    "id": "1nInOsHbtotAmEOQhtvnzP",
+    "title": "Stronger (What Doesn't Kill You)",
+    "artist": "Kelly Clarkson",
+    "album": "Stronger (Deluxe Version)",
+    "href": "https://open.spotify.com/track/1nInOsHbtotAmEOQhtvnzP",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#b18047",
-      "onLight": "#8a6437",
-      "onDark": "#b18047"
+      "raw": "#7a511d",
+      "onLight": "#7a511d",
+      "onDark": "#97774f"
     },
-    "fetchedAt": "2026-08-06T01:10:16.748Z"
+    "fetchedAt": "2026-08-06T08:09:18.730Z"
   }
 }
