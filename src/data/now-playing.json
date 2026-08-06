@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1nInOsHbtotAmEOQhtvnzP",
-    "title": "Stronger (What Doesn't Kill You)",
-    "artist": "Kelly Clarkson",
-    "album": "Stronger (Deluxe Version)",
-    "href": "https://open.spotify.com/track/1nInOsHbtotAmEOQhtvnzP",
+    "id": "3znIACSXPLn3HFCf7moZ28",
+    "title": "It's Going Down Now",
+    "artist": "Azumi Takahashi, Lotus Juice, アトラスサウンドチーム, ATLUS GAME MUSIC",
+    "album": "Persona 3 Reload Original Soundtrack",
+    "href": "https://open.spotify.com/track/3znIACSXPLn3HFCf7moZ28",
     "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7a511d",
-      "onLight": "#7a511d",
-      "onDark": "#97774f"
+      "raw": "#ff0224",
+      "onLight": "#e10220",
+      "onDark": "#ff0224"
     },
-    "fetchedAt": "2026-08-06T08:09:18.730Z"
+    "fetchedAt": "2026-08-06T13:26:07.418Z"
   }
 }
