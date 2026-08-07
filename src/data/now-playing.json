@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4srk9VdSiPW0IKqeX4KNDb",
-    "title": "Viola",
-    "artist": "Yves",
-    "album": "I Did: Bloom (Deluxe)",
-    "href": "https://open.spotify.com/track/4srk9VdSiPW0IKqeX4KNDb",
+    "id": "7HcPilnEni70hIwOr7cKSR",
+    "title": "a thousand miles",
+    "artist": "sennoh, 03 Greedo",
+    "album": "same but different 2!*",
+    "href": "https://open.spotify.com/track/7HcPilnEni70hIwOr7cKSR",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d52618",
-      "onLight": "#d52618",
-      "onDark": "#dc4b3f"
+      "raw": "#00ffff",
+      "onLight": "#007979",
+      "onDark": "#00ffff"
     },
-    "fetchedAt": "2026-08-07T06:55:31.912Z"
+    "fetchedAt": "2026-08-07T12:32:49.549Z"
   }
 }
