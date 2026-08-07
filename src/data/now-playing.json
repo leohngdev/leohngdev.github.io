@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "65FftemJ1DbbZ45DUfHJXE",
-    "title": "OMG",
-    "artist": "NewJeans",
-    "album": "NewJeans 'OMG'",
-    "href": "https://open.spotify.com/track/65FftemJ1DbbZ45DUfHJXE",
+    "id": "4srk9VdSiPW0IKqeX4KNDb",
+    "title": "Viola",
+    "artist": "Yves",
+    "album": "I Did: Bloom (Deluxe)",
+    "href": "https://open.spotify.com/track/4srk9VdSiPW0IKqeX4KNDb",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-08-06T22:41:45.429Z"
+    "palette": {
+      "raw": "#d52618",
+      "onLight": "#d52618",
+      "onDark": "#dc4b3f"
+    },
+    "fetchedAt": "2026-08-07T01:54:36.523Z"
   }
 }
