@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7HcPilnEni70hIwOr7cKSR",
-    "title": "a thousand miles",
-    "artist": "sennoh, 03 Greedo",
-    "album": "same but different 2!*",
-    "href": "https://open.spotify.com/track/7HcPilnEni70hIwOr7cKSR",
+    "id": "3nQA8Wj3KmWQRKq7yu4Db3",
+    "title": "COCONUT (feat. Eem Triplin)",
+    "artist": "SAILORR, Eem Triplin",
+    "album": "FROM FLORIDA'S FINEST DELU/XXX [for my delusional ex]",
+    "href": "https://open.spotify.com/track/3nQA8Wj3KmWQRKq7yu4Db3",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#00ffff",
-      "onLight": "#007979",
-      "onDark": "#00ffff"
+      "raw": "#efa265",
+      "onLight": "#92633e",
+      "onDark": "#efa265"
     },
-    "fetchedAt": "2026-08-07T12:32:49.549Z"
+    "fetchedAt": "2026-08-07T18:34:33.056Z"
   }
 }
