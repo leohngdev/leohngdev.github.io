@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2q4rjDy9WhaN3o9MvDbO21",
-    "title": "Kiss Me Thru The Phone",
-    "artist": "Soulja Boy, Sammie",
-    "album": "iSouljaBoyTellem",
-    "href": "https://open.spotify.com/track/2q4rjDy9WhaN3o9MvDbO21",
+    "id": "3cZajhyr8LmtPfHZ9296tj",
+    "title": "No Broke Boys",
+    "artist": "Disco Lines, Tinashe",
+    "album": "No Broke Boys",
+    "href": "https://open.spotify.com/track/3cZajhyr8LmtPfHZ9296tj",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#136db2",
-      "onLight": "#136db2",
-      "onDark": "#2e7ebb"
+      "raw": "#ff73bf",
+      "onLight": "#b04f84",
+      "onDark": "#ff73bf"
     },
-    "fetchedAt": "2026-08-08T12:18:25.731Z"
+    "fetchedAt": "2026-08-08T18:16:59.047Z"
   }
 }
