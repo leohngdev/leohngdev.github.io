@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3nQA8Wj3KmWQRKq7yu4Db3",
-    "title": "COCONUT (feat. Eem Triplin)",
-    "artist": "SAILORR, Eem Triplin",
-    "album": "FROM FLORIDA'S FINEST DELU/XXX [for my delusional ex]",
-    "href": "https://open.spotify.com/track/3nQA8Wj3KmWQRKq7yu4Db3",
+    "id": "3LN7i6dp0VlW9rD5H5uDOJ",
+    "title": "Brick By Brick",
+    "artist": "Say Now",
+    "album": "Brick By Brick",
+    "href": "https://open.spotify.com/track/3LN7i6dp0VlW9rD5H5uDOJ",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#efa265",
-      "onLight": "#92633e",
-      "onDark": "#efa265"
+      "raw": "#fabc9d",
+      "onLight": "#876555",
+      "onDark": "#fabc9d"
     },
-    "fetchedAt": "2026-08-07T18:34:33.056Z"
+    "fetchedAt": "2026-08-08T00:36:52.815Z"
   }
 }
