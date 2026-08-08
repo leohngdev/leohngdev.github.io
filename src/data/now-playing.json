@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3LN7i6dp0VlW9rD5H5uDOJ",
-    "title": "Brick By Brick",
-    "artist": "Say Now",
-    "album": "Brick By Brick",
-    "href": "https://open.spotify.com/track/3LN7i6dp0VlW9rD5H5uDOJ",
+    "id": "2q4rjDy9WhaN3o9MvDbO21",
+    "title": "Kiss Me Thru The Phone",
+    "artist": "Soulja Boy, Sammie",
+    "album": "iSouljaBoyTellem",
+    "href": "https://open.spotify.com/track/2q4rjDy9WhaN3o9MvDbO21",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fabc9d",
-      "onLight": "#876555",
-      "onDark": "#fabc9d"
+      "raw": "#136db2",
+      "onLight": "#136db2",
+      "onDark": "#2e7ebb"
     },
-    "fetchedAt": "2026-08-08T00:36:52.815Z"
+    "fetchedAt": "2026-08-08T06:28:10.079Z"
   }
 }
