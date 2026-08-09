@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3cZajhyr8LmtPfHZ9296tj",
-    "title": "No Broke Boys",
-    "artist": "Disco Lines, Tinashe",
-    "album": "No Broke Boys",
-    "href": "https://open.spotify.com/track/3cZajhyr8LmtPfHZ9296tj",
+    "id": "0LsfA3w3zQh2fcN4XeHmSK",
+    "title": "Blue",
+    "artist": "PinkPantheress",
+    "album": "Heaven knows",
+    "href": "https://open.spotify.com/track/0LsfA3w3zQh2fcN4XeHmSK",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff73bf",
-      "onLight": "#b04f84",
-      "onDark": "#ff73bf"
+      "raw": "#832316",
+      "onLight": "#832316",
+      "onDark": "#a9675e"
     },
-    "fetchedAt": "2026-08-09T00:38:53.654Z"
+    "fetchedAt": "2026-08-09T06:33:07.308Z"
   }
 }
