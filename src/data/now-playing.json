@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "09LrGvT9KsACH66RHYMDyR",
-    "title": "Don’t Smile",
-    "artist": "Sabrina Carpenter",
-    "album": "Short n' Sweet",
-    "href": "https://open.spotify.com/track/09LrGvT9KsACH66RHYMDyR",
+    "id": "39LLxExYz6ewLAcYrzQQyP",
+    "title": "Levitating",
+    "artist": "Dua Lipa",
+    "album": "Future Nostalgia",
+    "href": "https://open.spotify.com/track/39LLxExYz6ewLAcYrzQQyP",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#feae72",
-      "onLight": "#926441",
-      "onDark": "#feae72"
+      "raw": "#a9541a",
+      "onLight": "#a9541a",
+      "onDark": "#b36835"
     },
-    "fetchedAt": "2026-08-10T07:01:06.782Z"
+    "fetchedAt": "2026-08-10T12:36:39.500Z"
   }
 }
