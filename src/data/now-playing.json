@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "5SmXEPnevlRjBPWBG7oKIi",
-    "title": "Honeymoon Avenue",
-    "artist": "Ariana Grande",
-    "album": "Yours Truly",
-    "href": "https://open.spotify.com/track/5SmXEPnevlRjBPWBG7oKIi",
+    "id": "7B3BwNecBhKvNwSMOOl7Gk",
+    "title": "Fame is a Gun",
+    "artist": "Addison Rae",
+    "album": "Addison",
+    "href": "https://open.spotify.com/track/7B3BwNecBhKvNwSMOOl7Gk",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-08-10T18:37:49.139Z"
+    "palette": {
+      "raw": "#fdbf1b",
+      "onLight": "#88670f",
+      "onDark": "#fdbf1b"
+    },
+    "fetchedAt": "2026-08-11T00:41:06.132Z"
   }
 }
