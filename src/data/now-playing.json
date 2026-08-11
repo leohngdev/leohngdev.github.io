@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7B3BwNecBhKvNwSMOOl7Gk",
-    "title": "Fame is a Gun",
-    "artist": "Addison Rae",
-    "album": "Addison",
-    "href": "https://open.spotify.com/track/7B3BwNecBhKvNwSMOOl7Gk",
-    "live": false,
+    "id": "2YHzuwzIsz8qzpuXh4fFV9",
+    "title": "Ur All Mine",
+    "artist": "Westwood",
+    "album": "Glamour",
+    "href": "https://open.spotify.com/track/2YHzuwzIsz8qzpuXh4fFV9",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fdbf1b",
-      "onLight": "#88670f",
-      "onDark": "#fdbf1b"
+      "raw": "#7e91a6",
+      "onLight": "#627182",
+      "onDark": "#7e91a6"
     },
-    "fetchedAt": "2026-08-11T00:41:06.132Z"
+    "fetchedAt": "2026-08-11T06:40:52.165Z"
   }
 }
