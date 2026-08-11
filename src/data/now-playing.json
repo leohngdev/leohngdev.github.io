@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2YHzuwzIsz8qzpuXh4fFV9",
-    "title": "Ur All Mine",
-    "artist": "Westwood",
-    "album": "Glamour",
-    "href": "https://open.spotify.com/track/2YHzuwzIsz8qzpuXh4fFV9",
-    "live": true,
+    "id": "6qa9n0SQSqK0JMFvqE54AX",
+    "title": "parasite",
+    "artist": "tonser",
+    "album": "wolf",
+    "href": "https://open.spotify.com/track/6qa9n0SQSqK0JMFvqE54AX",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7e91a6",
-      "onLight": "#627182",
-      "onDark": "#7e91a6"
+      "raw": "#0f5bfd",
+      "onLight": "#0f5bfd",
+      "onDark": "#3877fd"
     },
-    "fetchedAt": "2026-08-11T06:40:52.165Z"
+    "fetchedAt": "2026-08-11T12:33:35.725Z"
   }
 }
