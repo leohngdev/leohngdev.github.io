@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6qa9n0SQSqK0JMFvqE54AX",
-    "title": "parasite",
-    "artist": "tonser",
-    "album": "wolf",
-    "href": "https://open.spotify.com/track/6qa9n0SQSqK0JMFvqE54AX",
+    "id": "14kYOiFVPb7E7NfFbqhdln",
+    "title": "goodnight n go",
+    "artist": "Ariana Grande",
+    "album": "Sweetener",
+    "href": "https://open.spotify.com/track/14kYOiFVPb7E7NfFbqhdln",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#0f5bfd",
-      "onLight": "#0f5bfd",
-      "onDark": "#3877fd"
+      "raw": "#fec1a1",
+      "onLight": "#896857",
+      "onDark": "#fec1a1"
     },
-    "fetchedAt": "2026-08-11T18:41:30.714Z"
+    "fetchedAt": "2026-08-12T00:46:43.077Z"
   }
 }
