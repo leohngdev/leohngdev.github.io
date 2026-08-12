@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "14kYOiFVPb7E7NfFbqhdln",
-    "title": "goodnight n go",
-    "artist": "Ariana Grande",
-    "album": "Sweetener",
-    "href": "https://open.spotify.com/track/14kYOiFVPb7E7NfFbqhdln",
+    "id": "3zZStBbSgerUJoeV6Di6Zd",
+    "title": "ITADAKIMASU",
+    "artist": "SAILORR",
+    "album": "FROM FLORIDA'S FINEST",
+    "href": "https://open.spotify.com/track/3zZStBbSgerUJoeV6Di6Zd",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fec1a1",
-      "onLight": "#896857",
-      "onDark": "#fec1a1"
+      "raw": "#f58c3e",
+      "onLight": "#9f5b28",
+      "onDark": "#f58c3e"
     },
-    "fetchedAt": "2026-08-12T00:46:43.077Z"
+    "fetchedAt": "2026-08-12T07:01:32.254Z"
   }
 }
