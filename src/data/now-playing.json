@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0OHsJvJmyWN4XRIsatl56T",
-    "title": "moves",
-    "artist": "Amelia Moore",
-    "album": "teaching a robot to love",
-    "href": "https://open.spotify.com/track/0OHsJvJmyWN4XRIsatl56T",
+    "id": "6vuVCtwukUA57ioTnKKeuL",
+    "title": "Bluest Flame",
+    "artist": "Selena Gomez, benny blanco",
+    "album": "I Said I Love You First",
+    "href": "https://open.spotify.com/track/6vuVCtwukUA57ioTnKKeuL",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#662925",
-      "onLight": "#662925",
-      "onDark": "#9c7472"
+      "raw": "#f18001",
+      "onLight": "#a65801",
+      "onDark": "#f18001"
     },
-    "fetchedAt": "2026-08-13T00:49:02.255Z"
+    "fetchedAt": "2026-08-13T07:05:26.644Z"
   }
 }
