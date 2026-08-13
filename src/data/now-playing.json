@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6vuVCtwukUA57ioTnKKeuL",
-    "title": "Bluest Flame",
-    "artist": "Selena Gomez, benny blanco",
-    "album": "I Said I Love You First",
-    "href": "https://open.spotify.com/track/6vuVCtwukUA57ioTnKKeuL",
+    "id": "773OzGjcoYdvfbRqpympVW",
+    "title": "Passionfruit",
+    "artist": "NMIXX",
+    "album": "Fe3O4: BREAK",
+    "href": "https://open.spotify.com/track/773OzGjcoYdvfbRqpympVW",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f18001",
-      "onLight": "#a65801",
-      "onDark": "#f18001"
+      "raw": "#7ea9dd",
+      "onLight": "#526e8f",
+      "onDark": "#7ea9dd"
     },
-    "fetchedAt": "2026-08-13T12:37:16.104Z"
+    "fetchedAt": "2026-08-13T18:42:58.993Z"
   }
 }
