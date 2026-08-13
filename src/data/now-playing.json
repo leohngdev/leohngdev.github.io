@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3zZStBbSgerUJoeV6Di6Zd",
-    "title": "ITADAKIMASU",
-    "artist": "SAILORR",
-    "album": "FROM FLORIDA'S FINEST",
-    "href": "https://open.spotify.com/track/3zZStBbSgerUJoeV6Di6Zd",
+    "id": "0OHsJvJmyWN4XRIsatl56T",
+    "title": "moves",
+    "artist": "Amelia Moore",
+    "album": "teaching a robot to love",
+    "href": "https://open.spotify.com/track/0OHsJvJmyWN4XRIsatl56T",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f58c3e",
-      "onLight": "#9f5b28",
-      "onDark": "#f58c3e"
+      "raw": "#662925",
+      "onLight": "#662925",
+      "onDark": "#9c7472"
     },
-    "fetchedAt": "2026-08-12T18:42:32.549Z"
+    "fetchedAt": "2026-08-13T00:49:02.255Z"
   }
 }
