@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "773OzGjcoYdvfbRqpympVW",
-    "title": "Passionfruit",
-    "artist": "NMIXX",
-    "album": "Fe3O4: BREAK",
-    "href": "https://open.spotify.com/track/773OzGjcoYdvfbRqpympVW",
+    "id": "5zQUndaoBtXJ10SsApqtvw",
+    "title": "Strategy (feat. Megan Thee Stallion)",
+    "artist": "TWICE, Megan Thee Stallion",
+    "album": "STRATEGY",
+    "href": "https://open.spotify.com/track/5zQUndaoBtXJ10SsApqtvw",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7ea9dd",
-      "onLight": "#526e8f",
-      "onDark": "#7ea9dd"
+      "raw": "#0162de",
+      "onLight": "#0162de",
+      "onDark": "#2c7de4"
     },
-    "fetchedAt": "2026-08-14T00:48:26.020Z"
+    "fetchedAt": "2026-08-14T07:01:28.284Z"
   }
 }
