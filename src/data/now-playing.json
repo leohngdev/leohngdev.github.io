@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5zQUndaoBtXJ10SsApqtvw",
-    "title": "Strategy (feat. Megan Thee Stallion)",
-    "artist": "TWICE, Megan Thee Stallion",
-    "album": "STRATEGY",
-    "href": "https://open.spotify.com/track/5zQUndaoBtXJ10SsApqtvw",
-    "live": false,
+    "id": "7BqHUALzNBTanL6OvsqmC1",
+    "title": "Happier",
+    "artist": "Marshmello, Bastille",
+    "album": "Happier",
+    "href": "https://open.spotify.com/track/7BqHUALzNBTanL6OvsqmC1",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#0162de",
-      "onLight": "#0162de",
-      "onDark": "#2c7de4"
+      "raw": "#ffde0e",
+      "onLight": "#817007",
+      "onDark": "#ffde0e"
     },
-    "fetchedAt": "2026-08-15T12:10:36.759Z"
+    "fetchedAt": "2026-08-15T18:09:20.365Z"
   }
 }
