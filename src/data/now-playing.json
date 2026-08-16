@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7BqHUALzNBTanL6OvsqmC1",
-    "title": "Happier",
-    "artist": "Marshmello, Bastille",
-    "album": "Happier",
-    "href": "https://open.spotify.com/track/7BqHUALzNBTanL6OvsqmC1",
-    "live": true,
+    "id": "7xkQdy0cy5ymoWT7nedvLz",
+    "title": "Whatcha Say",
+    "artist": "Jason Derulo",
+    "album": "Jason Derulo (International)",
+    "href": "https://open.spotify.com/track/7xkQdy0cy5ymoWT7nedvLz",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ffde0e",
-      "onLight": "#817007",
-      "onDark": "#ffde0e"
+      "raw": "#6999c9",
+      "onLight": "#4d7094",
+      "onDark": "#6999c9"
     },
-    "fetchedAt": "2026-08-15T18:09:20.365Z"
+    "fetchedAt": "2026-08-16T00:26:41.554Z"
   }
 }
