@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7xkQdy0cy5ymoWT7nedvLz",
-    "title": "Whatcha Say",
-    "artist": "Jason Derulo",
-    "album": "Jason Derulo (International)",
-    "href": "https://open.spotify.com/track/7xkQdy0cy5ymoWT7nedvLz",
+    "id": "2z4U9d5OAA4YLNXoCgioxo",
+    "title": "What the Hell",
+    "artist": "Avril Lavigne",
+    "album": "Goodbye Lullaby (Expanded Edition)",
+    "href": "https://open.spotify.com/track/2z4U9d5OAA4YLNXoCgioxo",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#6999c9",
-      "onLight": "#4d7094",
-      "onDark": "#6999c9"
+      "raw": "#c8df43",
+      "onLight": "#6c7824",
+      "onDark": "#c8df43"
     },
-    "fetchedAt": "2026-08-16T00:26:41.554Z"
+    "fetchedAt": "2026-08-16T06:17:09.355Z"
   }
 }
