@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2z4U9d5OAA4YLNXoCgioxo",
-    "title": "What the Hell",
-    "artist": "Avril Lavigne",
-    "album": "Goodbye Lullaby (Expanded Edition)",
-    "href": "https://open.spotify.com/track/2z4U9d5OAA4YLNXoCgioxo",
+    "id": "3ZdJffjzJWFimSQyxgGIxN",
+    "title": "Just A Dream",
+    "artist": "Nelly",
+    "album": "5.0",
+    "href": "https://open.spotify.com/track/3ZdJffjzJWFimSQyxgGIxN",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c8df43",
-      "onLight": "#6c7824",
-      "onDark": "#c8df43"
+      "raw": "#fcbc06",
+      "onLight": "#906c03",
+      "onDark": "#fcbc06"
     },
-    "fetchedAt": "2026-08-16T06:17:09.355Z"
+    "fetchedAt": "2026-08-16T12:12:02.938Z"
   }
 }
