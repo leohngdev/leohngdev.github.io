@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "3ZdJffjzJWFimSQyxgGIxN",
-    "title": "Just A Dream",
-    "artist": "Nelly",
-    "album": "5.0",
-    "href": "https://open.spotify.com/track/3ZdJffjzJWFimSQyxgGIxN",
+    "id": "789c3DD8obKdAWe1In9Fp5",
+    "title": "Knew Better Part Two",
+    "artist": "Ariana Grande",
+    "album": "Dangerous Woman (Tenth Anniversary Edition)",
+    "href": "https://open.spotify.com/track/789c3DD8obKdAWe1In9Fp5",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#fcbc06",
-      "onLight": "#906c03",
-      "onDark": "#fcbc06"
-    },
-    "fetchedAt": "2026-08-17T00:26:15.006Z"
+    "palette": null,
+    "fetchedAt": "2026-08-17T06:24:41.065Z"
   }
 }
