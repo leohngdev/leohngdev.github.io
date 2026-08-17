@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "789c3DD8obKdAWe1In9Fp5",
-    "title": "Knew Better Part Two",
-    "artist": "Ariana Grande",
-    "album": "Dangerous Woman (Tenth Anniversary Edition)",
-    "href": "https://open.spotify.com/track/789c3DD8obKdAWe1In9Fp5",
+    "id": "3bfqkspKABT4pPicm6wC9F",
+    "title": "Ass Back Home (feat. Neon Hitch)",
+    "artist": "Gym Class Heroes, Neon Hitch",
+    "album": "The Papercut Chronicles II",
+    "href": "https://open.spotify.com/track/3bfqkspKABT4pPicm6wC9F",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-08-17T06:24:41.065Z"
+    "palette": {
+      "raw": "#d9e78e",
+      "onLight": "#6e7548",
+      "onDark": "#d9e78e"
+    },
+    "fetchedAt": "2026-08-17T12:15:05.987Z"
   }
 }
