@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "24GdDBCqLhHEe2cAFvgUrL",
-    "title": "Little Miss",
-    "artist": "GIRLSET",
-    "album": "Little Miss",
-    "href": "https://open.spotify.com/track/24GdDBCqLhHEe2cAFvgUrL",
+    "id": "0u18ibQ2zk470oLSP3D5WR",
+    "title": "BODY",
+    "artist": "MEOVV",
+    "album": "TOXIC",
+    "href": "https://open.spotify.com/track/0u18ibQ2zk470oLSP3D5WR",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff7900",
-      "onLight": "#b05300",
-      "onDark": "#ff7900"
+      "raw": "#b7de98",
+      "onLight": "#637852",
+      "onDark": "#b7de98"
     },
-    "fetchedAt": "2026-08-18T00:25:04.631Z"
+    "fetchedAt": "2026-08-18T06:19:24.594Z"
   }
 }
