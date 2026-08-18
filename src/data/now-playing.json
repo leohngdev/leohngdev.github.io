@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0u18ibQ2zk470oLSP3D5WR",
-    "title": "BODY",
-    "artist": "MEOVV",
-    "album": "TOXIC",
-    "href": "https://open.spotify.com/track/0u18ibQ2zk470oLSP3D5WR",
+    "id": "25qp5LiSuet6rvl950jrGD",
+    "title": "Blink (feat. TZUYU)",
+    "artist": "Corbyn Besson, TZUYU",
+    "album": "Blink (feat. TZUYU)",
+    "href": "https://open.spotify.com/track/25qp5LiSuet6rvl950jrGD",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#b7de98",
-      "onLight": "#637852",
-      "onDark": "#b7de98"
+      "raw": "#ee0000",
+      "onLight": "#e00000",
+      "onDark": "#f01e1e"
     },
-    "fetchedAt": "2026-08-18T06:19:24.594Z"
+    "fetchedAt": "2026-08-18T12:17:20.655Z"
   }
 }
