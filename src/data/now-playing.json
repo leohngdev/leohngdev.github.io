@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3bfqkspKABT4pPicm6wC9F",
-    "title": "Ass Back Home (feat. Neon Hitch)",
-    "artist": "Gym Class Heroes, Neon Hitch",
-    "album": "The Papercut Chronicles II",
-    "href": "https://open.spotify.com/track/3bfqkspKABT4pPicm6wC9F",
+    "id": "24GdDBCqLhHEe2cAFvgUrL",
+    "title": "Little Miss",
+    "artist": "GIRLSET",
+    "album": "Little Miss",
+    "href": "https://open.spotify.com/track/24GdDBCqLhHEe2cAFvgUrL",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d9e78e",
-      "onLight": "#6e7548",
-      "onDark": "#d9e78e"
+      "raw": "#ff7900",
+      "onLight": "#b05300",
+      "onDark": "#ff7900"
     },
-    "fetchedAt": "2026-08-17T18:18:26.917Z"
+    "fetchedAt": "2026-08-18T00:25:04.631Z"
   }
 }
