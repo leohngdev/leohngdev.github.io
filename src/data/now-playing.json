@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6G1F11AclMLmGClDX71xOR",
-    "title": "Hone It In",
-    "artist": "aftrr!",
-    "album": "aftrrLife",
-    "href": "https://open.spotify.com/track/6G1F11AclMLmGClDX71xOR",
+    "id": "6hmhG1b4LEyNuashVvuIAo",
+    "title": "Never Forget You",
+    "artist": "Zara Larsson, MNEK",
+    "album": "So Good",
+    "href": "https://open.spotify.com/track/6hmhG1b4LEyNuashVvuIAo",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ded5ca",
-      "onLight": "#706c66",
-      "onDark": "#ded5ca"
+      "raw": "#f5098a",
+      "onLight": "#d8087a",
+      "onDark": "#f5098a"
     },
-    "fetchedAt": "2026-08-19T06:20:04.379Z"
+    "fetchedAt": "2026-08-19T12:16:48.939Z"
   }
 }
