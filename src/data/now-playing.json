@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "25qp5LiSuet6rvl950jrGD",
-    "title": "Blink (feat. TZUYU)",
-    "artist": "Corbyn Besson, TZUYU",
-    "album": "Blink (feat. TZUYU)",
-    "href": "https://open.spotify.com/track/25qp5LiSuet6rvl950jrGD",
+    "id": "6G1F11AclMLmGClDX71xOR",
+    "title": "Hone It In",
+    "artist": "aftrr!",
+    "album": "aftrrLife",
+    "href": "https://open.spotify.com/track/6G1F11AclMLmGClDX71xOR",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ee0000",
-      "onLight": "#e00000",
-      "onDark": "#f01e1e"
+      "raw": "#ded5ca",
+      "onLight": "#706c66",
+      "onDark": "#ded5ca"
     },
-    "fetchedAt": "2026-08-19T00:25:02.375Z"
+    "fetchedAt": "2026-08-19T06:20:04.379Z"
   }
 }
