@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6hmhG1b4LEyNuashVvuIAo",
-    "title": "Never Forget You",
-    "artist": "Zara Larsson, MNEK",
-    "album": "So Good",
-    "href": "https://open.spotify.com/track/6hmhG1b4LEyNuashVvuIAo",
+    "id": "2iUXsYOEPhVqEBwsqP70rE",
+    "title": "Youngblood",
+    "artist": "5 Seconds of Summer",
+    "album": "Youngblood (Deluxe)",
+    "href": "https://open.spotify.com/track/2iUXsYOEPhVqEBwsqP70rE",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f5098a",
-      "onLight": "#d8087a",
-      "onDark": "#f5098a"
+      "raw": "#ff002d",
+      "onLight": "#e10028",
+      "onDark": "#ff002d"
     },
-    "fetchedAt": "2026-08-19T12:16:48.939Z"
+    "fetchedAt": "2026-08-19T18:13:58.147Z"
   }
 }
