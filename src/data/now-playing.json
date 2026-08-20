@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "52RK8UVEDgUAgpecOpTQM3",
-    "title": "You Make Me",
-    "artist": "Avicii",
-    "album": "True",
-    "href": "https://open.spotify.com/track/52RK8UVEDgUAgpecOpTQM3",
+    "id": "11ozIUBoXAgRTVWelDn4pL",
+    "title": "Lights",
+    "artist": "Ellie Goulding",
+    "album": "An Introduction To Ellie Goulding EP",
+    "href": "https://open.spotify.com/track/11ozIUBoXAgRTVWelDn4pL",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-08-20T06:21:16.017Z"
+    "palette": {
+      "raw": "#6e431d",
+      "onLight": "#6e431d",
+      "onDark": "#957559"
+    },
+    "fetchedAt": "2026-08-20T12:18:44.699Z"
   }
 }
