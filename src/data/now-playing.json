@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "11ozIUBoXAgRTVWelDn4pL",
-    "title": "Lights",
-    "artist": "Ellie Goulding",
-    "album": "An Introduction To Ellie Goulding EP",
-    "href": "https://open.spotify.com/track/11ozIUBoXAgRTVWelDn4pL",
+    "id": "1qekwbzP41LRdK319vlnHe",
+    "title": "Where Did You Go?",
+    "artist": "Jax Jones, MNEK",
+    "album": "Where Did You Go?",
+    "href": "https://open.spotify.com/track/1qekwbzP41LRdK319vlnHe",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#6e431d",
-      "onLight": "#6e431d",
-      "onDark": "#957559"
+      "raw": "#ffc929",
+      "onLight": "#896c16",
+      "onDark": "#ffc929"
     },
-    "fetchedAt": "2026-08-20T12:18:44.699Z"
+    "fetchedAt": "2026-08-20T18:18:28.196Z"
   }
 }
