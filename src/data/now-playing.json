@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "2iUXsYOEPhVqEBwsqP70rE",
-    "title": "Youngblood",
-    "artist": "5 Seconds of Summer",
-    "album": "Youngblood (Deluxe)",
-    "href": "https://open.spotify.com/track/2iUXsYOEPhVqEBwsqP70rE",
+    "id": "52RK8UVEDgUAgpecOpTQM3",
+    "title": "You Make Me",
+    "artist": "Avicii",
+    "album": "True",
+    "href": "https://open.spotify.com/track/52RK8UVEDgUAgpecOpTQM3",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#ff002d",
-      "onLight": "#e10028",
-      "onDark": "#ff002d"
-    },
-    "fetchedAt": "2026-08-20T00:26:06.791Z"
+    "palette": null,
+    "fetchedAt": "2026-08-20T06:21:16.017Z"
   }
 }
