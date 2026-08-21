@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1qekwbzP41LRdK319vlnHe",
-    "title": "Where Did You Go?",
-    "artist": "Jax Jones, MNEK",
-    "album": "Where Did You Go?",
-    "href": "https://open.spotify.com/track/1qekwbzP41LRdK319vlnHe",
+    "id": "7BKLCZ1jbUBVqRi2FVlTVw",
+    "title": "Closer",
+    "artist": "The Chainsmokers, Halsey",
+    "album": "Closer",
+    "href": "https://open.spotify.com/track/7BKLCZ1jbUBVqRi2FVlTVw",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ffc929",
-      "onLight": "#896c16",
-      "onDark": "#ffc929"
+      "raw": "#c07d73",
+      "onLight": "#96625a",
+      "onDark": "#c07d73"
     },
-    "fetchedAt": "2026-08-21T00:28:48.228Z"
+    "fetchedAt": "2026-08-21T06:21:21.194Z"
   }
 }
