@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "03JZr55j9bIj1d2RQJ7Yq9",
-    "title": "Jealous Type",
-    "artist": "Doja Cat",
-    "album": "Vie",
-    "href": "https://open.spotify.com/track/03JZr55j9bIj1d2RQJ7Yq9",
-    "live": true,
+    "id": "72jbDTw1piOOj770jWNeaG",
+    "title": "Paris",
+    "artist": "The Chainsmokers",
+    "album": "Memories...Do Not Open",
+    "href": "https://open.spotify.com/track/72jbDTw1piOOj770jWNeaG",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ebb328",
-      "onLight": "#876717",
-      "onDark": "#ebb328"
+      "raw": "#49ddd5",
+      "onLight": "#277773",
+      "onDark": "#49ddd5"
     },
-    "fetchedAt": "2026-08-21T12:18:38.881Z"
+    "fetchedAt": "2026-08-21T18:17:13.008Z"
   }
 }
