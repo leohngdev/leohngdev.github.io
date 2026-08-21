@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7BKLCZ1jbUBVqRi2FVlTVw",
-    "title": "Closer",
-    "artist": "The Chainsmokers, Halsey",
-    "album": "Closer",
-    "href": "https://open.spotify.com/track/7BKLCZ1jbUBVqRi2FVlTVw",
-    "live": false,
+    "id": "03JZr55j9bIj1d2RQJ7Yq9",
+    "title": "Jealous Type",
+    "artist": "Doja Cat",
+    "album": "Vie",
+    "href": "https://open.spotify.com/track/03JZr55j9bIj1d2RQJ7Yq9",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c07d73",
-      "onLight": "#96625a",
-      "onDark": "#c07d73"
+      "raw": "#ebb328",
+      "onLight": "#876717",
+      "onDark": "#ebb328"
     },
-    "fetchedAt": "2026-08-21T06:21:21.194Z"
+    "fetchedAt": "2026-08-21T12:18:38.881Z"
   }
 }
