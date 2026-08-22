@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1JD37Pmj6xJj8dlWHgLG9C",
-    "title": "Dally (feat. GRAY)",
-    "artist": "HYOLYN, GRAY",
-    "album": "Dally (feat. GRAY)",
-    "href": "https://open.spotify.com/track/1JD37Pmj6xJj8dlWHgLG9C",
-    "live": true,
+    "id": "3lbgEhGLRZjj0ugAlmkVLU",
+    "title": "see through it",
+    "artist": "Amelia Moore",
+    "album": "he's still just not that into you!",
+    "href": "https://open.spotify.com/track/3lbgEhGLRZjj0ugAlmkVLU",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff0d3e",
-      "onLight": "#e10b37",
-      "onDark": "#ff0d3e"
+      "raw": "#ffa281",
+      "onLight": "#9b634f",
+      "onDark": "#ffa281"
     },
-    "fetchedAt": "2026-08-22T06:16:13.322Z"
+    "fetchedAt": "2026-08-22T12:12:29.575Z"
   }
 }
