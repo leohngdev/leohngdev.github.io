@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "72jbDTw1piOOj770jWNeaG",
-    "title": "Paris",
-    "artist": "The Chainsmokers",
-    "album": "Memories...Do Not Open",
-    "href": "https://open.spotify.com/track/72jbDTw1piOOj770jWNeaG",
+    "id": "5G2c6FsfTzgYUzageCmfXY",
+    "title": "One Thing",
+    "artist": "One Direction",
+    "album": "Up All Night",
+    "href": "https://open.spotify.com/track/5G2c6FsfTzgYUzageCmfXY",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#49ddd5",
-      "onLight": "#277773",
-      "onDark": "#49ddd5"
+      "raw": "#bd1724",
+      "onLight": "#bd1724",
+      "onDark": "#cf555e"
     },
-    "fetchedAt": "2026-08-21T18:17:13.008Z"
+    "fetchedAt": "2026-08-22T00:26:08.102Z"
   }
 }
