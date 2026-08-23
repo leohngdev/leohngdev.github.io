@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "44HrR9XYoeU3TsigJMRT9V",
-    "title": "What's Up",
-    "artist": "Malcolm Todd",
-    "album": "Shower Shoes",
-    "href": "https://open.spotify.com/track/44HrR9XYoeU3TsigJMRT9V",
+    "id": "0XZW4ZKXOwo9kCyDpXGNc7",
+    "title": "Oceans & Engines",
+    "artist": "NIKI",
+    "album": "Nicole",
+    "href": "https://open.spotify.com/track/0XZW4ZKXOwo9kCyDpXGNc7",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#9b8520",
-      "onLight": "#816e1b",
-      "onDark": "#9b8520"
+      "raw": "#d2926a",
+      "onLight": "#916549",
+      "onDark": "#d2926a"
     },
-    "fetchedAt": "2026-08-23T12:12:04.512Z"
+    "fetchedAt": "2026-08-23T18:10:00.043Z"
   }
 }
