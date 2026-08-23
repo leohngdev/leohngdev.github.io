@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3lbgEhGLRZjj0ugAlmkVLU",
-    "title": "see through it",
-    "artist": "Amelia Moore",
-    "album": "he's still just not that into you!",
-    "href": "https://open.spotify.com/track/3lbgEhGLRZjj0ugAlmkVLU",
+    "id": "44HrR9XYoeU3TsigJMRT9V",
+    "title": "What's Up",
+    "artist": "Malcolm Todd",
+    "album": "Shower Shoes",
+    "href": "https://open.spotify.com/track/44HrR9XYoeU3TsigJMRT9V",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ffa281",
-      "onLight": "#9b634f",
-      "onDark": "#ffa281"
+      "raw": "#9b8520",
+      "onLight": "#816e1b",
+      "onDark": "#9b8520"
     },
-    "fetchedAt": "2026-08-23T06:17:50.472Z"
+    "fetchedAt": "2026-08-23T12:12:04.512Z"
   }
 }
