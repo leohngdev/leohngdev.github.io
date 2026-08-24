@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0XZW4ZKXOwo9kCyDpXGNc7",
-    "title": "Oceans & Engines",
+    "id": "7ipqVwkp2MhZv0Ojzqy1NV",
+    "title": "lowkey",
     "artist": "NIKI",
-    "album": "Nicole",
-    "href": "https://open.spotify.com/track/0XZW4ZKXOwo9kCyDpXGNc7",
+    "album": "lowkey",
+    "href": "https://open.spotify.com/track/7ipqVwkp2MhZv0Ojzqy1NV",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d2926a",
-      "onLight": "#916549",
-      "onDark": "#d2926a"
+      "raw": "#7b3215",
+      "onLight": "#7b3215",
+      "onDark": "#a4725e"
     },
-    "fetchedAt": "2026-08-24T00:27:03.615Z"
+    "fetchedAt": "2026-08-24T06:29:54.360Z"
   }
 }
