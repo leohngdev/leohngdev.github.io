@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7ipqVwkp2MhZv0Ojzqy1NV",
-    "title": "lowkey",
-    "artist": "NIKI",
-    "album": "lowkey",
-    "href": "https://open.spotify.com/track/7ipqVwkp2MhZv0Ojzqy1NV",
+    "id": "1l0XqMFdaoK2NlJHrmK33R",
+    "title": "elevate",
+    "artist": "WESLEY OU",
+    "album": "Wes Season",
+    "href": "https://open.spotify.com/track/1l0XqMFdaoK2NlJHrmK33R",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7b3215",
-      "onLight": "#7b3215",
-      "onDark": "#a4725e"
+      "raw": "#0019ff",
+      "onLight": "#0019ff",
+      "onDark": "#5a6aff"
     },
-    "fetchedAt": "2026-08-26T00:27:43.721Z"
+    "fetchedAt": "2026-08-26T06:23:14.186Z"
   }
 }
