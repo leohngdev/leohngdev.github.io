@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0GtwMH7DIAU5lyHlnt4LQa",
-    "title": "Superficial Love",
-    "artist": "Calica, Magdalena Bay",
-    "album": "Superficial Love",
-    "href": "https://open.spotify.com/track/0GtwMH7DIAU5lyHlnt4LQa",
+    "id": "7gkZNvBHfI30qG7hA0eopT",
+    "title": "Die On This Hill",
+    "artist": "SIENNA SPIRO",
+    "album": "Visitor",
+    "href": "https://open.spotify.com/track/7gkZNvBHfI30qG7hA0eopT",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fe5eeb",
-      "onLight": "#af41a2",
-      "onDark": "#fe5eeb"
+      "raw": "#fe9057",
+      "onLight": "#a55d38",
+      "onDark": "#fe9057"
     },
-    "fetchedAt": "2026-08-27T05:10:47.093Z"
+    "fetchedAt": "2026-08-27T16:52:32.991Z"
   }
 }
