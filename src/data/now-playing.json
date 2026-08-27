@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0FFsgUoFibYISzMxuGS61W",
-    "title": "I Don't Do Drugs (feat. Ariana Grande)",
-    "artist": "Doja Cat, Ariana Grande",
-    "album": "Planet Her",
-    "href": "https://open.spotify.com/track/0FFsgUoFibYISzMxuGS61W",
+    "id": "0GtwMH7DIAU5lyHlnt4LQa",
+    "title": "Superficial Love",
+    "artist": "Calica, Magdalena Bay",
+    "album": "Superficial Love",
+    "href": "https://open.spotify.com/track/0GtwMH7DIAU5lyHlnt4LQa",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#039aff",
-      "onLight": "#0271bb",
-      "onDark": "#039aff"
+      "raw": "#fe5eeb",
+      "onLight": "#af41a2",
+      "onDark": "#fe5eeb"
     },
-    "fetchedAt": "2026-08-26T19:27:39.082Z"
+    "fetchedAt": "2026-08-27T05:10:47.093Z"
   }
 }
