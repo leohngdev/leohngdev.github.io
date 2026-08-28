@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "7gkZNvBHfI30qG7hA0eopT",
-    "title": "Die On This Hill",
-    "artist": "SIENNA SPIRO",
-    "album": "Visitor",
-    "href": "https://open.spotify.com/track/7gkZNvBHfI30qG7hA0eopT",
+    "id": "0sZLzafgqCzvnzhh8B97r2",
+    "title": "Weirdo",
+    "artist": "Suki Waterhouse",
+    "album": "Loveland",
+    "href": "https://open.spotify.com/track/0sZLzafgqCzvnzhh8B97r2",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#fe9057",
-      "onLight": "#a55d38",
-      "onDark": "#fe9057"
-    },
-    "fetchedAt": "2026-08-28T01:48:06.946Z"
+    "palette": null,
+    "fetchedAt": "2026-08-28T17:44:23.471Z"
   }
 }
