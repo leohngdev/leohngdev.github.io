@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "0sZLzafgqCzvnzhh8B97r2",
-    "title": "Weirdo",
-    "artist": "Suki Waterhouse",
-    "album": "Loveland",
-    "href": "https://open.spotify.com/track/0sZLzafgqCzvnzhh8B97r2",
-    "live": false,
+    "id": "3nQ24dxqvxZEVwlHTeuLz0",
+    "title": "Sympathy is a knife featuring ariana grande",
+    "artist": "Charli xcx, Ariana Grande",
+    "album": "Brat and it’s completely different but also still brat",
+    "href": "https://open.spotify.com/track/3nQ24dxqvxZEVwlHTeuLz0",
+    "live": true,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-08-29T01:11:43.539Z"
+    "palette": {
+      "raw": "#a5f502",
+      "onLight": "#547c01",
+      "onDark": "#a5f502"
+    },
+    "fetchedAt": "2026-08-29T11:48:51.694Z"
   }
 }
