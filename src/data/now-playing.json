@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "46O213xVNlD6ieYltB9Qmv",
-    "title": "we'll have a family someday",
-    "artist": "Faouzia",
-    "album": "FILM NOIR (fin)",
-    "href": "https://open.spotify.com/track/46O213xVNlD6ieYltB9Qmv",
+    "id": "1HDNcD0s6lqt7pVurm0neZ",
+    "title": "When I Get Drunk (I Want You Boy)",
+    "artist": "Suki Waterhouse",
+    "album": "Loveland",
+    "href": "https://open.spotify.com/track/1HDNcD0s6lqt7pVurm0neZ",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#decfc7",
-      "onLight": "#786f6b",
-      "onDark": "#decfc7"
-    },
-    "fetchedAt": "2026-08-30T01:49:14.259Z"
+    "palette": null,
+    "fetchedAt": "2026-08-30T10:45:12.004Z"
   }
 }
