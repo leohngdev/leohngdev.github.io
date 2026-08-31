@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1C3SJEsAIPrHNz6bNZepoQ",
-    "title": "After All",
-    "artist": "Carly Rae Jepsen",
-    "album": "After All",
-    "href": "https://open.spotify.com/track/1C3SJEsAIPrHNz6bNZepoQ",
+    "id": "0inNzeehKp63mKOqEMSHL3",
+    "title": "Boring",
+    "artist": "Chxrry",
+    "album": "U, Me & My Ego",
+    "href": "https://open.spotify.com/track/0inNzeehKp63mKOqEMSHL3",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fea800",
-      "onLight": "#9b6600",
-      "onDark": "#fea800"
+      "raw": "#3a67d1",
+      "onLight": "#3a67d1",
+      "onDark": "#5179d6"
     },
-    "fetchedAt": "2026-08-31T11:54:30.205Z"
+    "fetchedAt": "2026-08-31T18:14:19.030Z"
   }
 }
