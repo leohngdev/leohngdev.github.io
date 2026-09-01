@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0inNzeehKp63mKOqEMSHL3",
-    "title": "Boring",
-    "artist": "Chxrry",
-    "album": "U, Me & My Ego",
-    "href": "https://open.spotify.com/track/0inNzeehKp63mKOqEMSHL3",
+    "id": "1FWdQdJ175wUBh6WpkrR1K",
+    "title": "don't go!",
+    "artist": "sennoh",
+    "album": "don't go!",
+    "href": "https://open.spotify.com/track/1FWdQdJ175wUBh6WpkrR1K",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#3a67d1",
-      "onLight": "#3a67d1",
-      "onDark": "#5179d6"
+      "raw": "#05bada",
+      "onLight": "#03798d",
+      "onDark": "#05bada"
     },
-    "fetchedAt": "2026-08-31T18:14:19.030Z"
+    "fetchedAt": "2026-09-01T02:07:55.228Z"
   }
 }
