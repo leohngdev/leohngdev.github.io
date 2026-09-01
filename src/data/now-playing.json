@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "1FWdQdJ175wUBh6WpkrR1K",
-    "title": "don't go!",
-    "artist": "sennoh",
-    "album": "don't go!",
-    "href": "https://open.spotify.com/track/1FWdQdJ175wUBh6WpkrR1K",
+    "id": "50kpGaPAhYJ3sGmk6vplg0",
+    "title": "Love Yourself",
+    "artist": "Justin Bieber",
+    "album": "Purpose (Deluxe)",
+    "href": "https://open.spotify.com/track/50kpGaPAhYJ3sGmk6vplg0",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#05bada",
-      "onLight": "#03798d",
-      "onDark": "#05bada"
-    },
-    "fetchedAt": "2026-09-01T02:07:55.228Z"
+    "palette": null,
+    "fetchedAt": "2026-09-01T10:33:51.903Z"
   }
 }
