@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "50kpGaPAhYJ3sGmk6vplg0",
-    "title": "Love Yourself",
-    "artist": "Justin Bieber",
-    "album": "Purpose (Deluxe)",
-    "href": "https://open.spotify.com/track/50kpGaPAhYJ3sGmk6vplg0",
-    "live": false,
+    "id": "5UmfBGfRJgjZ8CdhgffabQ",
+    "title": "New Woman (feat. ROSALÍA)",
+    "artist": "LISA, ROSALÍA",
+    "album": "Alter Ego",
+    "href": "https://open.spotify.com/track/5UmfBGfRJgjZ8CdhgffabQ",
+    "live": true,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-09-02T01:30:48.385Z"
+    "palette": {
+      "raw": "#f1b05b",
+      "onLight": "#8a6534",
+      "onDark": "#f1b05b"
+    },
+    "fetchedAt": "2026-09-02T09:59:33.882Z"
   }
 }
