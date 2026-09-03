@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2xyFffCXz66Yh77c1SEEAk",
-    "title": "W1LL U L13?",
-    "artist": "SAILORR",
-    "album": "FROM FLORIDA'S FINEST",
-    "href": "https://open.spotify.com/track/2xyFffCXz66Yh77c1SEEAk",
+    "id": "6Wytqpe4mfmyeT8s1xbczG",
+    "title": "Something In The Way You Move",
+    "artist": "Ellie Goulding",
+    "album": "Delirium (Deluxe)",
+    "href": "https://open.spotify.com/track/6Wytqpe4mfmyeT8s1xbczG",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f58c3e",
-      "onLight": "#9f5b28",
-      "onDark": "#f58c3e"
+      "raw": "#b18a61",
+      "onLight": "#8a6c4c",
+      "onDark": "#b18a61"
     },
-    "fetchedAt": "2026-09-03T01:34:44.054Z"
+    "fetchedAt": "2026-09-03T10:10:10.848Z"
   }
 }
