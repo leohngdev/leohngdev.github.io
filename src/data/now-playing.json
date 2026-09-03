@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6Wytqpe4mfmyeT8s1xbczG",
-    "title": "Something In The Way You Move",
-    "artist": "Ellie Goulding",
-    "album": "Delirium (Deluxe)",
-    "href": "https://open.spotify.com/track/6Wytqpe4mfmyeT8s1xbczG",
+    "id": "4bT2zLVv2T4GiK9q9KtI0v",
+    "title": "Stay The Night - Featuring Hayley Williams Of Paramore",
+    "artist": "Zedd, Hayley Williams",
+    "album": "Clarity (Deluxe)",
+    "href": "https://open.spotify.com/track/4bT2zLVv2T4GiK9q9KtI0v",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#b18a61",
-      "onLight": "#8a6c4c",
-      "onDark": "#b18a61"
+      "raw": "#7bc1d1",
+      "onLight": "#4b767f",
+      "onDark": "#7bc1d1"
     },
-    "fetchedAt": "2026-09-03T10:10:10.848Z"
+    "fetchedAt": "2026-09-03T15:16:11.737Z"
   }
 }
