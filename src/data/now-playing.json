@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2yWlGEgEfPot0lv3OAjuG3",
-    "title": "Just Keep Watching (From F1® The Movie)",
-    "artist": "Tate McRae, F1 The Album",
-    "album": "Just Keep Watching (From F1® The Movie)",
-    "href": "https://open.spotify.com/track/2yWlGEgEfPot0lv3OAjuG3",
+    "id": "2Rmuzh89p29BeTIF63Opwo",
+    "title": "Right Here",
+    "artist": "Justin Bieber, Drake",
+    "album": "Believe",
+    "href": "https://open.spotify.com/track/2Rmuzh89p29BeTIF63Opwo",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fab07b",
-      "onLight": "#8f6546",
-      "onDark": "#fab07b"
+      "raw": "#fed32c",
+      "onLight": "#816b16",
+      "onDark": "#fed32c"
     },
-    "fetchedAt": "2026-09-04T10:06:58.393Z"
+    "fetchedAt": "2026-09-04T15:10:57.773Z"
   }
 }
