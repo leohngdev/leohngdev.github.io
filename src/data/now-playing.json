@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3nQA8Wj3KmWQRKq7yu4Db3",
-    "title": "COCONUT (feat. Eem Triplin)",
-    "artist": "SAILORR, Eem Triplin",
-    "album": "FROM FLORIDA'S FINEST DELU/XXX [for my delusional ex]",
-    "href": "https://open.spotify.com/track/3nQA8Wj3KmWQRKq7yu4Db3",
+    "id": "2yWlGEgEfPot0lv3OAjuG3",
+    "title": "Just Keep Watching (From F1® The Movie)",
+    "artist": "Tate McRae, F1 The Album",
+    "album": "Just Keep Watching (From F1® The Movie)",
+    "href": "https://open.spotify.com/track/2yWlGEgEfPot0lv3OAjuG3",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#efa265",
-      "onLight": "#92633e",
-      "onDark": "#efa265"
+      "raw": "#fab07b",
+      "onLight": "#8f6546",
+      "onDark": "#fab07b"
     },
-    "fetchedAt": "2026-09-04T01:29:26.622Z"
+    "fetchedAt": "2026-09-04T10:06:58.393Z"
   }
 }
