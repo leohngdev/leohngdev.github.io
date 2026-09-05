@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "2Rmuzh89p29BeTIF63Opwo",
-    "title": "Right Here",
-    "artist": "Justin Bieber, Drake",
-    "album": "Believe",
-    "href": "https://open.spotify.com/track/2Rmuzh89p29BeTIF63Opwo",
+    "id": "1hNixpTJ3KtIQGYIdGWLoz",
+    "title": "CHAT",
+    "artist": "GIRLSET",
+    "album": "CHAT",
+    "href": "https://open.spotify.com/track/1hNixpTJ3KtIQGYIdGWLoz",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#fed32c",
-      "onLight": "#816b16",
-      "onDark": "#fed32c"
-    },
-    "fetchedAt": "2026-09-05T01:29:44.221Z"
+    "palette": null,
+    "fetchedAt": "2026-09-05T09:30:02.259Z"
   }
 }
