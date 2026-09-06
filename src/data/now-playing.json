@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "3zU9rdflI65tK4dkkNSp77",
-    "title": "Heroes (we could be)",
-    "artist": "Alesso, Tove Lo",
-    "album": "Forever",
-    "href": "https://open.spotify.com/track/3zU9rdflI65tK4dkkNSp77",
+    "id": "4mJtdc1xi7VN8Tn7c2aKvI",
+    "title": "AMERICAN GIRL",
+    "artist": "Tiffany Day",
+    "album": "HALO",
+    "href": "https://open.spotify.com/track/4mJtdc1xi7VN8Tn7c2aKvI",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-09-06T01:23:53.831Z"
+    "palette": {
+      "raw": "#002134",
+      "onLight": "#002134",
+      "onDark": "#6d808b"
+    },
+    "fetchedAt": "2026-09-06T09:44:04.356Z"
   }
 }
