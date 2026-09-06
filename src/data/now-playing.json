@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4mJtdc1xi7VN8Tn7c2aKvI",
-    "title": "AMERICAN GIRL",
-    "artist": "Tiffany Day",
-    "album": "HALO",
-    "href": "https://open.spotify.com/track/4mJtdc1xi7VN8Tn7c2aKvI",
+    "id": "01TuObJVd7owWchVRuQbQw",
+    "title": "#thatPOWER",
+    "artist": "will.i.am, Justin Bieber",
+    "album": "#willpower (Deluxe)",
+    "href": "https://open.spotify.com/track/01TuObJVd7owWchVRuQbQw",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#002134",
-      "onLight": "#002134",
-      "onDark": "#6d808b"
+      "raw": "#f75c2d",
+      "onLight": "#c14823",
+      "onDark": "#f75c2d"
     },
-    "fetchedAt": "2026-09-06T09:44:04.356Z"
+    "fetchedAt": "2026-09-06T14:27:01.021Z"
   }
 }
