@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0dXNQ8dckG4eYfEtq9zcva",
-    "title": "All Night",
-    "artist": "The Vamps, Matoma",
-    "album": "Night & Day (Night Edition)",
-    "href": "https://open.spotify.com/track/0dXNQ8dckG4eYfEtq9zcva",
+    "id": "6q5wkwldXvaikgjIEpOUNu",
+    "title": "11:11",
+    "artist": "nate band",
+    "album": "11:11",
+    "href": "https://open.spotify.com/track/6q5wkwldXvaikgjIEpOUNu",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#0097a3",
-      "onLight": "#007d87",
-      "onDark": "#0097a3"
+      "raw": "#982158",
+      "onLight": "#982158",
+      "onDark": "#b8668c"
     },
-    "fetchedAt": "2026-09-08T01:31:42.799Z"
+    "fetchedAt": "2026-09-08T10:07:51.305Z"
   }
 }
