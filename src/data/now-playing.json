@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6q5wkwldXvaikgjIEpOUNu",
-    "title": "11:11",
-    "artist": "nate band",
-    "album": "11:11",
-    "href": "https://open.spotify.com/track/6q5wkwldXvaikgjIEpOUNu",
+    "id": "7LwQfsJ7JzgfFr7ErvcTs6",
+    "title": "r u ok?",
+    "artist": "ifeye",
+    "album": "sweet tang",
+    "href": "https://open.spotify.com/track/7LwQfsJ7JzgfFr7ErvcTs6",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#982158",
-      "onLight": "#982158",
-      "onDark": "#b8668c"
+      "raw": "#36aadc",
+      "onLight": "#257598",
+      "onDark": "#36aadc"
     },
-    "fetchedAt": "2026-09-08T10:07:51.305Z"
+    "fetchedAt": "2026-09-08T15:24:36.627Z"
   }
 }
