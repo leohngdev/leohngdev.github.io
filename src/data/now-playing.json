@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "01TuObJVd7owWchVRuQbQw",
-    "title": "#thatPOWER",
-    "artist": "will.i.am, Justin Bieber",
-    "album": "#willpower (Deluxe)",
-    "href": "https://open.spotify.com/track/01TuObJVd7owWchVRuQbQw",
+    "id": "0dXNQ8dckG4eYfEtq9zcva",
+    "title": "All Night",
+    "artist": "The Vamps, Matoma",
+    "album": "Night & Day (Night Edition)",
+    "href": "https://open.spotify.com/track/0dXNQ8dckG4eYfEtq9zcva",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f75c2d",
-      "onLight": "#c14823",
-      "onDark": "#f75c2d"
+      "raw": "#0097a3",
+      "onLight": "#007d87",
+      "onDark": "#0097a3"
     },
-    "fetchedAt": "2026-09-07T20:50:01.178Z"
+    "fetchedAt": "2026-09-08T01:31:42.799Z"
   }
 }
