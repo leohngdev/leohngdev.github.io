@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7HcPilnEni70hIwOr7cKSR",
-    "title": "a thousand miles",
-    "artist": "sennoh, 03 Greedo",
-    "album": "same but different 2!*",
-    "href": "https://open.spotify.com/track/7HcPilnEni70hIwOr7cKSR",
+    "id": "1Ym4sVB8XQllwMBqcUvPQw",
+    "title": "Corpus Christi",
+    "artist": "PRETTYMUCH",
+    "album": "Smackables (Deluxe Edition)",
+    "href": "https://open.spotify.com/track/1Ym4sVB8XQllwMBqcUvPQw",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#00ffff",
-      "onLight": "#007979",
-      "onDark": "#00ffff"
+      "raw": "#00aeff",
+      "onLight": "#0078b0",
+      "onDark": "#00aeff"
     },
-    "fetchedAt": "2026-09-09T10:10:07.502Z"
+    "fetchedAt": "2026-09-09T15:22:07.736Z"
   }
 }
