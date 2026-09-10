@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "56v8WEnGzLByGsDAXDiv4d",
-    "title": "ETA",
-    "artist": "NewJeans",
-    "album": "NewJeans 2nd EP 'Get Up'",
-    "href": "https://open.spotify.com/track/56v8WEnGzLByGsDAXDiv4d",
+    "id": "3SqnwMW6Xcldf9KYgL8UOD",
+    "title": "BREAKUP",
+    "artist": "Tiffany Day",
+    "album": "HALO",
+    "href": "https://open.spotify.com/track/3SqnwMW6Xcldf9KYgL8UOD",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#007fff",
-      "onLight": "#0069d4",
-      "onDark": "#007fff"
+      "raw": "#002134",
+      "onLight": "#002134",
+      "onDark": "#6d808b"
     },
-    "fetchedAt": "2026-09-10T10:05:36.236Z"
+    "fetchedAt": "2026-09-10T15:15:28.385Z"
   }
 }
