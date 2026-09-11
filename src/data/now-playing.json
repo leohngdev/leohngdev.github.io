@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "3SqnwMW6Xcldf9KYgL8UOD",
-    "title": "BREAKUP",
-    "artist": "Tiffany Day",
-    "album": "HALO",
-    "href": "https://open.spotify.com/track/3SqnwMW6Xcldf9KYgL8UOD",
+    "id": "3Wdn8pG7DKOTZrx1aqdZpm",
+    "title": "Drive Me Crazy",
+    "artist": "Myles Lloyd",
+    "album": "I'm Still Thinking",
+    "href": "https://open.spotify.com/track/3Wdn8pG7DKOTZrx1aqdZpm",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#002134",
-      "onLight": "#002134",
-      "onDark": "#6d808b"
-    },
-    "fetchedAt": "2026-09-11T01:33:18.808Z"
+    "palette": null,
+    "fetchedAt": "2026-09-11T10:03:04.137Z"
   }
 }
