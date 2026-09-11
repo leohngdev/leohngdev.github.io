@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "3Wdn8pG7DKOTZrx1aqdZpm",
-    "title": "Drive Me Crazy",
-    "artist": "Myles Lloyd",
-    "album": "I'm Still Thinking",
-    "href": "https://open.spotify.com/track/3Wdn8pG7DKOTZrx1aqdZpm",
+    "id": "7uEFboafVLvROPYTqdMi0n",
+    "title": "4Me 4Me",
+    "artist": "Malcolm Todd",
+    "album": "Sweet Boy",
+    "href": "https://open.spotify.com/track/7uEFboafVLvROPYTqdMi0n",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-09-11T10:03:04.137Z"
+    "palette": {
+      "raw": "#c11c38",
+      "onLight": "#c11c38",
+      "onDark": "#cf4e64"
+    },
+    "fetchedAt": "2026-09-11T15:17:21.642Z"
   }
 }
