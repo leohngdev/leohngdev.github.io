@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7uEFboafVLvROPYTqdMi0n",
-    "title": "4Me 4Me",
-    "artist": "Malcolm Todd",
-    "album": "Sweet Boy",
-    "href": "https://open.spotify.com/track/7uEFboafVLvROPYTqdMi0n",
+    "id": "04a44cx2PJthIbN2aLMXhl",
+    "title": "TIT FOR TAT",
+    "artist": "Tate McRae",
+    "album": "TIT FOR TAT",
+    "href": "https://open.spotify.com/track/04a44cx2PJthIbN2aLMXhl",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c11c38",
-      "onLight": "#c11c38",
-      "onDark": "#cf4e64"
+      "raw": "#0078e6",
+      "onLight": "#0071d8",
+      "onDark": "#0078e6"
     },
-    "fetchedAt": "2026-09-12T01:39:50.106Z"
+    "fetchedAt": "2026-09-12T09:39:04.786Z"
   }
 }
