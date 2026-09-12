@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "04a44cx2PJthIbN2aLMXhl",
-    "title": "TIT FOR TAT",
-    "artist": "Tate McRae",
-    "album": "TIT FOR TAT",
-    "href": "https://open.spotify.com/track/04a44cx2PJthIbN2aLMXhl",
+    "id": "0FFsgUoFibYISzMxuGS61W",
+    "title": "I Don't Do Drugs (feat. Ariana Grande)",
+    "artist": "Doja Cat, Ariana Grande",
+    "album": "Planet Her",
+    "href": "https://open.spotify.com/track/0FFsgUoFibYISzMxuGS61W",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#0078e6",
-      "onLight": "#0071d8",
-      "onDark": "#0078e6"
+      "raw": "#039aff",
+      "onLight": "#0271bb",
+      "onDark": "#039aff"
     },
-    "fetchedAt": "2026-09-12T09:39:04.786Z"
+    "fetchedAt": "2026-09-12T14:25:34.743Z"
   }
 }
