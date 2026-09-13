@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0FFsgUoFibYISzMxuGS61W",
-    "title": "I Don't Do Drugs (feat. Ariana Grande)",
-    "artist": "Doja Cat, Ariana Grande",
-    "album": "Planet Her",
-    "href": "https://open.spotify.com/track/0FFsgUoFibYISzMxuGS61W",
+    "id": "5HXbYVQ0yM8nO6ZDUI6QOW",
+    "title": "Miss Your Body",
+    "artist": "nate band",
+    "album": "Miss Your Body",
+    "href": "https://open.spotify.com/track/5HXbYVQ0yM8nO6ZDUI6QOW",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#039aff",
-      "onLight": "#0271bb",
-      "onDark": "#039aff"
+      "raw": "#eb4b09",
+      "onLight": "#c33e07",
+      "onDark": "#eb4b09"
     },
-    "fetchedAt": "2026-09-13T01:30:03.034Z"
+    "fetchedAt": "2026-09-13T10:40:13.590Z"
   }
 }
