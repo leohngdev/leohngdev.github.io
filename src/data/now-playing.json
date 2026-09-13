@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5HXbYVQ0yM8nO6ZDUI6QOW",
-    "title": "Miss Your Body",
-    "artist": "nate band",
-    "album": "Miss Your Body",
-    "href": "https://open.spotify.com/track/5HXbYVQ0yM8nO6ZDUI6QOW",
+    "id": "3PtGzlgwAUUDm9k6wMxSx3",
+    "title": "Marijuana",
+    "artist": "ADÉLA",
+    "album": "PRIMA",
+    "href": "https://open.spotify.com/track/3PtGzlgwAUUDm9k6wMxSx3",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#eb4b09",
-      "onLight": "#c33e07",
-      "onDark": "#eb4b09"
+      "raw": "#c30d32",
+      "onLight": "#c30d32",
+      "onDark": "#d34d69"
     },
-    "fetchedAt": "2026-09-13T10:40:13.590Z"
+    "fetchedAt": "2026-09-13T15:07:26.422Z"
   }
 }
