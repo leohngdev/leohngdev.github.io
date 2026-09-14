@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "40gsPLTRUl4VDevJNoNeNE",
-    "title": "I got it bad",
-    "artist": "Addison Rae",
-    "album": "AR",
-    "href": "https://open.spotify.com/track/40gsPLTRUl4VDevJNoNeNE",
+    "id": "5h1OL4GUcAKtP0PD5TuPw3",
+    "title": "hoàng hôn (feat. tlinh)",
+    "artist": "2Pillz, tlinh",
+    "album": "hoàng hôn",
+    "href": "https://open.spotify.com/track/5h1OL4GUcAKtP0PD5TuPw3",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#af1b42",
-      "onLight": "#af1b42",
-      "onDark": "#c45874"
+      "raw": "#0a425a",
+      "onLight": "#0a425a",
+      "onDark": "#608494"
     },
-    "fetchedAt": "2026-09-14T01:48:11.407Z"
+    "fetchedAt": "2026-09-14T11:00:40.918Z"
   }
 }
