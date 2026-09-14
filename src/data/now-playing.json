@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3PtGzlgwAUUDm9k6wMxSx3",
-    "title": "Marijuana",
-    "artist": "ADÉLA",
-    "album": "PRIMA",
-    "href": "https://open.spotify.com/track/3PtGzlgwAUUDm9k6wMxSx3",
+    "id": "40gsPLTRUl4VDevJNoNeNE",
+    "title": "I got it bad",
+    "artist": "Addison Rae",
+    "album": "AR",
+    "href": "https://open.spotify.com/track/40gsPLTRUl4VDevJNoNeNE",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c30d32",
-      "onLight": "#c30d32",
-      "onDark": "#d34d69"
+      "raw": "#af1b42",
+      "onLight": "#af1b42",
+      "onDark": "#c45874"
     },
-    "fetchedAt": "2026-09-13T19:54:59.670Z"
+    "fetchedAt": "2026-09-14T01:48:11.407Z"
   }
 }
