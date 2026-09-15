@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6pIuPm3u7QgUFAX1V0D9wY",
-    "title": "Dopamine - GISELLE Solo",
-    "artist": "aespa",
-    "album": "SYNK : PARALLEL LINE - Special Digital Single",
-    "href": "https://open.spotify.com/track/6pIuPm3u7QgUFAX1V0D9wY",
-    "live": true,
+    "id": "7rZakQcep7Tqhrwb5U72ml",
+    "title": "summer",
+    "artist": "damon r.",
+    "album": "summer",
+    "href": "https://open.spotify.com/track/7rZakQcep7Tqhrwb5U72ml",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#feead3",
-      "onLight": "#796f64",
-      "onDark": "#feead3"
+      "raw": "#1a464c",
+      "onLight": "#1a464c",
+      "onDark": "#617f84"
     },
-    "fetchedAt": "2026-09-15T15:44:16.872Z"
+    "fetchedAt": "2026-09-15T20:29:23.965Z"
   }
 }
