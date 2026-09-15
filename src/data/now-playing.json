@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5h1OL4GUcAKtP0PD5TuPw3",
-    "title": "hoàng hôn (feat. tlinh)",
-    "artist": "2Pillz, tlinh",
-    "album": "hoàng hôn",
-    "href": "https://open.spotify.com/track/5h1OL4GUcAKtP0PD5TuPw3",
-    "live": false,
+    "id": "63fXGINcMbO1x5RKLGKlgx",
+    "title": "UPPER ECHELON",
+    "artist": "ARDN",
+    "album": "KEEP YOUR EYE ON THE SPARROW",
+    "href": "https://open.spotify.com/track/63fXGINcMbO1x5RKLGKlgx",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#0a425a",
-      "onLight": "#0a425a",
-      "onDark": "#608494"
+      "raw": "#7f5314",
+      "onLight": "#7f5314",
+      "onDark": "#9b7948"
     },
-    "fetchedAt": "2026-09-15T01:57:37.344Z"
+    "fetchedAt": "2026-09-15T10:30:45.305Z"
   }
 }
