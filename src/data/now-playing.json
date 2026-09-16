@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7rZakQcep7Tqhrwb5U72ml",
-    "title": "summer",
-    "artist": "damon r.",
-    "album": "summer",
-    "href": "https://open.spotify.com/track/7rZakQcep7Tqhrwb5U72ml",
+    "id": "7cHFV5Cc0QDoffNkwCbJIY",
+    "title": "DON’T KNOW",
+    "artist": "SAAY, punchnello",
+    "album": "DON’T KNOW",
+    "href": "https://open.spotify.com/track/7cHFV5Cc0QDoffNkwCbJIY",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#1a464c",
-      "onLight": "#1a464c",
-      "onDark": "#617f84"
+      "raw": "#e9045f",
+      "onLight": "#db0459",
+      "onDark": "#ec2172"
     },
-    "fetchedAt": "2026-09-16T01:48:34.511Z"
+    "fetchedAt": "2026-09-16T10:20:12.113Z"
   }
 }
