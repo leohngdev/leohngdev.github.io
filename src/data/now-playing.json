@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6DZtyR7Pk6LyHve2AD19Zv",
-    "title": "Waiting Room (feat. Jordan Ward)",
-    "artist": "Jenevieve, Jordan Ward",
-    "album": "CRYSALIS (CODA)",
-    "href": "https://open.spotify.com/track/6DZtyR7Pk6LyHve2AD19Zv",
+    "id": "3cZajhyr8LmtPfHZ9296tj",
+    "title": "No Broke Boys",
+    "artist": "Disco Lines, Tinashe",
+    "album": "No Broke Boys",
+    "href": "https://open.spotify.com/track/3cZajhyr8LmtPfHZ9296tj",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e55401",
-      "onLight": "#be4601",
-      "onDark": "#e55401"
+      "raw": "#ff73bf",
+      "onLight": "#b04f84",
+      "onDark": "#ff73bf"
     },
-    "fetchedAt": "2026-09-16T20:28:44.521Z"
+    "fetchedAt": "2026-09-17T01:52:25.871Z"
   }
 }
