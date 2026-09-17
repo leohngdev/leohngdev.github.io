@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3cZajhyr8LmtPfHZ9296tj",
-    "title": "No Broke Boys",
-    "artist": "Disco Lines, Tinashe",
-    "album": "No Broke Boys",
-    "href": "https://open.spotify.com/track/3cZajhyr8LmtPfHZ9296tj",
+    "id": "3P3pw6C19j31Rnzgo3JG7o",
+    "title": "Perfect Strangers",
+    "artist": "Jonas Blue, JP Cooper",
+    "album": "Blue",
+    "href": "https://open.spotify.com/track/3P3pw6C19j31Rnzgo3JG7o",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff73bf",
-      "onLight": "#b04f84",
-      "onDark": "#ff73bf"
+      "raw": "#b6def6",
+      "onLight": "#5c707d",
+      "onDark": "#b6def6"
     },
-    "fetchedAt": "2026-09-17T01:52:25.871Z"
+    "fetchedAt": "2026-09-17T10:29:41.958Z"
   }
 }
