@@ -1,10 +1,10 @@
 {
   "track": {
-    "id": "3P3pw6C19j31Rnzgo3JG7o",
-    "title": "Perfect Strangers",
-    "artist": "Jonas Blue, JP Cooper",
+    "id": "5ZSl6gDoV6bPPxzmLeneV9",
+    "title": "Rise",
+    "artist": "Jonas Blue, Jack & Jack",
     "album": "Blue",
-    "href": "https://open.spotify.com/track/3P3pw6C19j31Rnzgo3JG7o",
+    "href": "https://open.spotify.com/track/5ZSl6gDoV6bPPxzmLeneV9",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
@@ -12,6 +12,6 @@
       "onLight": "#5c707d",
       "onDark": "#b6def6"
     },
-    "fetchedAt": "2026-09-17T10:29:41.958Z"
+    "fetchedAt": "2026-09-17T15:42:10.249Z"
   }
 }
