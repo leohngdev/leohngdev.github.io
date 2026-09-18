@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "25qp5LiSuet6rvl950jrGD",
-    "title": "Blink (feat. TZUYU)",
-    "artist": "Corbyn Besson, TZUYU",
-    "album": "Blink (feat. TZUYU)",
-    "href": "https://open.spotify.com/track/25qp5LiSuet6rvl950jrGD",
+    "id": "7yNf9YjeO5JXUE3JEBgnYc",
+    "title": "Babydoll",
+    "artist": "Dominic Fike",
+    "album": "Don't Forget About Me, Demos",
+    "href": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ee0000",
-      "onLight": "#e00000",
-      "onDark": "#f01e1e"
+      "raw": "#ffc232",
+      "onLight": "#89681b",
+      "onDark": "#ffc232"
     },
-    "fetchedAt": "2026-09-18T15:14:34.173Z"
+    "fetchedAt": "2026-09-18T20:02:08.193Z"
   }
 }
