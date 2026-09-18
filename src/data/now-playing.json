@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5ZSl6gDoV6bPPxzmLeneV9",
-    "title": "Rise",
-    "artist": "Jonas Blue, Jack & Jack",
-    "album": "Blue",
-    "href": "https://open.spotify.com/track/5ZSl6gDoV6bPPxzmLeneV9",
-    "live": false,
+    "id": "0fonaf88IEDQM309zmU80L",
+    "title": "Be My Baby",
+    "artist": "Ariana Grande, Cashmere Cat",
+    "album": "My Everything (Deluxe)",
+    "href": "https://open.spotify.com/track/0fonaf88IEDQM309zmU80L",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#b6def6",
-      "onLight": "#5c707d",
-      "onDark": "#b6def6"
+      "raw": "#03030b",
+      "onLight": "#03030b",
+      "onDark": "#7f7f83"
     },
-    "fetchedAt": "2026-09-18T01:39:45.095Z"
+    "fetchedAt": "2026-09-18T10:06:03.602Z"
   }
 }
