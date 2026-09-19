@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7yNf9YjeO5JXUE3JEBgnYc",
-    "title": "Babydoll",
-    "artist": "Dominic Fike",
-    "album": "Don't Forget About Me, Demos",
-    "href": "https://open.spotify.com/track/7yNf9YjeO5JXUE3JEBgnYc",
-    "live": false,
+    "id": "0vrmHPfoBadXVr2n0m1aqZ",
+    "title": "Heaven",
+    "artist": "Avicii",
+    "album": "TIM",
+    "href": "https://open.spotify.com/track/0vrmHPfoBadXVr2n0m1aqZ",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ffc232",
-      "onLight": "#89681b",
-      "onDark": "#ffc232"
+      "raw": "#e4d5c7",
+      "onLight": "#736c65",
+      "onDark": "#e4d5c7"
     },
-    "fetchedAt": "2026-09-19T01:44:11.700Z"
+    "fetchedAt": "2026-09-19T09:47:09.977Z"
   }
 }
