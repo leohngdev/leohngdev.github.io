@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0vrmHPfoBadXVr2n0m1aqZ",
-    "title": "Heaven",
-    "artist": "Avicii",
-    "album": "TIM",
-    "href": "https://open.spotify.com/track/0vrmHPfoBadXVr2n0m1aqZ",
-    "live": true,
+    "id": "7gSPJdd7ZcmLmTOWqzlZG3",
+    "title": "Saturday Night",
+    "artist": "Ravyn Lenae",
+    "album": "Blue Island",
+    "href": "https://open.spotify.com/track/7gSPJdd7ZcmLmTOWqzlZG3",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e4d5c7",
-      "onLight": "#736c65",
-      "onDark": "#e4d5c7"
+      "raw": "#36b8e8",
+      "onLight": "#237796",
+      "onDark": "#36b8e8"
     },
-    "fetchedAt": "2026-09-19T09:47:09.977Z"
+    "fetchedAt": "2026-09-19T14:51:47.253Z"
   }
 }
