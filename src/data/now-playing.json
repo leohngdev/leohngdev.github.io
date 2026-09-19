@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7gSPJdd7ZcmLmTOWqzlZG3",
-    "title": "Saturday Night",
-    "artist": "Ravyn Lenae",
-    "album": "Blue Island",
-    "href": "https://open.spotify.com/track/7gSPJdd7ZcmLmTOWqzlZG3",
+    "id": "70cHKK8bHAfJrOGVnfRG9J",
+    "title": "Nicole Kidman",
+    "artist": "ADÉLA",
+    "album": "PRIMA",
+    "href": "https://open.spotify.com/track/70cHKK8bHAfJrOGVnfRG9J",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#36b8e8",
-      "onLight": "#237796",
-      "onDark": "#36b8e8"
+      "raw": "#c30d32",
+      "onLight": "#c30d32",
+      "onDark": "#d34d69"
     },
-    "fetchedAt": "2026-09-19T14:51:47.253Z"
+    "fetchedAt": "2026-09-19T19:37:35.310Z"
   }
 }
