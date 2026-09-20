@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "3d1oTMjtfVySbAYQp3v4MU",
-    "title": "like i do",
-    "artist": "Ariana Grande",
-    "album": "petal",
-    "href": "https://open.spotify.com/track/3d1oTMjtfVySbAYQp3v4MU",
+    "id": "47SWX89TEMbqdL1CyAzDGb",
+    "title": "I can’t be high around you anymore",
+    "artist": "FLO",
+    "album": "THERAPY AT THE CLUB",
+    "href": "https://open.spotify.com/track/47SWX89TEMbqdL1CyAzDGb",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-09-20T01:46:15.790Z"
+    "palette": {
+      "raw": "#005995",
+      "onLight": "#005995",
+      "onDark": "#4485b1"
+    },
+    "fetchedAt": "2026-09-20T10:08:53.861Z"
   }
 }
