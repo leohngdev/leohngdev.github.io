@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "70cHKK8bHAfJrOGVnfRG9J",
-    "title": "Nicole Kidman",
-    "artist": "ADÉLA",
-    "album": "PRIMA",
-    "href": "https://open.spotify.com/track/70cHKK8bHAfJrOGVnfRG9J",
+    "id": "3d1oTMjtfVySbAYQp3v4MU",
+    "title": "like i do",
+    "artist": "Ariana Grande",
+    "album": "petal",
+    "href": "https://open.spotify.com/track/3d1oTMjtfVySbAYQp3v4MU",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#c30d32",
-      "onLight": "#c30d32",
-      "onDark": "#d34d69"
-    },
-    "fetchedAt": "2026-09-19T19:37:35.310Z"
+    "palette": null,
+    "fetchedAt": "2026-09-20T01:46:15.790Z"
   }
 }
