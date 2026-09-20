@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "47SWX89TEMbqdL1CyAzDGb",
-    "title": "I can’t be high around you anymore",
-    "artist": "FLO",
-    "album": "THERAPY AT THE CLUB",
-    "href": "https://open.spotify.com/track/47SWX89TEMbqdL1CyAzDGb",
+    "id": "5DFoaOcbygmi9MSzQjMweU",
+    "title": "act like you know ? (feat. Muni Long)",
+    "artist": "Master Peace, Muni Long",
+    "album": "act like you know ? (feat. Muni Long)",
+    "href": "https://open.spotify.com/track/5DFoaOcbygmi9MSzQjMweU",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#005995",
-      "onLight": "#005995",
-      "onDark": "#4485b1"
+      "raw": "#9c2020",
+      "onLight": "#9c2020",
+      "onDark": "#bb6565"
     },
-    "fetchedAt": "2026-09-20T10:08:53.861Z"
+    "fetchedAt": "2026-09-20T14:56:44.366Z"
   }
 }
