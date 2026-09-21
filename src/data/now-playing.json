@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1NOZvdCovG42qQV7ftVD5d",
-    "title": "Birthday",
-    "artist": "Katy Perry",
-    "album": "PRISM",
-    "href": "https://open.spotify.com/track/1NOZvdCovG42qQV7ftVD5d",
+    "id": "21RzyxY3EFaxVy6K4RqaU9",
+    "title": "Body",
+    "artist": "Loud Luxury, Brando",
+    "album": "Body",
+    "href": "https://open.spotify.com/track/21RzyxY3EFaxVy6K4RqaU9",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f6ce1b",
-      "onLight": "#846f0f",
-      "onDark": "#f6ce1b"
+      "raw": "#ff8ebd",
+      "onLight": "#9b5773",
+      "onDark": "#ff8ebd"
     },
-    "fetchedAt": "2026-09-21T11:10:14.592Z"
+    "fetchedAt": "2026-09-21T17:15:54.735Z"
   }
 }
