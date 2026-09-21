@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5DFoaOcbygmi9MSzQjMweU",
-    "title": "act like you know ? (feat. Muni Long)",
-    "artist": "Master Peace, Muni Long",
-    "album": "act like you know ? (feat. Muni Long)",
-    "href": "https://open.spotify.com/track/5DFoaOcbygmi9MSzQjMweU",
+    "id": "1NOZvdCovG42qQV7ftVD5d",
+    "title": "Birthday",
+    "artist": "Katy Perry",
+    "album": "PRISM",
+    "href": "https://open.spotify.com/track/1NOZvdCovG42qQV7ftVD5d",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#9c2020",
-      "onLight": "#9c2020",
-      "onDark": "#bb6565"
+      "raw": "#f6ce1b",
+      "onLight": "#846f0f",
+      "onDark": "#f6ce1b"
     },
-    "fetchedAt": "2026-09-21T01:47:29.474Z"
+    "fetchedAt": "2026-09-21T11:10:14.592Z"
   }
 }
