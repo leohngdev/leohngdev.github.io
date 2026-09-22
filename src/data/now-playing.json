@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "21RzyxY3EFaxVy6K4RqaU9",
-    "title": "Body",
-    "artist": "Loud Luxury, Brando",
-    "album": "Body",
-    "href": "https://open.spotify.com/track/21RzyxY3EFaxVy6K4RqaU9",
+    "id": "1KtD0xaLAikgIt5tPbteZQ",
+    "title": "Thinking About You (feat. Ayah Marar)",
+    "artist": "Calvin Harris, Ayah Marar",
+    "album": "18 Months",
+    "href": "https://open.spotify.com/track/1KtD0xaLAikgIt5tPbteZQ",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff8ebd",
-      "onLight": "#9b5773",
-      "onDark": "#ff8ebd"
+      "raw": "#488fbc",
+      "onLight": "#3c779c",
+      "onDark": "#488fbc"
     },
-    "fetchedAt": "2026-09-21T21:15:44.593Z"
+    "fetchedAt": "2026-09-22T01:57:53.833Z"
   }
 }
