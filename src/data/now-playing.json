@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1KtD0xaLAikgIt5tPbteZQ",
-    "title": "Thinking About You (feat. Ayah Marar)",
-    "artist": "Calvin Harris, Ayah Marar",
-    "album": "18 Months",
-    "href": "https://open.spotify.com/track/1KtD0xaLAikgIt5tPbteZQ",
+    "id": "5Fla3zyOCcIRqrDoKLU0DP",
+    "title": "Let You Love Me",
+    "artist": "Rita Ora",
+    "album": "Phoenix (Deluxe Edition)",
+    "href": "https://open.spotify.com/track/5Fla3zyOCcIRqrDoKLU0DP",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#488fbc",
-      "onLight": "#3c779c",
-      "onDark": "#488fbc"
+      "raw": "#61280d",
+      "onLight": "#61280d",
+      "onDark": "#997462"
     },
-    "fetchedAt": "2026-09-22T01:57:53.833Z"
+    "fetchedAt": "2026-09-22T10:23:56.408Z"
   }
 }
