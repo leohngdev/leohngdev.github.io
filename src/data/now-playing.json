@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0BZ5YlY2xnwfUmyGdiOMje",
-    "title": "Call on Me - Ryan Riback Remix",
-    "artist": "Starley, Ryan Riback",
-    "album": "One of One",
-    "href": "https://open.spotify.com/track/0BZ5YlY2xnwfUmyGdiOMje",
+    "id": "3rAcN3CLeSrkhIZN8PHbwb",
+    "title": "What You Want",
+    "artist": "CORTIS",
+    "album": "What You Want",
+    "href": "https://open.spotify.com/track/3rAcN3CLeSrkhIZN8PHbwb",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f75d33",
-      "onLight": "#c14928",
-      "onDark": "#f75d33"
+      "raw": "#29638b",
+      "onLight": "#29638b",
+      "onDark": "#5885a4"
     },
-    "fetchedAt": "2026-09-23T15:36:24.818Z"
+    "fetchedAt": "2026-09-23T20:43:47.177Z"
   }
 }
