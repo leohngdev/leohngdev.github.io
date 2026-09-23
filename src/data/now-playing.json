@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "3zU9rdflI65tK4dkkNSp77",
-    "title": "Heroes (we could be)",
-    "artist": "Alesso, Tove Lo",
-    "album": "Forever",
-    "href": "https://open.spotify.com/track/3zU9rdflI65tK4dkkNSp77",
+    "id": "7ks6AZmFcm3Y6PGGxGSmlB",
+    "title": "Where Them Girls At (feat. Nicki Minaj & Flo Rida)",
+    "artist": "David Guetta, Flo Rida, Nicki Minaj",
+    "album": "Nothing but the Beat (Ultimate Edition)",
+    "href": "https://open.spotify.com/track/7ks6AZmFcm3Y6PGGxGSmlB",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-09-23T01:54:06.531Z"
+    "palette": {
+      "raw": "#d20021",
+      "onLight": "#d20021",
+      "onDark": "#de445c"
+    },
+    "fetchedAt": "2026-09-23T10:19:19.507Z"
   }
 }
