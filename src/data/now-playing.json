@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3rAcN3CLeSrkhIZN8PHbwb",
-    "title": "What You Want",
-    "artist": "CORTIS",
-    "album": "What You Want",
-    "href": "https://open.spotify.com/track/3rAcN3CLeSrkhIZN8PHbwb",
-    "live": false,
+    "id": "1WwQ714xuznu44tEnkem2g",
+    "title": "I Run",
+    "artist": "HAVEN., Kaitlin Aragon",
+    "album": "I Run",
+    "href": "https://open.spotify.com/track/1WwQ714xuznu44tEnkem2g",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#29638b",
-      "onLight": "#29638b",
-      "onDark": "#5885a4"
+      "raw": "#2aabf8",
+      "onLight": "#1d76ab",
+      "onDark": "#2aabf8"
     },
-    "fetchedAt": "2026-09-23T20:43:47.177Z"
+    "fetchedAt": "2026-09-24T01:44:07.135Z"
   }
 }
