@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1fidCEsYlaVE3pHwKCvpFZ",
-    "title": "Am I Wrong",
-    "artist": "Nico & Vinz",
-    "album": "Black Star Elephant",
-    "href": "https://open.spotify.com/track/1fidCEsYlaVE3pHwKCvpFZ",
+    "id": "6jg5SRvdGxvJ0DzNV0UqEK",
+    "title": "Please Don't Go",
+    "artist": "Mike Posner",
+    "album": "31 Minutes to Takeoff",
+    "href": "https://open.spotify.com/track/6jg5SRvdGxvJ0DzNV0UqEK",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#a46516",
-      "onLight": "#9a5f15",
-      "onDark": "#a96e24"
+      "raw": "#064a7a",
+      "onLight": "#064a7a",
+      "onDark": "#5382a3"
     },
-    "fetchedAt": "2026-09-24T10:33:34.566Z"
+    "fetchedAt": "2026-09-24T15:57:22.555Z"
   }
 }
