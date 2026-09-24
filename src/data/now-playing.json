@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1WwQ714xuznu44tEnkem2g",
-    "title": "I Run",
-    "artist": "HAVEN., Kaitlin Aragon",
-    "album": "I Run",
-    "href": "https://open.spotify.com/track/1WwQ714xuznu44tEnkem2g",
-    "live": true,
+    "id": "1fidCEsYlaVE3pHwKCvpFZ",
+    "title": "Am I Wrong",
+    "artist": "Nico & Vinz",
+    "album": "Black Star Elephant",
+    "href": "https://open.spotify.com/track/1fidCEsYlaVE3pHwKCvpFZ",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#2aabf8",
-      "onLight": "#1d76ab",
-      "onDark": "#2aabf8"
+      "raw": "#a46516",
+      "onLight": "#9a5f15",
+      "onDark": "#a96e24"
     },
-    "fetchedAt": "2026-09-24T01:44:07.135Z"
+    "fetchedAt": "2026-09-24T10:33:34.566Z"
   }
 }
