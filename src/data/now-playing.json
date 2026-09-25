@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6jg5SRvdGxvJ0DzNV0UqEK",
-    "title": "Please Don't Go",
-    "artist": "Mike Posner",
-    "album": "31 Minutes to Takeoff",
-    "href": "https://open.spotify.com/track/6jg5SRvdGxvJ0DzNV0UqEK",
+    "id": "3xmL9LoL5tl9KYqWIbxQRN",
+    "title": "MachineGirl",
+    "artist": "ADÉLA",
+    "album": "The Provocateur",
+    "href": "https://open.spotify.com/track/3xmL9LoL5tl9KYqWIbxQRN",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#064a7a",
-      "onLight": "#064a7a",
-      "onDark": "#5382a3"
+      "raw": "#a989cd",
+      "onLight": "#7c6596",
+      "onDark": "#a989cd"
     },
-    "fetchedAt": "2026-09-24T20:49:10.330Z"
+    "fetchedAt": "2026-09-25T02:00:08.590Z"
   }
 }
