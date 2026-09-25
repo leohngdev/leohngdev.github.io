@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3xmL9LoL5tl9KYqWIbxQRN",
-    "title": "MachineGirl",
+    "id": "70cHKK8bHAfJrOGVnfRG9J",
+    "title": "Nicole Kidman",
     "artist": "ADÉLA",
-    "album": "The Provocateur",
-    "href": "https://open.spotify.com/track/3xmL9LoL5tl9KYqWIbxQRN",
+    "album": "PRIMA",
+    "href": "https://open.spotify.com/track/70cHKK8bHAfJrOGVnfRG9J",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#a989cd",
-      "onLight": "#7c6596",
-      "onDark": "#a989cd"
+      "raw": "#c30d32",
+      "onLight": "#c30d32",
+      "onDark": "#d34d69"
     },
-    "fetchedAt": "2026-09-25T02:00:08.590Z"
+    "fetchedAt": "2026-09-25T10:37:00.710Z"
   }
 }
