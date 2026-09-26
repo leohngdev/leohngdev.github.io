@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5ld2rB0d5nG8RTQRRmkxNa",
-    "title": "BAD BITCHES",
-    "artist": "DESTIN CONRAD, Kehlani",
-    "album": "LOVE ON DIGITAL",
-    "href": "https://open.spotify.com/track/5ld2rB0d5nG8RTQRRmkxNa",
+    "id": "3EEUi4q95LmCjJfRzP1epo",
+    "title": "TELL ME WHAT I DID",
+    "artist": "Tiffany Day",
+    "album": "HALO",
+    "href": "https://open.spotify.com/track/3EEUi4q95LmCjJfRzP1epo",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e58c4b",
-      "onLight": "#9e6134",
-      "onDark": "#e58c4b"
+      "raw": "#002134",
+      "onLight": "#002134",
+      "onDark": "#6d808b"
     },
-    "fetchedAt": "2026-09-26T10:20:25.053Z"
+    "fetchedAt": "2026-09-26T15:09:44.374Z"
   }
 }
