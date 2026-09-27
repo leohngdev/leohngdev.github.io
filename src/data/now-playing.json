@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "3EEUi4q95LmCjJfRzP1epo",
-    "title": "TELL ME WHAT I DID",
-    "artist": "Tiffany Day",
-    "album": "HALO",
-    "href": "https://open.spotify.com/track/3EEUi4q95LmCjJfRzP1epo",
+    "id": "2GhvoJajHIXxWK4vtPWkqN",
+    "title": "destroy me",
+    "artist": "2hollis",
+    "album": "star",
+    "href": "https://open.spotify.com/track/2GhvoJajHIXxWK4vtPWkqN",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#002134",
-      "onLight": "#002134",
-      "onDark": "#6d808b"
-    },
-    "fetchedAt": "2026-09-27T01:57:28.532Z"
+    "palette": null,
+    "fetchedAt": "2026-09-27T10:52:37.658Z"
   }
 }
