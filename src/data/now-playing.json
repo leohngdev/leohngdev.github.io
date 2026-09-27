@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "65FftemJ1DbbZ45DUfHJXE",
-    "title": "OMG",
-    "artist": "NewJeans",
-    "album": "NewJeans 'OMG'",
-    "href": "https://open.spotify.com/track/65FftemJ1DbbZ45DUfHJXE",
-    "live": true,
+    "id": "09LrGvT9KsACH66RHYMDyR",
+    "title": "Don’t Smile",
+    "artist": "Sabrina Carpenter",
+    "album": "Short n' Sweet",
+    "href": "https://open.spotify.com/track/09LrGvT9KsACH66RHYMDyR",
+    "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-09-27T15:50:45.031Z"
+    "palette": {
+      "raw": "#feae72",
+      "onLight": "#926441",
+      "onDark": "#feae72"
+    },
+    "fetchedAt": "2026-09-27T20:29:19.843Z"
   }
 }
