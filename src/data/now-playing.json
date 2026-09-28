@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "09LrGvT9KsACH66RHYMDyR",
-    "title": "Don’t Smile",
-    "artist": "Sabrina Carpenter",
-    "album": "Short n' Sweet",
-    "href": "https://open.spotify.com/track/09LrGvT9KsACH66RHYMDyR",
+    "id": "5b4ZkTjErABGLOTrnuUKgu",
+    "title": "Ten Four",
+    "artist": "Lucas Home",
+    "album": "Ten Four",
+    "href": "https://open.spotify.com/track/5b4ZkTjErABGLOTrnuUKgu",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#feae72",
-      "onLight": "#926441",
-      "onDark": "#feae72"
+      "raw": "#f88a12",
+      "onLight": "#a1590c",
+      "onDark": "#f88a12"
     },
-    "fetchedAt": "2026-09-27T20:29:19.843Z"
+    "fetchedAt": "2026-09-28T02:03:00.788Z"
   }
 }
