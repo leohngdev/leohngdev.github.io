@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5b4ZkTjErABGLOTrnuUKgu",
-    "title": "Ten Four",
-    "artist": "Lucas Home",
-    "album": "Ten Four",
-    "href": "https://open.spotify.com/track/5b4ZkTjErABGLOTrnuUKgu",
+    "id": "08WEIBLx95kvXakvVs8izv",
+    "title": "FORFEIT",
+    "artist": "2hollis",
+    "album": "2",
+    "href": "https://open.spotify.com/track/08WEIBLx95kvXakvVs8izv",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f88a12",
-      "onLight": "#a1590c",
-      "onDark": "#f88a12"
+      "raw": "#da5253",
+      "onLight": "#c14849",
+      "onDark": "#da5253"
     },
-    "fetchedAt": "2026-09-28T02:03:00.788Z"
+    "fetchedAt": "2026-09-28T12:03:53.830Z"
   }
 }
