@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "08WEIBLx95kvXakvVs8izv",
-    "title": "FORFEIT",
-    "artist": "2hollis",
-    "album": "2",
-    "href": "https://open.spotify.com/track/08WEIBLx95kvXakvVs8izv",
+    "id": "5Bnvtv2hJ9SnTlCFYs3wwX",
+    "title": "appealing",
+    "artist": "Pdubcookin",
+    "album": "appealing",
+    "href": "https://open.spotify.com/track/5Bnvtv2hJ9SnTlCFYs3wwX",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#da5253",
-      "onLight": "#c14849",
-      "onDark": "#da5253"
+      "raw": "#4a0209",
+      "onLight": "#4a0209",
+      "onDark": "#9e777b"
     },
-    "fetchedAt": "2026-09-28T12:03:53.830Z"
+    "fetchedAt": "2026-09-28T22:39:34.801Z"
   }
 }
