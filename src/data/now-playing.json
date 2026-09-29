@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4Nw7kywWurWS6ceinn1cHK",
-    "title": "Baby Powder",
-    "artist": "Jenevieve",
-    "album": "Division",
-    "href": "https://open.spotify.com/track/4Nw7kywWurWS6ceinn1cHK",
+    "id": "1eqXXzzOpPM98Rliz3BAoT",
+    "title": "Romanticize (feat. Jenevieve)",
+    "artist": "Tkay Maidza, Jenevieve",
+    "album": "Romanticize (feat. Jenevieve)",
+    "href": "https://open.spotify.com/track/1eqXXzzOpPM98Rliz3BAoT",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fdf607",
-      "onLight": "#787503",
-      "onDark": "#fdf607"
+      "raw": "#f40013",
+      "onLight": "#e50012",
+      "onDark": "#f40013"
     },
-    "fetchedAt": "2026-09-29T02:49:48.055Z"
+    "fetchedAt": "2026-09-29T11:37:42.018Z"
   }
 }
