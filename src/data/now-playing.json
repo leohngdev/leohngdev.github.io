@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5Bnvtv2hJ9SnTlCFYs3wwX",
-    "title": "appealing",
-    "artist": "Pdubcookin",
-    "album": "appealing",
-    "href": "https://open.spotify.com/track/5Bnvtv2hJ9SnTlCFYs3wwX",
+    "id": "4Nw7kywWurWS6ceinn1cHK",
+    "title": "Baby Powder",
+    "artist": "Jenevieve",
+    "album": "Division",
+    "href": "https://open.spotify.com/track/4Nw7kywWurWS6ceinn1cHK",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#4a0209",
-      "onLight": "#4a0209",
-      "onDark": "#9e777b"
+      "raw": "#fdf607",
+      "onLight": "#787503",
+      "onDark": "#fdf607"
     },
-    "fetchedAt": "2026-09-28T22:39:34.801Z"
+    "fetchedAt": "2026-09-29T02:49:48.055Z"
   }
 }
