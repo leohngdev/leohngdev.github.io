@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "2oTR1JPVhkXgTpdo8giXnN",
-    "title": "DOYA?",
-    "artist": "3ee",
-    "album": "MORELUV",
-    "href": "https://open.spotify.com/track/2oTR1JPVhkXgTpdo8giXnN",
-    "live": true,
+    "id": "7oSE3cm1Y26nfwd8wSUHE8",
+    "title": "til' death do us part",
+    "artist": "TYLER LEWIS",
+    "album": "til' death do us part",
+    "href": "https://open.spotify.com/track/7oSE3cm1Y26nfwd8wSUHE8",
+    "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#ba0e04",
-      "onLight": "#ba0e04",
-      "onDark": "#cf5952"
-    },
-    "fetchedAt": "2026-09-30T17:02:04.186Z"
+    "palette": null,
+    "fetchedAt": "2026-09-30T21:33:12.991Z"
   }
 }
