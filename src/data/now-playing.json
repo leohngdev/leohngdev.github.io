@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "0EeB1wGl2hRmgrj7cXlMUR",
-    "title": "shadow of you",
-    "artist": "Celine Wanyi",
-    "album": "shadow of you",
-    "href": "https://open.spotify.com/track/0EeB1wGl2hRmgrj7cXlMUR",
-    "live": false,
+    "id": "2oTR1JPVhkXgTpdo8giXnN",
+    "title": "DOYA?",
+    "artist": "3ee",
+    "album": "MORELUV",
+    "href": "https://open.spotify.com/track/2oTR1JPVhkXgTpdo8giXnN",
+    "live": true,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-09-30T11:25:13.522Z"
+    "palette": {
+      "raw": "#ba0e04",
+      "onLight": "#ba0e04",
+      "onDark": "#cf5952"
+    },
+    "fetchedAt": "2026-09-30T17:02:04.186Z"
   }
 }
