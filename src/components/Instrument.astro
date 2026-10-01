@@ -15,7 +15,7 @@ const { variant = 'full', class: className = '' } = Astro.props;
  * performance from causing the layout shift it is supposed to be arguing against.
  */
 const metrics = [
-  { key: 'transferred', label: 'Page weight', unit: 'KB', budget: runtimeBudget.transferred },
+  { key: 'transferred', label: 'Resources loaded', unit: 'KB', budget: runtimeBudget.transferred },
   { key: 'javascript', label: 'JavaScript', unit: 'KB', budget: runtimeBudget.javascript },
   { key: 'lcp', label: 'Largest paint', unit: 'ms', budget: runtimeBudget.lcp },
 ] as const;
@@ -36,7 +36,7 @@ const budgetLabel = (metric: (typeof metrics)[number]) =>
 {
   variant === 'full' ? (
     <div class:list={['w-full max-w-md', className]} data-instrument>
-      <p class="eyebrow">This page, measured in your browser</p>
+      <p class="eyebrow">Measured in your browser</p>
 
       <dl class="mt-4 space-y-3">
         {metrics.map((metric) => (
@@ -66,7 +66,7 @@ const budgetLabel = (metric: (typeof metrics)[number]) =>
       </dl>
 
       <p class="datum mt-4 text-[var(--text-muted)]">
-        <span data-metric="islands">&mdash;</span> · budgets enforced at build
+        <span data-metric="islands">&mdash;</span> · build assets checked against size budgets
       </p>
     </div>
   ) : (
@@ -158,4 +158,8 @@ const budgetLabel = (metric: (typeof metrics)[number]) =>
   // Re-measures after each view transition, so a case study reports its own weight
   // rather than the number the home page happened to produce.
   document.addEventListener('astro:page-load', () => whenSettled(render));
+  // Refresh on demand after lazy artwork or navigation adds resources to this tab.
+  document.addEventListener('toggle', (event) => {
+    if (event.target instanceof HTMLDetailsElement && event.target.open && event.target.hasAttribute('data-performance-details')) render();
+  }, true);
 </script>

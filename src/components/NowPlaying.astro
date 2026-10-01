@@ -137,7 +137,7 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
           /* The extractor found no colour worth borrowing, so say so rather than
              offering a button that would turn the site grey. */
           <p class="datum mt-4 leading-relaxed text-[var(--text-muted)]">
-            This cover has no colour worth borrowing, so the site keeps its amber.
+            The site’s original palette is available for this cover.
           </p>
         )}
 
@@ -151,7 +151,7 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
           audio, off-screen, because that is the only lawful way to play the track.
         */}
         {trackId && (
-          <div data-np-player hidden class="mt-4 border-t border-[var(--border-subtle)] pt-4">
+          <div data-np-player class="mt-4 border-t border-[var(--border-subtle)] pt-4">
             <div class="flex items-center gap-3">
               <button
                 type="button"
@@ -238,43 +238,7 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
         )}
       </div>
 
-      {/* First-visit invitation. Deliberately not a gate: the page is fully usable
-          behind it, it arrives after the thesis has landed, and either answer is
-          remembered so it never appears twice. */}
-      {trackId && (
-        <div
-          data-np-prompt
-          hidden
-          role="region"
-          aria-label="Soundtrack offer"
-          class="np-prompt fixed top-20 right-4 z-50 w-80 max-w-[calc(100vw-2rem)] rounded-xl border border-[var(--border-subtle)] bg-[var(--surface-raised)] p-4 shadow-2xl"
-        >
-          <p class="eyebrow">This site has a soundtrack</p>
-          <p class="mt-2 text-sm leading-relaxed text-[var(--text-secondary)]">
-            {track.title} — {track.artist}. Want it while you read? It brings the
-            album's colours with it.
-          </p>
-          <div class="mt-3 flex items-center gap-2">
-            <button
-              type="button"
-              data-vibes-yes
-              class="rounded-lg bg-[var(--text-primary)] px-4 py-2 text-sm font-medium text-[var(--surface)] transition-opacity hover:opacity-88"
-            >
-              Play the vibes
-            </button>
-            <button
-              type="button"
-              data-vibes-no
-              class="rounded-lg border border-[var(--border-strong)] px-4 py-2 text-sm font-medium transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
-            >
-              Keep it quiet
-            </button>
-          </div>
-          <p class="datum mt-3 text-[var(--text-muted)]">
-            Spotify preview · remembered on this device
-          </p>
-        </div>
-      )}
+
     </div>
   )
 }
@@ -282,6 +246,17 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
 <style>
   .np-panel {
     transform-origin: top right;
+  }
+
+  @media (max-width: 760px) {
+    .np-panel {
+      position: fixed;
+      top: 68px;
+      right: 12px;
+      width: min(19rem, calc(100vw - 24px));
+      max-height: calc(100dvh - 90px);
+      overflow-y: auto;
+    }
   }
 
   /* Spotify's iframe, kept for audio only. Off-screen at real size rather than
@@ -334,23 +309,6 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
   @media (prefers-reduced-motion: reduce) {
     .np-panel:not([hidden]),
     .np-live {
-      animation: none;
-    }
-  }
-
-  .np-prompt:not([hidden]) {
-    animation: np-prompt-in 360ms cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  @keyframes np-prompt-in {
-    from {
-      opacity: 0;
-      transform: translateY(-10px) scale(0.98);
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .np-prompt:not([hidden]) {
       animation: none;
     }
   }
@@ -418,10 +376,9 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
 
     root_.querySelector('[data-tint-toggle]')?.setAttribute('aria-pressed', String(on));
     const label = root_.querySelector<HTMLElement>('[data-tint-label]');
-    if (label) label.textContent = on ? 'Back to amber' : 'Use this palette';
+    if (label) label.textContent = on ? 'Original palette' : 'Use this palette';
   }
 
-  const VIBES_KEY = 'vibes';
 
   interface SpotifyController {
     play: () => void;
@@ -438,6 +395,7 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
 
   /** Survives navigations along with the transition:persist node. */
   let embedController: SpotifyController | null = null;
+  let embedLoading = false;
   /** 0 until Spotify reports a real length, so nothing is invented. */
   let lastDuration = 0;
 
@@ -497,11 +455,13 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
       if (autoplay) embedController.play();
       return;
     }
+    if (embedLoading) return;
 
     const target = wrap.querySelector<HTMLElement>('[data-np-embed]');
     const player = wrap.querySelector<HTMLElement>('[data-np-player]');
     const trackId = wrap.dataset.trackId;
     if (!target || !trackId) return;
+    embedLoading = true;
 
     player?.removeAttribute('hidden');
 
@@ -512,6 +472,7 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
         { uri: `spotify:track:${trackId}`, width: 320, height: 80 },
         (controller: SpotifyController) => {
           embedController = controller;
+          embedLoading = false;
           controller.addListener('playback_update', (event) =>
             renderPlayback(wrap, event.data),
           );
@@ -523,6 +484,12 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
     const loader = document.createElement('script');
     loader.src = 'https://open.spotify.com/embed/iframe-api/v1';
     loader.async = true;
+    loader.addEventListener('error', () => {
+      embedLoading = false;
+      loader.remove();
+      const state = wrap.querySelector<HTMLElement>('[data-np-state]');
+      if (state) state.textContent = 'Could not load. Press play to retry.';
+    }, { once: true });
     document.head.append(loader);
   }
 
@@ -645,65 +612,7 @@ const trackId = track?.href?.match(/\/track\/([A-Za-z0-9]+)/)?.[1] ?? null;
 
     bindTransport(wrap);
 
-    const prompt = wrap.querySelector<HTMLElement>('[data-np-prompt]');
-    let vibes: string | null = null;
-    try {
-      vibes = localStorage.getItem(VIBES_KEY);
-    } catch {
-      /* Private mode. Treat as answered so the prompt cannot nag. */
-      vibes = '0';
-    }
 
-    const remember = (value: string) => {
-      try {
-        localStorage.setItem(VIBES_KEY, value);
-      } catch {
-        /* Fine: the choice just will not persist. */
-      }
-    };
-
-    if (prompt && vibes === null) {
-      // After the thesis has landed, not against it.
-      setTimeout(() => {
-        prompt.hidden = false;
-      }, 1100);
-
-      prompt.querySelector('[data-vibes-yes]')?.addEventListener('click', () => {
-        prompt.hidden = true;
-        remember('1');
-        // Vibes means both: the music and the album's colours, one choice.
-        if (!tintOn && wrap.dataset.onLight) {
-          tintOn = true;
-          root.setAttribute('data-tint-animate', '');
-          applyTint(true, wrap);
-          try {
-            localStorage.setItem(STORAGE_KEY, '1');
-          } catch {
-            /* Fine. */
-          }
-        }
-        setOpen(true);
-        // The click IS the user gesture autoplay policy requires.
-        loadEmbed(wrap, true);
-      });
-
-      prompt.querySelector('[data-vibes-no]')?.addEventListener('click', () => {
-        prompt.hidden = true;
-        remember('0');
-      });
-
-      document.addEventListener('keydown', (event) => {
-        if (event.key === 'Escape' && prompt && !prompt.hidden) prompt.hidden = true;
-      });
-    } else if (vibes === '1') {
-      /**
-       * A returning vibes-visitor cannot get autoplay: browsers require a user
-       * gesture per page load, full stop. The nearest legal thing is to resume on
-       * their first interaction with the page, which is what they opted into.
-       */
-      const resume = () => loadEmbed(wrap, true);
-      document.addEventListener('pointerdown', resume, { once: true });
-    }
   }
 
   document.addEventListener('astro:page-load', initNowPlaying);

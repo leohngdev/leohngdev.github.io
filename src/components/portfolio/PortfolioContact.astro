@@ -1,0 +1,13 @@
+---
+import { profile } from '../../data/profile';
+---
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <p class="eyebrow">Looking for my next chapter</p>
+  <div class="contact-grid">
+    <h2 id="contact-title">Let’s make<br /><em>something.</em></h2>
+    <div><p>{profile.available}.</p><a class="email" href={`mailto:${profile.email}`}>{profile.email} ↗</a>
+      <div class="contact-links"><a href={profile.resume} data-cv-open data-astro-prefetch="false">Read my CV ↗</a><a href={profile.github} rel="noopener noreferrer" target="_blank">GitHub ↗</a><a href={profile.linkedin} rel="noopener noreferrer" target="_blank">LinkedIn ↗</a></div>
+    </div>
+  </div>
+  <div class="signoff"><span class="hand">thanks for having a look.</span><span>LEO NGUYEN / LOOSE PARTS</span><a href="#collection">Back to the collection ↑</a></div>
+</section>

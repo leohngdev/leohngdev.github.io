@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { profile } from '../../data/profile';
+import { portfolio } from '../../data/portfolio';
+import ProjectObject from './ProjectObject.astro';
+interface Props { projects: CollectionEntry<'projects'>[] }
+const { projects } = Astro.props;
+---
+<section class="hero" id="collection" data-motion="collection" aria-labelledby="portfolio-title">
+  <div class="hero-top">
+    <div class="hero-copy">
+      <p class="eyebrow">A personal collection, still growing.</p>
+      <h1 id="portfolio-title">A few things<br />that make<br />me, <em>me.</em></h1>
+      <p class="hero-intro">I’m Leo. I build software, learn tricks, and get curious about how things work.</p>
+      <span class="available">Monash IT graduate, Melbourne.<br />Open to graduate &amp; junior software roles.</span>
+      <div class="hero-actions"><a href="#work">Explore my work ↓</a><a href={profile.resume} data-cv-open data-astro-prefetch="false">Read my CV ↗</a></div>
+    </div>
+    <div class="collection" aria-label="The project collection">
+      <span class="hand" aria-hidden="true">there’s a story inside ↙</span>
+      {projects.map((project, i) => {
+        const item = portfolio[project.id];
+        return <a class={`object object-${item.key}`} href={`#${item.key}`} data-project={item.key} aria-label={`Explore ${project.data.title}`}>
+          <ProjectObject kind={item.key} />
+          <span class="caption">{String(i + 1).padStart(2, '0')} / {item.short} ↗</span>
+        </a>;
+      })}
+    </div>
+  </div>
+  <div class="hero-bottom">
+    <span class="hand">Different things. Same curiosity.</span>
+    <label class="motion-control" data-motion-control hidden><input type="checkbox" data-reduce-motion />Reduce motion</label>
+    <a href="#work">Scroll to open the collection ↓</a>
+  </div>
+</section>
+<nav class="chapter-nav" id="work" aria-label="Jump to a project">
+  {projects.map((project, i) => <a href={`#${portfolio[project.id].key}`}>{String(i + 1).padStart(2, '0')} {portfolio[project.id].short}</a>)}
+</nav>

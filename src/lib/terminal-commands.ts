@@ -234,11 +234,14 @@ const commands: Command[] = [
        * `go skills` works from the home page as well as from /about.
        */
       const routes: Record<string, string> = {
+        work: '/#work',
+        timeline: '/#experience',
+        contact: '/#contact',
         about: '/about/',
         skills: '/about/#skills',
         experience: '/about/#experience',
       };
-      const sections = ['work', 'timeline', 'contact', ...Object.keys(routes)];
+      const sections = Object.keys(routes);
       const target = args[0]?.toLowerCase();
 
       if (!target || !sections.includes(target)) {

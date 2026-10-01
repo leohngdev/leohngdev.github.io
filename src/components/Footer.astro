@@ -2,29 +2,27 @@
 import { profile } from '../data/profile';
 import { REPO_URL } from '../data/site';
 import Instrument from './Instrument.astro';
-
 const year = new Date().getFullYear();
 ---
-
-<footer class="border-t border-[var(--border-subtle)] py-12">
+<footer class="site-footer">
   <div class="container-page">
-    <Instrument variant="full" />
-
-    <div
-      class="mt-10 flex flex-col items-start justify-between gap-4 border-t border-[var(--border-subtle)] pt-8 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center"
-    >
-      <p class="datum">
-        &copy; {year} {profile.fullDisplayName} &middot; {profile.location}
-      </p>
-
-      <p class="datum">
-        Built with Astro and Tailwind. No UI framework.{' '}
-        <a
-          href={REPO_URL}
-          class="link-underline"
-          rel="noopener">Source</a
-        >.
-      </p>
+    <div class="footer-row">
+      <p>© {year} {profile.fullDisplayName} · {profile.location}</p>
+      <a href={REPO_URL} rel="noopener noreferrer" target="_blank">Source ↗</a>
     </div>
+    <details class="performance-details" data-performance-details>
+      <summary>Page performance</summary>
+      <div class="performance-body"><Instrument variant="full" /><p>Resources loaded in this tab, including images loaded as you scroll and pages you visit. Paint timing refers to the initial page load.</p></div>
+    </details>
   </div>
 </footer>
+<style>
+  .site-footer { padding: 26px 0 30px; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: 11px; }
+  .footer-row { display: flex; justify-content: space-between; gap: 20px; align-items: center; flex-wrap: wrap; }
+  .footer-row a, summary { min-height: 44px; display: inline-flex; align-items: center; cursor: pointer; text-underline-offset: 4px; }
+  .footer-row a:hover { text-decoration: underline; }
+  summary { display: list-item; align-content: center; width: fit-content; }
+  .performance-body { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; max-width: 780px; padding: 20px 0; }
+  .performance-body > p { max-width: 300px; font-size: 12px; line-height: 1.7; }
+  @media (max-width: 600px) { .performance-body { grid-template-columns: 1fr; } }
+</style>

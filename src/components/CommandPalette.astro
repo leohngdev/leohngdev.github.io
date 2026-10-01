@@ -244,7 +244,8 @@ const { data } = Astro.props;
         const target = document.getElementById(effect.target);
         close();
         if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const reduced = document.documentElement.dataset.motion === 'reduce';
+          target.scrollIntoView({ behavior: reduced ? 'instant' : 'smooth', block: 'start' });
           return;
         }
         // The section lives on another page now, so navigate instead of doing nothing.

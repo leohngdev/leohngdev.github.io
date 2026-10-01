@@ -1,0 +1,29 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { profile } from '../../data/profile';
+interface Props { roles: CollectionEntry<'experience'>[] }
+const { roles } = Astro.props;
+---
+<section class="about" id="about" data-motion="coding" aria-labelledby="about-title">
+  <div class="about-grid">
+    <div>
+      <p class="eyebrow">A little more context</p>
+      <h2 id="about-title">Still plenty<br />to be curious<br />about.</h2>
+      {profile.about.map(paragraph => <p>{paragraph}</p>)}
+      <div class="education"><span class="eyebrow">{profile.education.institution} / {profile.education.period}</span><strong>{profile.education.degree}</strong><p>{profile.education.major} major<br />{profile.education.minor} minor</p></div>
+      <a class="text-link" href="/about/">More about my background ↗</a>
+    </div>
+    <div>
+      <figure class="coding-paper"><span class="tape a" aria-hidden="true"></span>
+        <div class="sprite coding-strip" style="--columns:2;--rows:2;--sprite-x:0%;--sprite-y:0%;"><img src="/media/loose-parts/coding.webp" alt="Crayon illustration of Leo working at a laptop." width="1330" height="1182" loading="lazy" decoding="async" /></div>
+        <figcaption class="hand">same curiosity, different surface.</figcaption>
+      </figure>
+      <div class="skills" id="skills"><h3>Things I’ve worked with</h3>{profile.skills.map(group => <div class="skill-row"><strong>{group.label}</strong><div><span>{group.items.join(', ')}</span><p>{group.note}</p></div></div>)}</div>
+    </div>
+  </div>
+  <div class="experience-strip" id="experience">
+    <span id="timeline" aria-hidden="true"></span>
+    <h3>A little history</h3>
+    <ol>{roles.map(role => <li><span class="date">{role.data.period}</span><strong>{role.data.role}</strong><span>{role.data.org}</span><p>{role.data.points[0]}</p></li>)}</ol>
+  </div>
+</section>

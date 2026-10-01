@@ -1,0 +1,28 @@
+---
+interface Props { kickflip?: boolean }
+const { kickflip = false } = Astro.props;
+const key = kickflip ? 'kickflip' : 'skate';
+---
+<section class:list={['interlude', 'skate-sequence', { 'kick-chapter': kickflip }]} data-motion={key} aria-labelledby={`${key}-title`}>
+  <div class="scene-stage">
+    <div class="interlude-grid">
+      <div class="interlude-copy">
+        <p class="eyebrow">{kickflip ? 'A page out of the skate tape' : 'Off the clock / the same person'}</p>
+        <h2 id={`${key}-title`}>{kickflip ? <>One <br />more <br />try.</> : <>Find your<br />own <span class="hand orange line-word">line.</span></>}</h2>
+        {kickflip && <span class="hand scene-annotation">and make it your own.</span>}
+        <p>{kickflip ? 'The freedom to experiment. The tiny adjustments. Finding a way that feels like yours.' : 'Skating is freedom. There are so many ways into a trick that you end up inventing what works for you.'}</p>
+      </div>
+      <figure class="skate-art">
+        <div class="film-paper">
+          <div class="sprite skate-strip" style={`--columns:4;--rows:${kickflip ? 3 : 2};--sprite-x:${kickflip ? -50 : 0}%;--sprite-y:${kickflip ? -33.333333 : -50}%;`}>
+            <img src={`/media/loose-parts/skate-${kickflip ? 'kickflip' : 'ledge'}.webp`} alt={kickflip ? 'Crayon drawings of Leo doing a kickflip, based on his skating footage.' : 'Crayon drawings of Leo skating a ledge, based on his own footage.'} width={kickflip ? 1086 : 1330} height={kickflip ? 1448 : 1182} loading="lazy" decoding="async" />
+          </div>
+          <i class="crease" aria-hidden="true"></i><i class="crease second" aria-hidden="true"></i>
+        </div>
+        <figcaption class="sr-only">Scroll down to advance the sequence or up to rewind. Reduce motion shows a still.</figcaption>
+      </figure>
+    </div>
+    <div class="film-caption"><span>{kickflip ? 'Kickflip' : 'Outside'} / From my skate tape</span><a href={kickflip ? '#web' : '#antsa'}>Next project ↓</a></div>
+    <div class="film-line" aria-hidden="true"></div>
+  </div>
+</section>

@@ -1,0 +1,27 @@
+---
+interface Props { kind: string; expanded?: boolean }
+const { kind, expanded = false } = Astro.props;
+---
+{kind === 'yard' && <>
+  <span class="cassette" aria-hidden="true">
+    <span class="cassette-label">YARD<small>{expanded ? 'SIDE A / CONNECTION' : '01 / SOLO PRODUCT / SIDE A'}</small></span>
+    <span class="reels"><i></i><b></b><i></i></span>
+  </span>
+  {expanded && <span class="case-lid" aria-hidden="true"></span>}
+</>}
+{kind === 'antsa' && (expanded ? <>
+  <span class="rule-page" aria-hidden="true">
+    <span class="paper-heading">ASSESSMENT RULES</span>
+    {['Categories', 'Severity thresholds', 'Weights', 'Reverse scoring'].map((label, i) =>
+      <span class="paper-row"><span>{label}</span><span>{['Configurable', 'Configurable', 'Redistribute', 'Flags'][i]}</span></span>
+    )}
+  </span>
+  <span class="folder-cover" aria-hidden="true"><b>ANTSA</b><small>SCORING ENGINE / CASE NOTES</small></span>
+</> : <span class="folder" aria-hidden="true"><b>ANTSA</b><small>QUESTIONNAIRE<br />SCORING ENGINE</small><i class="rule-lines"></i></span>)}
+{kind === 'games' && <span class="cartridge" aria-hidden="true"><span class="cart-label">PLAY{expanded && <><br />↳ TRY</>}<small>{expanded ? 'UNREAL / UNITY' : 'ENGINE STUDIES'}</small></span></span>}
+{kind === 'character' && <>
+  {expanded && <span class="tape a" aria-hidden="true"></span>}
+  <span class="mesh" aria-hidden="true"><i></i><i></i><i></i><i></i><strong>3D</strong></span>
+</>}
+{kind === 'web' && <span class="layers" aria-hidden="true"><i>DATABASE</i><i>APPLICATION</i><i>INTERFACE</i></span>}
+{kind === 'robotics' && <span class="wheel" aria-hidden="true"></span>}
