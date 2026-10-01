@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5LiJslg0y8OFUJz5r5YBgV",
-    "title": "SELFISH",
-    "artist": "BOY SODA",
-    "album": "SOULSTAR",
-    "href": "https://open.spotify.com/track/5LiJslg0y8OFUJz5r5YBgV",
+    "id": "0l45fHynGyWPiSrJ1szQZj",
+    "title": "hella jealous",
+    "artist": "TYLER LEWIS",
+    "album": "hella jealous",
+    "href": "https://open.spotify.com/track/0l45fHynGyWPiSrJ1szQZj",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ca474b",
-      "onLight": "#be4347",
-      "onDark": "#cd5256"
+      "raw": "#a13103",
+      "onLight": "#a13103",
+      "onDark": "#ba6846"
     },
-    "fetchedAt": "2026-10-01T11:52:25.750Z"
+    "fetchedAt": "2026-10-01T17:32:12.590Z"
   }
 }
