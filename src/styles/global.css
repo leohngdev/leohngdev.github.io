@@ -4,11 +4,7 @@
    which halves the number of font files the build has to emit. */
 @import '@fontsource-variable/inter/wght.css';
 @import '@fontsource-variable/jetbrains-mono/wght.css';
-/* Fraunces carries the display voice. 'standard' is weight + optical size, and the
-   opsz axis is the point: browsers apply font-optical-sizing: auto by default, so the
-   hero gets the high-contrast display cut and a section heading gets the readable one
-   from a single file. The soft/wonk/italic axes are never used, so they are not loaded. */
-@import '@fontsource-variable/fraunces/standard.css';
+@import './fonts.css';
 
 @plugin "@tailwindcss/typography";
 
@@ -19,28 +15,28 @@
   /* Three faces, three jobs, no overlap. Display carries voice, sans carries prose,
      mono carries data only — never decoration. Mono on every section label was what
      made the whole page read as one long technical note. */
-  --font-display: 'Fraunces Variable', ui-serif, Georgia, 'Times New Roman', serif;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', ui-sans-serif, sans-serif;
   --font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
   --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', 'Consolas', monospace;
 
   /* Warm neutrals rather than pure grey, so the page reads less clinical. */
-  --color-ink-50: #f8f7f5;
-  --color-ink-100: #eeecE8;
-  --color-ink-200: #ddd9d2;
-  --color-ink-300: #b9b3a9;
-  --color-ink-400: #8a847a;
-  --color-ink-500: #6b6559;
-  --color-ink-600: #4c4740;
+  --color-ink-50: #ece9df;
+  --color-ink-100: #e2e2d5;
+  --color-ink-200: #c2c3b3;
+  --color-ink-300: #bec3b4;
+  --color-ink-400: #9ba18f;
+  --color-ink-500: #65675b;
+  --color-ink-600: #484c40;
   --color-ink-700: #332f2a;
   --color-ink-800: #1f1c19;
-  --color-ink-900: #141210;
-  --color-ink-950: #0c0b0a;
+  --color-ink-900: #2b2d25;
+  --color-ink-950: #20251f;
 
-  /* Single accent, borrowed from amber phosphor CRT terminals. */
-  --color-accent-400: #f5a524;
-  --color-accent-500: #e08c10;
-  --color-accent-600: #b56d09;
-  --color-accent-700: #8a5307;
+  /* Burnt orange on paper; lighter terracotta for dark surfaces. */
+  --color-accent-400: #eea083;
+  --color-accent-500: #d97854;
+  --color-accent-600: #b84629;
+  --color-accent-700: #b84629;
 
   /* A real scale, five steps, each with its own line height. Replaces the previous
      two ad-hoc sizes. Display is reserved for the thesis: exactly one per page. */
@@ -66,7 +62,7 @@
 @layer base {
   :root {
     --surface: var(--color-ink-50);
-    --surface-raised: #ffffff;
+    --surface-raised: #f7f3e9;
     --surface-sunken: var(--color-ink-100);
     --border-subtle: var(--color-ink-200);
     --border-strong: var(--color-ink-300);
@@ -80,9 +76,9 @@
   .dark {
     --surface: var(--color-ink-950);
     --surface-raised: var(--color-ink-900);
-    --surface-sunken: #080807;
-    --border-subtle: #26221e;
-    --border-strong: #3a352f;
+    --surface-sunken: #191e19;
+    --border-subtle: #464d40;
+    --border-strong: #69705f;
     --text-primary: var(--color-ink-50);
     --text-secondary: var(--color-ink-300);
     --text-muted: var(--color-ink-400);
@@ -93,7 +89,7 @@
   html {
     scroll-behavior: smooth;
     /* Keeps anchored sections clear of the sticky header. */
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
   }
 
@@ -152,6 +148,17 @@
     }
   }
 }
+
+html[data-motion='reduce'], html[data-motion='reduce'] * {
+  scroll-behavior: auto !important;
+}
+html[data-motion='reduce'] *, html[data-motion='reduce'] *::before, html[data-motion='reduce'] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+}
+html[data-motion='reduce'] .reveal { opacity: 1; transform: none; }
+@media (max-width: 760px) { html { scroll-padding-top: 8rem; } }
 
 @utility container-page {
   width: 100%;

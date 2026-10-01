@@ -61,8 +61,8 @@ const personSchema = {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="author" content={profile.fullDisplayName} />
-    <meta name="theme-color" content="#0c0b0a" media="(prefers-color-scheme: dark)" />
-    <meta name="theme-color" content="#f8f7f5" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#20251f" media="(prefers-color-scheme: dark)" />
+    <meta name="theme-color" content="#ece9df" media="(prefers-color-scheme: light)" />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
@@ -98,7 +98,10 @@ const personSchema = {
         function applyChrome() {
           const root = document.documentElement;
           root.classList.add('js');
+          root.dataset.motion = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'reduce' : 'full';
           try {
+            const motion = localStorage.getItem('portfolio-motion');
+            if (motion === 'reduce' || motion === 'full') root.dataset.motion = motion;
             const storedTheme = localStorage.getItem('theme');
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const dark = storedTheme === 'dark' || (!storedTheme && prefersDark);
@@ -160,6 +163,7 @@ const personSchema = {
     <CvWindow />
 
     <script>
+      import '../lib/portfolio-motion';
       // Reveal-on-scroll. Progressive enhancement only: without JS the CSS
       // fallback in global.css leaves everything visible.
       let observer: IntersectionObserver | null = null;
@@ -202,6 +206,10 @@ const personSchema = {
 
       // Fires on first load and after every view transition.
       document.addEventListener('astro:page-load', bindReveals);
+      document.addEventListener('astro:before-swap', () => {
+        observer?.disconnect();
+        observer = null;
+      });
     </script>
   </body>
 </html>
