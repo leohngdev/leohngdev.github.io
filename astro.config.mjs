@@ -5,9 +5,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 import { SITE_URL } from './src/data/site.ts';
 
-// No UI framework integration. The only interactive pieces — the command palette,
-// the cost explorer and the instrument readout — are plain TypeScript modules, which
-// is why this site ships single-digit kilobytes of JavaScript instead of react-dom.
+// The scroll film, command palette, CV and music controls use plain TypeScript.
 export default defineConfig({
   site: SITE_URL,
   integrations: [sitemap()],
@@ -19,6 +17,8 @@ export default defineConfig({
   },
   prefetch: {
     prefetchAll: true,
-    defaultStrategy: 'viewport',
+    // Six complete chapters are already visible in the scroll. Only fetch a full
+    // case study when a visitor shows intent to follow its link.
+    defaultStrategy: 'hover',
   },
 });

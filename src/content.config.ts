@@ -12,7 +12,7 @@ const projects = defineCollection({
       role: z.string(),
       org: z.string().optional(),
       period: z.string(),
-      // Lower numbers surface first. ANTSA leads at 1.
+      // Lower numbers surface first. Yard leads at 0; ANTSA follows at 1.
       order: z.number(),
       featured: z.boolean().default(true),
       category: z.enum(['web', 'game', 'threed', 'hardware']),

@@ -22,28 +22,12 @@ export const profile = {
   locationDetail: 'Melbourne, Australia',
   available: 'Open to graduate and junior software roles in Melbourne',
 
-  /**
-   * The one sentence the site is built around, set at display scale in the hero.
-   * It is a causal claim, not a list: the games half explains why the software half
-   * is good, which is the thing a four-second scan needs to land. Everything else on
-   * the page — including the measured page-weight readout — is evidence for it.
-   * Keep it under about 40 characters or it stops working at display size.
-   */
-  thesis: 'Games taught me what software costs.',
-
-  /**
-   * One line of concrete proof directly beneath the thesis. Both halves, fast.
-   * Deliberately does NOT restate the ANTSA tagline: that sentence already appears
-   * on the lead row of the work index one screen further down, and reading the same
-   * sentence twice in the first two screens makes the page feel thinner than it is.
-   */
-  heroProof:
-    'Software Development major, Games Development minor at Monash. Most recently on a live Australian mental health platform.',
-
-  headline: 'I build full-stack web apps, and things that run in game engines.',
-  /** Meta description and OG copy. Longer than the hero copy on purpose. */
+  /** The collection brings the person and the work together. */
+  thesis: 'A few things that make me, me.',
+  heroProof: 'Monash IT graduate in Melbourne. Software, skating, and a curiosity about how things work.',
+  headline: 'I build software, learn tricks, and get curious about how things work.',
   subheadline:
-    'Software Development graduate from Monash with a Games Development minor. Most recently I rebuilt the scoring engine behind a live Australian digital mental health platform.',
+    'Leo Nguyen, software developer and Monash IT graduate in Melbourne. Explore Yard, production software at ANTSA, games, 3D, web apps and robotics.',
 
   email: 'hnguyen.leo04@gmail.com',
   linkedin: 'https://linkedin.com/in/leo-hnguyen/',
@@ -90,14 +74,21 @@ export const profile = {
       id: 'web',
       label: 'Web & Backend',
       depth: 'shipped',
-      note: 'Most of my paid work sits here, including the ANTSA scoring engine.',
+      note: 'Production work at ANTSA and university web projects.',
       items: ['Node.js', 'Nest.js', 'React', 'React Native', 'CakePHP', 'PostgreSQL', 'MySQL', 'REST APIs'],
+    },
+    {
+      id: 'product',
+      label: 'Product Development',
+      depth: 'built',
+      note: 'Independent product work on Yard. See the project for its dated beta status.',
+      items: ['Expo', 'Next.js', 'Supabase'],
     },
     {
       id: 'tools',
       label: 'Ways of Working',
       depth: 'shipped',
-      note: 'Shipped against a client who could reject it, rather than a marking rubric.',
+      note: 'Agile team delivery, client sign-off, and tracing problems across services.',
       items: ['Git & GitHub', 'Agile / Scrum', 'UAT', 'Code Review', 'CI/CD', 'Debugging legacy systems'],
     },
     {
@@ -118,10 +109,9 @@ export const profile = {
 
   /** First person, written to be read out loud. Rendered in the About section. */
   about: [
-    "I'm a software developer in Melbourne. I finished a Bachelor of IT at Monash at the end of 2025, majoring in Software Development with a minor in Games Development. It is an odd pairing and I would choose it again.",
-    'Before university I spent two years on an FRC robotics team in Ho Chi Minh City, writing navigation and sensor code in Python and C++. Two years of watching a machine do the wrong thing taught me where the work lives: in the gap between what you think a system does and what it does.',
-    'My most recent work was ANTSA, a live Australian digital mental health platform, where I made questionnaire scoring configurable at runtime. The two things I am proudest of never shipped as features. I stood the whole multiservice stack up locally before writing a line, then traced a data mismatch that produced no error and no log entry.',
-    'The engine and 3D half feeds the rest. Writing gameplay systems in C# and C++ and optimising topology for realtime rendering made me count frames and bytes. I still count them when I write a backend.',
+    'I’m Leo, a software developer in Melbourne and a Monash IT graduate. I studied Software Development with a Games Development minor.',
+    'My work spans a solo product, production software, game systems, 3D, web apps, and robotics. I’m finding my direction by making things and paying attention to what each one teaches me.',
+    'Games draw me in through their worlds, atmosphere, puzzles, and creative possibilities. Skating gives me room to experiment and find my own way. There are so many techniques behind one trick, and everyone puts them together differently.',
   ],
 
   /**
@@ -129,7 +119,7 @@ export const profile = {
    * density an applicant tracking system scans for, without the filler.
    */
   cvSummary:
-    'IT graduate, Software Development major and Games Development minor. I build full stack web applications, deliver against real client sign-off in an agile team, and program game engines in C++ and C#. I debug legacy backends and ship production features.',
+    'Monash IT graduate. Software Development major, Games Development minor. Solo developer of Yard; built configurable scoring at ANTSA in an agile team, with 100% UAT across two client-signed iterations.',
 
   /** Shown in the hero as a subtle hint that the terminal is real. */
   terminalHint: 'try: whoami',

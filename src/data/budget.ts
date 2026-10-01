@@ -60,15 +60,19 @@ export const buildBudget: BuildBudget = {
    * wrong move would have been raising this without noticing.
    */
   javascript: 15 * KB,
-  css: 16 * KB,
-  html: 16 * KB,
+  // Physical project objects, responsive film scenes and their dark variants add
+  // roughly 4 KB to the old 16 KB allowance. Keep 2 KB of headroom for maintenance.
+  css: 22 * KB,
+  // The full portfolio now includes six complete chapters, about and skills in
+  // server-rendered HTML so reading it never depends on opening an object.
+  html: 20 * KB,
 };
 
 export const runtimeBudget: RuntimeBudget = {
-  // Fonts are now the overwhelming majority of this: three variable faces at roughly
-  // 66, 47 and 40 KB. That is a deliberate trade the cost explorer lets a visitor
-  // interrogate for themselves rather than something to hide.
-  transferred: 240 * KB,
+  // Loose Parts adds 417 KB of lazy crayon atlases and a 37 KB product screen.
+  // 750 KB covers a complete scroll plus self-hosted fonts and the page's code.
+  // This is a tab-resource guide; JS/CSS/HTML remain separately enforced at build.
+  transferred: 750 * KB,
   javascript: 20 * KB,
   lcp: 1500,
 };
