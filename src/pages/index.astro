@@ -1,17 +1,13 @@
 ---
 import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Work from '../components/Work.astro';
-import Timeline from '../components/Timeline.astro';
-import Navigator from '../components/Navigator.astro';
-import Contact from '../components/Contact.astro';
+import CollectionHero from '../components/portfolio/CollectionHero.astro';
+import ProjectChapter from '../components/portfolio/ProjectChapter.astro';
+import SkateSequence from '../components/portfolio/SkateSequence.astro';
+import PersonalSection from '../components/portfolio/PersonalSection.astro';
+import PortfolioContact from '../components/portfolio/PortfolioContact.astro';
+import '../styles/portfolio.css';
 
-/**
- * The home page is a poster, not a document: the thesis, the work, the trajectory,
- * two doors, and a way to get in touch. About, skills and experience live on /about,
- * because seven sections on one scroll read as clutter however good each one is.
- */
 const projects = (await getCollection('projects'))
   .filter((project) => project.data.featured)
   .sort((a, b) => a.data.order - b.data.order);
@@ -20,9 +16,14 @@ const roles = (await getCollection('experience')).sort((a, b) => a.data.order - 
 ---
 
 <Layout>
-  <Hero />
-  <Work projects={projects} />
-  <Timeline projects={projects} roles={roles} />
-  <Navigator projects={projects} roles={roles} />
-  <Contact />
+  <div class="loose-parts" data-portfolio>
+    <CollectionHero projects={projects} />
+    {projects.map((project, index) => <>
+      <ProjectChapter project={project} index={index} />
+      {project.id === 'yard' && <SkateSequence />}
+      {project.id === 'character-pipeline' && <SkateSequence kickflip />}
+    </>)}
+    <PersonalSection roles={roles} />
+    <PortfolioContact />
+  </div>
 </Layout>
