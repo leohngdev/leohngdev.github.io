@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "7oSE3cm1Y26nfwd8wSUHE8",
-    "title": "til' death do us part",
-    "artist": "TYLER LEWIS",
-    "album": "til' death do us part",
-    "href": "https://open.spotify.com/track/7oSE3cm1Y26nfwd8wSUHE8",
+    "id": "5LiJslg0y8OFUJz5r5YBgV",
+    "title": "SELFISH",
+    "artist": "BOY SODA",
+    "album": "SOULSTAR",
+    "href": "https://open.spotify.com/track/5LiJslg0y8OFUJz5r5YBgV",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-10-01T02:33:00.517Z"
+    "palette": {
+      "raw": "#ca474b",
+      "onLight": "#be4347",
+      "onDark": "#cd5256"
+    },
+    "fetchedAt": "2026-10-01T11:52:25.750Z"
   }
 }
