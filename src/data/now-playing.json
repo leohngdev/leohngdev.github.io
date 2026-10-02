@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "09IStsImFySgyp0pIQdqAc",
-    "title": "The Middle",
-    "artist": "Zedd, Maren Morris, Grey",
-    "album": "The Middle",
-    "href": "https://open.spotify.com/track/09IStsImFySgyp0pIQdqAc",
+    "id": "102YUQbYmwdBXS7jwamI90",
+    "title": "Good Graces",
+    "artist": "Sabrina Carpenter",
+    "album": "Short n' Sweet",
+    "href": "https://open.spotify.com/track/102YUQbYmwdBXS7jwamI90",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d4898d",
-      "onLight": "#925f61",
-      "onDark": "#d4898d"
+      "raw": "#feae72",
+      "onLight": "#926441",
+      "onDark": "#feae72"
     },
-    "fetchedAt": "2026-10-02T11:24:55.867Z"
+    "fetchedAt": "2026-10-02T16:51:33.496Z"
   }
 }
