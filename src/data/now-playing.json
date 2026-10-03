@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "102YUQbYmwdBXS7jwamI90",
-    "title": "Good Graces",
-    "artist": "Sabrina Carpenter",
-    "album": "Short n' Sweet",
-    "href": "https://open.spotify.com/track/102YUQbYmwdBXS7jwamI90",
+    "id": "6qNALlmZa1ESnCxJmXE1K9",
+    "title": "The Way I Am",
+    "artist": "Charlie Puth",
+    "album": "Voicenotes",
+    "href": "https://open.spotify.com/track/6qNALlmZa1ESnCxJmXE1K9",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#feae72",
-      "onLight": "#926441",
-      "onDark": "#feae72"
+      "raw": "#fdd266",
+      "onLight": "#806a34",
+      "onDark": "#fdd266"
     },
-    "fetchedAt": "2026-10-03T02:26:23.607Z"
+    "fetchedAt": "2026-10-03T10:41:33.156Z"
   }
 }
