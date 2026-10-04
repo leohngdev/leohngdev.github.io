@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "03JZr55j9bIj1d2RQJ7Yq9",
-    "title": "Jealous Type",
-    "artist": "Doja Cat",
-    "album": "Vie",
-    "href": "https://open.spotify.com/track/03JZr55j9bIj1d2RQJ7Yq9",
+    "id": "72Bz4ciRZPBcVSw0nrZDHi",
+    "title": "Do It Again",
+    "artist": "Pia Mia, Chris Brown, Tyga",
+    "album": "Do It Again",
+    "href": "https://open.spotify.com/track/72Bz4ciRZPBcVSw0nrZDHi",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ebb328",
-      "onLight": "#876717",
-      "onDark": "#ebb328"
+      "raw": "#ffd338",
+      "onLight": "#816b1c",
+      "onDark": "#ffd338"
     },
-    "fetchedAt": "2026-10-04T02:55:09.895Z"
+    "fetchedAt": "2026-10-04T11:22:04.356Z"
   }
 }
