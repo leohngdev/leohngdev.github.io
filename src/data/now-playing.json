@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "72Bz4ciRZPBcVSw0nrZDHi",
-    "title": "Do It Again",
-    "artist": "Pia Mia, Chris Brown, Tyga",
-    "album": "Do It Again",
-    "href": "https://open.spotify.com/track/72Bz4ciRZPBcVSw0nrZDHi",
+    "id": "773OzGjcoYdvfbRqpympVW",
+    "title": "Passionfruit",
+    "artist": "NMIXX",
+    "album": "Fe3O4: BREAK",
+    "href": "https://open.spotify.com/track/773OzGjcoYdvfbRqpympVW",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ffd338",
-      "onLight": "#816b1c",
-      "onDark": "#ffd338"
+      "raw": "#7ea9dd",
+      "onLight": "#526e8f",
+      "onDark": "#7ea9dd"
     },
-    "fetchedAt": "2026-10-04T11:22:04.356Z"
+    "fetchedAt": "2026-10-04T16:00:39.748Z"
   }
 }
