@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "773OzGjcoYdvfbRqpympVW",
-    "title": "Passionfruit",
-    "artist": "NMIXX",
-    "album": "Fe3O4: BREAK",
-    "href": "https://open.spotify.com/track/773OzGjcoYdvfbRqpympVW",
+    "id": "5ZShaPb5WiA6DLLSaH2oEF",
+    "title": "Echo",
+    "artist": "Talia Perese, EDYONTHEBEAT",
+    "album": "Talia Perese",
+    "href": "https://open.spotify.com/track/5ZShaPb5WiA6DLLSaH2oEF",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7ea9dd",
-      "onLight": "#526e8f",
-      "onDark": "#7ea9dd"
+      "raw": "#00c8dc",
+      "onLight": "#007a86",
+      "onDark": "#00c8dc"
     },
-    "fetchedAt": "2026-10-04T16:00:39.748Z"
+    "fetchedAt": "2026-10-04T20:31:07.767Z"
   }
 }
