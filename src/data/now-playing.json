@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5ZShaPb5WiA6DLLSaH2oEF",
-    "title": "Echo",
-    "artist": "Talia Perese, EDYONTHEBEAT",
-    "album": "Talia Perese",
-    "href": "https://open.spotify.com/track/5ZShaPb5WiA6DLLSaH2oEF",
+    "id": "1cM1snkcQwkdMnCHlFSAOU",
+    "title": "Stay In",
+    "artist": "Adanna Duru, Leven Kali",
+    "album": "NAPPY HOUR",
+    "href": "https://open.spotify.com/track/1cM1snkcQwkdMnCHlFSAOU",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#00c8dc",
-      "onLight": "#007a86",
-      "onDark": "#00c8dc"
+      "raw": "#ff7630",
+      "onLight": "#b05121",
+      "onDark": "#ff7630"
     },
-    "fetchedAt": "2026-10-05T02:28:52.260Z"
+    "fetchedAt": "2026-10-05T12:44:36.419Z"
   }
 }
