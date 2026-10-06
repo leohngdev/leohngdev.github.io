@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6i8XXoMxeH6bQjdycGSS4A",
-    "title": "So Close",
-    "artist": "Larissa Lambert",
-    "album": "Yearning",
-    "href": "https://open.spotify.com/track/6i8XXoMxeH6bQjdycGSS4A",
+    "id": "6FqoCnCIuNXNh4H6V7Aux3",
+    "title": "She’s Gonna Break My Heart",
+    "artist": "Magnus Ferrell, Jenevieve",
+    "album": "Groove Therapy",
+    "href": "https://open.spotify.com/track/6FqoCnCIuNXNh4H6V7Aux3",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c0d2fe",
-      "onLight": "#677189",
-      "onDark": "#c0d2fe"
+      "raw": "#ebab81",
+      "onLight": "#8f684f",
+      "onDark": "#ebab81"
     },
-    "fetchedAt": "2026-10-06T03:23:44.388Z"
+    "fetchedAt": "2026-10-06T12:15:47.888Z"
   }
 }
