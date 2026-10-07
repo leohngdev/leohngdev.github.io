@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7dTVx630q32E7NBBylFnfG",
-    "title": "Cosmic",
-    "artist": "Celine Wanyi",
-    "album": "Cosmic",
-    "href": "https://open.spotify.com/track/7dTVx630q32E7NBBylFnfG",
+    "id": "6mY0aTHgjIIhVYVwzcbUC0",
+    "title": "Echo",
+    "artist": "Talia Perese, EDYONTHEBEAT",
+    "album": "Echo",
+    "href": "https://open.spotify.com/track/6mY0aTHgjIIhVYVwzcbUC0",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f69a6c",
-      "onLight": "#965e42",
-      "onDark": "#f69a6c"
+      "raw": "#cabd01",
+      "onLight": "#7b7301",
+      "onDark": "#cabd01"
     },
-    "fetchedAt": "2026-10-07T02:47:07.348Z"
+    "fetchedAt": "2026-10-07T12:06:45.344Z"
   }
 }
