@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6mY0aTHgjIIhVYVwzcbUC0",
-    "title": "Echo",
-    "artist": "Talia Perese, EDYONTHEBEAT",
-    "album": "Echo",
-    "href": "https://open.spotify.com/track/6mY0aTHgjIIhVYVwzcbUC0",
+    "id": "5RlWyohsph62rIAPBbgLGV",
+    "title": "Made 4 Two (feat. Charli Taft, SIRUP)",
+    "artist": "DAUL, Charli Taft, SIRUP",
+    "album": "Made 4 Two (feat. Charli Taft, SIRUP)",
+    "href": "https://open.spotify.com/track/5RlWyohsph62rIAPBbgLGV",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#cabd01",
-      "onLight": "#7b7301",
-      "onDark": "#cabd01"
+      "raw": "#ff9600",
+      "onLight": "#a56100",
+      "onDark": "#ff9600"
     },
-    "fetchedAt": "2026-10-07T22:19:08.478Z"
+    "fetchedAt": "2026-10-08T03:05:00.945Z"
   }
 }
