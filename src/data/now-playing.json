@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0ERV6HibuwmYkgItouTTLW",
-    "title": "BAD OMEN",
-    "artist": "Ezra Wood",
-    "album": "Afterparty*",
-    "href": "https://open.spotify.com/track/0ERV6HibuwmYkgItouTTLW",
-    "live": true,
+    "id": "6ijpyPHFuJLEtF1DmE8VPo",
+    "title": "HOT",
+    "artist": "Gäelle",
+    "album": "ALL THE THINGS I CAN'T SAY",
+    "href": "https://open.spotify.com/track/6ijpyPHFuJLEtF1DmE8VPo",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fb6c07",
-      "onLight": "#b84f05",
-      "onDark": "#fb6c07"
+      "raw": "#8b4521",
+      "onLight": "#8b4521",
+      "onDark": "#a46e52"
     },
-    "fetchedAt": "2026-10-08T12:17:06.639Z"
+    "fetchedAt": "2026-10-08T22:31:00.882Z"
   }
 }
