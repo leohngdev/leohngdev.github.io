@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5RlWyohsph62rIAPBbgLGV",
-    "title": "Made 4 Two (feat. Charli Taft, SIRUP)",
-    "artist": "DAUL, Charli Taft, SIRUP",
-    "album": "Made 4 Two (feat. Charli Taft, SIRUP)",
-    "href": "https://open.spotify.com/track/5RlWyohsph62rIAPBbgLGV",
-    "live": false,
+    "id": "0ERV6HibuwmYkgItouTTLW",
+    "title": "BAD OMEN",
+    "artist": "Ezra Wood",
+    "album": "Afterparty*",
+    "href": "https://open.spotify.com/track/0ERV6HibuwmYkgItouTTLW",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff9600",
-      "onLight": "#a56100",
-      "onDark": "#ff9600"
+      "raw": "#fb6c07",
+      "onLight": "#b84f05",
+      "onDark": "#fb6c07"
     },
-    "fetchedAt": "2026-10-08T03:05:00.945Z"
+    "fetchedAt": "2026-10-08T12:17:06.639Z"
   }
 }
