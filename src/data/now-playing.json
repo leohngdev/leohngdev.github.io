@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6ijpyPHFuJLEtF1DmE8VPo",
-    "title": "HOT",
-    "artist": "Gäelle",
-    "album": "ALL THE THINGS I CAN'T SAY",
-    "href": "https://open.spotify.com/track/6ijpyPHFuJLEtF1DmE8VPo",
+    "id": "7angRTnu7Xopk5DV3dXivC",
+    "title": "ATM (JIHYO)",
+    "artist": "TWICE, JIHYO",
+    "album": "TEN: The Story Goes On",
+    "href": "https://open.spotify.com/track/7angRTnu7Xopk5DV3dXivC",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#8b4521",
-      "onLight": "#8b4521",
-      "onDark": "#a46e52"
+      "raw": "#f9a224",
+      "onLight": "#986316",
+      "onDark": "#f9a224"
     },
-    "fetchedAt": "2026-10-08T22:31:00.882Z"
+    "fetchedAt": "2026-10-09T03:11:17.720Z"
   }
 }
