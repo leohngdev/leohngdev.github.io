@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7angRTnu7Xopk5DV3dXivC",
-    "title": "ATM (JIHYO)",
-    "artist": "TWICE, JIHYO",
-    "album": "TEN: The Story Goes On",
-    "href": "https://open.spotify.com/track/7angRTnu7Xopk5DV3dXivC",
+    "id": "3vCiszoeXrPvWPquUytWvb",
+    "title": "Eternal Failure",
+    "artist": "Noa Milee",
+    "album": "Eternal Failure",
+    "href": "https://open.spotify.com/track/3vCiszoeXrPvWPquUytWvb",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f9a224",
-      "onLight": "#986316",
-      "onDark": "#f9a224"
+      "raw": "#de0036",
+      "onLight": "#de0036",
+      "onDark": "#e53862"
     },
-    "fetchedAt": "2026-10-09T03:11:17.720Z"
+    "fetchedAt": "2026-10-09T12:08:13.498Z"
   }
 }
