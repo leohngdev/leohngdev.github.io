@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3vCiszoeXrPvWPquUytWvb",
-    "title": "Eternal Failure",
-    "artist": "Noa Milee",
-    "album": "Eternal Failure",
-    "href": "https://open.spotify.com/track/3vCiszoeXrPvWPquUytWvb",
+    "id": "3gnlEjMRzlZzB26J8xIPpb",
+    "title": "In Touch",
+    "artist": "DAUL, Charli Taft",
+    "album": "In Touch",
+    "href": "https://open.spotify.com/track/3gnlEjMRzlZzB26J8xIPpb",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#de0036",
-      "onLight": "#de0036",
-      "onDark": "#e53862"
+      "raw": "#fec10a",
+      "onLight": "#896805",
+      "onDark": "#fec10a"
     },
-    "fetchedAt": "2026-10-10T02:50:26.008Z"
+    "fetchedAt": "2026-10-10T11:25:40.790Z"
   }
 }
