@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3gnlEjMRzlZzB26J8xIPpb",
-    "title": "In Touch",
-    "artist": "DAUL, Charli Taft",
-    "album": "In Touch",
-    "href": "https://open.spotify.com/track/3gnlEjMRzlZzB26J8xIPpb",
+    "id": "2rGAASBrTG770g8wx5NJOV",
+    "title": "Questions",
+    "artist": "Maeta",
+    "album": "When I Hear Your Name",
+    "href": "https://open.spotify.com/track/2rGAASBrTG770g8wx5NJOV",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fec10a",
-      "onLight": "#896805",
-      "onDark": "#fec10a"
+      "raw": "#f50010",
+      "onLight": "#d8000e",
+      "onDark": "#f50010"
     },
-    "fetchedAt": "2026-10-10T11:25:40.790Z"
+    "fetchedAt": "2026-10-10T16:24:40.906Z"
   }
 }
