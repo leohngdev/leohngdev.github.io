@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0ShoOeOMAIhvZ9FhZ9fu88",
-    "title": "off the carousel",
-    "artist": "francene rouelle",
-    "album": "off the carousel",
-    "href": "https://open.spotify.com/track/0ShoOeOMAIhvZ9FhZ9fu88",
-    "live": false,
+    "id": "6DZtyR7Pk6LyHve2AD19Zv",
+    "title": "Waiting Room (feat. Jordan Ward)",
+    "artist": "Jenevieve, Jordan Ward",
+    "album": "CRYSALIS (CODA)",
+    "href": "https://open.spotify.com/track/6DZtyR7Pk6LyHve2AD19Zv",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fbc8af",
-      "onLight": "#876c5e",
-      "onDark": "#fbc8af"
+      "raw": "#e55401",
+      "onLight": "#be4601",
+      "onDark": "#e55401"
     },
-    "fetchedAt": "2026-10-11T02:19:30.603Z"
+    "fetchedAt": "2026-10-11T11:39:05.853Z"
   }
 }
