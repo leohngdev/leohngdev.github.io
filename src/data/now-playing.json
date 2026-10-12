@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "20M6fWN10GRH65raKuxnbi",
-    "title": "Blah Blah Blah",
-    "artist": "Saint Joshua",
-    "album": "Self-(En)titled",
-    "href": "https://open.spotify.com/track/20M6fWN10GRH65raKuxnbi",
+    "id": "1mZF9TEc7gpw7by7NCZSKr",
+    "title": "3 Strikes",
+    "artist": "Terror Jr",
+    "album": "Bop City",
+    "href": "https://open.spotify.com/track/1mZF9TEc7gpw7by7NCZSKr",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ac7328",
-      "onLight": "#986623",
-      "onDark": "#ac7328"
+      "raw": "#cc4874",
+      "onLight": "#c0446d",
+      "onDark": "#cf537c"
     },
-    "fetchedAt": "2026-10-12T13:35:44.541Z"
+    "fetchedAt": "2026-10-12T23:50:58.796Z"
   }
 }
