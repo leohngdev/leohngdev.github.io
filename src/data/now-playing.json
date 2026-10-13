@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0JX2J58ewIwjhttBOg6iwn",
-    "title": "Astro Afterglow",
-    "artist": "Kyle Dion",
-    "album": "SOULAR",
-    "href": "https://open.spotify.com/track/0JX2J58ewIwjhttBOg6iwn",
+    "id": "29Nnbfgwa1lmiryOliCxQm",
+    "title": "When U Saw Love",
+    "artist": "ELIO",
+    "album": "Can You Hear Me Now?",
+    "href": "https://open.spotify.com/track/29Nnbfgwa1lmiryOliCxQm",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#cc3403",
-      "onLight": "#cc3403",
-      "onDark": "#d5562e"
+      "raw": "#ec7f41",
+      "onLight": "#a3582d",
+      "onDark": "#ec7f41"
     },
-    "fetchedAt": "2026-10-13T04:00:49.634Z"
+    "fetchedAt": "2026-10-13T12:59:33.387Z"
   }
 }
