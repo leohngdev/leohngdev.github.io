@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1mZF9TEc7gpw7by7NCZSKr",
-    "title": "3 Strikes",
-    "artist": "Terror Jr",
-    "album": "Bop City",
-    "href": "https://open.spotify.com/track/1mZF9TEc7gpw7by7NCZSKr",
+    "id": "0JX2J58ewIwjhttBOg6iwn",
+    "title": "Astro Afterglow",
+    "artist": "Kyle Dion",
+    "album": "SOULAR",
+    "href": "https://open.spotify.com/track/0JX2J58ewIwjhttBOg6iwn",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#cc4874",
-      "onLight": "#c0446d",
-      "onDark": "#cf537c"
+      "raw": "#cc3403",
+      "onLight": "#cc3403",
+      "onDark": "#d5562e"
     },
-    "fetchedAt": "2026-10-12T23:50:58.796Z"
+    "fetchedAt": "2026-10-13T04:00:49.634Z"
   }
 }
