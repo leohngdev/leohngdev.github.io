@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "29Nnbfgwa1lmiryOliCxQm",
-    "title": "When U Saw Love",
-    "artist": "ELIO",
-    "album": "Can You Hear Me Now?",
-    "href": "https://open.spotify.com/track/29Nnbfgwa1lmiryOliCxQm",
+    "id": "0Gz4Q1Bmyef5yA0G6LIIQZ",
+    "title": "poster boy",
+    "artist": "2hollis",
+    "album": "2",
+    "href": "https://open.spotify.com/track/0Gz4Q1Bmyef5yA0G6LIIQZ",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ec7f41",
-      "onLight": "#a3582d",
-      "onDark": "#ec7f41"
+      "raw": "#da5253",
+      "onLight": "#c14849",
+      "onDark": "#da5253"
     },
-    "fetchedAt": "2026-10-14T02:15:10.578Z"
+    "fetchedAt": "2026-10-14T10:40:14.206Z"
   }
 }
