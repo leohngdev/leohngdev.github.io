@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0Gz4Q1Bmyef5yA0G6LIIQZ",
-    "title": "poster boy",
-    "artist": "2hollis",
-    "album": "2",
-    "href": "https://open.spotify.com/track/0Gz4Q1Bmyef5yA0G6LIIQZ",
+    "id": "2PqFh92NTHhlbshWLOumzl",
+    "title": "Hvnly (feat. JIHYO)",
+    "artist": "Jenevieve, JIHYO",
+    "album": "CRYSALIS (CODA)",
+    "href": "https://open.spotify.com/track/2PqFh92NTHhlbshWLOumzl",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#da5253",
-      "onLight": "#c14849",
-      "onDark": "#da5253"
+      "raw": "#e55401",
+      "onLight": "#be4601",
+      "onDark": "#e55401"
     },
-    "fetchedAt": "2026-10-14T21:00:28.215Z"
+    "fetchedAt": "2026-10-15T01:56:16.656Z"
   }
 }
