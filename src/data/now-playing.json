@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2PqFh92NTHhlbshWLOumzl",
-    "title": "Hvnly (feat. JIHYO)",
-    "artist": "Jenevieve, JIHYO",
-    "album": "CRYSALIS (CODA)",
-    "href": "https://open.spotify.com/track/2PqFh92NTHhlbshWLOumzl",
+    "id": "0AcMlDcuIaWZfqEVt5rPeX",
+    "title": "With My Heart (feat. Ámina)",
+    "artist": "01sail, Ámina",
+    "album": "With My Heart (feat. Ámina)",
+    "href": "https://open.spotify.com/track/0AcMlDcuIaWZfqEVt5rPeX",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e55401",
-      "onLight": "#be4601",
-      "onDark": "#e55401"
+      "raw": "#ff9100",
+      "onLight": "#a55e00",
+      "onDark": "#ff9100"
     },
-    "fetchedAt": "2026-10-15T01:56:16.656Z"
+    "fetchedAt": "2026-10-15T10:23:56.122Z"
   }
 }
