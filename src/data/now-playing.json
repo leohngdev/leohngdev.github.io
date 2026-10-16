@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "70cHKK8bHAfJrOGVnfRG9J",
-    "title": "Nicole Kidman",
-    "artist": "ADÉLA",
-    "album": "PRIMA",
-    "href": "https://open.spotify.com/track/70cHKK8bHAfJrOGVnfRG9J",
+    "id": "5dtiFEy44JDeDBT3kk6pAZ",
+    "title": "Partycrasher",
+    "artist": "Jenevieve",
+    "album": "CRYSALIS",
+    "href": "https://open.spotify.com/track/5dtiFEy44JDeDBT3kk6pAZ",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c30d32",
-      "onLight": "#c30d32",
-      "onDark": "#d34d69"
+      "raw": "#855124",
+      "onLight": "#855124",
+      "onDark": "#a07754"
     },
-    "fetchedAt": "2026-10-16T10:11:18.287Z"
+    "fetchedAt": "2026-10-16T15:37:14.232Z"
   }
 }
