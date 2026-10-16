@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2OPTa0ZrCScjBkfY8IJZQx",
-    "title": "DOWN BAD",
-    "artist": "SAILORR",
-    "album": "FROM FLORIDA'S FINEST",
-    "href": "https://open.spotify.com/track/2OPTa0ZrCScjBkfY8IJZQx",
+    "id": "70cHKK8bHAfJrOGVnfRG9J",
+    "title": "Nicole Kidman",
+    "artist": "ADÉLA",
+    "album": "PRIMA",
+    "href": "https://open.spotify.com/track/70cHKK8bHAfJrOGVnfRG9J",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f58c3e",
-      "onLight": "#9f5b28",
-      "onDark": "#f58c3e"
+      "raw": "#c30d32",
+      "onLight": "#c30d32",
+      "onDark": "#d34d69"
     },
-    "fetchedAt": "2026-10-16T01:46:25.031Z"
+    "fetchedAt": "2026-10-16T10:11:18.287Z"
   }
 }
