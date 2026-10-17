@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5dtiFEy44JDeDBT3kk6pAZ",
-    "title": "Partycrasher",
-    "artist": "Jenevieve",
-    "album": "CRYSALIS",
-    "href": "https://open.spotify.com/track/5dtiFEy44JDeDBT3kk6pAZ",
+    "id": "1g9mpQbdwwEmlU24eopgHD",
+    "title": "Carolina",
+    "artist": "S3AN",
+    "album": "Carolina",
+    "href": "https://open.spotify.com/track/1g9mpQbdwwEmlU24eopgHD",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#855124",
-      "onLight": "#855124",
-      "onDark": "#a07754"
+      "raw": "#a32716",
+      "onLight": "#a32716",
+      "onDark": "#bb6054"
     },
-    "fetchedAt": "2026-10-17T01:40:48.590Z"
+    "fetchedAt": "2026-10-17T09:45:15.066Z"
   }
 }
