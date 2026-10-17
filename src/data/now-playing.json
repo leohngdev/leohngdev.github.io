@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1g9mpQbdwwEmlU24eopgHD",
-    "title": "Carolina",
-    "artist": "S3AN",
-    "album": "Carolina",
-    "href": "https://open.spotify.com/track/1g9mpQbdwwEmlU24eopgHD",
+    "id": "7FTliHWCCz2SpUVL1nPokh",
+    "title": "Only girl",
+    "artist": "hyejin",
+    "album": "Only girl",
+    "href": "https://open.spotify.com/track/7FTliHWCCz2SpUVL1nPokh",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#a32716",
-      "onLight": "#a32716",
-      "onDark": "#bb6054"
+      "raw": "#cb7e46",
+      "onLight": "#9e6237",
+      "onDark": "#cb7e46"
     },
-    "fetchedAt": "2026-10-17T09:45:15.066Z"
+    "fetchedAt": "2026-10-17T14:28:53.524Z"
   }
 }
