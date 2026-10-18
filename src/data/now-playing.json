@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7FTliHWCCz2SpUVL1nPokh",
-    "title": "Only girl",
-    "artist": "hyejin",
-    "album": "Only girl",
-    "href": "https://open.spotify.com/track/7FTliHWCCz2SpUVL1nPokh",
+    "id": "4Zou1bFHzORO8p2RSW5jH4",
+    "title": "FLY",
+    "artist": "Tone Stith",
+    "album": "THE EDGE",
+    "href": "https://open.spotify.com/track/4Zou1bFHzORO8p2RSW5jH4",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#cb7e46",
-      "onLight": "#9e6237",
-      "onDark": "#cb7e46"
+      "raw": "#d9bd3a",
+      "onLight": "#7c6c21",
+      "onDark": "#d9bd3a"
     },
-    "fetchedAt": "2026-10-18T01:36:57.944Z"
+    "fetchedAt": "2026-10-18T09:58:32.060Z"
   }
 }
