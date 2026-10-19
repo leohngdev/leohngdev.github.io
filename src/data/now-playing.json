@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3T4s8KFP2SGW7hfmbcICsv",
-    "title": "Adios",
-    "artist": "Hoody, GRAY",
-    "album": "Departure",
-    "href": "https://open.spotify.com/track/3T4s8KFP2SGW7hfmbcICsv",
-    "live": false,
+    "id": "2QDwrWatl0A0beu3IMXbmD",
+    "title": "metronome",
+    "artist": "reiko",
+    "album": "r u ready?",
+    "href": "https://open.spotify.com/track/2QDwrWatl0A0beu3IMXbmD",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#eee61b",
-      "onLight": "#78740e",
-      "onDark": "#eee61b"
+      "raw": "#18c4f3",
+      "onLight": "#0f7794",
+      "onDark": "#18c4f3"
     },
-    "fetchedAt": "2026-10-19T01:54:49.521Z"
+    "fetchedAt": "2026-10-19T11:19:43.452Z"
   }
 }
