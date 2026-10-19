@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2PqFh92NTHhlbshWLOumzl",
-    "title": "Hvnly (feat. JIHYO)",
-    "artist": "Jenevieve, JIHYO",
-    "album": "CRYSALIS (CODA)",
-    "href": "https://open.spotify.com/track/2PqFh92NTHhlbshWLOumzl",
+    "id": "3T4s8KFP2SGW7hfmbcICsv",
+    "title": "Adios",
+    "artist": "Hoody, GRAY",
+    "album": "Departure",
+    "href": "https://open.spotify.com/track/3T4s8KFP2SGW7hfmbcICsv",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e55401",
-      "onLight": "#be4601",
-      "onDark": "#e55401"
+      "raw": "#eee61b",
+      "onLight": "#78740e",
+      "onDark": "#eee61b"
     },
-    "fetchedAt": "2026-10-18T19:43:11.973Z"
+    "fetchedAt": "2026-10-19T01:54:49.521Z"
   }
 }
