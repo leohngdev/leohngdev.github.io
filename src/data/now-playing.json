@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2QDwrWatl0A0beu3IMXbmD",
-    "title": "metronome",
-    "artist": "reiko",
-    "album": "r u ready?",
-    "href": "https://open.spotify.com/track/2QDwrWatl0A0beu3IMXbmD",
-    "live": true,
+    "id": "6UOX5jgJVxjKr1rj5AnQC5",
+    "title": "what now?",
+    "artist": "KARLEE GIRL",
+    "album": "what now?",
+    "href": "https://open.spotify.com/track/6UOX5jgJVxjKr1rj5AnQC5",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#18c4f3",
-      "onLight": "#0f7794",
-      "onDark": "#18c4f3"
+      "raw": "#ebaa8b",
+      "onLight": "#8f6855",
+      "onDark": "#ebaa8b"
     },
-    "fetchedAt": "2026-10-19T11:19:43.452Z"
+    "fetchedAt": "2026-10-19T17:48:16.542Z"
   }
 }
