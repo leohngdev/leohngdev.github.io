@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6UOX5jgJVxjKr1rj5AnQC5",
-    "title": "what now?",
-    "artist": "KARLEE GIRL",
-    "album": "what now?",
-    "href": "https://open.spotify.com/track/6UOX5jgJVxjKr1rj5AnQC5",
+    "id": "2stuYeS9icwoQf79tUmnv8",
+    "title": "distance",
+    "artist": "bixby",
+    "album": "distance",
+    "href": "https://open.spotify.com/track/2stuYeS9icwoQf79tUmnv8",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ebaa8b",
-      "onLight": "#8f6855",
-      "onDark": "#ebaa8b"
+      "raw": "#051c18",
+      "onLight": "#051c18",
+      "onDark": "#707d7b"
     },
-    "fetchedAt": "2026-10-20T02:12:59.597Z"
+    "fetchedAt": "2026-10-20T10:28:35.217Z"
   }
 }
