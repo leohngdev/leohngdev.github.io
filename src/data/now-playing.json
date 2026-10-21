@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2stuYeS9icwoQf79tUmnv8",
-    "title": "distance",
-    "artist": "bixby",
-    "album": "distance",
-    "href": "https://open.spotify.com/track/2stuYeS9icwoQf79tUmnv8",
+    "id": "5T0mnzMsyHtmWB7Kou51Ph",
+    "title": "Gorgeous",
+    "artist": "Doja Cat",
+    "album": "Vie",
+    "href": "https://open.spotify.com/track/5T0mnzMsyHtmWB7Kou51Ph",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#051c18",
-      "onLight": "#051c18",
-      "onDark": "#707d7b"
+      "raw": "#ebb328",
+      "onLight": "#876717",
+      "onDark": "#ebb328"
     },
-    "fetchedAt": "2026-10-20T20:55:49.836Z"
+    "fetchedAt": "2026-10-21T02:06:17.891Z"
   }
 }
