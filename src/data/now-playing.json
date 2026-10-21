@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5T0mnzMsyHtmWB7Kou51Ph",
-    "title": "Gorgeous",
-    "artist": "Doja Cat",
-    "album": "Vie",
-    "href": "https://open.spotify.com/track/5T0mnzMsyHtmWB7Kou51Ph",
+    "id": "6wZOZ0votPhc8qdg4UFPtH",
+    "title": "dandelion",
+    "artist": "Ariana Grande",
+    "album": "eternal sunshine deluxe: brighter days ahead",
+    "href": "https://open.spotify.com/track/6wZOZ0votPhc8qdg4UFPtH",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ebb328",
-      "onLight": "#876717",
-      "onDark": "#ebb328"
+      "raw": "#223e45",
+      "onLight": "#223e45",
+      "onDark": "#708286"
     },
-    "fetchedAt": "2026-10-21T02:06:17.891Z"
+    "fetchedAt": "2026-10-21T10:39:15.891Z"
   }
 }
