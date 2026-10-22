@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6wZOZ0votPhc8qdg4UFPtH",
-    "title": "dandelion",
-    "artist": "Ariana Grande",
-    "album": "eternal sunshine deluxe: brighter days ahead",
-    "href": "https://open.spotify.com/track/6wZOZ0votPhc8qdg4UFPtH",
+    "id": "1TWNKyNQOBfNUkWWs7FooF",
+    "title": "XS",
+    "artist": "Rina Sawayama",
+    "album": "SAWAYAMA",
+    "href": "https://open.spotify.com/track/1TWNKyNQOBfNUkWWs7FooF",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#223e45",
-      "onLight": "#223e45",
-      "onDark": "#708286"
+      "raw": "#d8b787",
+      "onLight": "#7c694d",
+      "onDark": "#d8b787"
     },
-    "fetchedAt": "2026-10-21T20:56:22.710Z"
+    "fetchedAt": "2026-10-22T02:00:33.616Z"
   }
 }
