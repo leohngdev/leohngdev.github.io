@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1TWNKyNQOBfNUkWWs7FooF",
-    "title": "XS",
-    "artist": "Rina Sawayama",
-    "album": "SAWAYAMA",
-    "href": "https://open.spotify.com/track/1TWNKyNQOBfNUkWWs7FooF",
+    "id": "5rlMVKnvE6ZSzNCs8ZyHqU",
+    "title": "For You (With Rita Ora)",
+    "artist": "Liam Payne, Rita Ora",
+    "album": "LP1",
+    "href": "https://open.spotify.com/track/5rlMVKnvE6ZSzNCs8ZyHqU",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d8b787",
-      "onLight": "#7c694d",
-      "onDark": "#d8b787"
+      "raw": "#e2ab88",
+      "onLight": "#8a6853",
+      "onDark": "#e2ab88"
     },
-    "fetchedAt": "2026-10-22T20:52:23.072Z"
+    "fetchedAt": "2026-10-23T02:04:36.252Z"
   }
 }
