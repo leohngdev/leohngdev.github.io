@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5rlMVKnvE6ZSzNCs8ZyHqU",
-    "title": "For You (With Rita Ora)",
-    "artist": "Liam Payne, Rita Ora",
-    "album": "LP1",
-    "href": "https://open.spotify.com/track/5rlMVKnvE6ZSzNCs8ZyHqU",
+    "id": "3agccBcICCxc1WWkG3XuvE",
+    "title": "SPOILED BITCH",
+    "artist": "Tiffany Day",
+    "album": "SPOILED BITCH",
+    "href": "https://open.spotify.com/track/3agccBcICCxc1WWkG3XuvE",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e2ab88",
-      "onLight": "#8a6853",
-      "onDark": "#e2ab88"
+      "raw": "#ff0083",
+      "onLight": "#d4006d",
+      "onDark": "#ff0083"
     },
-    "fetchedAt": "2026-10-24T02:03:17.507Z"
+    "fetchedAt": "2026-10-24T09:52:10.224Z"
   }
 }
