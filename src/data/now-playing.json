@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3agccBcICCxc1WWkG3XuvE",
-    "title": "SPOILED BITCH",
-    "artist": "Tiffany Day",
-    "album": "SPOILED BITCH",
-    "href": "https://open.spotify.com/track/3agccBcICCxc1WWkG3XuvE",
+    "id": "6zjK3WGMLd7F4r1dA3od7S",
+    "title": "Lose",
+    "artist": "Lily Massie",
+    "album": "Lose",
+    "href": "https://open.spotify.com/track/6zjK3WGMLd7F4r1dA3od7S",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff0083",
-      "onLight": "#d4006d",
-      "onDark": "#ff0083"
+      "raw": "#fde044",
+      "onLight": "#807122",
+      "onDark": "#fde044"
     },
-    "fetchedAt": "2026-10-25T01:50:30.396Z"
+    "fetchedAt": "2026-10-25T10:12:33.070Z"
   }
 }
