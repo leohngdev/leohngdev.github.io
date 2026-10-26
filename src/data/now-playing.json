@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6zjK3WGMLd7F4r1dA3od7S",
-    "title": "Lose",
-    "artist": "Lily Massie",
-    "album": "Lose",
-    "href": "https://open.spotify.com/track/6zjK3WGMLd7F4r1dA3od7S",
+    "id": "6UOX5jgJVxjKr1rj5AnQC5",
+    "title": "what now?",
+    "artist": "KARLEE GIRL",
+    "album": "what now?",
+    "href": "https://open.spotify.com/track/6UOX5jgJVxjKr1rj5AnQC5",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fde044",
-      "onLight": "#807122",
-      "onDark": "#fde044"
+      "raw": "#ebaa8b",
+      "onLight": "#8f6855",
+      "onDark": "#ebaa8b"
     },
-    "fetchedAt": "2026-10-25T20:02:03.873Z"
+    "fetchedAt": "2026-10-26T01:52:10.279Z"
   }
 }
