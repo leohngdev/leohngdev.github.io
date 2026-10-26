@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6UOX5jgJVxjKr1rj5AnQC5",
-    "title": "what now?",
-    "artist": "KARLEE GIRL",
-    "album": "what now?",
-    "href": "https://open.spotify.com/track/6UOX5jgJVxjKr1rj5AnQC5",
+    "id": "0Jirkb7LGNWyVhKOsKFdZ2",
+    "title": "Run Away With Me",
+    "artist": "Carly Rae Jepsen",
+    "album": "Emotion",
+    "href": "https://open.spotify.com/track/0Jirkb7LGNWyVhKOsKFdZ2",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ebaa8b",
-      "onLight": "#8f6855",
-      "onDark": "#ebaa8b"
+      "raw": "#d62546",
+      "onLight": "#d62546",
+      "onDark": "#db3e5c"
     },
-    "fetchedAt": "2026-10-26T01:52:10.279Z"
+    "fetchedAt": "2026-10-26T11:36:04.973Z"
   }
 }
