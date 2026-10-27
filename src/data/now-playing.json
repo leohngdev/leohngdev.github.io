@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0Jirkb7LGNWyVhKOsKFdZ2",
-    "title": "Run Away With Me",
-    "artist": "Carly Rae Jepsen",
-    "album": "Emotion",
-    "href": "https://open.spotify.com/track/0Jirkb7LGNWyVhKOsKFdZ2",
+    "id": "6dbSBQXCctYSVryynHXaZ4",
+    "title": "Freaky Friday (feat. Chris Brown)",
+    "artist": "Lil Dicky, Chris Brown",
+    "album": "Freaky Friday (feat. Chris Brown)",
+    "href": "https://open.spotify.com/track/6dbSBQXCctYSVryynHXaZ4",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d62546",
-      "onLight": "#d62546",
-      "onDark": "#db3e5c"
+      "raw": "#f85fa2",
+      "onLight": "#b64677",
+      "onDark": "#f85fa2"
     },
-    "fetchedAt": "2026-10-27T02:30:28.493Z"
+    "fetchedAt": "2026-10-27T11:06:37.195Z"
   }
 }
