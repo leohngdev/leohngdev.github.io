@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6dbSBQXCctYSVryynHXaZ4",
-    "title": "Freaky Friday (feat. Chris Brown)",
-    "artist": "Lil Dicky, Chris Brown",
-    "album": "Freaky Friday (feat. Chris Brown)",
-    "href": "https://open.spotify.com/track/6dbSBQXCctYSVryynHXaZ4",
+    "id": "4rUTAkOU7OkVGeQuyQCHhF",
+    "title": "Sledgehammer",
+    "artist": "Fifth Harmony",
+    "album": "Reflection (Deluxe)",
+    "href": "https://open.spotify.com/track/4rUTAkOU7OkVGeQuyQCHhF",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f85fa2",
-      "onLight": "#b64677",
-      "onDark": "#f85fa2"
+      "raw": "#e39167",
+      "onLight": "#9d6447",
+      "onDark": "#e39167"
     },
-    "fetchedAt": "2026-10-27T16:53:46.782Z"
+    "fetchedAt": "2026-10-27T21:30:08.789Z"
   }
 }
