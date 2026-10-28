@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4rUTAkOU7OkVGeQuyQCHhF",
-    "title": "Sledgehammer",
-    "artist": "Fifth Harmony",
-    "album": "Reflection (Deluxe)",
-    "href": "https://open.spotify.com/track/4rUTAkOU7OkVGeQuyQCHhF",
+    "id": "65pHtEdxGt4e3Fv1ncPi6V",
+    "title": "MORE",
+    "artist": "K/DA, Madison Beer, i-dle, Lexie Liu, Jaira Burns, Seraphine, League of Legends",
+    "album": "MORE",
+    "href": "https://open.spotify.com/track/65pHtEdxGt4e3Fv1ncPi6V",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e39167",
-      "onLight": "#9d6447",
-      "onDark": "#e39167"
+      "raw": "#be6b03",
+      "onLight": "#a85f03",
+      "onDark": "#be6b03"
     },
-    "fetchedAt": "2026-10-27T21:30:08.789Z"
+    "fetchedAt": "2026-10-28T02:39:33.562Z"
   }
 }
