@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "65pHtEdxGt4e3Fv1ncPi6V",
-    "title": "MORE",
-    "artist": "K/DA, Madison Beer, i-dle, Lexie Liu, Jaira Burns, Seraphine, League of Legends",
-    "album": "MORE",
-    "href": "https://open.spotify.com/track/65pHtEdxGt4e3Fv1ncPi6V",
+    "id": "5WokFKscrfGEGGLPTu3jgO",
+    "title": "WOW (feat. Sabrina Carpenter) - Remix",
+    "artist": "Zara Larsson, Sabrina Carpenter",
+    "album": "WOW (feat. Sabrina Carpenter) [Remix]",
+    "href": "https://open.spotify.com/track/5WokFKscrfGEGGLPTu3jgO",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#be6b03",
-      "onLight": "#a85f03",
-      "onDark": "#be6b03"
+      "raw": "#ff00e5",
+      "onLight": "#c700b3",
+      "onDark": "#ff00e5"
     },
-    "fetchedAt": "2026-10-28T02:39:33.562Z"
+    "fetchedAt": "2026-10-28T11:42:31.377Z"
   }
 }
