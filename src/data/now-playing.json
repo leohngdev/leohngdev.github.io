@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6V88gGf9mxfBaCg2xt45e9",
-    "title": "Break The Tide",
-    "artist": "edwin",
-    "album": "Break The Tide",
-    "href": "https://open.spotify.com/track/6V88gGf9mxfBaCg2xt45e9",
+    "id": "7nD9nN3jord9wWcfW3Gkcm",
+    "title": "All In My Head (Flex) (feat. Fetty Wap)",
+    "artist": "Fifth Harmony, Fetty Wap",
+    "album": "7/27 (Deluxe)",
+    "href": "https://open.spotify.com/track/7nD9nN3jord9wWcfW3Gkcm",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#008bc2",
-      "onLight": "#0073a1",
-      "onDark": "#008bc2"
+      "raw": "#00b8db",
+      "onLight": "#00778e",
+      "onDark": "#00b8db"
     },
-    "fetchedAt": "2026-10-29T02:58:11.987Z"
+    "fetchedAt": "2026-10-29T11:50:03.686Z"
   }
 }
