@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5WokFKscrfGEGGLPTu3jgO",
-    "title": "WOW (feat. Sabrina Carpenter) - Remix",
-    "artist": "Zara Larsson, Sabrina Carpenter",
-    "album": "WOW (feat. Sabrina Carpenter) [Remix]",
-    "href": "https://open.spotify.com/track/5WokFKscrfGEGGLPTu3jgO",
+    "id": "6V88gGf9mxfBaCg2xt45e9",
+    "title": "Break The Tide",
+    "artist": "edwin",
+    "album": "Break The Tide",
+    "href": "https://open.spotify.com/track/6V88gGf9mxfBaCg2xt45e9",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff00e5",
-      "onLight": "#c700b3",
-      "onDark": "#ff00e5"
+      "raw": "#008bc2",
+      "onLight": "#0073a1",
+      "onDark": "#008bc2"
     },
-    "fetchedAt": "2026-10-28T21:55:03.432Z"
+    "fetchedAt": "2026-10-29T02:58:11.987Z"
   }
 }
