@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6kH135t7tnbb7OfusRMrbs",
-    "title": "Make it Up",
-    "artist": "Doja Cat",
-    "album": "Vie",
-    "href": "https://open.spotify.com/track/6kH135t7tnbb7OfusRMrbs",
+    "id": "7CmQjA7j6CxyPBkH3tP95W",
+    "title": "Dear god",
+    "artist": "Tate McRae",
+    "album": "So Close To What",
+    "href": "https://open.spotify.com/track/7CmQjA7j6CxyPBkH3tP95W",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ebb328",
-      "onLight": "#876717",
-      "onDark": "#ebb328"
+      "raw": "#c2895a",
+      "onLight": "#8e6542",
+      "onDark": "#c2895a"
     },
-    "fetchedAt": "2026-10-30T17:16:00.601Z"
+    "fetchedAt": "2026-10-30T21:42:44.255Z"
   }
 }
