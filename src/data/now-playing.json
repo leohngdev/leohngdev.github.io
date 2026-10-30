@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6Wytqpe4mfmyeT8s1xbczG",
-    "title": "Something In The Way You Move",
-    "artist": "Ellie Goulding",
-    "album": "Delirium (Deluxe)",
-    "href": "https://open.spotify.com/track/6Wytqpe4mfmyeT8s1xbczG",
+    "id": "6kH135t7tnbb7OfusRMrbs",
+    "title": "Make it Up",
+    "artist": "Doja Cat",
+    "album": "Vie",
+    "href": "https://open.spotify.com/track/6kH135t7tnbb7OfusRMrbs",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#b18a61",
-      "onLight": "#8a6c4c",
-      "onDark": "#b18a61"
+      "raw": "#ebb328",
+      "onLight": "#876717",
+      "onDark": "#ebb328"
     },
-    "fetchedAt": "2026-10-30T03:03:01.409Z"
+    "fetchedAt": "2026-10-30T11:42:48.006Z"
   }
 }
