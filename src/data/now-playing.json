@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "7CmQjA7j6CxyPBkH3tP95W",
-    "title": "Dear god",
-    "artist": "Tate McRae",
-    "album": "So Close To What",
-    "href": "https://open.spotify.com/track/7CmQjA7j6CxyPBkH3tP95W",
+    "id": "6KIKaWKE9wV6mLjho3w61y",
+    "title": "worst behavior",
+    "artist": "Ariana Grande",
+    "album": "Positions (Deluxe)",
+    "href": "https://open.spotify.com/track/6KIKaWKE9wV6mLjho3w61y",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c2895a",
-      "onLight": "#8e6542",
-      "onDark": "#c2895a"
+      "raw": "#4e7562",
+      "onLight": "#4e7562",
+      "onDark": "#638574"
     },
-    "fetchedAt": "2026-10-31T02:49:49.855Z"
+    "fetchedAt": "2026-10-31T11:16:14.198Z"
   }
 }
