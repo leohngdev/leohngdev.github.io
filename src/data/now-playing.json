@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "5DZOKNtaoVEssXu9ltcMjx",
-    "title": "oh well",
-    "artist": "Ariana Grande",
-    "album": "petal",
-    "href": "https://open.spotify.com/track/5DZOKNtaoVEssXu9ltcMjx",
+    "id": "3FZoov0ORtnr8TznSNI1y2",
+    "title": "brand new chanel$",
+    "artist": "Slayyyter",
+    "album": "brand new chanel$",
+    "href": "https://open.spotify.com/track/3FZoov0ORtnr8TznSNI1y2",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-11-01T02:42:11.578Z"
+    "palette": {
+      "raw": "#0efcfe",
+      "onLight": "#077879",
+      "onDark": "#0efcfe"
+    },
+    "fetchedAt": "2026-11-01T12:05:47.462Z"
   }
 }
