@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3FZoov0ORtnr8TznSNI1y2",
-    "title": "brand new chanel$",
-    "artist": "Slayyyter",
-    "album": "brand new chanel$",
-    "href": "https://open.spotify.com/track/3FZoov0ORtnr8TznSNI1y2",
+    "id": "14kYOiFVPb7E7NfFbqhdln",
+    "title": "goodnight n go",
+    "artist": "Ariana Grande",
+    "album": "Sweetener",
+    "href": "https://open.spotify.com/track/14kYOiFVPb7E7NfFbqhdln",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#0efcfe",
-      "onLight": "#077879",
-      "onDark": "#0efcfe"
+      "raw": "#fec1a1",
+      "onLight": "#896857",
+      "onDark": "#fec1a1"
     },
-    "fetchedAt": "2026-11-02T02:50:57.030Z"
+    "fetchedAt": "2026-11-02T13:54:41.072Z"
   }
 }
