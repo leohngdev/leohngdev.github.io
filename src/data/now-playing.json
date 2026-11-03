@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "14kYOiFVPb7E7NfFbqhdln",
-    "title": "goodnight n go",
-    "artist": "Ariana Grande",
-    "album": "Sweetener",
-    "href": "https://open.spotify.com/track/14kYOiFVPb7E7NfFbqhdln",
+    "id": "0vrmHPfoBadXVr2n0m1aqZ",
+    "title": "Heaven",
+    "artist": "Avicii",
+    "album": "TIM",
+    "href": "https://open.spotify.com/track/0vrmHPfoBadXVr2n0m1aqZ",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fec1a1",
-      "onLight": "#896857",
-      "onDark": "#fec1a1"
+      "raw": "#e4d5c7",
+      "onLight": "#736c65",
+      "onDark": "#e4d5c7"
     },
-    "fetchedAt": "2026-11-02T13:54:41.072Z"
+    "fetchedAt": "2026-11-03T00:04:35.249Z"
   }
 }
