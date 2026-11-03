@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4OjNFGkz7j1zRU7RXbCkiL",
-    "title": "Needs",
+    "id": "3IHTGwXvGyGslBbvHDDFrM",
+    "title": "Crash Out",
     "artist": "Tinashe",
-    "album": "BB/ANG3L",
-    "href": "https://open.spotify.com/track/4OjNFGkz7j1zRU7RXbCkiL",
-    "live": false,
+    "album": "Crash Out",
+    "href": "https://open.spotify.com/track/3IHTGwXvGyGslBbvHDDFrM",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#8e542c",
-      "onLight": "#8e542c",
-      "onDark": "#a17150"
+      "raw": "#f4ba94",
+      "onLight": "#8c6b55",
+      "onDark": "#f4ba94"
     },
-    "fetchedAt": "2026-11-03T13:03:48.044Z"
+    "fetchedAt": "2026-11-03T22:36:28.992Z"
   }
 }
