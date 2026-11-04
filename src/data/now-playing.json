@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "3IHTGwXvGyGslBbvHDDFrM",
-    "title": "Crash Out",
-    "artist": "Tinashe",
-    "album": "Crash Out",
-    "href": "https://open.spotify.com/track/3IHTGwXvGyGslBbvHDDFrM",
-    "live": true,
+    "id": "3FZoov0ORtnr8TznSNI1y2",
+    "title": "brand new chanel$",
+    "artist": "Slayyyter",
+    "album": "brand new chanel$",
+    "href": "https://open.spotify.com/track/3FZoov0ORtnr8TznSNI1y2",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f4ba94",
-      "onLight": "#8c6b55",
-      "onDark": "#f4ba94"
+      "raw": "#0efcfe",
+      "onLight": "#077879",
+      "onDark": "#0efcfe"
     },
-    "fetchedAt": "2026-11-03T22:36:28.992Z"
+    "fetchedAt": "2026-11-04T03:25:59.848Z"
   }
 }
