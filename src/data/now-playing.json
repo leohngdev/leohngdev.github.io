@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6k5MFxx07WH3p0cC6DK9PD",
-    "title": "Dangerous Lover",
-    "artist": "Sekou",
-    "album": "Dangerous Lover",
-    "href": "https://open.spotify.com/track/6k5MFxx07WH3p0cC6DK9PD",
+    "id": "1QgcSY6PNHqv6wr3U2x6xj",
+    "title": "better",
+    "artist": "brb.",
+    "album": "relationshit",
+    "href": "https://open.spotify.com/track/1QgcSY6PNHqv6wr3U2x6xj",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#632e18",
-      "onLight": "#632e18",
-      "onDark": "#9a7769"
+      "raw": "#7a0100",
+      "onLight": "#7a0100",
+      "onDark": "#ae6464"
     },
-    "fetchedAt": "2026-11-05T13:32:06.432Z"
+    "fetchedAt": "2026-11-05T22:56:23.995Z"
   }
 }
