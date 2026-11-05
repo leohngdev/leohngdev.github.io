@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0luDwSGwDCnQmEBAMFw9jJ",
-    "title": "MISS YOUR TOUCH",
-    "artist": "Genia",
-    "album": "INTENSE LOVER",
-    "href": "https://open.spotify.com/track/0luDwSGwDCnQmEBAMFw9jJ",
+    "id": "6wGkomWcIw53tCdLa2rBfN",
+    "title": "Doushite (feat. Emi Noda)",
+    "artist": "TakaseToya, emi noda",
+    "album": "The 2nd of Undecimber",
+    "href": "https://open.spotify.com/track/6wGkomWcIw53tCdLa2rBfN",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fd5b5e",
-      "onLight": "#ba4345",
-      "onDark": "#fd5b5e"
+      "raw": "#892d0f",
+      "onLight": "#892d0f",
+      "onDark": "#ae6e59"
     },
-    "fetchedAt": "2026-11-04T22:55:38.402Z"
+    "fetchedAt": "2026-11-05T03:48:51.587Z"
   }
 }
