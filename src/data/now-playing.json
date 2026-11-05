@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6wGkomWcIw53tCdLa2rBfN",
-    "title": "Doushite (feat. Emi Noda)",
-    "artist": "TakaseToya, emi noda",
-    "album": "The 2nd of Undecimber",
-    "href": "https://open.spotify.com/track/6wGkomWcIw53tCdLa2rBfN",
+    "id": "6k5MFxx07WH3p0cC6DK9PD",
+    "title": "Dangerous Lover",
+    "artist": "Sekou",
+    "album": "Dangerous Lover",
+    "href": "https://open.spotify.com/track/6k5MFxx07WH3p0cC6DK9PD",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#892d0f",
-      "onLight": "#892d0f",
-      "onDark": "#ae6e59"
+      "raw": "#632e18",
+      "onLight": "#632e18",
+      "onDark": "#9a7769"
     },
-    "fetchedAt": "2026-11-05T03:48:51.587Z"
+    "fetchedAt": "2026-11-05T13:32:06.432Z"
   }
 }
