@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "36k1sK906KIHdnU0ZiPg56",
-    "title": "Tangerine",
-    "artist": "Greg Shilling",
-    "album": "Tangerine",
-    "href": "https://open.spotify.com/track/36k1sK906KIHdnU0ZiPg56",
+    "id": "2VuOOQ8aG0Kn7pO8kyoEb9",
+    "title": "hold on",
+    "artist": "nate sib",
+    "album": "hold on",
+    "href": "https://open.spotify.com/track/2VuOOQ8aG0Kn7pO8kyoEb9",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e45800",
-      "onLight": "#bd4900",
-      "onDark": "#e45800"
+      "raw": "#fafef6",
+      "onLight": "#70726e",
+      "onDark": "#fafef6"
     },
-    "fetchedAt": "2026-11-06T03:45:54.044Z"
+    "fetchedAt": "2026-11-06T13:17:19.228Z"
   }
 }
