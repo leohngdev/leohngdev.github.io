@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1QgcSY6PNHqv6wr3U2x6xj",
-    "title": "better",
-    "artist": "brb.",
-    "album": "relationshit",
-    "href": "https://open.spotify.com/track/1QgcSY6PNHqv6wr3U2x6xj",
+    "id": "36k1sK906KIHdnU0ZiPg56",
+    "title": "Tangerine",
+    "artist": "Greg Shilling",
+    "album": "Tangerine",
+    "href": "https://open.spotify.com/track/36k1sK906KIHdnU0ZiPg56",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7a0100",
-      "onLight": "#7a0100",
-      "onDark": "#ae6464"
+      "raw": "#e45800",
+      "onLight": "#bd4900",
+      "onDark": "#e45800"
     },
-    "fetchedAt": "2026-11-05T22:56:23.995Z"
+    "fetchedAt": "2026-11-06T03:45:54.044Z"
   }
 }
