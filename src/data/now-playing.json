@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6tf8ujzaA9DAnDgNCYrpM9",
-    "title": "safeword",
-    "artist": "brb.",
-    "album": "safeword",
-    "href": "https://open.spotify.com/track/6tf8ujzaA9DAnDgNCYrpM9",
+    "id": "2fv6il8oAlsoOP7sKohscF",
+    "title": "kiss goodbye",
+    "artist": "The Two Lips",
+    "album": "kiss goodbye / brb",
+    "href": "https://open.spotify.com/track/2fv6il8oAlsoOP7sKohscF",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#05730d",
-      "onLight": "#05730d",
-      "onDark": "#2f8b36"
+      "raw": "#260119",
+      "onLight": "#260119",
+      "onDark": "#8a7683"
     },
-    "fetchedAt": "2026-11-07T03:18:56.211Z"
+    "fetchedAt": "2026-11-07T11:57:18.649Z"
   }
 }
