@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2VuOOQ8aG0Kn7pO8kyoEb9",
-    "title": "hold on",
-    "artist": "nate sib",
-    "album": "hold on",
-    "href": "https://open.spotify.com/track/2VuOOQ8aG0Kn7pO8kyoEb9",
+    "id": "6tf8ujzaA9DAnDgNCYrpM9",
+    "title": "safeword",
+    "artist": "brb.",
+    "album": "safeword",
+    "href": "https://open.spotify.com/track/6tf8ujzaA9DAnDgNCYrpM9",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fafef6",
-      "onLight": "#70726e",
-      "onDark": "#fafef6"
+      "raw": "#05730d",
+      "onLight": "#05730d",
+      "onDark": "#2f8b36"
     },
-    "fetchedAt": "2026-11-06T22:26:54.724Z"
+    "fetchedAt": "2026-11-07T03:18:56.211Z"
   }
 }
