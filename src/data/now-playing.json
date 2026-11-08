@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6jOZXCgbIsBZiYJGpRsL5O",
-    "title": "Akira",
-    "artist": "MICHELLE",
-    "album": "Songs About You Specifically",
-    "href": "https://open.spotify.com/track/6jOZXCgbIsBZiYJGpRsL5O",
+    "id": "5dNDBm3dVxo2Zemw9SC1TR",
+    "title": "Heavy Heads",
+    "artist": "Orca",
+    "album": "Heavy Heads",
+    "href": "https://open.spotify.com/track/5dNDBm3dVxo2Zemw9SC1TR",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#b4140f",
-      "onLight": "#b4140f",
-      "onDark": "#cb5d59"
+      "raw": "#ff8209",
+      "onLight": "#b05a06",
+      "onDark": "#ff8209"
     },
-    "fetchedAt": "2026-11-08T02:48:17.643Z"
+    "fetchedAt": "2026-11-08T12:15:57.975Z"
   }
 }
