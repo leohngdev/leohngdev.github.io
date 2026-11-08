@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "2fv6il8oAlsoOP7sKohscF",
-    "title": "kiss goodbye",
-    "artist": "The Two Lips",
-    "album": "kiss goodbye / brb",
-    "href": "https://open.spotify.com/track/2fv6il8oAlsoOP7sKohscF",
+    "id": "6jOZXCgbIsBZiYJGpRsL5O",
+    "title": "Akira",
+    "artist": "MICHELLE",
+    "album": "Songs About You Specifically",
+    "href": "https://open.spotify.com/track/6jOZXCgbIsBZiYJGpRsL5O",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#260119",
-      "onLight": "#260119",
-      "onDark": "#8a7683"
+      "raw": "#b4140f",
+      "onLight": "#b4140f",
+      "onDark": "#cb5d59"
     },
-    "fetchedAt": "2026-11-07T21:06:36.085Z"
+    "fetchedAt": "2026-11-08T02:48:17.643Z"
   }
 }
