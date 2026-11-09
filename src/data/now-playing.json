@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5dNDBm3dVxo2Zemw9SC1TR",
-    "title": "Heavy Heads",
-    "artist": "Orca",
-    "album": "Heavy Heads",
-    "href": "https://open.spotify.com/track/5dNDBm3dVxo2Zemw9SC1TR",
+    "id": "4qmrCMYjDjjJWbkwfZwXO0",
+    "title": "MANY",
+    "artist": "HAAN, SHIRT, DUT2",
+    "album": "HS7",
+    "href": "https://open.spotify.com/track/4qmrCMYjDjjJWbkwfZwXO0",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff8209",
-      "onLight": "#b05a06",
-      "onDark": "#ff8209"
+      "raw": "#fdc987",
+      "onLight": "#886c49",
+      "onDark": "#fdc987"
     },
-    "fetchedAt": "2026-11-08T21:23:28.551Z"
+    "fetchedAt": "2026-11-09T03:06:15.452Z"
   }
 }
