@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4qmrCMYjDjjJWbkwfZwXO0",
-    "title": "MANY",
-    "artist": "HAAN, SHIRT, DUT2",
-    "album": "HS7",
-    "href": "https://open.spotify.com/track/4qmrCMYjDjjJWbkwfZwXO0",
+    "id": "4xBnmmezhW0ZwIMyVcZoxf",
+    "title": "swv",
+    "artist": "Karri",
+    "album": "SLIDER II",
+    "href": "https://open.spotify.com/track/4xBnmmezhW0ZwIMyVcZoxf",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#fdc987",
-      "onLight": "#886c49",
-      "onDark": "#fdc987"
+      "raw": "#ab6f3f",
+      "onLight": "#976238",
+      "onDark": "#ab6f3f"
     },
-    "fetchedAt": "2026-11-09T03:06:15.452Z"
+    "fetchedAt": "2026-11-09T14:25:47.794Z"
   }
 }
