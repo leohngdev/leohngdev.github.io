@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4xBnmmezhW0ZwIMyVcZoxf",
-    "title": "swv",
-    "artist": "Karri",
-    "album": "SLIDER II",
-    "href": "https://open.spotify.com/track/4xBnmmezhW0ZwIMyVcZoxf",
+    "id": "0sSyDptzNXHBODOssLukZT",
+    "title": "talking to myself",
+    "artist": "brb.",
+    "album": "relationshit",
+    "href": "https://open.spotify.com/track/0sSyDptzNXHBODOssLukZT",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ab6f3f",
-      "onLight": "#976238",
-      "onDark": "#ab6f3f"
+      "raw": "#7a0100",
+      "onLight": "#7a0100",
+      "onDark": "#ae6464"
     },
-    "fetchedAt": "2026-11-10T00:53:05.865Z"
+    "fetchedAt": "2026-11-10T13:49:02.178Z"
   }
 }
