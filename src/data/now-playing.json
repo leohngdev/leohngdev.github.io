@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0sSyDptzNXHBODOssLukZT",
-    "title": "talking to myself",
-    "artist": "brb.",
-    "album": "relationshit",
-    "href": "https://open.spotify.com/track/0sSyDptzNXHBODOssLukZT",
+    "id": "6mY0aTHgjIIhVYVwzcbUC0",
+    "title": "Echo",
+    "artist": "Talia Perese, EDYONTHEBEAT",
+    "album": "Echo",
+    "href": "https://open.spotify.com/track/6mY0aTHgjIIhVYVwzcbUC0",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7a0100",
-      "onLight": "#7a0100",
-      "onDark": "#ae6464"
+      "raw": "#cabd01",
+      "onLight": "#7b7301",
+      "onDark": "#cabd01"
     },
-    "fetchedAt": "2026-11-10T22:34:55.712Z"
+    "fetchedAt": "2026-11-11T03:14:08.627Z"
   }
 }
