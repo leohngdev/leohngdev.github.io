@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "6mY0aTHgjIIhVYVwzcbUC0",
-    "title": "Echo",
-    "artist": "Talia Perese, EDYONTHEBEAT",
-    "album": "Echo",
-    "href": "https://open.spotify.com/track/6mY0aTHgjIIhVYVwzcbUC0",
+    "id": "0S4RKPbRDA72tvKwVdXQqe",
+    "title": "The Way",
+    "artist": "Ariana Grande, Mac Miller",
+    "album": "Yours Truly",
+    "href": "https://open.spotify.com/track/0S4RKPbRDA72tvKwVdXQqe",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#cabd01",
-      "onLight": "#7b7301",
-      "onDark": "#cabd01"
-    },
-    "fetchedAt": "2026-11-11T03:14:08.627Z"
+    "palette": null,
+    "fetchedAt": "2026-11-11T12:59:52.371Z"
   }
 }
