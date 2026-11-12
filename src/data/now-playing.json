@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4KtyllItD3Dwp1EqPK9xXs",
-    "title": "Dive",
-    "artist": "ziproom",
-    "album": "Dive",
-    "href": "https://open.spotify.com/track/4KtyllItD3Dwp1EqPK9xXs",
+    "id": "5B2mE1GD2u2DotWHJQilzf",
+    "title": "star",
+    "artist": "no na",
+    "album": "island girl",
+    "href": "https://open.spotify.com/track/5B2mE1GD2u2DotWHJQilzf",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#d79012",
-      "onLight": "#94630c",
-      "onDark": "#d79012"
+      "raw": "#db7000",
+      "onLight": "#ab5700",
+      "onDark": "#db7000"
     },
-    "fetchedAt": "2026-11-12T04:26:05.733Z"
+    "fetchedAt": "2026-11-12T14:01:26.768Z"
   }
 }
