@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "0S4RKPbRDA72tvKwVdXQqe",
-    "title": "The Way",
-    "artist": "Ariana Grande, Mac Miller",
-    "album": "Yours Truly",
-    "href": "https://open.spotify.com/track/0S4RKPbRDA72tvKwVdXQqe",
+    "id": "4KtyllItD3Dwp1EqPK9xXs",
+    "title": "Dive",
+    "artist": "ziproom",
+    "album": "Dive",
+    "href": "https://open.spotify.com/track/4KtyllItD3Dwp1EqPK9xXs",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-11-11T23:44:23.882Z"
+    "palette": {
+      "raw": "#d79012",
+      "onLight": "#94630c",
+      "onDark": "#d79012"
+    },
+    "fetchedAt": "2026-11-12T04:26:05.733Z"
   }
 }
