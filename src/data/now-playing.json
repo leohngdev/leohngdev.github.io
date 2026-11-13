@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5B2mE1GD2u2DotWHJQilzf",
-    "title": "star",
-    "artist": "no na",
-    "album": "island girl",
-    "href": "https://open.spotify.com/track/5B2mE1GD2u2DotWHJQilzf",
+    "id": "6Pgkp4qUoTmJIPn7ReaGxL",
+    "title": "Without You (feat. Sandro Cavazza)",
+    "artist": "Avicii, Sandro Cavazza",
+    "album": "AVĪCI (01)",
+    "href": "https://open.spotify.com/track/6Pgkp4qUoTmJIPn7ReaGxL",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#db7000",
-      "onLight": "#ab5700",
-      "onDark": "#db7000"
+      "raw": "#ddb772",
+      "onLight": "#7f6941",
+      "onDark": "#ddb772"
     },
-    "fetchedAt": "2026-11-13T03:41:13.831Z"
+    "fetchedAt": "2026-11-13T13:28:10.480Z"
   }
 }
