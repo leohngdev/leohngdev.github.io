@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "541sN2qNfIlllGn9nGOQoC",
-    "title": "Revolving door",
-    "artist": "Tate McRae",
-    "album": "So Close To What",
-    "href": "https://open.spotify.com/track/541sN2qNfIlllGn9nGOQoC",
+    "id": "70cHKK8bHAfJrOGVnfRG9J",
+    "title": "Nicole Kidman",
+    "artist": "ADÉLA",
+    "album": "PRIMA",
+    "href": "https://open.spotify.com/track/70cHKK8bHAfJrOGVnfRG9J",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c2895a",
-      "onLight": "#8e6542",
-      "onDark": "#c2895a"
+      "raw": "#c30d32",
+      "onLight": "#c30d32",
+      "onDark": "#d34d69"
     },
-    "fetchedAt": "2026-11-14T12:33:11.908Z"
+    "fetchedAt": "2026-11-14T21:42:01.084Z"
   }
 }
