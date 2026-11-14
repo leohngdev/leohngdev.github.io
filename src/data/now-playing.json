@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6Pgkp4qUoTmJIPn7ReaGxL",
-    "title": "Without You (feat. Sandro Cavazza)",
-    "artist": "Avicii, Sandro Cavazza",
-    "album": "AVĪCI (01)",
-    "href": "https://open.spotify.com/track/6Pgkp4qUoTmJIPn7ReaGxL",
+    "id": "541sN2qNfIlllGn9nGOQoC",
+    "title": "Revolving door",
+    "artist": "Tate McRae",
+    "album": "So Close To What",
+    "href": "https://open.spotify.com/track/541sN2qNfIlllGn9nGOQoC",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ddb772",
-      "onLight": "#7f6941",
-      "onDark": "#ddb772"
+      "raw": "#c2895a",
+      "onLight": "#8e6542",
+      "onDark": "#c2895a"
     },
-    "fetchedAt": "2026-11-14T03:40:13.844Z"
+    "fetchedAt": "2026-11-14T12:33:11.908Z"
   }
 }
