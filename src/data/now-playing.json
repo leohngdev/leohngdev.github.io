@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "70cHKK8bHAfJrOGVnfRG9J",
-    "title": "Nicole Kidman",
-    "artist": "ADÉLA",
-    "album": "PRIMA",
-    "href": "https://open.spotify.com/track/70cHKK8bHAfJrOGVnfRG9J",
+    "id": "1yTQ39my3MoNROlFw3RDNy",
+    "title": "Say You'll Be There - Single Mix",
+    "artist": "Spice Girls",
+    "album": "Spice",
+    "href": "https://open.spotify.com/track/1yTQ39my3MoNROlFw3RDNy",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c30d32",
-      "onLight": "#c30d32",
-      "onDark": "#d34d69"
+      "raw": "#fffb03",
+      "onLight": "#727001",
+      "onDark": "#fffb03"
     },
-    "fetchedAt": "2026-11-15T03:15:37.308Z"
+    "fetchedAt": "2026-11-15T12:59:35.753Z"
   }
 }
