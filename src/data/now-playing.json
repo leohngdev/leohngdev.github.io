@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4lQcSUqt6n6OMaZvS4UChJ",
-    "title": "U, Me & My Ego",
-    "artist": "Chxrry",
-    "album": "U, Me & My Ego",
-    "href": "https://open.spotify.com/track/4lQcSUqt6n6OMaZvS4UChJ",
+    "id": "5FAaJCUDqZWWb8kCoo1lDO",
+    "title": "HOTPOT",
+    "artist": "MIO",
+    "album": "HOTPOT",
+    "href": "https://open.spotify.com/track/5FAaJCUDqZWWb8kCoo1lDO",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#3a67d1",
-      "onLight": "#3a67d1",
-      "onDark": "#5179d6"
+      "raw": "#c99b57",
+      "onLight": "#8b6b3c",
+      "onDark": "#c99b57"
     },
-    "fetchedAt": "2026-11-16T03:18:37.088Z"
+    "fetchedAt": "2026-11-16T14:03:09.451Z"
   }
 }
