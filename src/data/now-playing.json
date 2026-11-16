@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1KGi9sZVMeszgZOWivFpxs",
-    "title": "No Scrubs",
-    "artist": "TLC",
-    "album": "Fanmail",
-    "href": "https://open.spotify.com/track/1KGi9sZVMeszgZOWivFpxs",
+    "id": "4lQcSUqt6n6OMaZvS4UChJ",
+    "title": "U, Me & My Ego",
+    "artist": "Chxrry",
+    "album": "U, Me & My Ego",
+    "href": "https://open.spotify.com/track/4lQcSUqt6n6OMaZvS4UChJ",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c0fcff",
-      "onLight": "#567172",
-      "onDark": "#c0fcff"
+      "raw": "#3a67d1",
+      "onLight": "#3a67d1",
+      "onDark": "#5179d6"
     },
-    "fetchedAt": "2026-11-15T22:07:47.830Z"
+    "fetchedAt": "2026-11-16T03:18:37.088Z"
   }
 }
