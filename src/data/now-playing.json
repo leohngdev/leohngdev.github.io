@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "5FAaJCUDqZWWb8kCoo1lDO",
-    "title": "HOTPOT",
-    "artist": "MIO",
-    "album": "HOTPOT",
-    "href": "https://open.spotify.com/track/5FAaJCUDqZWWb8kCoo1lDO",
+    "id": "7JaklRGtjDrRBtJHOSIEI4",
+    "title": "Dancing in the Dark",
+    "artist": "A2O SOUL, A2O",
+    "album": "SUPERSTAR",
+    "href": "https://open.spotify.com/track/7JaklRGtjDrRBtJHOSIEI4",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c99b57",
-      "onLight": "#8b6b3c",
-      "onDark": "#c99b57"
+      "raw": "#f4f9fd",
+      "onLight": "#6d6f71",
+      "onDark": "#f4f9fd"
     },
-    "fetchedAt": "2026-11-16T14:03:09.451Z"
+    "fetchedAt": "2026-11-17T01:07:59.347Z"
   }
 }
