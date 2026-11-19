@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "26ao8h4lge7K2yltgKXrVc",
-    "title": "moonlit room",
-    "artist": "UMI",
-    "album": "Forest in the City",
-    "href": "https://open.spotify.com/track/26ao8h4lge7K2yltgKXrVc",
+    "id": "0JX2J58ewIwjhttBOg6iwn",
+    "title": "Astro Afterglow",
+    "artist": "Kyle Dion",
+    "album": "SOULAR",
+    "href": "https://open.spotify.com/track/0JX2J58ewIwjhttBOg6iwn",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#78452d",
-      "onLight": "#78452d",
-      "onDark": "#9c7665"
+      "raw": "#cc3403",
+      "onLight": "#cc3403",
+      "onDark": "#d5562e"
     },
-    "fetchedAt": "2026-11-19T14:44:21.967Z"
+    "fetchedAt": "2026-11-19T23:55:48.112Z"
   }
 }
