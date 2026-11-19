@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "4bT2zLVv2T4GiK9q9KtI0v",
-    "title": "Stay The Night - Featuring Hayley Williams Of Paramore",
-    "artist": "Zedd, Hayley Williams",
-    "album": "Clarity (Deluxe)",
-    "href": "https://open.spotify.com/track/4bT2zLVv2T4GiK9q9KtI0v",
+    "id": "26ao8h4lge7K2yltgKXrVc",
+    "title": "moonlit room",
+    "artist": "UMI",
+    "album": "Forest in the City",
+    "href": "https://open.spotify.com/track/26ao8h4lge7K2yltgKXrVc",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#7bc1d1",
-      "onLight": "#4b767f",
-      "onDark": "#7bc1d1"
+      "raw": "#78452d",
+      "onLight": "#78452d",
+      "onDark": "#9c7665"
     },
-    "fetchedAt": "2026-11-19T04:37:23.907Z"
+    "fetchedAt": "2026-11-19T14:44:21.967Z"
   }
 }
