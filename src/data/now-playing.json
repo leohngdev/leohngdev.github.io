@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6Q9IUoBTNLHgBib1FSFGbj",
-    "title": "Love To Dream",
-    "artist": "Doja Cat",
-    "album": "Planet Her",
-    "href": "https://open.spotify.com/track/6Q9IUoBTNLHgBib1FSFGbj",
+    "id": "6hShfxTdYcC7YQ3AhfRedv",
+    "title": "in the sea",
+    "artist": "kensuke ushio",
+    "album": "CHAINSAW MAN THE MOVIE: REZE ARC original soundtrack -summer's end-",
+    "href": "https://open.spotify.com/track/6hShfxTdYcC7YQ3AhfRedv",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#039aff",
-      "onLight": "#0271bb",
-      "onDark": "#039aff"
+      "raw": "#dad5af",
+      "onLight": "#6e6c59",
+      "onDark": "#dad5af"
     },
-    "fetchedAt": "2026-11-20T04:39:25.093Z"
+    "fetchedAt": "2026-11-20T14:25:24.442Z"
   }
 }
