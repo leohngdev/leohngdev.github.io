@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6wm3t4VpTxSFfOUgTMlHZM",
-    "title": "The Peace",
-    "artist": "underscores",
-    "album": "U",
-    "href": "https://open.spotify.com/track/6wm3t4VpTxSFfOUgTMlHZM",
+    "id": "77D6bnJyqxaTR7EofBe6lX",
+    "title": "easy",
+    "artist": "Amelia Moore",
+    "album": "he's just not that into you!",
+    "href": "https://open.spotify.com/track/77D6bnJyqxaTR7EofBe6lX",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#1d7bb1",
-      "onLight": "#1b74a6",
-      "onDark": "#2b83b6"
+      "raw": "#e26e3e",
+      "onLight": "#b05630",
+      "onDark": "#e26e3e"
     },
-    "fetchedAt": "2026-11-21T13:45:26.748Z"
+    "fetchedAt": "2026-11-21T22:28:31.870Z"
   }
 }
