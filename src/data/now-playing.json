@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6hShfxTdYcC7YQ3AhfRedv",
-    "title": "in the sea",
-    "artist": "kensuke ushio",
-    "album": "CHAINSAW MAN THE MOVIE: REZE ARC original soundtrack -summer's end-",
-    "href": "https://open.spotify.com/track/6hShfxTdYcC7YQ3AhfRedv",
+    "id": "6wm3t4VpTxSFfOUgTMlHZM",
+    "title": "The Peace",
+    "artist": "underscores",
+    "album": "U",
+    "href": "https://open.spotify.com/track/6wm3t4VpTxSFfOUgTMlHZM",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#dad5af",
-      "onLight": "#6e6c59",
-      "onDark": "#dad5af"
+      "raw": "#1d7bb1",
+      "onLight": "#1b74a6",
+      "onDark": "#2b83b6"
     },
-    "fetchedAt": "2026-11-21T04:21:18.867Z"
+    "fetchedAt": "2026-11-21T13:45:26.748Z"
   }
 }
