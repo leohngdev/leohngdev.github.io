@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "77D6bnJyqxaTR7EofBe6lX",
-    "title": "easy",
-    "artist": "Amelia Moore",
-    "album": "he's just not that into you!",
-    "href": "https://open.spotify.com/track/77D6bnJyqxaTR7EofBe6lX",
+    "id": "0t8S4mESYiQ4RwsuI0mLPn",
+    "title": "Girls Like U",
+    "artist": "Kylie Cantrall",
+    "album": "Valley Girl Problems",
+    "href": "https://open.spotify.com/track/0t8S4mESYiQ4RwsuI0mLPn",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#e26e3e",
-      "onLight": "#b05630",
-      "onDark": "#e26e3e"
+      "raw": "#cc2208",
+      "onLight": "#cc2208",
+      "onDark": "#d7523e"
     },
-    "fetchedAt": "2026-11-21T22:28:31.870Z"
+    "fetchedAt": "2026-11-22T03:35:50.381Z"
   }
 }
