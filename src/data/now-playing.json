@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0t8S4mESYiQ4RwsuI0mLPn",
-    "title": "Girls Like U",
-    "artist": "Kylie Cantrall",
-    "album": "Valley Girl Problems",
-    "href": "https://open.spotify.com/track/0t8S4mESYiQ4RwsuI0mLPn",
+    "id": "0dGqP4VickYjtIaB5VOt4H",
+    "title": "3:15 (Breathe)",
+    "artist": "Russ",
+    "album": "3:15 (Breathe)",
+    "href": "https://open.spotify.com/track/0dGqP4VickYjtIaB5VOt4H",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#cc2208",
-      "onLight": "#cc2208",
-      "onDark": "#d7523e"
+      "raw": "#fed000",
+      "onLight": "#816900",
+      "onDark": "#fed000"
     },
-    "fetchedAt": "2026-11-22T03:35:50.381Z"
+    "fetchedAt": "2026-11-22T13:38:56.494Z"
   }
 }
