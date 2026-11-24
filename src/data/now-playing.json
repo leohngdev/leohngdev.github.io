@@ -1,13 +1,17 @@
 {
   "track": {
-    "id": "6f9cRA5Ar7RggRyShSCmIl",
-    "title": "TAKE MY BREATH",
-    "artist": "XG",
-    "album": "THE CORE - 核",
-    "href": "https://open.spotify.com/track/6f9cRA5Ar7RggRyShSCmIl",
+    "id": "6i8XXoMxeH6bQjdycGSS4A",
+    "title": "So Close",
+    "artist": "Larissa Lambert",
+    "album": "Yearning",
+    "href": "https://open.spotify.com/track/6i8XXoMxeH6bQjdycGSS4A",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": null,
-    "fetchedAt": "2026-11-24T03:29:22.158Z"
+    "palette": {
+      "raw": "#c0d2fe",
+      "onLight": "#677189",
+      "onDark": "#c0d2fe"
+    },
+    "fetchedAt": "2026-11-24T16:31:59.937Z"
   }
 }
