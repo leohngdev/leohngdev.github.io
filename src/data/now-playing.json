@@ -1,17 +1,13 @@
 {
   "track": {
-    "id": "5mHdCZtVyb4DcJw8799hZp",
-    "title": "Escapism.",
-    "artist": "RAYE, 070 Shake",
-    "album": "My 21st Century Blues",
-    "href": "https://open.spotify.com/track/5mHdCZtVyb4DcJw8799hZp",
+    "id": "6f9cRA5Ar7RggRyShSCmIl",
+    "title": "TAKE MY BREATH",
+    "artist": "XG",
+    "album": "THE CORE - 核",
+    "href": "https://open.spotify.com/track/6f9cRA5Ar7RggRyShSCmIl",
     "live": false,
     "art": "now-playing.jpg",
-    "palette": {
-      "raw": "#bb6763",
-      "onLight": "#a55b57",
-      "onDark": "#bb6763"
-    },
-    "fetchedAt": "2026-11-23T16:33:40.551Z"
+    "palette": null,
+    "fetchedAt": "2026-11-24T03:29:22.158Z"
   }
 }
