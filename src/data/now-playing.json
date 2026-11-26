@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "6i8XXoMxeH6bQjdycGSS4A",
-    "title": "So Close",
-    "artist": "Larissa Lambert",
-    "album": "Yearning",
-    "href": "https://open.spotify.com/track/6i8XXoMxeH6bQjdycGSS4A",
-    "live": false,
+    "id": "1cM1snkcQwkdMnCHlFSAOU",
+    "title": "Stay In",
+    "artist": "Adanna Duru, Leven Kali",
+    "album": "NAPPY HOUR",
+    "href": "https://open.spotify.com/track/1cM1snkcQwkdMnCHlFSAOU",
+    "live": true,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#c0d2fe",
-      "onLight": "#677189",
-      "onDark": "#c0d2fe"
+      "raw": "#ff7630",
+      "onLight": "#b05121",
+      "onDark": "#ff7630"
     },
-    "fetchedAt": "2026-11-26T01:11:45.251Z"
+    "fetchedAt": "2026-11-26T15:51:48.242Z"
   }
 }
