@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "1cM1snkcQwkdMnCHlFSAOU",
-    "title": "Stay In",
-    "artist": "Adanna Duru, Leven Kali",
-    "album": "NAPPY HOUR",
-    "href": "https://open.spotify.com/track/1cM1snkcQwkdMnCHlFSAOU",
-    "live": true,
+    "id": "2PqFh92NTHhlbshWLOumzl",
+    "title": "Hvnly (feat. JIHYO)",
+    "artist": "Jenevieve, JIHYO",
+    "album": "CRYSALIS (CODA)",
+    "href": "https://open.spotify.com/track/2PqFh92NTHhlbshWLOumzl",
+    "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#ff7630",
-      "onLight": "#b05121",
-      "onDark": "#ff7630"
+      "raw": "#e55401",
+      "onLight": "#be4601",
+      "onDark": "#e55401"
     },
-    "fetchedAt": "2026-11-26T15:51:48.242Z"
+    "fetchedAt": "2026-11-27T01:10:52.829Z"
   }
 }
