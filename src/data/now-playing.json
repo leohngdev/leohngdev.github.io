@@ -1,17 +1,17 @@
 {
   "track": {
-    "id": "0P6DaVjrOyGTKo8f1Ch2ta",
-    "title": "Stuck",
-    "artist": "Jeff Bernat",
-    "album": "Luv Language",
-    "href": "https://open.spotify.com/track/0P6DaVjrOyGTKo8f1Ch2ta",
+    "id": "6zjK3WGMLd7F4r1dA3od7S",
+    "title": "Lose",
+    "artist": "Lily Massie",
+    "album": "Lose",
+    "href": "https://open.spotify.com/track/6zjK3WGMLd7F4r1dA3od7S",
     "live": false,
     "art": "now-playing.jpg",
     "palette": {
-      "raw": "#f3aa7e",
-      "onLight": "#94684d",
-      "onDark": "#f3aa7e"
+      "raw": "#fde044",
+      "onLight": "#807122",
+      "onDark": "#fde044"
     },
-    "fetchedAt": "2026-11-27T15:39:58.600Z"
+    "fetchedAt": "2026-11-28T00:43:54.218Z"
   }
 }
